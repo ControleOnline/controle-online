@@ -153,9 +153,9 @@ module.exports = function (ctx) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'FreteClick Quotation',
-        short_name: 'FreteClick Quotation',
-        description: 'FreteClick Quotation Front End',
+        name: 'Accounting',
+        short_name: 'Accounting',
+        description: 'Accounting',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -221,7 +221,7 @@ module.exports = function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'fclick-quote-app'
+        appId: 'accounting'
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
