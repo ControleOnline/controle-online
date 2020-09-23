@@ -118,7 +118,7 @@ module.exports = function (ctx) {
       // gzip: true,
       // analyze: true,
 
-      env: ctx.dev ? { 'APP_API_ENTRYPOINT': 'https://localhost:8081/' } : { 'APP_API_ENTRYPOINT': 'https://api.freteclick.com.br/' },
+      env: ctx.dev ? { 'APP_API_ENTRYPOINT': 'https://localhost:8081/' } : { 'APP_API_ENTRYPOINT': 'https://api.controleonline.com/' },
 
       // Options below are automatically set depending on the env, set them if you want to override
       // preloadChunks: false,
