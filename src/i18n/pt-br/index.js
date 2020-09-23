@@ -1,0 +1,85 @@
+// This is just an example,
+// so you can safely delete all default props below
+
+export default {
+  failed : 'Ação falhou',
+  success: 'Ação ocorreu com sucesso',
+  form   : {
+    title    : 'Cotação de frete',
+    subtitle : 'Preencha os campos abaixo para sua cotação',
+    section01: 'Dados dos produtos',
+    section02: 'Origem',
+    section03: 'Destino',
+    cubTotal : 'Total cubado',
+    weigTotal: 'Peso total',
+    labels   : {
+      name  : 'Nome',
+      email : 'Email',
+      phone : 'Fone',
+      submit: 'Fazer cotação de frete',
+      type  : 'Tipo de produto',
+      price : 'Valor da nota',
+      qtty  : 'Quantidade',
+      depth : 'Profundidade',
+      width : 'Largura',
+      height: 'Altura',
+      weight: 'Peso',
+      addPro: 'Adicionar produto',
+      postal: 'CEP',
+      street: 'Rua',
+      number: 'Número',
+      comple: 'Complemento',
+      distri: 'Bairro',
+      city  : 'Cidade',
+      state : 'Estado',
+      country: 'País',
+      list  : {
+        search: 'Digite o endereço, CEP ou cidade',
+      },
+      cubage: 'Cubagem',
+    },
+  },
+  common  : {
+    labels: {
+      close: 'Fechar',
+    }
+  },
+  messages: {
+    fieldRequired     : 'Este campo é obrigatório',
+    emailInvalid      : 'O email informado não é válido',
+    phoneInvalid      : 'O fone informado não é válido',
+    anErrorOccurred   : 'Não foi possível atender a solicitação',
+    gmapsReqNoData    : 'Pesquisa sem resultados',
+    mustDefinePackages: 'Deve definir a cubagem total ou os productos'
+  },
+  order: {
+    statuses: {
+      'quote'                     : 'Cotação',
+      'waiting client invoice tax': 'Aguardando nota fiscal',
+      'automatic analysis'        : 'Análise automática',
+      'analysis'                  : 'Em análise',
+      'waiting payment'           : 'Aguardando pagamento',
+      'waiting retrieve'          : 'Aguardando coleta',
+      'on the way'                : 'Em trânsito',
+      'waiting invoice tax'       : 'Aguardando fatura',
+      'delivered'                 : 'Entregue',
+      'waiting billing'           : 'Gerando NF',
+      'canceled'                  : 'Cancelado',
+      'waiting commission'        : 'Aguardando comissão',
+      'ship to carrier'           : 'Entregar na transportadora',
+    },
+  },
+  invoice: {
+    statuses: {
+      'waiting payment'         : 'Aguardando pagamento',
+      'paid'                    : 'Pago',
+      'divergence of values'    : 'Divergência de valores',
+      'canceled'                : 'Cancelado',
+      'outdated billing'        : 'Fatura em atraso',
+      'open'                    : 'Aberto',
+      'exceeded billing'        : 'Limite de faturamento excedido',
+      'waiting billing'         : 'Aguardando fatura',
+      'waiting generate invoice': 'Gerando NF',
+    },
+  },
+}
