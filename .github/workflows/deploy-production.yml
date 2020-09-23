@@ -30,7 +30,7 @@ jobs:
       - name: Building the project                                
         run: |              
               cd /home/runner/work/accounting/accounting
-              echo "export const ENTRYPOINT_LOCAL = 'https://api.cointabion.com.br'" > ./src/config/entrypoint.local.js
+              echo "export const ENTRYPOINT_LOCAL = 'https://api.contabion.com.br'" > ./src/config/entrypoint.local.js
               npm install              
               npx quasar build      
       - name: Copy to Contabion
