@@ -17,10 +17,18 @@ export default function(id, options = {}) {
   }
 
   if (options.params) {
-    var queryString = Object.keys(options.params)
-      .map(key => key + '=' + options.params[key])
-      .join('&');
-    id = `${id}?${queryString}`;
+    let params = [];
+
+    Object.keys(options.params).map(key => {
+      if (Array.isArray(options.params[key])) {
+        params.push(options.params[key].map((value) => `${key}[]=${value}`).join('&'))
+      }
+      else {
+        params.push(key + '=' + options.params[key]);
+      }
+    });
+
+    id = `${id}?${params.join('&')}`;
   }
 
   const entryPoint = ENTRYPOINT + (ENTRYPOINT.endsWith('/') ? '' : '/');

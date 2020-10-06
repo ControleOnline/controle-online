@@ -4,22 +4,24 @@
     @submit="onSubmit"
   >
     <div class="row q-col-gutter-xs q-pb-xs">
-      <div class="col-xs-12 col-sm-9 q-mb-sm">
+      <div class="col-xs-12 col-sm-4 q-mb-sm">
+        <q-input stack-label lazy-rules unmasked-value hide-bottom-space
+          v-model    ="item.postalCode"
+          type       ="text"
+          label      ="CEP"
+          mask       ="#####-###"
+          :rules     ="[isInvalid('postal_code')]"
+          placeholder="Busque o endereço pelo CEP"
+          :loading   ="loading"
+        />
+      </div>
+      <div class="col-xs-12 col-sm-8 q-mb-sm">
         <q-input stack-label lazy-rules unmasked-value hide-bottom-space
           v-model="item.nickname"
           type       ="text"
           label      ="Apelido"
           :rules     ="[isInvalid('nickname')]"
           placeholder="Informe um apelido para este endereço"
-        />
-      </div>
-      <div class="col-xs-12 col-sm-3 q-mb-sm">
-        <q-input stack-label lazy-rules unmasked-value hide-bottom-space
-          v-model="item.postalCode"
-          type   ="text"
-          label  ="CEP"
-          mask   ="#####-###"
-          :rules ="[isInvalid('postal_code')]"
         />
       </div>
       <div class="col-xs-12 col-sm-8 q-mb-sm">
@@ -95,11 +97,14 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
   data() {
     return {
-        saving: false,
-        item  : {
+        saving : false,
+        loading: false,
+        item   : {
           nickname  : '',
           country   : '',
           state     : '',
@@ -113,7 +118,41 @@ export default {
     };
   },
 
-  methods : {
+  watch: {
+    'item.postalCode'(code) {
+      if (code.length == 8) {
+        this.loading = true;
+
+        this.getAddress(code)
+          .then(address => {
+            if (address['@id']) {
+              this.item.country  = address.country;
+              this.item.state    = address.state;
+              this.item.city     = address.city;
+              this.item.district = address.district;
+              this.item.street   = address.street;
+              this.item.number   = address.number;
+            }
+          })
+          .catch(error => {
+            this.$q.notify({
+              message : 'Nenhum endereço foi encontrado',
+              position: 'bottom',
+              type    : 'negative',
+            });
+          })
+          .finally(() => {
+            this.loading = false;
+          });
+      }
+    },
+  },
+
+  methods: {
+    ...mapActions({
+      getAddress: 'gmaps/getAddressByCEP',
+    }),
+
     onSubmit () {
       this.$refs.myForm.validate()
         .then(success => {

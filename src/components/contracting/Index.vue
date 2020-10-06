@@ -119,9 +119,13 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      myCompany: 'people/currentCompany',
+    }),
+
     logged () {
       return this.$store.getters['auth/user'];
-    }
+    },
   },
 
   methods: {
@@ -227,14 +231,19 @@ export default {
         },
       };
 
+      if (this.myCompany !== null)
+        payload.query = {
+          myCompany: this.myCompany.id
+        };
+
       this.choose(payload)
         .then(response => {
-          if (response) {
+          if (response['@id']) {
             this.$emit('finished', payload);
           }
-        })
-        .catch(error => {
-          this.notifyError('Não foi possivel finalizar o checkout. Tente novamente');
+          else {
+            this.notifyError('Não foi possivel finalizar o checkout. Tente novamente');
+          }
         });
     },
 

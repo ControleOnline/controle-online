@@ -22,7 +22,7 @@
             <tr>
               <td class="text-left text-bold">Número do pedido</td>
               <td class="text-left">
-                {{ `#${this.orderStatus['@id'].match(/^\/orders\/([a-z0-9-]*)$/)[1]}` }}
+                {{ `#${this.orderStatus['@id'].match(/^\/purchasing\/orders\/([a-z0-9-]*)$/)[1]}` }}
               </td>
             </tr>
             <tr>
@@ -31,6 +31,14 @@
                 {{ formatMoney(this.orderStatus.price) }}
               </td>
             </tr>
+            <!--
+            <tr>
+              <td class="text-left text-bold">Nota Fiscal</td>
+              <td class="text-left">
+                #{{ this.orderStatus.invoiceTax }}
+              </td>
+            </tr>            
+            -->
           </tbody>
         </q-markup-table>
       </div>
@@ -43,12 +51,12 @@
           <tbody>
             <tr>
               <td class="text-center">
-                <div class="text-h4">{{ $t(`order.statuses.${orderStatus.orderStatus.status}`) }}</div>
+                <div class="text-h6">{{ $t(`order.statuses.${orderStatus.orderStatus.status}`) }}</div>
               </td>
             </tr>
             <tr>
               <td class="text-center text-bold">
-                Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur
+                <!--{{ $t(`order.statuses.${orderStatus.orderStatus.status}`+' text') }}-->
               </td>
             </tr>
           </tbody>
@@ -95,7 +103,10 @@
           </q-tab-panel>
 
           <q-tab-panel name="quotation"  class="q-pa-none">
-            <OrderDetailQuotation  :orderId="orderId" />
+            <OrderDetailQuotation
+              :orderId ="orderId"
+              @finished="onCheckoutFinished"
+            />
           </q-tab-panel>
 
           <q-tab-panel name="notafiscal" class="q-pa-none">
@@ -181,6 +192,16 @@ export default {
     ...mapActions({
       getStatus: 'order/getDetailStatus',
     }),
+
+    onCheckoutFinished() {
+      this.$q.notify({
+        message : `Pedido #${this.orderId} foi salvo com sucesso`,
+        position: 'bottom',
+        type    : 'positive',
+      });
+
+      this.requestOrderStatus(this.orderId);
+    },
 
     onInvoiceTaxUploaded() {
       this.requestOrderStatus(this.orderId);

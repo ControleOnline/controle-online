@@ -1,11 +1,14 @@
 <template>
-  <div class="row justify-center items-center q-pa-md">
-    <h5>Fatura</h5>
+  <div class="row q-pa-md">
+    <div class="col-12">
+      <InvoiceSearching :search="false" :orderId="orderId" />
+    </div>
   </div>
 </template>
 
 <script>
 import { date, extend } from 'quasar';
+import InvoiceSearching   from '../../invoice/InvoiceSearching';
 
 export default {
   props: {
@@ -13,6 +16,10 @@ export default {
       type    : String,
       required: true,
     }
+  },
+
+  components: {
+    InvoiceSearching,
   },
   
   created() {

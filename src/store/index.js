@@ -9,6 +9,8 @@ import config  from './modules/config';
 import order   from './modules/order';
 import invoice from './modules/invoice';
 import profile from './modules/profile';
+import support from './modules/support';
+import user    from './modules/user';
 
 Vue.use(Vuex)
 
@@ -32,6 +34,8 @@ export default function (/* { ssrContext } */) {
       order  ,
       invoice,
       profile,
+      support,
+      user   ,
     },
 
     // enable strict mode (adds overhead!)

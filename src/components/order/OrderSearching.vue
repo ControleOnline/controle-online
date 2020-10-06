@@ -1,5 +1,5 @@
 <template>
-  <q-table flat dense
+  <q-table
       :loading        ="isLoading"
       :data           ="data"
       :columns        ="settings.columns"
@@ -9,7 +9,7 @@
       :visible-columns="settings.visibleColumns"
       style           ="min-height: 90vh;"
   >
-    <template v-slot:top>
+    <template v-slot:top v-if="search === true">
       <div class="col-xs-12 q-pb-md text-h6">
           Pedidos
       </div>
@@ -43,16 +43,17 @@
     <template v-slot:body="props">
       <q-tr :props="props">
         <q-td key="id"                :props="props">
-          <q-btn outline
+          <q-btn outline dense
             :to   ="{ name: 'OrderDetails', params: { id: props.row.id }}"
             :label="`#${props.row.id}`"
-            :style ="{color:props.row.color_status}"
+            :style="{color:props.row.color_status}"
             class ="full-width"
           />		  
         </q-td>
-        <q-td key="dataPedido"        :props="props">{{ props.cols[1].value }}</q-td>
-        <q-td key="ultimaModificacao" :props="props">{{ props.cols[2].value }}</q-td>
-        <q-td key="status"            :props="props" :style ="{color:props.row.color_status}">
+        <q-td key="notaFiscal"        :props="props">{{ props.row.notaFiscal }}</q-td>        
+        <q-td key="dataPedido"        :props="props">{{ props.cols[2].value }}</q-td>
+        <q-td key="ultimaModificacao" :props="props">{{ props.cols[3].value }}</q-td>
+        <q-td key="status"            :props="props" :style="{color:props.row.color_status}">
           {{ $t(`order.statuses.${props.row.status}`) }}
         </q-td>
         <q-td key="coleta"            :props="props">
@@ -62,9 +63,9 @@
           {{ props.row.localEntrega }}<br/>{{ props.row.entrega }}
         </q-td>
         <q-td key="transportadora"    :props="props">
-          Nota Fiscal #{{ props.row.notaFiscal }}<br/>{{ props.row.transportadora }}
-        </q-td>
-        <q-td key="preco"             :props="props">{{ props.cols[7].value }}</q-td>
+          {{ props.row.transportadora }}
+        </q-td>        
+        <q-td key="preco"             :props="props">{{ props.cols[8].value }}</q-td>
       </q-tr>
     </template>
   </q-table>
@@ -78,12 +79,13 @@ import { mapActions, mapGetters } from 'vuex';
 const SETTINGS = {
   visibleColumns: [
     'id'               ,
+    'notaFiscal'       ,
     'dataPedido'       ,
     'ultimaModificacao',
     'status'           ,
     'coleta'           ,
     'entrega'          ,
-    'transportadora'   ,
+    'transportadora'   ,    
     'preco'            ,
   ],
   columns       : [
@@ -93,6 +95,15 @@ const SETTINGS = {
       align : 'left',
       label : 'ID'
     },
+    {
+      name : 'notaFiscal',
+      field: 'notaFiscal',
+      align: 'left',
+      label: 'Nota Fiscal',
+      format: (val, row) => {
+        return val?'#'+val:''
+      },
+    },    
     {
       name  : 'dataPedido',
       field : 'dataPedido',
@@ -146,13 +157,7 @@ const SETTINGS = {
       field: 'transportadora',
       align: 'left',
       label: 'Transportadora'
-    },
-    {
-      name : 'notaFiscal',
-      field: 'notaFiscal',
-      align: 'left',
-      label: 'Nota Fiscal'
-    },
+    },    
     {
       name  : 'preco',
       field : 'preco',
@@ -168,6 +173,19 @@ const SETTINGS = {
 Object.freeze(SETTINGS);
 
 export default {
+  props: {
+    search   : {
+      type    : Boolean,
+      required: false,
+      default : true,
+    },
+    invoiceId: {
+      type    : String,
+      required: false,
+      default : null,
+    },
+  },
+
   created() {
     if (this.myCompany !== null) {
       this.filters.company = this.myCompany;
@@ -245,18 +263,18 @@ export default {
 
         data.push({
           '@id'              : item['@id'],
-          'id'               : item['@id'].match(/^\/orders\/([a-z0-9-]*)$/)[1],
+          'id'               : item['@id'].match(/^\/purchasing\/orders\/([a-z0-9-]*)$/)[1],
+          'notaFiscal'       : item.invoiceTax.length > 0 ? '#'+item.invoiceTax[0].invoiceTax.invoiceNumber : '',
           'dataPedido'       : item.orderDate,
           'ultimaModificacao': item.alterDate,
           'status'           : item.orderStatus.status,
           'color_status'     : item.orderStatus.color,
           'fornecedor'       : item.client.alias,
-          'coleta'           : item.deliveryPeople !== null ? item.deliveryPeople.name : '',
+          'coleta'           : item.retrievePeople !== null ? item.retrievePeople.name : '',
           'localColeta'      : item.quote !== null ? `${item.quote.cityOrigin.city} / ${item.quote.cityOrigin.state.uf}` : '',
           'entrega'          : item.deliveryPeople !== null ? item.deliveryPeople.name : '',
           'localEntrega'     : item.quote !== null ? `${item.quote.cityDestination.city} / ${item.quote.cityDestination.state.uf}` : '',
-          'transportadora'   : item.quote !== null ? item.quote.carrier.name : '',
-          'notaFiscal'       : item.invoiceTax.length > 0 ? item.invoiceTax[0].invoiceTax.invoiceNumber : '',
+          'transportadora'   : item.quote !== null ? item.quote.carrier.name : '',          
           'preco'            : item.price,
         });
       }
@@ -288,7 +306,10 @@ export default {
 
     requestStatuses() {
       this.loadingStatuses = true;
-      this.getStatuses()
+      this.getStatuses({
+        'visibility': 'public',
+        'realStatus': ['open', 'pending', 'closed'],
+      })
         .then(statuses => {
           if (statuses.length) {
             let data = [];
@@ -316,17 +337,25 @@ export default {
       let params = { itemsPerPage: rowsPerPage, page };
 
       if (this.filters.text != null && this.filters.text.length > 0) {
-          if (this.filters.text.length < 3)
+        if (this.filters.text.length < 2)
           return;
-          params['text'] = this.filters.text;
+
+        params['searchBy'] = this.filters.text;
       }
 
       if (this.filters.status != null && this.filters.status.value != -1) {
-          params['orderStatus'] = this.filters.status.value;
+        params['orderStatus'] = this.filters.status.value;
+      }
+      else {
+        params['orderStatus.realStatus'] = ['pending'];
       }
 
       if (this.filters.company != null) {
-          params['myCompany'] = this.filters.company.id;
+        params['myCompany'] = this.filters.company.id;
+      }
+
+      if (this.invoiceId !== null) {
+        params['invoice.invoice'] = this.invoiceId;
       }
 
       params['order[alterDate]'] = 'desc';

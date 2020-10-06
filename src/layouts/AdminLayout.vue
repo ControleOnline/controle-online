@@ -2,13 +2,21 @@
   <q-layout view="lHh Lpr fff" class="bg-image">
     <q-header elevated class="bg-white text-grey-8" height-hint="64">
       <q-toolbar class="GPL__toolbar" style="height: 64px">
-        <q-btn flat dense round
-          @click    ="leftDrawerOpen = !leftDrawerOpen"
+        <q-btn
+          flat
+          dense
+          round
+          @click="leftDrawerOpen = !leftDrawerOpen"
           aria-label="Menu"
-          icon      ="menu"
-          class     ="q-mx-md"
+          icon="menu"
+          class="q-mx-md"
         />
-        <q-space />          
+        <div class="q-gutter-sm items-center row logo-container">          
+          <router-link v-bind:to="'/'" tag='a' class='primary'>
+            <img :src="defaultCompany.logo" class="main-logo" />
+          </router-link>
+        </div>
+        <q-space />
         <div class="q-gutter-sm row items-center no-wrap">
           <!--
           <q-btn round dense flat color="grey-8" icon="notifications">
@@ -50,18 +58,19 @@
                 <div class="column items-stretch justify-between">
                   <div class="text-center">
                     <q-avatar size="64px">
-                      <q-img :src="user.avatar || gravatar()" />
+                      <q-img :src="user.avatar || gravatar" />
                     </q-avatar>
                   </div>
 
                   <div class="text-body2 text-center">
-                    {{ user.realname || 'John Doe' }}
+                    {{ user.realname || "John Doe" }}
                   </div>
 
-                  <q-btn v-close-popup
-                    color ="primary"
-                    label ="Sair"
-                    size  ="sm"
+                  <q-btn
+                    v-close-popup
+                    color="primary"
+                    label="Sair"
+                    size="sm"
                     @click="onLogout"
                   />
                 </div>
@@ -72,54 +81,76 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model      ="leftDrawerOpen"
-      :width       ="225"
-      content-class="bg-primary"
-    >
+    <q-drawer v-model="leftDrawerOpen" :width="225" content-class="bg-primary">
       <q-scroll-area class="fit">
         <q-toolbar class="GPL__toolbar">
-          <q-toolbar-title class="row items-center justify-center">            
-            <q-img width="100%" :src="currentCompany.logo || ''" />
-          </q-toolbar-title>
+
+        <div class="q-gutter-sm items-center row current-logo-container">          
+          <router-link v-bind:to="'/'" tag='a' class='primary'>
+            <img :src="currentCompany.logo || ''" class="current-logo" />
+          </router-link>
+        </div>          
         </q-toolbar>
 
         <q-toolbar class="q-pt-md justify-center">
-          <MyCompanies />
+          <MyCompanies
+            :selected="companySelected"
+            @selected="onCompanySelected"
+          />
         </q-toolbar>
 
         <div class="q-pt-xl q-px-sm column">
-          <q-btn flat stack no-caps
-            size ="26px"
+          <q-btn
+            flat
+            stack
+            no-caps
+            size="26px"
             class="GPL__side-btn"
             color="white"
-            :to  ="{ name: 'ShippingQuoteIndex' }"
+            :to="{ name: 'ShippingQuoteIndex' }"
           >
             <q-icon size="35px" name="local_shipping" color="orange" />
             <div class="GPL__side-btn__label">Cotação</div>
           </q-btn>
 
-          <q-btn flat stack no-caps
-            size ="26px"
+          <q-btn
+            flat
+            stack
+            no-caps
+            size="26px"
             color="white"
             class="GPL__side-btn"
-            :to  ="{ name: 'OrderIndex' }"
+            :to="{ name: 'OrderIndex' }"
           >
             <q-icon size="35px" name="shopping_cart" color="orange" />
             <div class="GPL__side-btn__label">Pedidos</div>
           </q-btn>
 
-          <!--
-          <q-btn flat stack no-caps
-            size ="26px"
+          <q-btn
+            flat
+            stack
+            no-caps
+            size="26px"
             class="GPL__side-btn"
             color="white"
-            :to  ="{ name: 'InvoiceIndex' }"
+            :to="{ name: 'InvoiceIndex' }"
           >
             <q-icon size="35px" name="attach_money" color="orange" />
             <div class="GPL__side-btn__label">Faturas</div>
           </q-btn>
-          -->
+
+          <q-btn
+            flat
+            stack
+            no-caps
+            size="26px"
+            class="GPL__side-btn"
+            color="white"
+            :to="{ name: 'News' }"
+          >
+            <q-icon size="35px" name="featured_play_list" color="orange" />
+            <div class="GPL__side-btn__label">Artigos</div>
+          </q-btn>
         </div>
       </q-scroll-area>
     </q-drawer>
@@ -131,10 +162,14 @@
 </template>
 
 <script>
-import MyCompanies from '../components/common/MyCompanies';
+import MyCompanies                from "../components/common/MyCompanies";
+import md5                        from "md5";
+import { mapActions, mapGetters } from "vuex";
+import Analytics                  from "../utils/analytics";
+import { LocalStorage }           from 'quasar';
 
 export default {
-  name      : 'AdminLayout',
+  name      : "AdminLayout",
 
   components: {
     MyCompanies,
@@ -142,35 +177,112 @@ export default {
 
   data() {
     return {
-      leftDrawerOpen: this.$q.screen.gt.sm,
-      gravatar: function(){
-        var md5 = require('md5');
-        var user = this.$store.getters['auth/user'] || {};        
-        return  'https://www.gravatar.com/avatar/' + md5(user.email)+'?s=400';
-      }
-    }
+      defaultCompany : [],
+      leftDrawerOpen : this.$q.screen.gt.sm,
+      companySelected: -1,
+    };
+  },
+
+  created() {
+    this.discoveryDefaultCompany();
+    this.selectMyCompanyInSession();
   },
 
   computed: {
+    ...mapGetters({
+      cfLoading: "config/isLoading",
+    }),
+
     user() {
-      return this.$store.getters['auth/user'] || {};
+      return this.$store.getters["auth/user"] || {};
     },
 
-    currentCompany() {      
-      return this.$store.getters['people/currentCompany'] || {};
+    currentCompany() {
+      return this.$store.getters["people/currentCompany"] || {};
     },
+
+    style() {
+      return "background: #182840";
+    },
+
+    gravatar() {
+      if (this.user.email === undefined)
+        return '';
+
+      return `https://www.gravatar.com/avatar/${md5(this.user.email)}?s=400`;
+    },
+  },
+
+  mounted() {
+    this.config().then((config) => {
+      if (config.gtmId !== null)
+        Analytics.init({
+          gtmId: config.gtmId,
+        });
+    });
   },
 
   methods: {
+    ...mapActions({
+      config              : "config/appConfig",
+      peopleDefaultCompany: "people/defaultCompany",
+    }),
+
+    onCompanySelected(company) {
+      let session = LocalStorage.has('session') ? LocalStorage.getItem('session') : {};
+
+      session.mycompany = company.id;
+
+      LocalStorage.set('session', session);
+    },
+
+    selectMyCompanyInSession() {
+      let session = LocalStorage.has('session') ? LocalStorage.getItem('session') : {};
+      if (session.mycompany !== undefined)
+        this.companySelected = session.mycompany;
+    },
+
+    discoveryDefaultCompany() {
+      this.peopleDefaultCompany().then((response) => {
+        let data = [];
+        if (response.success === true && response.data.length) {
+          for (let index in response.data) {
+            let item = response.data[index];
+            let logo = null;
+
+            if (item.logo !== null) {
+              logo = "https://" + item.logo.domain + item.logo.url;
+            }
+
+            data.push({
+              id  : item.id,
+              name: item.alias,
+              logo: logo || null,
+            });
+          }
+        }
+        this.defaultCompany = data[0];
+      });
+    },
+
     onLogout() {
-      this.$store.dispatch('auth/logOut');
-      this.$router.push('/');
+      this.$store.dispatch("auth/logOut");
+      this.$router.push("/");
     },
   },
-}
+};
 </script>
 
 <style lang="sass">
+.logo-container
+  width: 100%
+.main-logo,.logo-container a,.current-logo,.current-logo-container
+  margin: auto  
+  margin-top: 3px
+  min-height: 50px
+  height: 50px
+  max-width: 100%
+  max-height: 100%
 .bg-image
   background-position: center    !important
   background-repeat  : no-repeat !important

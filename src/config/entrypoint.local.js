@@ -1,1 +1,1 @@
-export const ENTRYPOINT_LOCAL = 'https://api.controleonline.com';
+export const ENTRYPOINT_LOCAL = 'https://api.freteclick.com.br/';

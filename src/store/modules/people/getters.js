@@ -4,3 +4,4 @@ export const violations     = state => state.violations;
 export const retrieved      = state => state.retrieved;
 export const company        = state => state.company;
 export const currentCompany = state => state.currentCompany;
+export const companies      = state => state.companies;

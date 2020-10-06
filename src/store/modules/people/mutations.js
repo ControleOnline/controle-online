@@ -22,6 +22,10 @@ export default {
     Object.assign(state, { company });
   },
 
+  [types.SET_COMPANIES](state, companies) {
+    Object.assign(state, { companies });
+  },
+
   [types.SET_CURRENT_COMPANY](state, company) {
     try {
       let session = LocalStorage.has('session') ? LocalStorage.getItem('session') : {};
