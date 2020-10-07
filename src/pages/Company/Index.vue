@@ -89,7 +89,7 @@ export default {
       currentTab: 'employees',
       gravatar: function(){
         var md5 = require('md5');
-        var user = this.$store.getters['auth/user'] || {};        
+        var user = this.$store.getters['auth/user'] || {};
         return  'https://www.gravatar.com/avatar/' + md5(user.email)+'?s=400';
       }
     }
@@ -100,5 +100,10 @@ export default {
       myCompany: 'people/currentCompany',
     }),
   },
+
+  mounted() {
+    console.log('teste');
+    var company = this.$store.subscribeAction()
+  }
 }
 </script>
