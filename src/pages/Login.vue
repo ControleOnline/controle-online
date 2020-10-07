@@ -62,7 +62,8 @@ export default {
 
     onLogged(user) {
       if (this.isLogged) {
-        this.$router.push('/purchasing/order');
+        // this.$router.push('/purchasing/order');
+        // this.$router.push('/company');
       }
     },
 
@@ -113,7 +114,7 @@ export default {
       });
 
       if (this.isLogged) {
-        this.$router.push('/purchasing/order');
+        this.$router.push('/company');
       }
     },
 

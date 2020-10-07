@@ -7,7 +7,18 @@
         toggle-color="primary"
         :options    ="[
           { label: 'Pessoa Jurídica', value: 'PJ' },
-          { label: 'Pessoa Física'  , value: 'PF' },
+          //{ label: 'Pessoa Física'  , value: 'PF' },
+        ]"
+      />
+    </div>
+    
+    <div class="row justify-center q-pb-md">
+      <q-btn-toggle
+        v-model     ="hasCompany"
+        toggle-color="primary"
+        :options    ="[
+          { label: 'Já possui empresa', value: 'hasCompany' },
+          { label: 'Quero abrir uma empresa'  , value: 'doesntHaveCompany' },
         ]"
       />
     </div>
@@ -18,7 +29,8 @@
       :label      ="personType == 'PJ' ? $t('CNPJ') : $t('CPF')"
       :mask       ="personType == 'PJ' ? '##.###.###/####-##' : '###.###.###-##'"
       :placeholder="personType == 'PJ' ? 'Digite o CNPJ' : 'Digite o CPF'"
-      :rules      ="[isInvalid('document')]"
+      :rules      ="hasCompany == 'hasCompany' ? [isInvalid('document')] : ''"
+      :disable    ="hasCompany == 'hasCompany' ? false : true"
       class       ="q-mb-sm"
     />
 
@@ -161,6 +173,7 @@ export default {
     return {
       isSearching: false,
       personType : 'PJ',
+      hasCompany: 'hasCompany',
       item       : {
         name    : null,
         alias   : null,
@@ -200,6 +213,10 @@ export default {
     }),
 
     save() {
+      // if (this.hasCompany == 'doesntHaveCompany') {
+      //   this.item.document = '34.845.291/0001-30';
+      // }
+      console.log('item a persistir no banco de dados', this.item);
       this.company(this.item)
         .then(response => {
           let formHasErrors = !(response && response.success === true);
