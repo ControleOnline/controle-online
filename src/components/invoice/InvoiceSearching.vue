@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-table flat dense
+    <q-table
         :loading        ="isLoading"
         :data           ="data"
         :columns        ="settings.columns"
@@ -10,7 +10,7 @@
         :visible-columns="settings.visibleColumns"
         style           ="min-height: 90vh;"
     >
-      <template v-slot:top>
+      <template v-slot:top v-if="search === true">
         <div class="col-xs-12 q-pb-md text-h6">
           Faturas
         </div>
@@ -44,24 +44,24 @@
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td key="id"             :props="props">
-            <q-btn outline
+            <q-btn outline dense
               :to   ="{ name: 'InvoiceDetails', params: { id: props.row.id } }"
               :label="props.cols[0].value"
-              color ="primary"
+              :style="{color:props.row.color_status}"              
               class ="full-width"
             />
           </q-td>
           <q-td key="pedidos"        :props="props">
-            <q-btn outline
+            <q-btn outline dense
               :label="props.row.pedidos.length > 1 ? `${props.row.pedidos.length} Pedidos` : '1 Pedido'"
-              color ="positive"
+              color ="primary"
               @click="seeOrdersList(props.row.pedidos, props.row.id)"
               class ="full-width"
             />
           </q-td>
           <q-td key="dataVencimento" :props="props">{{ props.cols[2].value }}</q-td>
           <q-td key="fornecedor"     :props="props">{{ props.cols[3].value }}</q-td>
-          <q-td key="status"         :props="props">
+          <q-td key="status"         :props="props" :style="{color:props.row.color_status}">
             {{ $t(`invoice.statuses.${props.row.status}`) }}
           </q-td>
           <q-td key="preco"          :props="props">{{ props.cols[5].value }}</q-td>
@@ -137,7 +137,7 @@ const SETTINGS = {
       field : 'dataVencimento',
       align : 'left',
       format: (val, row) => {
-        return date.formatDate(val, 'DD-MM-YYYY')
+        return date.formatDate(val, 'DD/MM/YYYY')
       },
       label : 'Data vencimento'
     },
@@ -168,6 +168,19 @@ const SETTINGS = {
 Object.freeze(SETTINGS);
 
 export default {
+  props: {
+    search : {
+      type    : Boolean,
+      required: false,
+      default : true,
+    },
+    orderId: {
+      type    : String,
+      required: false,
+      default : null,
+    },
+  },
+
   created() {
     if (this.myCompany !== null) {
       this.filters.company = this.myCompany;
@@ -253,16 +266,17 @@ export default {
 
         for (let o in item.order) {
           orders.push(
-            item.order[o].order['@id'].match(/^\/orders\/([a-z0-9-]*)$/)[1]
+            item.order[o].order['@id'].match(/^\/purchasing\/orders\/([a-z0-9-]*)$/)[1]
           );
         }
 
         data.push({
           '@id'           : item['@id'],
-          'id'            : item['@id'].match(/^\/invoices\/([a-z0-9-]*)$/)[1],
+          'id'            : item['@id'].match(/^\/finance\/pay\/([a-z0-9-]*)$/)[1],
           'pedidos'       : orders,
+          'color_status'  : item.invoiceStatus.color,
           'dataVencimento': item.dueDate,
-          'fornecedor'    : item.order[0].order.client.alias,
+          'fornecedor'    : item.order[0].order.provider.name,
           'status'        : item.invoiceStatus.status,
           'preco'         : item.price,
         });
@@ -301,7 +315,10 @@ export default {
 
     requestStatuses() {
       this.loadingStatuses = true;
-      this.getStatuses()
+      this.getStatuses({
+        'visibility': 'public',
+        'realStatus': ['open', 'pending', 'canceled'],
+      })
         .then(statuses => {
           if (statuses.length) {
             let data = [];
@@ -329,17 +346,25 @@ export default {
       let params = { itemsPerPage: rowsPerPage, page };
 
       if (this.filters.text != null && this.filters.text.length > 0) {
-          if (this.filters.text.length < 3)
-          return;
-          params['text'] = this.filters.text;
+          if (this.filters.text.length < 2)
+            return;
+
+          params['searchBy'] = this.filters.text;
       }
 
       if (this.filters.status != null && this.filters.status.value != -1) {
-          params['invoiceStatus'] = this.filters.status.value;
+        params['invoiceStatus'] = this.filters.status.value;
+      }
+      else {
+        params['invoiceStatus.realStatus'] = ['open', 'pending'];
       }
 
       if (this.filters.company != null) {
-          params['myCompany'] = this.filters.company.id;
+        params['myCompany'] = this.filters.company.id;
+      }
+
+      if (this.orderId !== null) {
+        params['order.order'] = this.orderId;
       }
 
       params['invoice[dueDate]'] = 'desc';

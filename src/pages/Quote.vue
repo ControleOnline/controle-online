@@ -235,8 +235,8 @@ export default {
       isLoading : 'quote/isLoading' ,
       error     : 'quote/error'     ,
       violations: 'quote/violations',
-      retrieved : 'quote/retrieved' ,
-      cfLoading : 'config/isLoading',
+      retrieved : 'quote/retrieved',
+      myCompany : 'people/currentCompany',
     }),
 
     isLogged() {
@@ -250,22 +250,6 @@ export default {
     isPublic() {
       return this.$route.name == 'QuoteIndex';
     },
-  },
-
-  mounted() {
-
-    // load app config
-
-    this.config()
-      .then((config) => {
-
-        // initialize Google Analytics
-
-        if (config.gtmId !== null)
-          Analytics.init({
-            gtmId: config.gtmId
-          });
-      });
   },
 
   watch: {
@@ -309,8 +293,7 @@ export default {
 
   methods: {
     ...mapActions({
-      quote : 'quote/quote',
-      config: 'config/appConfig',
+      quote : 'quote/quote'      
     }),
 
     formatPhone(phone) {
@@ -343,12 +326,7 @@ export default {
     			  },
             data  = { 'items': item, 'coupon': this.order.id };
 
-        Analytics.logEvent('begin_checkout', data)
-          .then(() => {
-            // @remove
-            console.log('Logged: Begin Checkout');
-            console.log(data);
-          });
+        Analytics.logEvent('begin_checkout', data);
       }
     },
 
@@ -378,12 +356,7 @@ export default {
         data.items = items;
 
         if (items.length > 0)
-          Analytics.logEvent('view_item_list', data)
-            .then(() => {
-              // @remove
-              console.log('Logged: View Item List');
-              console.log(data);
-            });
+          Analytics.logEvent('view_item_list', data);
       }
 
     },
@@ -403,12 +376,7 @@ export default {
   		  'value'         : this.formatMoneyToBRL(this.order.price)
 		  };
 
-      Analytics.logEvent('Solicitar', data)
-        .then(() => {
-          // @remove
-          console.log('Logged: Solicitar');
-          console.log(data);
-        });
+      Analytics.logEvent('Solicitar', data);
 
       if (this.isLogged) {
         if (this.logged.company === null)
@@ -516,12 +484,7 @@ export default {
       		  "items"         : item
       		};
 
-      Analytics.logEvent('purchase', data)
-        .then(() => {
-          // @remove
-          console.log('Logged: Purchase');
-          console.log(data);
-        });
+      Analytics.logEvent('purchase', data);
 
       // show notification
 
@@ -533,13 +496,8 @@ export default {
 
       // redirect to order detail page
 
-      setTimeout(() => {
-        if (this.isPublic) {
-          window.top.location.href = `https://app.freteclick.com.br/purchasing/order/id/${this.order.id}/?api-key=${this.logged.token}`;
-        }
-        else {
-          this.$router.push({ name: 'OrderIndex' });
-        }
+      setTimeout(() => {        
+        this.$router.push({ name: 'OrderDetails', params: { id: this.order.id }});
       }, 1000);
     },
 
@@ -743,9 +701,16 @@ export default {
       if (this.validate() === false)
         return;
 
-      this.quote(
-        this.payload()
-      );
+      let payload = {
+        values: this.payload()
+      };
+
+      if (this.myCompany !== null)
+        payload.query = {
+          myCompany: this.myCompany.id
+        };
+
+      this.quote(payload);
     },
 
     formatMoneyToBRL(value) {

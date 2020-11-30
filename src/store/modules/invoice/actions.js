@@ -2,7 +2,7 @@ import SubmissionError from '../../../error/SubmissionError';
 import { fetch }       from '../../../boot/myapi';
 import * as types      from './mutation_types';
 
-const RESOURCE_ENDPOINT = '/invoices';
+const RESOURCE_ENDPOINT = '/finance/pay';
 
 export const getItems = ({ commit }, params = {}) => {
   commit(types.SET_ISLOADING);
@@ -52,5 +52,15 @@ export const getStatuses = ({ commit }, params = {}) => {
       }
 
       commit(types.SET_ERROR, e.message);
+    });
+};
+
+export const getInvoice = ({ commit }, { invoiceId, params }) => {
+  return fetch(`/finance/pay/${invoiceId}`, { params })
+    .then(response => response.json())
+    .then(data => {
+
+      return data;
+
     });
 };

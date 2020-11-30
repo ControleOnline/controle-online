@@ -1,10 +1,19 @@
 <template>
   <div class="text-center">
-    <div class="text-body2">{{ $t('Informe seu email. Em breve enviaremos um link de recuperação de acesso.' ) }}</div>
+    <div class="text-body2">{{ $t('Informe seu nome de usuário e email. Em breve enviaremos no email informado um link de recuperação de acesso.' ) }}</div>
 
     <q-form @submit="onSubmit" class="q-mt-md">
 
-      <q-input outlined
+      <q-input outlined stack-label
+        ref    ="email"
+        v-model="item.username"
+        type   ="text"
+        :label ="$t('Seu nome de usuário')"
+        class  ="q-mt-md"
+        :rules ="[isInvalid('username')]"
+      />
+
+      <q-input outlined stack-label
         ref    ="email"
         v-model="item.email"
         type   ="email"
@@ -19,30 +28,68 @@
         size    ="lg"
         color   ="primary"
         class   ="full-width q-mt-md"
+        :loading="isLoading"
       />
     </q-form>
   </div>
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
       item: {
-        email: '',
+        username: '',
+        email   : '',
       }
     };
   },
 
+  computed: {
+    ...mapGetters({
+      isLoading: 'user/isLoading',
+    }),
+  },
+
   methods: {
+    ...mapActions({
+      recovery: 'user/passwordRecovery',
+    }),
+
     onSubmit () {
       this.$refs.email.validate();
 
       if (this.$refs.email.hasError) {
         return;
       }
+
+      this.recovery(this.item)
+        .then(data => {
+          if (data.success === true) {
+            this.$q.notify({
+              message : 'Sua solicitação foi enviada com sucesso',
+              position: 'bottom',
+              type    : 'positive',
+            });
+          }
+          else {
+            if (data.success === false && data.error)
+              this.$q.notify({
+                message : data.error,
+                position: 'bottom',
+                type    : 'negative',
+              });
+          }
+        })
+        .catch(error => {
+          this.$q.notify({
+            message : 'Ocorreu um erro no envio da solicitação',
+            position: 'bottom',
+            type    : 'negative',
+          });
+        });
     },
 
     isInvalid(key) {

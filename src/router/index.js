@@ -94,6 +94,10 @@ export default function ({ store }) {
     const isPrivatePage = !publicPages.includes(to.path);
     const isLogged      = autoLogin();
 
+    if (to.path.match(/^\/forgot-password\/[\w\W]+\/[\w\W]+$/g)) {
+      return next();
+    }
+
     if (isLoginPage && isLogged) {
       return next('/purchasing/order');
     }

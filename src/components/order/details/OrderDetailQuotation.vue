@@ -11,7 +11,12 @@
 
     <!-- QUOTE TABLE RESULTS  -->
     <div class="col-12" v-if="order !== null">
-      <QuoteTable :order="order" @choose="onChoose" />
+      <QuoteTable
+        :order ="order"
+        :header="false"
+        :footer="false"
+        @choose="onChoose"
+      />
     </div>
 
     <!-- CHECKUP STEP TO STEP -->
@@ -107,6 +112,8 @@ export default {
       this.order = {
         id     : data.id,
         quotes : data.quotes,
+        quote  : data.quote,
+        status : data.status,
         choose : null,
         price  : null,
         user   : {
@@ -118,7 +125,7 @@ export default {
         address: {
           origin     : data.origin,
           destination: data.destination,
-        }
+        },
       };
     },
   },
@@ -138,6 +145,16 @@ export default {
     },
 
     onFinished() {
+      this.$emit('finished');
+
+      if (this.myCompany !== null && this.orderId !== null) {
+        this.requestQuotation(this.orderId)
+          .then(result => {
+            if (result === false)
+              this.incomplete = true;
+          });
+      }
+
       this.dialog = false;
     },
 

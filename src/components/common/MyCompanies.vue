@@ -3,7 +3,6 @@
     color     ="primary"
     text-color="white"
     :label    ="currentCompany !== null ? currentCompany.name : 'Loading...'"
-    :loading  ="isLoading"
     class     ="ellipsis full-width"
   >
     <q-list>
@@ -24,6 +23,14 @@
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
+  props: {
+    selected: {
+      type    : Number,
+      required: false,
+      default : -1
+    }
+  },
+
   data () {
     return {
       myCompanies   : [],
@@ -38,8 +45,19 @@ export default {
 
   computed: {
     ...mapGetters({
-      isLoading: 'people/isLoading',
+      myCompany: 'people/currentCompany',
+      companies: 'people/companies'     ,
     }),
+  },
+
+  watch: {
+    myCompany(company) {
+      this.$emit('selected', company);
+    },
+
+    companies(companies) {
+      this.setCompanies(companies);
+    },
   },
 
   methods: {
@@ -48,33 +66,45 @@ export default {
       setCompany  : 'people/currentCompany',
     }),
 
+    setCompanies(companies) {
+      let data = [];
+
+      for (let index in companies) {
+        let item = companies[index];
+        let logo = null;
+
+        if (item.logo !== null) {
+          logo = 'https://' + item.logo.domain + item.logo.url;
+        }
+
+        data.push({
+          'id'  : item.id,
+          'name': item.alias,
+          'logo': logo || null
+        });
+      }
+
+      this.myCompanies = data;
+
+      if (this.selected != -1) {
+        let _company = data.find(companies => companies.id === this.selected);
+
+        this.currentCompany = _company !== undefined ?
+          _company : (data.length > 0 ? data[0] : null);
+      }
+      else
+        this.currentCompany = data.length > 0 ? data[0] : null;
+
+      if (this.currentCompany !== null)
+        this.setCompany(this.currentCompany);
+    },
+
     getMyCompanies() {
       this.getCompanies()
         .then(response => {
-          let data = [];
-
           if (response.success === true && response.data.length) {
-            for (let index in response.data) {
-              let item = response.data[index];
-              let logo = null;
-
-              if (item.logo !== null) {
-                logo = '//' + item.logo.domain + item.logo.url;
-              }
-
-              data.push({
-                'id'  : item.id,
-                'name': item.alias,
-                'logo': logo || null
-              });
-            }
+            this.setCompanies(response.data);
           }
-
-          this.myCompanies    = data;
-          this.currentCompany = data.length > 0 ? data[0] : null;
-
-          if (this.currentCompany !== null)
-            this.setCompany(data[0]);
         });
     },
 
@@ -82,8 +112,6 @@ export default {
       this.currentCompany = company;
 
       this.setCompany(company);
-
-      this.$emit('selected', company);
     },
   },
 };

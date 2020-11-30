@@ -31,3 +31,13 @@ export const geoplace = ({ commit }, address) => {
       commit(types.SET_ERROR, e.message);
     });
 };
+
+export const getAddressByCEP = ({ commit }, cep) => {
+  return fetch(`/cep_address/${cep}`)
+    .then(response => response.json())
+    .then(data => {
+
+      return data;
+
+    });
+};

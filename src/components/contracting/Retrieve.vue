@@ -58,6 +58,7 @@
         :placeholder="personType == 'PJ' ? 'Digite o CNPJ' : 'Digite o CPF'"
         :rules      ="[isInvalid('document')]"
         class       ="q-mb-sm"
+        :loading    ="loadingContact"
       />
     </div>
 
@@ -119,8 +120,8 @@
           :label     ="$t('CEP')"
           mask       ="#####-###"
           :rules     ="[isInvalid('postal_code')]"
-          :readonly  ="order.address.origin.postalCode.length > 0"
-          :borderless="order.address.origin.postalCode.length > 0"
+          :readonly  ="order.address.origin === null ? false : order.address.origin.postalCode.length > 0"
+          :borderless="order.address.origin === null ? false : order.address.origin.postalCode.length > 0"
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
@@ -129,8 +130,8 @@
           type       ="text"
           :label     ="$t('Rua')"
           :rules     ="[isInvalid('street')]"
-          :readonly  ="order.address.origin.street.length > 0"
-          :borderless="order.address.origin.street.length > 0"
+          :readonly  ="order.address.origin === null ? false : order.address.origin.street.length > 0"
+          :borderless="order.address.origin === null ? false : order.address.origin.street.length > 0"
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
@@ -139,8 +140,8 @@
           type       ="text"
           :label     ="$t('Número')"
           :rules     ="[isInvalid('number')]"
-          :readonly  ="order.address.origin.number.length > 0"
-          :borderless="order.address.origin.number.length > 0"
+          :readonly  ="order.address.origin === null ? false : order.address.origin.number.length > 0"
+          :borderless="order.address.origin === null ? false : order.address.origin.number.length > 0"
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
@@ -148,8 +149,8 @@
           v-model    ="item.address.complement"
           type       ="text"
           :label     ="$t('Complemento')"
-          :readonly  ="order.address.origin.complement.length > 0"
-          :borderless="order.address.origin.complement.length > 0"
+          :readonly  ="order.address.origin === null ? false : order.address.origin.complement.length > 0"
+          :borderless="order.address.origin === null ? false : order.address.origin.complement.length > 0"
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
@@ -158,8 +159,8 @@
           type       ="text"
           :label     ="$t('Bairro')"
           :rules     ="[isInvalid('district')]"
-          :readonly  ="order.address.origin.district.length > 0"
-          :borderless="order.address.origin.district.length > 0"
+          :readonly  ="order.address.origin === null ? false : order.address.origin.district.length > 0"
+          :borderless="order.address.origin === null ? false : order.address.origin.district.length > 0"
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
@@ -168,8 +169,8 @@
           type       ="text"
           :label     ="$t('Cidade')"
           :rules     ="[isInvalid('city')]"
-          :readonly  ="order.address.origin.city.length > 0"
-          :borderless="order.address.origin.city.length > 0"
+          :readonly  ="order.address.origin === null ? false : order.address.origin.city.length > 0"
+          :borderless="order.address.origin === null ? false : order.address.origin.city.length > 0"
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
@@ -179,8 +180,8 @@
           :label     ="$t('UF')"
           mask       ="AA"
           :rules     ="[isInvalid('state')]"
-          :readonly  ="order.address.origin.state.length > 0"
-          :borderless="order.address.origin.state.length > 0"
+          :readonly  ="order.address.origin === null ? false : order.address.origin.state.length > 0"
+          :borderless="order.address.origin === null ? false : order.address.origin.state.length > 0"
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
@@ -189,8 +190,8 @@
           type       ="text"
           :label     ="$t('País')"
           :rules     ="[isInvalid('country')]"
-          :readonly  ="order.address.origin.country.length > 0"
-          :borderless="order.address.origin.country.length > 0"
+          :readonly  ="order.address.origin === null ? false : order.address.origin.country.length > 0"
+          :borderless="order.address.origin === null ? false : order.address.origin.country.length > 0"
         />
       </div>
     </div>
@@ -243,11 +244,12 @@ export default {
 
   data() {
     let data = {
-      isSearching  : false,
-      whereRetrieve: 'MC',
-      personType   : 'PJ',
-      contacts     : [],
-      item         : {
+      isSearching   : false,
+      whereRetrieve : 'MC',
+      personType    : 'PJ',
+      loadingContact: false,
+      contacts      : [],
+      item          : {
         id      : null,
         name    : null,
         alias   : null,
@@ -302,6 +304,7 @@ export default {
   computed: {
     ...mapGetters({
       isLoading: 'people/isLoading',
+      myCompany: 'people/currentCompany',
     }),
 
     logged() {
@@ -309,6 +312,9 @@ export default {
     },
 
     quoteAddressIsFull() {
+      if (this.order.address.origin === null)
+        return null;
+
       return this.order.address.origin.country.length     > 0 &&
              this.order.address.origin.state.length       > 0 &&
              this.order.address.origin.city.length        > 0 &&
@@ -365,12 +371,20 @@ export default {
         params: {}
       };
 
-      request.params['address[city]']    = this.order.address.origin.city;
-      request.params['address[state]']   = this.order.address.origin.state;
-      request.params['address[country]'] = this.order.address.origin.country;
+      if (this.order.address.origin !== null) {
+        request.params['address[city]']    = this.order.address.origin.city;
+        request.params['address[state]']   = this.order.address.origin.state;
+        request.params['address[country]'] = this.order.address.origin.country;
+      }
 
       if (documentId !== null)
         request.params.document = documentId;
+      else {
+        if (this.myCompany !== null)
+          request.params.myCompany = this.myCompany.id;
+      }
+
+      this.loadingContact = true;
 
       return this.contact(request)
         .then(response => {
@@ -391,7 +405,7 @@ export default {
             if (response.data.contact.length > 0) {
               for (let index = 0; index < response.data.contact.length; index++) {
                 this.contacts.push({
-                  label: response.data.contact[index].name,
+                  label: `${response.data.contact[index].name} ${response.data.contact[index].alias}`,
                   value: response.data.contact[index]
                 });
               }
@@ -405,17 +419,15 @@ export default {
 
             // set the address
 
-            if (response.data.address && !this.quoteAddressIsFull) {
-              if (response.data.address.country != this.order.address.origin.country) {
-                return;
-              }
-
-              if (response.data.address.state   != this.order.address.origin.state  ) {
-                return;
-              }
-
-              if (response.data.address.city    != this.order.address.origin.city   ) {
-                return;
+            if (response.data.address && this.quoteAddressIsFull !== true) {
+              if (this.order.address.origin !== null) {
+                if (
+                  response.data.address.country != this.order.address.origin.country ||
+                  response.data.address.state   != this.order.address.origin.state   ||
+                  response.data.address.city    != this.order.address.origin.city
+                ) {
+                  return;
+                }
               }
 
               this.setAddress(response.data.address);
@@ -426,6 +438,9 @@ export default {
         })
         .catch(error => {
           this.notifyError(error.message);
+        })
+        .finally(() => {
+          this.loadingContact = false;
         });
     },
 
@@ -507,6 +522,9 @@ export default {
     },
 
     setAddress(data) {
+      if (!data)
+        return;
+
       this.item.address.id          = data.id ? data.id : null;
       this.item.address.country     = data.country;
       this.item.address.state       = data.state;

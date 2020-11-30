@@ -4,6 +4,7 @@
     @submit="onSubmit"
   >
     <div class="row q-col-gutter-xs q-pb-xs">
+      <h6 class="col-xs-12 q-mt-sm q-mb-sm">Dados pessoais</h6>
       <div class="col-xs-12 col-sm-6 q-mb-sm">
         <q-input stack-label lazy-rules unmasked-value hide-bottom-space
           v-model="item.name"
@@ -47,21 +48,42 @@
         />
       </div>
       <div class="col-xs-12 col-sm-6 q-mb-sm">
-        <q-input stack-label lazy-rules hide-bottom-space
+        <q-input stack-label hide-bottom-space
           v-model="item.document.rg"
           type   ="text"
           label  ="R.G"
           mask   ="#########"
-          :rules ="[isInvalid('docrg')]"
         />
       </div>
       <div class="col-xs-12 col-sm-6 q-mb-sm">
-        <q-input stack-label lazy-rules hide-bottom-space
+        <q-input stack-label hide-bottom-space unmasked-value
           v-model="item.document.cpf"
           type   ="text"
           label  ="CPF"
           mask   ="###.###.###-##"
-          :rules ="[isInvalid('doccpf')]"
+        />
+      </div>
+      <h6 class="col-xs-12 q-mt-sm q-mb-sm">Dados de usuário</h6>
+      <div class="col-xs-12 col-sm-6 q-mb-sm">
+        <q-input stack-label lazy-rules reverse-fill-mask
+          v-model    ="item.username"
+          type       ="text"
+          :label     ="$t('Usuário')"
+          placeholder="Digite seu usuário (nickname)"
+          class      ="q-mb-md"
+          mask       ="x"
+          :rules     ="[isInvalid('username')]"
+          hint       ="Use apenas letras e números sem espaços"
+        />
+      </div>
+      <div class="col-xs-12 col-sm-6 q-mb-sm">
+        <q-input stack-label lazy-rules
+          v-model    ="item.password"
+          type       ="password"
+          :label     ="$t('Senha')"
+          placeholder="Digite sua senha"
+          :rules     ="[isInvalid('password')]"
+          hint       ="Use seis ou mais caracteres com uma combinação de letras, números e símbolos"
         />
       </div>
     </div>
@@ -94,9 +116,11 @@ export default {
           },
           email   : '',
           document: {
-            rg : '',
-            cpf: ''
-          }
+            rg : null,
+            cpf: null
+          },
+          username: '',
+          password: '',
         },
     };
   },
@@ -115,6 +139,8 @@ export default {
               },
               email    : this.item.email,
               documents: [],
+              username : this.item.username,
+              password : this.item.password,
             };
 
             payload.documents.push({
@@ -140,15 +166,18 @@ export default {
 
     isInvalid(key) {
       return val => {
-        switch (key) {
-          case 'email'   :
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))
-              return 'O email informado não é válido';
-          break;
-          default:
-            if (!(val && val.length > 0))
-              return 'Este campo é obrigatório';
-        }
+        if (!(val && val.length > 0))
+          return this.$t('messages.fieldRequired');
+
+        if (key == 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))
+          return this.$t('messages.emailInvalid');
+
+        if (key == 'password' && val.length < 6)
+          return this.$t('A senha deve ter no mínimo 6 caracteres');
+
+        if (key == 'confirm' && (this.item.password != this.item.confirmPassword))
+          return this.$t('As senhas não coincidem');
+
         return true;
       };
     },

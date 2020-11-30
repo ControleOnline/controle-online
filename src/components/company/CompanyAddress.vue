@@ -131,13 +131,15 @@ const SETTINGS = {
 Object.freeze(SETTINGS);
 
 export default {
-  components: {
-    FormAddress,
+  props: {
+    companyId: {
+      type    : Number,
+      required: true,
+    },
   },
 
-  created() {
-    if (this.myCompany !== null)
-      this.onRequest();
+  components: {
+    FormAddress,
   },
 
   data() {
@@ -149,22 +151,14 @@ export default {
     };
   },
 
-  computed: {
-    ...mapGetters({
-      isLoading: 'profile/isLoading'    ,
-      myCompany: 'people/currentCompany',
-    }),
-
-    user() {
-      return this.$store.getters['auth/user'];
-    },
+  created() {
+    this.onRequest();
   },
 
-  watch: {
-    myCompany(company) {
-      if (company !== null)
-        this.onRequest();
-    },
+  computed: {
+    ...mapGetters({
+      isLoading: 'profile/isLoading',
+    }),
   },
 
   methods: {
@@ -259,7 +253,7 @@ export default {
 
       this.items = [];
 
-      params['myCompany'] = this.myCompany.id;
+      params['myCompany'] = this.companyId;
 
       this.getItems(params)
         .then(items => {
