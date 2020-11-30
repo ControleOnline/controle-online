@@ -11,8 +11,8 @@
           icon="menu"
           class="q-mx-md"
         />
-        <div class="q-gutter-sm items-center row logo-container">          
-          <router-link v-bind:to="'/'" tag='a' class='primary'>
+        <div class="q-gutter-sm items-center row logo-container">
+          <router-link v-bind:to="'/'" tag="a" class="primary">
             <img :src="defaultCompany.logo" class="main-logo" />
           </router-link>
         </div>
@@ -84,12 +84,11 @@
     <q-drawer v-model="leftDrawerOpen" :width="225" content-class="bg-primary">
       <q-scroll-area class="fit">
         <q-toolbar class="GPL__toolbar">
-
-        <div class="q-gutter-sm items-center row current-logo-container">          
-          <router-link v-bind:to="'/'" tag='a' class='primary'>
-            <img :src="currentCompany.logo || ''" class="current-logo" />
-          </router-link>
-        </div>          
+          <div class="q-gutter-sm items-center row current-logo-container">
+            <router-link v-bind:to="'/'" tag="a" class="primary">
+              <img :src="currentCompany.logo || ''" class="current-logo" />
+            </router-link>
+          </div>
         </q-toolbar>
 
         <q-toolbar class="q-pt-md justify-center">
@@ -98,7 +97,6 @@
             @selected="onCompanySelected"
           />
         </q-toolbar>
-
         <div class="q-pt-xl q-px-sm column">
           <q-btn
             flat
@@ -107,10 +105,23 @@
             size="26px"
             class="GPL__side-btn"
             color="white"
-            :to="{ name: 'ShippingQuoteIndex' }"
+            :to="{ name: 'ClientsIndex' }"
           >
-            <q-icon size="35px" name="local_shipping" color="orange" />
-            <div class="GPL__side-btn__label">Cotação</div>
+            <q-icon size="35px" name="person" color="orange" />
+            <div class="GPL__side-btn__label">Clientes</div>
+          </q-btn>
+
+          <q-btn
+            flat
+            stack
+            no-caps
+            size="26px"
+            class="GPL__side-btn"
+            color="white"
+            :to="{ name: 'ContractIndex' }"
+          >
+            <q-icon size="35px" name="library_books" color="orange" />
+            <div class="GPL__side-btn__label">Contratos</div>
           </q-btn>
 
           <q-btn
@@ -120,23 +131,23 @@
             size="26px"
             color="white"
             class="GPL__side-btn"
-            :to="{ name: 'OrderIndex' }"
+            :to="{ name: 'SalesOrderIndex' }"
           >
             <q-icon size="35px" name="shopping_cart" color="orange" />
-            <div class="GPL__side-btn__label">Pedidos</div>
+            <div class="GPL__side-btn__label">Pedidos de Venda</div>
           </q-btn>
 
-          <q-btn
+          <q-btn v-if="currentCompany && currentCompany.commission > 0"
             flat
             stack
             no-caps
             size="26px"
             class="GPL__side-btn"
             color="white"
-            :to="{ name: 'InvoiceIndex' }"
+            :to="{ name: 'ComissionIndex' }"
           >
             <q-icon size="35px" name="attach_money" color="orange" />
-            <div class="GPL__side-btn__label">Faturas</div>
+            <div class="GPL__side-btn__label">Comissões</div>
           </q-btn>
 
           <q-btn
@@ -162,14 +173,14 @@
 </template>
 
 <script>
-import MyCompanies                from "../components/common/MyCompanies";
-import md5                        from "md5";
+import MyCompanies from "../components/common/MyCompanies";
+import md5 from "md5";
 import { mapActions, mapGetters } from "vuex";
-import Analytics                  from "../utils/analytics";
-import { LocalStorage }           from 'quasar';
+import Analytics from "../utils/analytics";
+import { LocalStorage } from "quasar";
 
 export default {
-  name      : "AdminLayout",
+  name: "AdminLayout",
 
   components: {
     MyCompanies,
@@ -177,8 +188,8 @@ export default {
 
   data() {
     return {
-      defaultCompany : [],
-      leftDrawerOpen : this.$q.screen.gt.sm,
+      defaultCompany: [],
+      leftDrawerOpen: this.$q.screen.gt.sm,
       companySelected: -1,
     };
   },
@@ -206,8 +217,7 @@ export default {
     },
 
     gravatar() {
-      if (this.user.email === undefined)
-        return '';
+      if (this.user.email === undefined) return "";
 
       return `https://www.gravatar.com/avatar/${md5(this.user.email)}?s=400`;
     },
@@ -224,20 +234,24 @@ export default {
 
   methods: {
     ...mapActions({
-      config              : "config/appConfig",
+      config: "config/appConfig",
       peopleDefaultCompany: "people/defaultCompany",
     }),
 
     onCompanySelected(company) {
-      let session = LocalStorage.has('session') ? LocalStorage.getItem('session') : {};
+      let session = LocalStorage.has("session")
+        ? LocalStorage.getItem("session")
+        : {};
 
       session.mycompany = company.id;
 
-      LocalStorage.set('session', session);
+      LocalStorage.set("session", session);
     },
 
     selectMyCompanyInSession() {
-      let session = LocalStorage.has('session') ? LocalStorage.getItem('session') : {};
+      let session = LocalStorage.has("session")
+        ? LocalStorage.getItem("session")
+        : {};
       if (session.mycompany !== undefined)
         this.companySelected = session.mycompany;
     },
@@ -255,7 +269,7 @@ export default {
             }
 
             data.push({
-              id  : item.id,
+              id: item.id,
               name: item.alias,
               logo: logo || null,
             });

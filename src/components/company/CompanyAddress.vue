@@ -169,7 +169,7 @@ export default {
 
     onSave(data) {
       this.save({
-        id       : this.myCompany.id,
+        id       : this.companyId,
         component: 'address',
         payload  : {
           "operation": "post",
@@ -215,7 +215,7 @@ export default {
         item._bussy = true;
 
         this.save({
-          id       : this.myCompany.id,
+          id       : this.companyId,
           component: 'address',
           payload  : {
             "operation": "delete",

@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable -->
   <q-btn-dropdown outline
     color     ="primary"
     text-color="white"
@@ -20,6 +21,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
@@ -62,8 +64,8 @@ export default {
 
   methods: {
     ...mapActions({
-      getCompanies: 'people/myCompanies'   ,
-      setCompany  : 'people/currentCompany',
+      getCompanies: 'people/mySaleCompanies',
+      setCompany  : 'people/currentCompany' ,
     }),
 
     setCompanies(companies) {
@@ -78,9 +80,10 @@ export default {
         }
 
         data.push({
-          'id'  : item.id,
-          'name': item.alias,
-          'logo': logo || null
+          'id'        : item.id,
+          'name'      : item.alias,
+          'logo'      : logo || null,
+          'commission': item.commission,
         });
       }
 

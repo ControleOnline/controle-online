@@ -4,31 +4,49 @@ const routes = [
     path     : '/',
     component: () => import('layouts/MainLayout.vue'),
     children : [
-      { name: 'LoginIndex', path: ''     , component: () => import('pages/Login.vue') },
-      { name: 'QuoteIndex', path: 'quote', component: () => import('pages/Quote.vue') }
+      { name: 'LoginIndex', path: ''     , component: () => import('pages/Login.vue') }      
     ]
   },
   {
-    path     : '/purchasing/',
-    component: () => import('layouts/AdminLayout.vue'),
+    path     : '/forgot-password',
+    component: () => import('layouts/MainLayout.vue'),
     children : [
-      { name: 'OrderIndex'  , path: 'order'       , component: () => import('pages/Orders/Index.vue') },
-      { name: 'OrderDetails', path: 'order/id/:id', component: () => import('pages/Orders/Order.vue') },
+      {
+        path     : ':hash/:lost',
+        component: () => import('pages/User/Recovery/AccessRecovery.vue')
+      },
     ]
   },
+  {
+    path     : '/home/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      { name: 'DashboardIndex', path: 'dashboard', component: () => import('pages/Home/Dashboard.vue') },
+    ]
+  }, 
+  {
+    path: '/contracts/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children: [
+      { name: 'ContractIndex'  , path: ''      , component: () => import('pages/Contracts/Index.vue'  ) },
+      { name: 'ContractDetails', path: 'id/:id', component: () => import('pages/Contracts/Details.vue') },
+    ]
+  }, 
   {
     path     : '/sales/',
     component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      { name: 'ShippingQuoteIndex', path: 'shipping-quote', component: () => import('pages/Quote.vue') },
+    children : [      
+      { name: 'SalesOrderIndex'  , path: 'order'       , component: () => import('pages/Orders/Sales/Index.vue') },
+      { name: 'SalesOrderDetails', path: 'order/id/:id', component: () => import('pages/Orders/Sales/Order.vue') },
     ]
   },
   {
     path     : '/finance/',
     component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      { name: 'InvoiceIndex'  , path: 'pay'       , component: () => import('pages/Invoice/Index.vue'  ) },
-      { name: 'InvoiceDetails', path: 'pay/id/:id', component: () => import('pages/Invoice/Details.vue') },
+    children : [      
+      { name: 'ComissionIndex'  , path: 'comission'       , component: () => import('pages/Invoice/Comission/Index.vue'  ) },
+      { name: 'ComissionDetails', path: 'comission/id/:id', component: () => import('pages/Invoice/Comission/Details.vue') },
+      { name: 'ReceiveDetails', path: 'receive/id/:id', component: () => import('pages/Invoice/Receive/Details.vue') },
     ]
   },
   {
@@ -36,13 +54,6 @@ const routes = [
     component: () => import('layouts/AdminLayout.vue'),
     children : [
       { name: 'UserProfile', path: 'profile', component: () => import('pages/User/Profile.vue') },
-    ]
-  },
-  {
-    path     : '/order/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      { name: 'TrackBack', path: 'track-back', component: () => import('pages/Orders/TrackBack.vue') },
     ]
   }, 
   {
@@ -71,17 +82,18 @@ const routes = [
     ]
   },
   {
-    path     : '/forgot-password',
-    component: () => import('layouts/MainLayout.vue'),
+    path     : '/clients/',
+    component: () => import('layouts/AdminLayout.vue'),
     children : [
       {
-        path     : ':hash/:lost',
-        component: () => import('pages/User/Recovery/AccessRecovery.vue')
+        name     : 'ClientsIndex',
+        path     : '',
+        component: () => import('pages/Clients/Index.vue')
       },
     ]
-  },
+  }, 
   {
-    path: '*', redirect: '/sales/shipping-quote'
+    path: '*', redirect: '/finance/receive'
   },
 ]
 

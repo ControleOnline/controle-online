@@ -130,60 +130,53 @@ export default {
 
   methods: {
     ...mapActions({
-      choose     : 'quote/choose_quote',
-      email      : 'people/email',
-      postContact: 'people/postContact'
+      choose : 'quote/choose_quote',
+      email  : 'people/email',
+      contact: 'people/createContact'
     }),
 
-    createContact (contact, current) {
-      this.postContact(contact)
+    createContact() {
+      let payload = this.data[this.current];
+
+      return this.contact({
+          "name"     : payload.name,
+          "alias"    : payload.alias,
+          "document" : payload.document,
+          "contact"  : {
+            "name"  : payload.contact.name,
+            "email" : payload.contact.email,
+            "phone" : payload.contact.phone,
+          },
+          "address"  : {
+            "country"    : payload.address.country,
+            "state"      : payload.address.state,
+            "city"       : payload.address.city,
+            "district"   : payload.address.district,
+            "complement" : payload.address.complement,
+            "street"     : payload.address.street,
+            "number"     : payload.address.number,
+            "postal_code": payload.address.postal_code,
+          }
+        })
         .then(response => {
           let formHasErrors = !(response && response.success === true);
 
-          if (!formHasErrors) {
-            this.data[current].contact = response.data;
-            this.data[current].id      = response.data.id;
-            this.data[current].name    = response.data.name;
-          } else {
+          if (formHasErrors) {
             this.notifyError(response.error);
-          }
-        })
-        .catch(error => {
-          let formHasErrors = true;
-
-          this.notifyError(error.message);
-        });
-    },
-
-    async searchEmail (email, current) {
-      return await this.email(email)
-        .then(response => {
-          let hasErrors = !(response && response.success === true);
-
-          if (!hasErrors) {
-            /**
-             *  verifica se retornou o email, se sim, vincular ao contact
-             */
-            this.data[current].id         = response.data.people_id;
-            this.data[current].contact.id = response.data.people_id;
-          } else {
-            this.createContact({
-              name    : this.data[current].contact.name,
-              email   : this.data[current].contact.email,
-              phone   : this.data[current].contact.phone,
-              document: this.data[current].document,
-              alias   : this.data[current].contact.alias,
-            }, current)
+            this.steps[this.current].hasErrors = true;
+            return false;
           }
 
-          return hasErrors === false ? response.data : false;
+          this.data[this.current].id         = response.data.companyId;
+          this.data[this.current].contact.id = response.data.contactId;
+          return true;
         })
         .catch(error => {
           this.notifyError(error.message);
         });
     },
 
-    async goToNext (form) {
+    goToNext (form) {
       this.steps[this.current].hasErrors = form.errors;
       this.steps[this.current].extra     = form.extra || null;
 
@@ -201,11 +194,14 @@ export default {
           this.save();
         }
         else {
-          if (!this.data[this.current].id) {
-            await this.searchEmail(this.data[this.current].contact.email, this.current)
-          }
-
-          this.$refs.stepper.next();
+          if (!this.data[this.current].id)
+            this.createContact()
+              .then(result => {
+                if (result === true)
+                  this.$refs.stepper.next();
+              });
+          else
+            this.$refs.stepper.next();
         }
       }
     },
