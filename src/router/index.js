@@ -99,7 +99,7 @@ export default function ({ store }) {
     }
 
     if (isLoginPage && isLogged) {
-      return next('/purchasing/order');
+      return next({ name: 'DashboardIndex' });
     }
 
     if (isPrivatePage === true && isLogged === false) {

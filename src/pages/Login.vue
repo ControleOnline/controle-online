@@ -62,7 +62,7 @@ export default {
 
     onLogged(user) {
       if (this.isLogged) {
-        this.$router.push('/purchasing/order');
+        this.$router.push({ name: 'DashboardIndex' });
       }
     },
 
