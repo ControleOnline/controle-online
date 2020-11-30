@@ -3,7 +3,7 @@ version : '3.4'
 services:
   webapp:
     image         : rchdev/frontend-genesis:1.0
-    container_name: fclick-cotafacil
+    container_name: ctr-accounting
     build         :
       context: ./
     environment:
