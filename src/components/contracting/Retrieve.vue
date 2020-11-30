@@ -50,16 +50,34 @@
           :disable    ="whereRetrieve == 'MC'"
         />
       </div>
-      <q-input outlined stack-label lazy-rules unmasked-value
-        v-model     ="item.document"
-        type        ="text"
-        :label      ="personType == 'PJ' ? $t('CNPJ') : $t('CPF')"
-        :mask       ="personType == 'PJ' ? '##.###.###/####-##' : '###.###.###-##'"
-        :placeholder="personType == 'PJ' ? 'Digite o CNPJ' : 'Digite o CPF'"
-        :rules      ="[isInvalid('document')]"
-        class       ="q-mb-sm"
-        :loading    ="loadingContact"
-      />
+      <div class="row q-col-gutter-xs q-pb-xs">
+        <div class="col-xs-12 q-mb-sm">
+          <q-input outlined stack-label lazy-rules unmasked-value
+            v-model     ="item.document"
+            type        ="text"
+            :label      ="personType == 'PJ' ? $t('CNPJ') : $t('CPF')"
+            :mask       ="personType == 'PJ' ? '##.###.###/####-##' : '###.###.###-##'"
+            :placeholder="personType == 'PJ' ? 'Digite o CNPJ' : 'Digite o CPF'"
+            :rules      ="[isInvalid('document')]"
+            class       ="q-mb-sm"
+            :loading    ="loadingContact"
+          />
+        </div>
+        <div class="col-xs-12 col-sm-6 q-mb-sm" v-if="personType == 'PJ'">
+          <q-input outlined stack-label
+            v-model ="item.name"
+            type    ="text"
+            label   ="Razão social"
+          />
+        </div>
+        <div class="col-xs-12 col-sm-6 q-mb-sm" v-if="personType == 'PJ'">
+          <q-input outlined stack-label
+            v-model ="item.alias"
+            type    ="text"
+            label   ="Nome fantasia"
+          />
+        </div>
+      </div>
     </div>
 
     <q-separator spaced />
