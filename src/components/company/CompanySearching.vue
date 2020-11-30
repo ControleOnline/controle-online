@@ -134,7 +134,7 @@ export default {
     onSaved(hasErrors) {
       if (hasErrors == false) {
         this.dialog = false;
-        this.onRequest(true);
+        this.onRequest();
       }
     },
 
@@ -155,26 +155,20 @@ export default {
       }
     },
 
-    onRequest(force = false) {
+    onRequest() {
       this.items = [];
 
-      if (this.companies.length > 0 && force == false) {
-        this.setCompanies(this.companies);
-      }
-      else {
-        this.isLoading = true;
-  
-        this.getItems()
-          .then(response => {
-            if (response.data) {
-              this.setCompanies(response.data);
-            }
-          })
-          .finally(() => {
-            this.isLoading = false;
-          });
-      }
+      this.isLoading = true;
 
+      this.getItems()
+        .then(response => {
+          if (response.data) {
+            this.setCompanies(response.data);
+          }
+        })
+        .finally(() => {
+          this.isLoading = false;
+        });
     },
   },
 };

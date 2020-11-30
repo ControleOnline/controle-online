@@ -80,7 +80,7 @@
                     </q-item>
                   </q-list>
                   <div class="text-h4 text-bold q-mt-md">
-                    {{ props.cols[4].value }} <q-btn round class="hidden" icon="money" color="primary" @click="showTaxes(props.cols[7].value)" />
+                    {{ props.cols[4].value }} <q-btn round icon="money" color="primary" @click="showTaxes(props.cols[7].value)" />
                   </div>
                   <q-btn rounded
                     icon  ="send"
@@ -313,7 +313,7 @@ export default {
       for (let index in taxes) {
         _taxes.push({
           name : taxes[index].name,
-          total: format.format(taxes[index].subtotal),
+          total: format.format(taxes[index].total),
         });
       }
 

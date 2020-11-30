@@ -228,11 +228,11 @@ export default {
 
   computed: {
     ...mapGetters({
-      isLoading : 'order/isLoading' ,
-      error     : 'order/error'     ,
-      violations: 'order/violations',
-      items     : 'order/items'     ,
-      totalItems: 'order/totalItems',
+      isLoading : 'purchasingOrder/isLoading' ,
+      error     : 'purchasingOrder/error'     ,
+      violations: 'purchasingOrder/violations',
+      items     : 'purchasingOrder/items'     ,
+      totalItems: 'purchasingOrder/totalItems',
       myCompany : 'people/currentCompany',
     }),
   },
@@ -299,9 +299,9 @@ export default {
 
   methods: {
     ...mapActions({
-      getItems   : 'order/getItems'   ,
-      reset      : 'order/reset'      ,
-      getStatuses: 'order/getStatuses',
+      getItems   : 'purchasingOrder/getItems'   ,
+      reset      : 'purchasingOrder/reset'      ,
+      getStatuses: 'purchasingOrder/getStatuses',
     }),
 
     requestStatuses() {

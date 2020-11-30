@@ -42,7 +42,7 @@
                 <tr>
                   <td class="text-left text-bold">Nome</td>
                   <td class="text-left">
-                    {{ this.steps.retrieve.name }}
+                    {{ this.steps.retrieve.name || this.steps.retrieve.contact.name }}
                   </td>
                 </tr>
                 <tr>
@@ -91,7 +91,7 @@
                 <tr>
                   <td class="text-left text-bold">Nome</td>
                   <td class="text-left">
-                    {{ this.steps.delivery.name }}
+                    {{ this.steps.delivery.name || this.steps.delivery.contact.name }}
                   </td>
                 </tr>
                 <tr>
@@ -321,18 +321,18 @@ export default {
 
       if (this.steps.retrieve.id == this.steps.delivery.id)
         opts.push({
-          label: `${this.steps.retrieve.name} (CIF)`,
+          label: `${this.steps.retrieve.name || this.steps.retrieve.contact.name} (CIF)`,
           value: this.steps.retrieve.id,
         });
 
       else {
         opts.push({
-          label: `${this.steps.retrieve.name} (CIF)`,
+          label: `${this.steps.retrieve.name || this.steps.retrieve.contact.name} (CIF)`,
           value: this.steps.retrieve.id,
         });
 
         opts.push({
-          label: `${this.steps.delivery.name} (FOB)`,
+          label: `${this.steps.delivery.name || this.steps.delivery.contact.name} (FOB)`,
           value: this.steps.delivery.id,
         });
       }

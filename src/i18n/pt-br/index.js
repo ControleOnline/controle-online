@@ -67,6 +67,7 @@ export default {
       'canceled'                  : 'Cancelado',
       'waiting commission'        : 'Aguardando comissão',
       'ship to carrier'           : 'Entregar na transportadora',
+      'retrieved'                 : 'Coletado',
     },
   },
   invoice: {
@@ -80,6 +81,22 @@ export default {
       'exceeded billing'        : 'Limite de faturamento excedido',
       'waiting billing'         : 'Aguardando fatura',
       'waiting generate invoice': 'Gerando NF',
+    },
+  },
+  contracts: {
+    statuses: {
+      'Draft'           : 'Proposta',
+      'Waiting approval': 'Aguardando assinaturas',
+      'Active'          : 'Ativo',
+      'Canceled'        : 'Cancelado',
+      'Amended'         : 'Alterado',
+    },
+    roles   : {
+      'Beneficiary': 'Contratante',
+      'Witness'    : 'Testemunha',
+      'Payer'      : 'Pagador',
+      'Provider'   : 'Contratado',
+      'Contractor' : 'Prestador de serviço',
     },
   },
 }

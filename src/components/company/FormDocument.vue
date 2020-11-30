@@ -16,7 +16,7 @@
 
     <q-input lazy-rules stack-label
       v-model="item.document"
-      type   ="file"
+      type   ="text"
       label  ="Documento"
       class  ="q-mt-md"
       :rules ="[isInvalid('phone')]"
@@ -51,10 +51,6 @@ const SETTINGS = {
       {
         label: 'Inscrição Municipal',
         value: 5,
-      },
-      {
-        label: 'Contrato Social',
-        value: 6,
       },
     ],
   },
