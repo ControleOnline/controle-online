@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-card v-if="this.order.quotes.length > 0">
-      <q-card-section v-if="isPublic"
+      <q-card-section v-if="header"
         style="background-color: #00519b"
       >
         <div class="row items-center title-bar">
@@ -21,12 +21,15 @@
           :visible-columns="visible"
           row-key         ="id"
           :pagination.sync="pagination"
+          
         >
 
           <template v-slot:item="props">
             <div class="q-pb-xs-md q-pa-sm-md col-xs-12 col-sm-6 col-md-3">
-              <q-card class="shadow-10" style="border-radius: 30px">
-
+              <q-card
+                class ="shadow-10"
+                :style="getSelectedStyle(props.row.id)"
+              >
                 <q-card-section v-if="props.cols[5].value == null"
                   class="row items-center justify-center text-center"
                   style="height: 130px; width: 80%; margin-left: 9%"
@@ -82,7 +85,7 @@
                   <q-btn rounded
                     icon  ="send"
                     style ="width: 85%; background-color: #56da63"
-                    class ="q-mt-md"
+                    :class="mayContract()"
                     label ="Contratar"
                     @click="chooseQuote(props.row)"
                   />
@@ -94,7 +97,7 @@
         </q-table>
       </q-card-section>
 
-      <q-card-actions v-if="isPublic"
+      <q-card-actions v-if="footer"
         align="center"
         class="q-pa-md"
       >
@@ -140,14 +143,24 @@
 <script>
 export default {
   props     : {
-    order: {
+    order : {
       type    : Object,
       required: true,
+    },
+    header: {
+      type    : Boolean,
+      required: false,
+      default : true,
+    },
+    footer: {
+      type    : Boolean,
+      required: false,
+      default : true,
     },
   },
 
   mounted() {
-    this.$emit('load');
+    this.$emit('load');    
   },
 
   data() {
@@ -261,6 +274,28 @@ export default {
   },
 
   methods: {
+    getSelectedStyle(quoteId) {
+      let style = 'border-radius: 30px;';
+
+      if (!this.order.quote)
+        return style;
+
+      if (this.order.quote.id == quoteId) {
+        style += 'border: 3px solid green;';
+      }
+
+      return style;
+    },
+
+    mayContract() {
+      let _class = 'q-mt-md';
+
+      if (!this.order.status)
+        return _class;
+
+      return this.order.status.real_status != 'open' ? `${_class} hidden` : _class;
+    },
+
     chooseQuote(quote) {
       if (quote) {
         this.$emit('choose', { id: quote.id, price: quote.total });

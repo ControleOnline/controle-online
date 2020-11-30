@@ -36,9 +36,11 @@ import { mapActions, mapGetters } from 'vuex';
 import { formatMoney }            from '../../utils/formatter';
 
 export default {
-  created() {
-    if (this.myCompany !== null)
-      this.onRequest();
+  props: {
+    companyId: {
+      type    : Number,
+      required: true,
+    },
   },
 
   data() {
@@ -47,22 +49,14 @@ export default {
     };
   },
 
-  computed: {
-    ...mapGetters({
-      isLoading: 'profile/isLoading'    ,
-      myCompany: 'people/currentCompany',
-    }),
-
-    user() {
-      return this.$store.getters['auth/user'];
-    },
+  created() {
+    this.onRequest();
   },
 
-  watch: {
-    myCompany(company) {
-      if (company !== null)
-        this.onRequest();
-    },
+  computed: {
+    ...mapGetters({
+      isLoading: 'profile/isLoading',
+    }),
   },
 
   methods: {
@@ -80,12 +74,12 @@ export default {
         monthly : 'mensal',
       };
 
-      this.getItem(this.myCompany.id)
+      this.getItem(this.companyId)
         .then(billing => {
           if (billing !== null) {
             this.item = {
-              amount : billing.amount > 0 ?formatMoney(billing.amount, 'BRL', 'pt-br') : 'À Vista',
-              period : billing.amount > 0 ?periods[billing.period] ? periods[billing.period] : billing.period:'Por Pedido',
+              amount : billing.amount  > 0 ? formatMoney(billing.amount, 'BRL', 'pt-br') : 'À Vista',
+              period : billing.amount  > 0 ? (periods[billing.period] ? periods[billing.period] : billing.period) : 'Por Pedido',
               dueDays: billing.dueDays > 1 ? `${billing.dueDays} dias` : `${billing.dueDays} dia`,
             };
           }

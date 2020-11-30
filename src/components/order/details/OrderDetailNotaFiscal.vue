@@ -10,7 +10,7 @@
         Carregando...
       </div>
 
-      <div class="col-12" v-if="order !== null">
+      <div class="col-12" v-if="isWaitingForNF">
         <div class="text-subtitle1">Dados para emissão da sua nota fiscal:</div>
         <div class="text-caption">Preencha corretamente sua DANFE, com os seguintes dados:</div>
 
@@ -26,7 +26,7 @@
           </li>
           <li>No campo "Frete por conta", colocar a opção por "Terceiros"</li>
           <li>Não esqueça de colocar os volumes a serem transportados e peso total</li>
-          <li>No campo "Dados adicionais", coloque a seguinte instrução: Frete por conta e ordem da {{ provider.name }} CNPJ: {{ provider.document }}</li>
+          <li>No campo "Dados adicionais", coloque a seguinte instrução: Frete número #{{ order.id }} por conta e ordem da {{ provider.name }} CNPJ: {{ provider.document }}</li>
           <li>Atenção ao endereço de entrega</li>
           <li>Abaixo está nossa carta de consignatário do frete, que deve ser impressa e anexada na frente da sua Nota Fiscal.</li>
         </ul>
@@ -65,20 +65,14 @@
             </q-banner>
           </div>
         </div>
+      </div>
 
+      <div class="col-12" v-else>
         <div class="row" v-if="invoiceTax !== null">
           <div class="col-12">
-            <div class="row justify-center q-pt-lg">
-              <q-btn
-                :loading="isDownloading"
-                icon    ="cloud_download"
-                label   ="Baixar Nota Fiscal"
-                size    ="md"
-                color   ="primary"
-                @click  ="downloadNFFile"
-                class   ="q-ml-sm"
-                :disable="invoiceTax === null"
-              />
+            <h6 class="q-mb-md q-mt-md">Nota Fiscal: #{{ invoiceTax.invoice_number }}</h6>
+            <div class="row justify-center">
+              <iframe :src="urlInvoiceTax" name="invoice-tax" class="invoice-tax" width="100%" height="100%" frameBorder="0"></iframe>              
             </div>
           </div>
         </div>
@@ -157,8 +151,22 @@ export default {
       myCompany: 'people/currentCompany',
     }),
 
+    isWaitingForNF() {
+      if (this.order === null)
+        return false;
+
+      return this.order.status.status == 'waiting client invoice tax';
+    },
+
     updEndpoint() {
-      return `${ENTRYPOINT}invoice_taxes/upload-nf?myCompany=${this.myCompany.id}`;
+      return `${ENTRYPOINT}/invoice_taxes/upload-nf?myCompany=${this.myCompany.id}`;
+    },
+
+    urlInvoiceTax() {
+      if (this.invoiceTax === null)
+        return '';
+
+      return `${ENTRYPOINT}/vendor/pdf.js/web/viewer.html?file=/invoice_taxes/${this.invoiceTax.id}/download-nf`;        
     },
   },
 
@@ -173,34 +181,6 @@ export default {
     ...mapActions({
       getItem: 'order/getDetailOrder',
     }),
-
-    downloadNFFile() {
-      if (this.invoiceTax === null)
-        return;
-
-      this.isDownloading = true;
-
-      this.$store.dispatch('order/downloadNF', this.invoiceTax)
-        .then(blob => {
-          if (!exportFile('nota_fiscal.xml', blob, 'application/xml')) {
-            this.$q.notify({
-              message : 'Não foi possivel baixar a Nota Fiscal',
-              type    : 'negative',
-              position: 'bottom',
-            });
-          }
-        })
-        .catch(error => {
-          this.$q.notify({
-            message : error.message,
-            type    : 'negative',
-            position: 'bottom',
-          });
-        })
-        .finally(() => {
-          this.isDownloading = false;
-        });
-    },
 
     onFilesRemoved() {
       this.uploadErrors = [];
@@ -254,7 +234,7 @@ export default {
               this.provider.name              = order.provider.name;
               this.provider.document          = order.provider.document ? formatDocument(order.provider.document) : '';
 
-              this.invoiceTax                 = order.invoiceTax;
+              this.invoiceTax                 = order.invoiceTax.length == 0 ? null : order.invoiceTax[0];
 
               this.order                      = order;
             }
@@ -269,3 +249,8 @@ export default {
   },
 };
 </script>
+<style>
+.invoice-tax{
+  min-height: 100vh;
+}
+</style>

@@ -9,7 +9,7 @@
 
           <div class="q-pa-md text-subtitle1 text-center">
             <q-avatar size="80px">
-              <q-img :src="user.avatar || gravatar() " />
+              <q-img :src="user.avatar || gravatar" />
             </q-avatar>
             <div class="q-pa-md text-subtitle1">
               {{ user.realname || 'John Doe' }}
@@ -81,6 +81,7 @@ import UserAddress   from '../../components/user/profile/UserAddress';
 import UserEmails    from '../../components/user/profile/UserEmails';
 import UserUsers     from '../../components/user/profile/UserUsers';
 import UserDocuments from '../../components/user/profile/UserDocuments';
+import md5           from 'md5';
 
 export default {
   name      : 'UserProfilePage',
@@ -94,20 +95,26 @@ export default {
   },
 
   computed: {
-    user() {      
+    user() {
       return this.$store.getters['auth/user'] || {};
+    },
+
+    gravatar() {
+      if (this.user.email === undefined)
+        return '';
+
+      return `https://www.gravatar.com/avatar/${md5(this.user.email)}?s=400`;
     },
   },
 
   data () {
     return {
       currentTab: 'phones',
-      gravatar: function(){
-        var md5 = require('md5');
-        var user = this.$store.getters['auth/user'] || {};        
-        return  'https://www.gravatar.com/avatar/' + md5(user.email)+'?s=400';
-      }
     }
-  }
+  },
+
+  methods: {
+
+  },
 }
 </script>

@@ -40,7 +40,11 @@
                       <q-icon name="call" />
                     </q-item-section>
                     <q-item-section side>
-                      <q-item-label caption>{{ `(${props.row.phone.ddd}) ${props.row.phone.phone}` }}</q-item-label>
+                      <q-item-label caption>
+                        {{
+                          props.row.phone.ddd.length == 0 ? '' : `(${props.row.phone.ddd}) ${props.row.phone.phone}`
+                        }}
+                      </q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-item dense>
@@ -55,6 +59,7 @@
               </q-card-section>
               <q-separator />
               <q-card-actions align="around">
+                <!--
                 <q-btn flat round dense
                   color   ="primary"
                   icon    ="edit"
@@ -63,6 +68,7 @@
                 >
                   <q-tooltip>Editar</q-tooltip>
                 </q-btn>
+                -->
 
                 <q-btn flat round dense
                   color   ="red"
@@ -98,46 +104,36 @@
 import { date, extend }           from 'quasar';
 import { mapActions, mapGetters } from 'vuex';
 import FormEmployee               from './FormEmployee';
+import md5                        from 'md5';
 
 export default {
+  props: {
+    companyId: {
+      type    : Number,
+      required: true,
+    },
+  },
+
   components: {
     FormEmployee,
+  },
+
+  created() {
+    this.onRequest();
   },
 
   data() {
     return {
       items : [],
       dialog: false,
-      saving: false,
-      gravatar: function(email){
-        var md5 = require('md5');
-        var user = this.$store.getters['auth/user'] || {};        
-        return  'https://www.gravatar.com/avatar/' + md5(email)+'?s=400';
-      }          
+      saving: false,       
     };
-  },
-
-  created() {
-    if (this.myCompany !== null)
-      this.onRequest();
   },
 
   computed: {
     ...mapGetters({
-      isLoading: 'profile/isLoading'    ,
-      myCompany: 'people/currentCompany',
+      isLoading: 'profile/isLoading',
     }),
-
-    user() {
-      return this.$store.getters['auth/user'];
-    },
-  },
-
-  watch: {
-    myCompany(company) {
-      if (company !== null)
-        this.onRequest();
-    },
   },
 
   methods: {
@@ -145,6 +141,14 @@ export default {
       getItems: 'profile/getEmployees',
       save    : 'profile/updateProfile',
     }),
+
+    editItem() {
+
+    },
+
+    gravatar(email) {
+      return 'https://www.gravatar.com/avatar/' + md5(email) + '?s=400';
+    },
 
     onSave(data) {
       this.save({
@@ -161,7 +165,11 @@ export default {
               "phone": data.phone.phone
             },
             "email"    : data.email,
-            "documents": data.documents
+            "documents": data.documents,
+            "user"     : {
+              "username": data.username,
+              "password": data.password
+            },
           }
         }
       })
@@ -231,7 +239,7 @@ export default {
 
       this.items = [];
 
-      params['myCompany'] = this.myCompany.id;
+      params['myCompany'] = this.companyId;
 
       this.getItems(params)
         .then(items => {
@@ -243,8 +251,8 @@ export default {
                 alias   : items[index].alias,
                 image   : items[index].image !== null ? items[index].image.url : this.gravatar(items[index].email[0].email),
                 document: items[index].document,
-                phone   : items[index].phone.length ? items[index].phone[0] : null,
-                email   : items[index].email.length ? items[index].email[0] : null,
+                phone   : items[index].phone.length ? items[index].phone[0] : { ddd  : '', phone: '' },
+                email   : items[index].email.length ? items[index].email[0] : { email: '' },
                 _bussy  : false,
               });
             }

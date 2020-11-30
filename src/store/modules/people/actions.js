@@ -6,10 +6,10 @@ export const company = ({ commit }, values) => {
   commit(types.SET_ERROR, '');
   commit(types.SET_ISLOADING);
 
-  if (values.origin.country.length === 0) {
+  if (values.origin.country == null) {
     values.origin.country = values.address.country;
-    values.origin.city = values.address.city;
-    values.origin.state = values.address.state;
+    values.origin.city    = values.address.city;
+    values.origin.state   = values.address.state;
   }
 
   return fetch('companies', { method: 'POST', body: JSON.stringify(values) })
@@ -130,6 +130,34 @@ export const myCompanies = ({ commit }) => {
     .then(data => {
       commit(types.SET_ISLOADING, false);
 
+      if (data.response) {
+        commit(types.SET_COMPANIES, data.response.data);
+      }
+
+      return data.response;
+
+    }).catch(e => {
+      commit(types.SET_ISLOADING, false);
+
+      if (e instanceof SubmissionError) {
+        commit(types.SET_VIOLATIONS, e.errors);
+        // eslint-disable-next-line
+        commit(types.SET_ERROR, e.errors._error);
+        return;
+      }
+
+      commit(types.SET_ERROR, e.message);
+    });
+};
+
+export const defaultCompany = ({ commit }) => {
+  commit(types.SET_ISLOADING);
+
+  return fetch('/people/default-company')
+    .then(response => response.json())
+    .then(data => {
+      commit(types.SET_ISLOADING, false);
+
       return data.response;
 
     }).catch(e => {
@@ -150,4 +178,14 @@ export const currentCompany = ({ commit }, company) => {
   if (company) {
     commit(types.SET_CURRENT_COMPANY, company);
   }
+};
+
+export const getPeople = ({ commit }, id) => {
+  return fetch(`/people/${id}`)
+    .then(response => response.json())
+    .then(data => {
+
+      return data;
+
+    });
 };

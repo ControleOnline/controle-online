@@ -50,15 +50,33 @@
           :disable    ="whereDelivery == 'MC'"
         />
       </div>
-      <q-input outlined stack-label lazy-rules unmasked-value
-        v-model     ="item.document"
-        type        ="text"
-        :label      ="personType == 'PJ' ? $t('CNPJ') : $t('CPF')"
-        :mask       ="personType == 'PJ' ? '##.###.###/####-##' : '###.###.###-##'"
-        :placeholder="personType == 'PJ' ? 'Digite o CNPJ' : 'Digite o CPF'"
-        :rules      ="[isInvalid('document')]"
-        class       ="q-mb-sm"
-      />
+      <div class="row q-col-gutter-xs q-pb-xs">
+        <div class="col-xs-12 q-mb-sm">
+          <q-input outlined stack-label lazy-rules unmasked-value
+            v-model     ="item.document"
+            type        ="text"
+            :label      ="personType == 'PJ' ? $t('CNPJ') : $t('CPF')"
+            :mask       ="personType == 'PJ' ? '##.###.###/####-##' : '###.###.###-##'"
+            :placeholder="personType == 'PJ' ? 'Digite o CNPJ' : 'Digite o CPF'"
+            :rules      ="[isInvalid('document')]"
+            :loading    ="loadingContact"
+          />
+        </div>
+        <div class="col-xs-12 col-sm-6 q-mb-sm" v-if="personType == 'PJ'">
+          <q-input outlined stack-label
+            v-model ="item.name"
+            type    ="text"
+            label   ="Razão social"
+          />
+        </div>
+        <div class="col-xs-12 col-sm-6 q-mb-sm" v-if="personType == 'PJ'">
+          <q-input outlined stack-label
+            v-model ="item.alias"
+            type    ="text"
+            label   ="Nome fantasia"
+          />
+        </div>
+      </div>
     </div>
 
     <q-separator spaced />
@@ -119,8 +137,8 @@
           :label     ="$t('CEP')"
           mask       ="#####-###"
           :rules     ="[isInvalid('postal_code')]"
-          :readonly  ="order.address.destination.postalCode.length > 0"
-          :borderless="order.address.destination.postalCode.length > 0"
+          :readonly  ="order.address.destination === null ? false : order.address.destination.postalCode.length > 0"
+          :borderless="order.address.destination === null ? false : order.address.destination.postalCode.length > 0"
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
@@ -129,8 +147,8 @@
           type       ="text"
           :label     ="$t('Rua')"
           :rules     ="[isInvalid('street')]"
-          :readonly  ="order.address.destination.street.length > 0"
-          :borderless="order.address.destination.street.length > 0"
+          :readonly  ="order.address.destination === null ? false : order.address.destination.street.length > 0"
+          :borderless="order.address.destination === null ? false : order.address.destination.street.length > 0"
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
@@ -139,8 +157,8 @@
           type       ="text"
           :label     ="$t('Número')"
           :rules     ="[isInvalid('number')]"
-          :readonly  ="order.address.destination.number.length > 0"
-          :borderless="order.address.destination.number.length > 0"
+          :readonly  ="order.address.destination === null ? false : order.address.destination.number.length > 0"
+          :borderless="order.address.destination === null ? false : order.address.destination.number.length > 0"
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
@@ -148,8 +166,8 @@
           v-model    ="item.address.complement"
           type       ="text"
           :label     ="$t('Complemento')"
-          :readonly  ="order.address.destination.complement.length > 0"
-          :borderless="order.address.destination.complement.length > 0"
+          :readonly  ="order.address.destination === null ? false : order.address.destination.complement.length > 0"
+          :borderless="order.address.destination === null ? false : order.address.destination.complement.length > 0"
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
@@ -158,8 +176,8 @@
           type       ="text"
           :label     ="$t('Bairro')"
           :rules     ="[isInvalid('district')]"
-          :readonly  ="order.address.destination.district.length > 0"
-          :borderless="order.address.destination.district.length > 0"
+          :readonly  ="order.address.destination === null ? false : order.address.destination.district.length > 0"
+          :borderless="order.address.destination === null ? false : order.address.destination.district.length > 0"
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
@@ -168,8 +186,8 @@
           type       ="text"
           :label     ="$t('Cidade')"
           :rules     ="[isInvalid('city')]"
-          :readonly  ="order.address.destination.city.length > 0"
-          :borderless="order.address.destination.city.length > 0"
+          :readonly  ="order.address.destination === null ? false : order.address.destination.city.length > 0"
+          :borderless="order.address.destination === null ? false : order.address.destination.city.length > 0"
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
@@ -179,8 +197,8 @@
           :label     ="$t('UF')"
           mask       ="AA"
           :rules     ="[isInvalid('state')]"
-          :readonly  ="order.address.destination.state.length > 0"
-          :borderless="order.address.destination.state.length > 0"
+          :readonly  ="order.address.destination === null ? false : order.address.destination.state.length > 0"
+          :borderless="order.address.destination === null ? false : order.address.destination.state.length > 0"
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
@@ -189,8 +207,8 @@
           type       ="text"
           :label     ="$t('País')"
           :rules     ="[isInvalid('country')]"
-          :readonly  ="order.address.destination.country.length > 0"
-          :borderless="order.address.destination.country.length > 0"
+          :readonly  ="order.address.destination === null ? false : order.address.destination.country.length > 0"
+          :borderless="order.address.destination === null ? false : order.address.destination.country.length > 0"
         />
       </div>
     </div>
@@ -245,11 +263,12 @@ export default {
 
   data() {
     let data = {
-      isSearching  : false,
-      whereDelivery: 'OP',
-      personType   : 'PF',
-      contacts     : [],
-      item         : {
+      isSearching   : false,
+      whereDelivery : 'OP',
+      personType    : 'PF',
+      contacts      : [],
+      loadingContact: false,
+      item          : {
         id      : null,
         name    : null,
         alias   : null,
@@ -311,6 +330,9 @@ export default {
     },
 
     quoteAddressIsFull() {
+      if (this.order.address.destination === null)
+        return null;
+
       return this.order.address.destination.country.length     > 0 &&
              this.order.address.destination.state.length       > 0 &&
              this.order.address.destination.city.length        > 0 &&
@@ -367,12 +389,16 @@ export default {
         params: {}
       };
 
-      request.params['address[city]']    = this.order.address.destination.city;
-      request.params['address[state]']   = this.order.address.destination.state;
-      request.params['address[country]'] = this.order.address.destination.country;
+      if (this.order.address.destination !== null) {
+        request.params['address[city]']    = this.order.address.destination.city;
+        request.params['address[state]']   = this.order.address.destination.state;
+        request.params['address[country]'] = this.order.address.destination.country;
+      }
 
       if (documentId !== null)
         request.params.document = documentId;
+
+      this.loadingContact = true;
 
       return this.contact(request)
         .then(response => {
@@ -393,7 +419,7 @@ export default {
             if (response.data.contact.length > 0) {
               for (let index = 0; index < response.data.contact.length; index++) {
                 this.contacts.push({
-                  label: response.data.contact[index].name,
+                  label: `${response.data.contact[index].name} ${response.data.contact[index].alias}`,
                   value: response.data.contact[index]
                 });
               }
@@ -407,17 +433,15 @@ export default {
 
             // set the address
 
-            if (response.data.address && !this.quoteAddressIsFull) {
-              if (response.data.address.country != this.order.address.destination.country) {
-                return;
-              }
-
-              if (response.data.address.state   != this.order.address.destination.state  ) {
-                return;
-              }
-
-              if (response.data.address.city    != this.order.address.destination.city   ) {
-                return;
+            if (response.data.address && this.quoteAddressIsFull !== true) {
+              if (this.order.address.destination !== null) {
+                if (
+                  response.data.address.country != this.order.address.destination.country ||
+                  response.data.address.state   != this.order.address.destination.state   ||
+                  response.data.address.city    != this.order.address.destination.city
+                ) {
+                  return;
+                }
               }
 
               this.setAddress(response.data.address);
@@ -428,6 +452,9 @@ export default {
         })
         .catch(error => {
           this.notifyError(error.message);
+        })
+        .finally(() => {
+          this.loadingContact = false;
         });
     },
 
@@ -509,6 +536,9 @@ export default {
     },
 
     setAddress(data) {
+      if (!data)
+        return;
+
       this.item.address.id          = data.id ? data.id : null;
       this.item.address.country     = data.country;
       this.item.address.state       = data.state;

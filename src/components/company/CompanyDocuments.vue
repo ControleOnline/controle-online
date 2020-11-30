@@ -107,8 +107,19 @@ const SETTINGS = {
 Object.freeze(SETTINGS);
 
 export default {
+  props: {
+    companyId: {
+      type    : Number,
+      required: true,
+    },
+  },
+
   components: {
     FormDocument,
+  },
+
+  created() {
+    this.onRequest();
   },
 
   data() {
@@ -120,27 +131,10 @@ export default {
     };
   },
 
-  created() {
-    if (this.myCompany !== null)
-      this.onRequest();
-  },
-
   computed: {
     ...mapGetters({
-      isLoading: 'profile/isLoading'    ,
-      myCompany: 'people/currentCompany',
+      isLoading: 'profile/isLoading',
     }),
-
-    user() {
-      return this.$store.getters['auth/user'];
-    },
-  },
-
-  watch: {
-    myCompany(company) {
-      if (company !== null)
-        this.onRequest();
-    },
   },
 
   methods: {
@@ -228,7 +222,7 @@ export default {
 
       this.items = [];
 
-      params['myCompany'] = this.myCompany.id;
+      params['myCompany'] = this.companyId;
 
       this.getItems(params)
         .then(items => {

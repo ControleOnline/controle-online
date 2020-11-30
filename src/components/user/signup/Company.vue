@@ -1,7 +1,7 @@
 <template>
 
   <q-form @submit="save" class="q-mt-sm" ref="myForm">
-    <div class="row justify-center q-pb-md">
+    <div class="row justify-center q-pb-md" v-if="person === true">
       <q-btn-toggle
         v-model     ="personType"
         toggle-color="primary"
@@ -55,7 +55,7 @@
       </div>
     </div>
 
-    <div class="row q-col-gutter-xs q-pb-xs">
+    <div class="row q-col-gutter-xs q-pb-xs" v-if="address == 'gmaps'">
       <div class="col-xs-12 text-subtitle1 text-left">
         Procure o endereço na caixa de busca
       </div>
@@ -68,13 +68,24 @@
           placeholder="Digite o endereço completo (rua, número, bairro, CEP)"
         />
       </div>
-    </div>
-
-    <div class="row q-col-gutter-sm q-pb-xs">
       <div class="col-xs-12 text-subtitle1 text-left">
         Ou digite os dados diretamente
       </div>
-      <div class="col-xs-12 col-sm-grow q-mb-sm">
+    </div>
+
+    <div class="row q-col-gutter-sm q-pb-xs">
+      <div class="col-xs-12 col-sm-grow q-mb-sm" v-if="address == 'bycep'">
+        <q-input outlined stack-label lazy-rules unmasked-value hide-bottom-space
+          v-model    ="item.address.postal_code"
+          type       ="text"
+          :label     ="$t('CEP')"
+          mask       ="#####-###"
+          :rules     ="[isInvalid('postal_code')]"
+          :loading   ="loading"
+          @input     ="searchByCEP"
+        />
+      </div>
+      <div class="col-xs-12 col-sm-grow q-mb-sm" v-else>
         <q-input outlined stack-label lazy-rules unmasked-value hide-bottom-space
           v-model    ="item.address.postal_code"
           type       ="text"
@@ -83,6 +94,7 @@
           :rules     ="[isInvalid('postal_code')]"
         />
       </div>
+
       <div class="col-xs-12 col-sm-grow q-mb-sm">
         <q-input outlined stack-label lazy-rules hide-bottom-space
           v-model    ="item.address.street"
@@ -100,11 +112,10 @@
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
-        <q-input outlined stack-label hide-bottom-space lazy-rules
+        <q-input outlined stack-label hide-bottom-space
           v-model    ="item.address.complement"
           type       ="text"
           :label     ="$t('Complemento')"
-          :rules     ="[isInvalid('complement')]"
         />
       </div>
       <div class="col-xs-12 col-sm-grow q-mb-sm">
@@ -146,7 +157,7 @@
       <q-btn
          type    ="submit"
          color   ="primary"
-         label   ="Finalizar"
+         :label  ="saveBtn"
          :loading="isLoading"
       />
     </div>
@@ -165,7 +176,23 @@ export default {
   props     : {
     origin: {
       type    : Object,
-      required: true,
+      required: false,
+      default : null
+    },
+    person: {
+      type    : Boolean,
+      required: false,
+      default : true
+    },
+    address: {
+      type    : String,
+      required: false,
+      default : 'gmaps'
+    },
+    saveBtn: {
+      type    : String,
+      required: false,
+      default : 'Finalizar'
     },
   },
 
@@ -173,7 +200,7 @@ export default {
     return {
       isSearching: false,
       personType : 'PJ',
-      hasCompany: 'hasCompany',
+      loading    : false,
       item       : {
         name    : null,
         alias   : null,
@@ -189,9 +216,9 @@ export default {
           complement : null,
         },
         origin  : {
-          country: this.origin.country,
-          state  : this.origin.state  ,
-          city   : this.origin.city   ,
+          country: this.origin !== null ? this.origin.country : null,
+          state  : this.origin !== null ? this.origin.state   : null,
+          city   : this.origin !== null ? this.origin.city    : null,
         },
       }
     };
@@ -208,9 +235,38 @@ export default {
 
   methods: {
     ...mapActions({
-      company : 'people/company',
-      geoplace: 'gmaps/geoplace',
+      company   : 'people/company',
+      geoplace  : 'gmaps/geoplace',
+      getAddress: 'gmaps/getAddressByCEP',
     }),
+
+    searchByCEP(cep) {
+      if (cep.length == 8) {
+        this.loading = true;
+
+        this.getAddress(cep)
+          .then(address => {
+            if (address['@id']) {
+              this.item.address.country  = address.country;
+              this.item.address.state    = address.state;
+              this.item.address.city     = address.city;
+              this.item.address.district = address.district;
+              this.item.address.street   = address.street;
+              this.item.address.number   = address.number;
+            }
+          })
+          .catch(error => {
+            this.$q.notify({
+              message : 'Nenhum endereço foi encontrado',
+              position: 'bottom',
+              type    : 'negative',
+            });
+          })
+          .finally(() => {
+            this.loading = false;
+          });
+      }
+    },
 
     save() {
       // if (this.hasCompany == 'doesntHaveCompany') {
