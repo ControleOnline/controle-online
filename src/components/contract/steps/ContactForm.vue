@@ -101,7 +101,7 @@
           v-model    ="field.value"
           type       ="text"
           :label     ="$t(field.label)"
-          :rules     ="[isInvalid('field_text')]"
+          :rules     ="field.required ? [isInvalid('field_text')] : [true]"
           class      ="q-mb-sm"
           :outlined  ="editMode"
           :borderless="!editMode"
@@ -553,16 +553,19 @@ export default {
 
     loadParticulars() {
       this.getParticularTypes({
-        'peopleType': this.personType == 'PJ' ? 'J' : 'F'
+        'peopleType': this.personType == 'PJ' ? 'J' : 'F',
+        'context'   : 'contracts'
       })
         .then(types => {
           let _types = [];
 
           types.forEach(type => {
             _types.push({
-              id   : type['@id'].match(/^\/particulars_types\/([a-z0-9-]*)$/)[1],
-              label: type.typeValue,
-              value: null,
+              id      : type['@id'].match(/^\/particulars_types\/([a-z0-9-]*)$/)[1],
+              label   : type.typeValue,
+              value   : null,
+              required: type.required === null ? false : ((type.required.split(':')).includes('contracts')),
+              type    : type.fieldType
             });
           });
 

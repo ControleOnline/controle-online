@@ -84,6 +84,7 @@ module.exports = function (ctx) {
         'QBtnDropdown',
         'QBanner',
         'QInnerLoading',
+        'QFile',
       ],
 
       notify: {

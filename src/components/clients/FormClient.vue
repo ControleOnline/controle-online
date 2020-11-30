@@ -53,7 +53,7 @@
     <div class="row q-col-gutter-sm">
       <div
         v-if ="personType == 'PF'"
-        class="col-xs-12 col-sm-grow"
+        class="col-xs-12"
       >
         <q-input stack-label lazy-rules
           v-model    ="item.docrg"
@@ -65,17 +65,62 @@
         />
       </div>
       <div
+        v-if ="personType == 'PJ'"
+        class="col-xs-12"
+      >
+        <!--
+        <q-file
+          v-model     ="item.reqfile"
+          label       ="Requerimento"
+          :outlined   ="true"
+          :stack-label="true"
+          class       ="q-mb-sm"
+          :rules      ="[val => val !== null || 'Deve anexar um arquivo']"
+          accept      =".pdf"
+        >
+          <template v-slot:append>
+            <q-icon name="attachment" />
+          </template>
+        </q-file>
+        -->
+      </div>
+      <div
         v-for="(field, index) in particulars"
         :key ="index"
         class="col-xs-12 col-sm-grow"
       >
-        <q-input stack-label lazy-rules
-          v-model    ="field.value"
-          type       ="text"
-          :label     ="$t(field.label)"
-          :rules     ="[isInvalid('field_text')]"
-          class      ="q-mb-sm"
-          :outlined  ="true"
+        <!--
+        <q-file v-if="field.type === 'file'"
+          v-model     ="field.value"
+          :label      ="$t(field.label)"
+          :outlined   ="true"
+          :stack-label="true"
+          class       ="q-mb-sm"
+          :rules      ="field.required ? [val => val !== null || 'Deve anexar um arquivo'] : [true]"
+          :accept     ="field.configs.accept || ''"
+          @input      ="(file) => {
+            if (file !== null) {
+              file.arrayBuffer()
+                .then(content => {
+                  field.content = content;
+                });
+            }
+          }"
+        >
+          <template v-slot:append>
+            <q-icon name="attachment" />
+          </template>
+        </q-file>
+        -->
+
+        <q-input
+          v-model     ="field.value"
+          type        ="text"
+          :label      ="$t(field.label)"
+          :rules      ="field.required ? [isInvalid('field_text')] : [true]"
+          class       ="q-mb-sm"
+          :outlined   ="true"
+          :stack-label="true"
         />
       </div>
     </div>
@@ -272,6 +317,7 @@ export default {
         peopleType   : null,
         contact_name : null,
         contact_alias: null,
+        reqfile      : null,
         address   : {
           id         : null,
           country    : '',
@@ -451,7 +497,7 @@ export default {
         this.item.particulars
           .push({
             id   : field.id,
-            value: field.value,
+            value: field.type === 'file' ? field.content : field.value,
           });
       });
 
@@ -501,6 +547,12 @@ export default {
             this.clientId  = response.data.clientId;
             this.contactId = response.data.contactId;
 
+            // save "requerimento" file
+
+            if (this.item.reqfile !== null) {
+
+            }
+
             this.$emit('saved', response.data);
           }
           else {
@@ -519,17 +571,22 @@ export default {
 
     loadParticulars() {
       this.getParticularTypes({
-        'peopleType': this.personType == 'PJ' ? 'J' : 'F'
+        'peopleType': this.personType == 'PJ' ? 'J' : 'F',
+        'context'   : 'clients'
       })
         .then(types => {
           let _types = [];
 
           types.forEach(type => {
-            _types.push({
-              id   : type['@id'].match(/^\/particulars_types\/([a-z0-9-]*)$/)[1],
-              label: type.typeValue,
-              value: null,
-            });
+            if (type.fieldType !== 'file')
+              _types.push({
+                id      : type['@id'].match(/^\/particulars_types\/([a-z0-9-]*)$/)[1],
+                label   : type.typeValue,
+                value   : null,
+                required: type.required === null ? false : ((type.required.split(':')).includes('clients')),
+                type    : type.fieldType,
+                configs : type.fieldConfigs !== null ? JSON.parse(type.fieldConfigs) : {},
+              });
           });
 
           this.particulars = _types;
@@ -548,6 +605,7 @@ export default {
       this.item.type               = null;
       this.item.email              = null;
       this.item.phone              = null;
+      this.item.reqfile            = null;
       this.item.particulars        = [];
 
       this.item.address.id         = null;
