@@ -90,6 +90,11 @@ const routes = [
         path     : '',
         component: () => import('pages/Clients/Index.vue')
       },
+      {
+        name     : 'ClientsDetails',
+        path     : 'id/:id',
+        component: () => import('pages/Clients/Details.vue')
+      },
     ]
   }, 
   {
