@@ -2,15 +2,11 @@
   <q-page padding>
     <q-card style="min-height: 90vh;">
       <q-card-section>
-        <ClientsPage
+        <ClientPage
+          :id    ="clientId"
           :config="{
             endpoint: endpoint,
             token   : $store.getters['auth/user'].token
-          }"
-          :fetchs="{
-            createClient: {
-              before: this.onBeforeCreateClient
-            }
           }"
         />
       </q-card-section>
@@ -20,12 +16,17 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import ClientsPage    from '../../repository/pages/PageAdminClients/Index';
+import ClientPage     from '../../repository/pages/PageUpdateClient/Index';
 import { ENTRYPOINT } from '../../config/entrypoint';
 
 export default {
   components: {
-    ClientsPage,
+    ClientPage,
+  },
+
+  created() {
+    if (this.$route.params.id)
+      this.clientId = decodeURIComponent(this.$route.params.id);
   },
 
   computed: {
@@ -37,13 +38,8 @@ export default {
   data () {
     return {
       endpoint: ENTRYPOINT,
+      clientId: null,
     }
   },
-
-  methods: {
-    onBeforeCreateClient(params) {
-      params['myProvider'] = this.myProvider.id;
-    },
-  }
 }
 </script>
