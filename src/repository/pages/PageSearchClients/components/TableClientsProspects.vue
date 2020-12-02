@@ -191,7 +191,7 @@ export default {
       }          = props.pagination;
       let params = { itemsPerPage: rowsPerPage, page };
 
-      params['type'] = 'prospects';
+      params['type'] = 'prospect';
       params['from'] = this.formatDate(this.fromDate);
       params['to']   = this.formatDate(this.toDate  );
 
