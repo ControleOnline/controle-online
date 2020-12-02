@@ -14,7 +14,14 @@
     </div>
 
     <div class="col-12">
-      <PageSearchClient />
+      <PageSearchClient
+        ref    ="searchPageRef"
+        :config="{
+          endpoint: config.endpoint,
+          token   : config.token
+        }"
+        :fetchs="fetchs"
+      />
     </div>
 
     <q-dialog v-model="dialog">
@@ -88,6 +95,12 @@ export default {
       dialog: false,
       api   : null,
     }
+  },
+
+  methods: {
+    loadClientsDataRows() {
+      this.$refs.searchPageRef.loadCurrentTabRows();
+    },
   },
 }
 </script>
