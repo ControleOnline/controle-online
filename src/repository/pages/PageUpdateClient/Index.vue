@@ -25,6 +25,10 @@
           name ="users"
           label="Usuários"
         />
+        <q-tab
+          name ="address"
+          label="Endereços"
+        />
       </q-tabs>
 
       <q-separator />
@@ -73,6 +77,27 @@
             }"
           />
         </q-tab-panel>
+
+        <q-tab-panel name="address">
+          <ClientAdminAddresses
+            :api  ="api"
+            :id   ="clientId"
+            @error="(error) => {
+              this.$q.notify({
+                message : error.message,
+                position: 'bottom',
+                type    : 'negative',
+              });
+            }"
+            @saved="(data) => {
+              this.$q.notify({
+                message : 'Os dados foram salvos com sucesso',
+                position: 'bottom',
+                type    : 'positive',
+              });
+            }"
+          />
+        </q-tab-panel>
       </q-tab-panels>
     </div>
 
@@ -80,9 +105,10 @@
 </template>
 
 <script>
-import Api               from '../../utils/api';
-import ClientAdminEmails from '../../components/ClientAdminEmails';
-import ClientAdminUsers  from '../../components/ClientAdminUsers';
+import Api                  from '../../utils/api';
+import ClientAdminEmails    from '../../components/ClientAdminEmails';
+import ClientAdminUsers     from '../../components/ClientAdminUsers';
+import ClientAdminAddresses from '../../components/ClientAdminAddresses';
 
 export default {
   props: {
@@ -96,8 +122,9 @@ export default {
   },
 
   components: {
-    ClientAdminEmails,
-    ClientAdminUsers ,
+    ClientAdminEmails   ,
+    ClientAdminUsers    ,
+    ClientAdminAddresses,
   },
 
   created() {
