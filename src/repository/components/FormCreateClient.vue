@@ -189,7 +189,7 @@
       </div>
 
       <div class="col-xs-12 col-sm-grow">
-        <InputSearchPostalcode
+        <SearchCEPAddress
           ref   ="cepSearchRef"
           :api  ="api"
           @found="onCEPFound"
@@ -290,8 +290,8 @@
 </template>
 
 <script>
-import Api                   from '../utils/api';
-import InputSearchPostalcode from './InputSearchPostalcode';
+import Api              from '../utils/api';
+import SearchCEPAddress from './SearchCEPAddress';
 
 export default {
   props: {
@@ -302,7 +302,7 @@ export default {
   },
 
   components: {
-    InputSearchPostalcode,
+    SearchCEPAddress,
   },
 
   created() {

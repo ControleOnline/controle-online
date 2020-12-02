@@ -6,7 +6,7 @@
 
     <div class="col-12">
       <div class="q-pa-md text-subtitle1 text-center">
-        {{ client.name || '...' }}
+        {{ client.name }}
       </div>
     </div>
 
@@ -25,6 +25,10 @@
           name ="users"
           label="Usuários"
         />
+        <q-tab
+          name ="address"
+          label="Endereços"
+        />
       </q-tabs>
 
       <q-separator />
@@ -33,14 +37,65 @@
         v-model="currentTab"
       >
         <q-tab-panel name="emails">
-          <ClientEmails
-            :id="clientId"
+          <ClientAdminEmails
+            :api  ="api"
+            :id   ="clientId"
+            @error="(error) => {
+              this.$q.notify({
+                message : error.message,
+                position: 'bottom',
+                type    : 'negative',
+              });
+            }"
+            @saved="(data) => {
+              this.$q.notify({
+                message : 'Os dados foram salvos com sucesso',
+                position: 'bottom',
+                type    : 'positive',
+              });
+            }"
           />
         </q-tab-panel>
 
         <q-tab-panel name="users">
-          <ClientUsers
-            :id="clientId"
+          <ClientAdminUsers
+            :api  ="api"
+            :id   ="clientId"
+            @error="(error) => {
+              this.$q.notify({
+                message : error.message,
+                position: 'bottom',
+                type    : 'negative',
+              });
+            }"
+            @saved="(data) => {
+              this.$q.notify({
+                message : 'Os dados foram salvos com sucesso',
+                position: 'bottom',
+                type    : 'positive',
+              });
+            }"
+          />
+        </q-tab-panel>
+
+        <q-tab-panel name="address">
+          <ClientAdminAddresses
+            :api  ="api"
+            :id   ="clientId"
+            @error="(error) => {
+              this.$q.notify({
+                message : error.message,
+                position: 'bottom',
+                type    : 'negative',
+              });
+            }"
+            @saved="(data) => {
+              this.$q.notify({
+                message : 'Os dados foram salvos com sucesso',
+                position: 'bottom',
+                type    : 'positive',
+              });
+            }"
           />
         </q-tab-panel>
       </q-tab-panels>
@@ -50,9 +105,10 @@
 </template>
 
 <script>
-import Api          from '../../utils/api';
-import ClientEmails from './components/ClientEmails';
-import ClientUsers  from './components/ClientUsers';
+import Api                  from '../../utils/api';
+import ClientAdminEmails    from '../../components/ClientAdminEmails';
+import ClientAdminUsers     from '../../components/ClientAdminUsers';
+import ClientAdminAddresses from '../../components/ClientAdminAddresses';
 
 export default {
   props: {
@@ -66,8 +122,9 @@ export default {
   },
 
   components: {
-    ClientEmails,
-    ClientUsers ,
+    ClientAdminEmails   ,
+    ClientAdminUsers    ,
+    ClientAdminAddresses,
   },
 
   created() {
@@ -84,7 +141,7 @@ export default {
       api       : null,
       clientId  : this.id,
       client    : {
-        name: null
+        name: '...'
       }
     }
   },
