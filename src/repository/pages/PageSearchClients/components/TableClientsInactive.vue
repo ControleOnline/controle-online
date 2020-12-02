@@ -112,12 +112,10 @@ export default {
     },
   },
 
-  created() {
-    /*
+  mounted() {
     this.onRequest({
       pagination: this.pagination
     });
-    */
   },
 
   data() {
@@ -178,9 +176,15 @@ export default {
       });
     },
 
+    /**
+     * @fix load data once
+     * @fix load data passing myProvider param
+     */
     onRequest(props) {
+      /*
       if (this.isLoading)
         return;
+      */
 
       this.isLoading = true;
 
