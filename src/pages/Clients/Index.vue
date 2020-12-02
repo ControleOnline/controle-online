@@ -3,11 +3,15 @@
     <q-card style="min-height: 90vh;">
       <q-card-section>
         <ClientsPage
+          ref    ="clientPageRef"
           :config="{
             endpoint: endpoint,
             token   : $store.getters['auth/user'].token
           }"
           :fetchs="{
+            loadClients : {
+              before: this.onBeforeLoadClients
+            },
             createClient: {
               before: this.onBeforeCreateClient
             }
@@ -40,7 +44,18 @@ export default {
     }
   },
 
+  watch: {
+    myProvider(provider) {
+      if (provider !== null)
+        this.$refs.clientPageRef.loadClientsDataRows();
+    },
+  },
+
   methods: {
+    onBeforeLoadClients(params) {
+      params['myProvider'] = this.myProvider.id;
+    },
+
     onBeforeCreateClient(params) {
       params['myProvider'] = this.myProvider.id;
     },

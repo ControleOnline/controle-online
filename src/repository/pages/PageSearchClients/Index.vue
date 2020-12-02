@@ -79,42 +79,66 @@
         v-model="currentTab"
       >
         <q-tab-panel name="inactiveClient" class="q-px-none">
-          <InactiveClients
+          <TableClientsInactive
             ref      ="inactiveClient"
+            :api     ="api"
             :fromDate="dateFrom"
             :toDate  ="dateTo"
             :searchBy="searchBy"
             @selected="onClientSelected"
+            @before  ="(params) => {
+              if (this.fetchs.loadClients) {
+                this.fetchs.loadClients.before(params);
+              }
+            }"
           />
         </q-tab-panel>
 
         <q-tab-panel name="prospectsClient" class="q-px-none">
-          <ProspectsClients
+          <TableClientsProspects
             ref      ="prospectsClient"
+            :api     ="api"
             :fromDate="dateFrom"
             :toDate  ="dateTo"
             :searchBy="searchBy"
             @selected="onClientSelected"
+            @before  ="(params) => {
+              if (this.fetchs.loadClients) {
+                this.fetchs.loadClients.before(params);
+              }
+            }"
           />
         </q-tab-panel>
 
         <q-tab-panel name="activeClient" class="q-px-none">
-          <ActiveClients
+          <TableClientsActive
             ref      ="activeClient"
+            :api     ="api"
             :fromDate="dateFrom"
             :toDate  ="dateTo"
             :searchBy="searchBy"
             @selected="onClientSelected"
+            @before  ="(params) => {
+              if (this.fetchs.loadClients) {
+                this.fetchs.loadClients.before(params);
+              }
+            }"
           />
         </q-tab-panel>
 
         <q-tab-panel name="newClient" class="q-px-none">
-          <NewClients
+          <TableClientsNew
             ref      ="newClient"
+            :api     ="api"
             :fromDate="dateFrom"
             :toDate  ="dateTo"
             :searchBy="searchBy"
             @selected="onClientSelected"
+            @before  ="(params) => {
+              if (this.fetchs.loadClients) {
+                this.fetchs.loadClients.before(params);
+              }
+            }"
           />
         </q-tab-panel>
       </q-tab-panels>
@@ -124,23 +148,36 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
-import { date }                   from 'quasar';
-import InactiveClients            from '../../../components/clients/InactiveClients';
-import ProspectsClients           from '../../../components/clients/ProspectsClients';
-import ActiveClients              from '../../../components/clients/ActiveClients';
-import NewClients                 from '../../../components/clients/NewClients';
+import { date }              from 'quasar';
+import TableClientsInactive  from './components/TableClientsInactive';
+import TableClientsProspects from './components/TableClientsProspects';
+import TableClientsActive    from './components/TableClientsActive';
+import TableClientsNew       from './components/TableClientsNew';
+import Api                   from '../../utils/api';
 
 export default {
-  components: {
-    InactiveClients ,
-    ProspectsClients,
-    ActiveClients   ,
-    NewClients      ,
+  props: {
+    config: {
+      type    : Object,
+      required: true
+    },
+    fetchs: {
+      type    : Object,
+      required: false
+    },
   },
 
-  beforeDestroy() {
-    this.reset();
+  components: {
+    TableClientsInactive ,
+    TableClientsProspects,
+    TableClientsActive   ,
+    TableClientsNew      ,
+  },
+
+  created() {
+    this.api = new Api(
+      this.config.endpoint, this.config.token
+    );
   },
 
   data () {
@@ -149,14 +186,14 @@ export default {
       dateFrom  : date.formatDate(date.subtractFromDate(Date.now(), { month: 1 }), 'DD-MM-YYYY'),
       dateTo    : date.formatDate(Date.now(), 'DD-MM-YYYY'),
       searchBy  : '',
+      api       : null,
     }
   },
 
   methods: {
-    ...mapActions({
-      getClient: 'client/getClient',
-      reset    : 'client/reset',
-    }),
+    loadCurrentTabRows() {
+      this.$refs[this.currentTab].reload();
+    },
 
     onClientSelected(clientId) {
       if (!clientId)
