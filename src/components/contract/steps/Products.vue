@@ -21,13 +21,14 @@
         </div>
 
         <div class="col-xs-12 col-sm-6">
-          <q-input stack-label
-            v-model    ="item.price"
-            type       ="text"
-            :label     ="$t('Preço')"
-            :borderless="true"
-            :outlined  ="false"
-            :readonly  ="true"
+          <q-input stack-label outlined reverse-fill-mask
+            prefix   ="R$"
+            v-model  ="item.price"
+            type     ="text"
+            :label   ="$t('Preço')"
+            mask     ="#,##"
+            fill-mask="0"
+            :rules   ="[isInvalid('price')]"
           />
         </div>
 
@@ -147,7 +148,7 @@ export default {
     }),
 
     setProductPrice(product) {
-      this.item.price = product.price;
+      this.item.price = (parseFloat(product.price) + 0.001).toFixed(2);
     },
 
     onProductsLoaded(total) {
@@ -171,8 +172,7 @@ export default {
                 .push({
                   label : product.product,
                   value : product['@id'],
-                  price : formatMoney(product.price, 'BRL', 'pt-br'),
-                  _price: product.price
+                  price : product.price,
                 });
             });
           }
@@ -192,7 +192,7 @@ export default {
         "contract": this.contract['@id'],
         "product" : this.item.product.value,
         "quantity": parseInt(this.item.quantity),
-        "price"   : this.item.product._price
+        "price"   : parseFloat(this.item.price.replace(',', '.'))
       })
         .then(productContract => {
           if (productContract['@id']) {
