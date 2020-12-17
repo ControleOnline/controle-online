@@ -16,6 +16,16 @@
               before: this.onBeforeCreateClient
             }
           }"
+          :events="{
+            onSaved: (data) => {
+              $router.push({
+                name  : 'ClientsDetails',
+                params: {
+                  id: data.customerId
+                }
+              });
+            },
+          }"
         />
       </q-card-section>
     </q-card>

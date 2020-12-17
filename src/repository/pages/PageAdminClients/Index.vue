@@ -47,6 +47,10 @@
                 position: 'bottom',
                 type    : 'positive',
               });
+
+              if (this.events.onSaved) {
+                this.events.onSaved(data);
+              }
             }"
             @error ="(error) => {
               this.$q.notify({
@@ -76,6 +80,11 @@ export default {
     fetchs: {
       type    : Object,
       required: false
+    },
+    events: {
+      type    : Object,
+      required: false,
+      default : {}
     },
   },
 

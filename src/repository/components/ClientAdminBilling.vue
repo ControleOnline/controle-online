@@ -192,11 +192,9 @@ export default {
 
       this.getItems()
         .then(data => {
-          if (data.billing) {
-            this.item.billing     = data.billing;
-            this.item.billingDays = data.billingDays;
-            this.item.paymentTerm = data.paymentTerm;
-          }
+          this.item.billing     = data.billing;
+          this.item.billingDays = data.billingDays;
+          this.item.paymentTerm = data.paymentTerm;
         })
         .finally(() => {
           this.isLoading = false;

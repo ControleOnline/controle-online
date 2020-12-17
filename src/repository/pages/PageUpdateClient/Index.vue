@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-12 q-pa-md text-h6">
-      Atualização de cadastro
+      Atualização de cadastro de cliente
     </div>
 
     <div class="col-12">
@@ -17,29 +17,29 @@
         v-model    ="currentTab"
         class      ="bg-white text-primary"
       >
-        <q-tab
-          name ="emails"
-          label="Emails"
-        />
-        <q-tab
-          name ="users"
-          label="Usuários"
+        <q-tab v-if="client.type === 'J'"
+          name ="employees"
+          label="Funcionários"
         />
         <q-tab
           name ="address"
           label="Endereços"
         />
         <q-tab
-          name ="phones"
-          label="Telefones"
-        />
-        <q-tab
           name ="documents"
           label="Documentos"
         />
-        <q-tab
-          name ="employees"
-          label="Funcionários"
+        <q-tab v-if="client.type === 'F'"
+          name ="emails"
+          label="Emails"
+        />
+        <q-tab v-if="client.type === 'F'"
+          name ="users"
+          label="Usuários"
+        />
+        <q-tab v-if="client.type === 'F'"
+          name ="phones"
+          label="Telefones"
         />
         <q-tab
           name ="billing"
@@ -245,11 +245,12 @@ export default {
 
   data () {
     return {
-      currentTab: 'emails',
+      currentTab: null,
       api       : null,
       clientId  : this.id,
       client    : {
-        name: '...'
+        name: '...',
+        type: null,
       }
     }
   },
@@ -260,7 +261,10 @@ export default {
         .then(response => response.json())
         .then(data => {
           if (data['@id']) {
-            this.client.name = data.name;
+            this.client.name = data.peopleType === 'J' ? data.alias : `${data.name} ${data.alias}`;
+            this.client.type = data.peopleType;
+
+            this.currentTab  = data.peopleType === 'J' ? 'employees' : 'address';
           }
         });
     }
