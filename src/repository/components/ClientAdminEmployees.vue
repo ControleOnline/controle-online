@@ -36,18 +36,6 @@
                 <q-list>
                   <q-item dense>
                     <q-item-section avatar>
-                      <q-icon name="call" />
-                    </q-item-section>
-                    <q-item-section side>
-                      <q-item-label caption>
-                        {{
-                          props.row.phone.ddd.length == 0 ? '' : `(${props.row.phone.ddd}) ${props.row.phone.phone}`
-                        }}
-                      </q-item-label>
-                    </q-item-section>
-                  </q-item>
-                  <q-item dense>
-                    <q-item-section avatar>
                       <q-icon name="email" />
                     </q-item-section>
                     <q-item-section side>
@@ -348,7 +336,6 @@ export default {
                 name    : data.members[index].name,
                 alias   : data.members[index].alias,
                 image   : !data.members[index].image ? this.gravatar(data.members[index].email) : data.members[index].image.url,
-                phone   : { ddd  : '', phone: '' },
                 email   : data.members[index].email,
                 _bussy  : false,
               });
