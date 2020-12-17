@@ -44,7 +44,6 @@
           :rules      ="[isInvalid('document')]"
           :loading    ="isSearching"
           @input      ="searchCustomerById"
-          debounce    ="500"
         />
       </div>
     </div>
