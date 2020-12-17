@@ -10,7 +10,7 @@
       >
         <template v-slot:top>
           <div class="col-3 q-mb-md text-h6">
-            Lista de emails
+            Lista de telefones
           </div>
           <div class="col-9 q-mb-md">
             <div class="row justify-end">
@@ -28,7 +28,8 @@
 
         <template v-slot:body="props">
           <q-tr :props="props">
-            <q-td key="email" :props="props">{{ props.cols[0].value }}</q-td>
+            <q-td key="ddd"   :props="props">{{ props.cols[0].value }}</q-td>
+            <q-td key="phone" :props="props">{{ props.cols[1].value }}</q-td>
             <q-td auto-width>
               <q-btn flat round dense
                 color   ="red"
@@ -46,18 +47,27 @@
     <q-dialog v-model="dialog">
       <q-card style="width: 700px; max-width: 80vw;">
         <q-card-section class="row items-center">
-          <div class="text-h6">Novo email</div>
+          <div class="text-h6">Novo telefone</div>
           <q-space />
           <q-btn icon="close" flat round dense v-close-popup />
         </q-card-section>
         <q-card-section>
           <q-form ref="myForm" @submit="onSubmit" class="q-mt-md">
             <q-input lazy-rules stack-label
-              v-model="item.email"
+              v-model="item.ddd"
               type   ="text"
-              label  ="Email"
+              label  ="DDD"
               class  ="q-mt-md"
-              :rules ="[isInvalid('email')]"
+              :rules ="[isInvalid('ddd')]"
+              mask   ="##"
+            />
+            <q-input lazy-rules stack-label
+              v-model="item.phone"
+              type   ="text"
+              label  ="Número"
+              class  ="q-mt-md"
+              :rules ="[isInvalid('phone')]"
+              mask   ="#########"
             />
 
             <div class="row justify-end">
@@ -83,15 +93,22 @@ import Api from '../utils/api';
 
 const SETTINGS = {
   visibleColumns: [
-    'email' ,
+    'ddd'   ,
+    'phone' ,
     'action',
   ],
   columns       : [
     {
-      name : 'email',
-      field: row => row.email,
+      name : 'ddd',
+      field: row => row.ddd,
       align: 'left',
-      label: 'Email'
+      label: 'DDD'
+    },
+    {
+      name : 'phone',
+      field: row => row.phone,
+      align: 'left',
+      label: 'Número'
     },
     { name: 'action' },
   ],
@@ -118,7 +135,8 @@ export default {
       saving   : false,
       isLoading: false,
       item     : {
-        email: null
+        ddd  : null,
+        phone: null,
       }
     };
   },
@@ -130,7 +148,7 @@ export default {
   methods: {
     // store method
     getItems() {
-      let endpoint = `customers/${this.id}/emails`;
+      let endpoint = `customers/${this.id}/phones`;
       return this.api.private(endpoint)
         .then(response => response.json())
         .then(result => {
@@ -146,7 +164,7 @@ export default {
         body   : JSON.stringify(values),
       };
 
-      let endpoint = `customers/${this.id}/emails`;
+      let endpoint = `customers/${this.id}/phones`;
       return this.api.private(endpoint, options)
         .then(response => response.json())
         .then(data => {
@@ -169,7 +187,7 @@ export default {
         body   : JSON.stringify({ id }),
       };
 
-      let endpoint = `customers/${this.id}/emails`;
+      let endpoint = `customers/${this.id}/phones`;
       return this.api.private(endpoint, options)
         .then(response => response.json())
         .then(data => {
@@ -191,7 +209,8 @@ export default {
             this.saving = true;
 
             this.save({
-              "email": this.item.email,
+              "ddd"  : this.item.ddd,
+              "phone": this.item.phone,
             })
               .then (data => {
                 if (data) {
@@ -253,7 +272,8 @@ export default {
             for (let index in data.members) {
               _items.push({
                 id    : data.members[index].id,
-                email : data.members[index].email,
+                ddd   : data.members[index].ddd,
+                phone : data.members[index].phone,
                 _bussy: false,
               });
             }
@@ -268,15 +288,9 @@ export default {
 
     isInvalid(key) {
       return val => {
-        switch (key) {
-          case 'email'   :
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))
-              return 'O email informado não é válido';
-          break;
-          default:
-            if (!(val && val.length > 0))
-              return 'Este campo é obrigatório';
-        }
+        if (!(val && val.length > 0))
+          return 'Este campo é obrigatório';
+
         return true;
       };
     },

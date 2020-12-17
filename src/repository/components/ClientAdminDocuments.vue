@@ -10,7 +10,7 @@
       >
         <template v-slot:top>
           <div class="col-3 q-mb-md text-h6">
-            Lista de emails
+            Lista de documentos
           </div>
           <div class="col-9 q-mb-md">
             <div class="row justify-end">
@@ -28,7 +28,8 @@
 
         <template v-slot:body="props">
           <q-tr :props="props">
-            <q-td key="email" :props="props">{{ props.cols[0].value }}</q-td>
+            <q-td key="type"     :props="props">{{ props.cols[0].value }}</q-td>
+            <q-td key="document" :props="props">{{ props.cols[1].value }}</q-td>
             <q-td auto-width>
               <q-btn flat round dense
                 color   ="red"
@@ -46,18 +47,32 @@
     <q-dialog v-model="dialog">
       <q-card style="width: 700px; max-width: 80vw;">
         <q-card-section class="row items-center">
-          <div class="text-h6">Novo email</div>
+          <div class="text-h6">Novo documento</div>
           <q-space />
           <q-btn icon="close" flat round dense v-close-popup />
         </q-card-section>
         <q-card-section>
           <q-form ref="myForm" @submit="onSubmit" class="q-mt-md">
-            <q-input lazy-rules stack-label
-              v-model="item.email"
+            <q-select stack-label
+              label   ="Tipo de documento"
+              v-model="item.type"
+              :options="settings.select.doctypes"
+            >
+              <template v-slot:no-option>
+                <q-item>
+                  <q-item-section class="text-grey">
+                  Sem resultados
+                  </q-item-section>
+                </q-item>
+              </template>
+            </q-select>
+            <q-input lazy-rules stack-label unmasked-value
+              v-model="item.document"
               type   ="text"
-              label  ="Email"
+              label  ="Documento"
               class  ="q-mt-md"
-              :rules ="[isInvalid('email')]"
+              :rules ="[isInvalid('document')]"
+              :mask  ="docMask"
             />
 
             <div class="row justify-end">
@@ -79,22 +94,49 @@
 </template>
 
 <script>
-import Api from '../utils/api';
+import Api                from '../utils/api';
+import { formatDocument } from '../utils/formatters';
 
 const SETTINGS = {
   visibleColumns: [
-    'email' ,
-    'action',
+    'type'    ,
+    'document',
+    'action'  ,
   ],
   columns       : [
     {
-      name : 'email',
-      field: row => row.email,
+      name : 'type',
+      field: row => row.type,
       align: 'left',
-      label: 'Email'
+      label: 'Tipo de documento'
+    },
+    {
+      name  : 'document',
+      field : row => row.document,
+      align : 'left',
+      format: (val) => {
+        return formatDocument(val);
+      },
+      label : 'Documento'
     },
     { name: 'action' },
   ],
+  select        : {
+    doctypes: [
+      {
+        label: 'R.G.',
+        value: 1,
+      },
+      {
+        label: 'CPF',
+        value: 2,
+      },
+      {
+        label: 'CNPJ',
+        value: 3,
+      },
+    ],
+  },
 };
 
 Object.freeze(SETTINGS);
@@ -117,8 +159,10 @@ export default {
       settings : SETTINGS,
       saving   : false,
       isLoading: false,
+      docMask  : '',
       item     : {
-        email: null
+        type    : null,
+        document: null,
       }
     };
   },
@@ -127,10 +171,26 @@ export default {
     this.onRequest();
   },
 
+  watch: {
+    'item.type'(type) {
+      if (type.value == 3) {
+        this.docMask = '##.###.###/####-##';
+        return;
+      }
+
+      if (type.value == 2) {
+        this.docMask = '###.###.###-##';
+        return;
+      }
+
+      this.docMask = '';
+    }
+  },
+
   methods: {
     // store method
     getItems() {
-      let endpoint = `customers/${this.id}/emails`;
+      let endpoint = `customers/${this.id}/documents`;
       return this.api.private(endpoint)
         .then(response => response.json())
         .then(result => {
@@ -146,7 +206,7 @@ export default {
         body   : JSON.stringify(values),
       };
 
-      let endpoint = `customers/${this.id}/emails`;
+      let endpoint = `customers/${this.id}/documents`;
       return this.api.private(endpoint, options)
         .then(response => response.json())
         .then(data => {
@@ -169,7 +229,7 @@ export default {
         body   : JSON.stringify({ id }),
       };
 
-      let endpoint = `customers/${this.id}/emails`;
+      let endpoint = `customers/${this.id}/documents`;
       return this.api.private(endpoint, options)
         .then(response => response.json())
         .then(data => {
@@ -191,7 +251,8 @@ export default {
             this.saving = true;
 
             this.save({
-              "email": this.item.email,
+              "type"    : this.item.type.value,
+              "document": this.item.document,
             })
               .then (data => {
                 if (data) {
@@ -252,9 +313,10 @@ export default {
           if (data.members.length) {
             for (let index in data.members) {
               _items.push({
-                id    : data.members[index].id,
-                email : data.members[index].email,
-                _bussy: false,
+                id      : data.members[index].id,
+                type    : data.members[index].type,
+                document: data.members[index].document,
+                _bussy  : false,
               });
             }
           }
@@ -268,15 +330,9 @@ export default {
 
     isInvalid(key) {
       return val => {
-        switch (key) {
-          case 'email'   :
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))
-              return 'O email informado não é válido';
-          break;
-          default:
-            if (!(val && val.length > 0))
-              return 'Este campo é obrigatório';
-        }
+        if (!(val && val.length > 0))
+          return 'Este campo é obrigatório';
+
         return true;
       };
     },
