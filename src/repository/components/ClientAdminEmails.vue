@@ -130,10 +130,11 @@ export default {
   methods: {
     // store method
     getItems() {
-      return this.api.private('/emails', { params: { 'people': this.id } })
+      let endpoint = `customers/${this.id}/emails`;
+      return this.api.private(endpoint)
         .then(response => response.json())
-        .then(data => {
-          return data['hydra:member'];
+        .then(result => {
+          return result.response.data;
         });
     },
 
@@ -145,11 +146,41 @@ export default {
         body   : JSON.stringify(values),
       };
 
-      return this.api.private(`people/${this.id}/profile/email`, options)
+      let endpoint = `customers/${this.id}/emails`;
+      return this.api.private(endpoint, options)
         .then(response => response.json())
         .then(data => {
+          if (data.response) {
+            if (data.response.success === false)
+              throw new Error(data.response.error);
 
-          return data;
+            return data.response.data;
+          }
+
+          return null;
+        });
+    },
+
+    // store method
+    delete(id) {
+      let options = {
+        method : 'DELETE',
+        headers: new Headers({ 'Content-Type': 'application/ld+json' }),
+        body   : JSON.stringify({ id }),
+      };
+
+      let endpoint = `customers/${this.id}/emails`;
+      return this.api.private(endpoint, options)
+        .then(response => response.json())
+        .then(data => {
+          if (data.response) {
+            if (data.response.success === false)
+              throw new Error(data.response.error);
+
+            return data.response.data;
+          }
+
+          return null;
         });
     },
 
@@ -160,10 +191,7 @@ export default {
             this.saving = true;
 
             this.save({
-              "operation": "post",
-              "payload"  : {
-                "email": this.item.email,
-              }
+              "email": this.item.email,
             })
               .then (data => {
                 if (data) {
@@ -190,15 +218,10 @@ export default {
       if (window.confirm('Tem certeza que deseja eliminar este registro?')) {
         item._bussy = true;
 
-        this.save({
-          "operation": "delete",
-          "payload"  : {
-            "id": item.id
-          }
-        })
+        this.delete(item.id)
         .then (data => {
           if (data) {
-            this.cleanItem(item['id']);
+            this.cleanItem(item.id);
           }
         })
         .catch(error => {
@@ -223,14 +246,14 @@ export default {
       this.isLoading = true;
 
       this.getItems()
-        .then(items => {
+        .then(data => {
           let _items = [];
 
-          if (items.length) {
-            for (let index in items) {
+          if (data.members.length) {
+            for (let index in data.members) {
               _items.push({
-                id    : items[index]['@id'].match(/^\/emails\/([a-z0-9-]*)$/)[1],
-                email : items[index].email,
+                id    : data.members[index].id,
+                email : data.members[index].email,
                 _bussy: false,
               });
             }
