@@ -27,7 +27,7 @@
           :outlined   ="true"
           :loading    ="isSearching"
           @input      ="searchCustomerById"
-          debounce    ="1000"
+          debounce    ="800"
         />
       </div>
 
@@ -44,7 +44,7 @@
           :rules      ="[isInvalid('document')]"
           :loading    ="isSearching"
           @input      ="searchCustomerById"
-          debounce    ="1000"
+          debounce    ="500"
         />
       </div>
     </div>

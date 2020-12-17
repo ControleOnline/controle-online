@@ -28,15 +28,15 @@
 
         <template v-slot:body="props">
           <q-tr :props="props">
-            <q-td key="nickname"    :props="props">{{ props.row.nickname    }}</q-td>
-            <q-td key="postalCode"  :props="props">{{ props.cols[1].value   }}</q-td>
-            <q-td key="street"      :props="props">{{ props.row.street      }}</q-td>
-            <q-td key="number"      :props="props">{{ props.row.number      }}</q-td>
-            <q-td key="complement"  :props="props">{{ props.row.complement  }}</q-td>
-            <q-td key="district"    :props="props">{{ props.row.district    }}</q-td>
-            <q-td key="cityName"    :props="props">{{ props.row.cityName    }}</q-td>
-            <q-td key="stateName"   :props="props">{{ props.row.stateName   }}</q-td>
-            <q-td key="countryName" :props="props">{{ props.row.countryName }}</q-td>
+            <q-td key="nickname"   :props="props">{{ props.row.nickname    }}</q-td>
+            <q-td key="postalCode" :props="props">{{ props.cols[1].value   }}</q-td>
+            <q-td key="street"     :props="props">{{ props.row.street      }}</q-td>
+            <q-td key="number"     :props="props">{{ props.row.number      }}</q-td>
+            <q-td key="complement" :props="props">{{ props.row.complement  }}</q-td>
+            <q-td key="district"   :props="props">{{ props.row.district    }}</q-td>
+            <q-td key="city"       :props="props">{{ props.row.city        }}</q-td>
+            <q-td key="state"      :props="props">{{ props.row.state       }}</q-td>
+            <q-td key="country"    :props="props">{{ props.row.country     }}</q-td>
             <q-td auto-width>
               <q-btn flat round dense
                 color   ="red"
@@ -100,13 +100,14 @@
                 />
               </div>
               <div class="col-xs-12 col-sm-grow">
-                <q-input stack-label lazy-rules
+                <q-input stack-label lazy-rules reverse-fill-mask
                   v-model    ="item.number"
                   type       ="text"
                   :label     ="$t('Número')"
                   :rules     ="[isInvalid('number')]"
                   class      ="q-mb-sm"
                   :outlined  ="true"
+                  mask       ="#"
                 />
               </div>
               <div class="col-xs-12 col-sm-grow">
@@ -186,16 +187,16 @@ import SearchCEPAddress from './SearchCEPAddress';
 
 const SETTINGS = {
   visibleColumns: [
-    'nickname'   ,
-    'postalCode' ,
-    'street'     ,
-    'number'     ,
-    'complement' ,
-    'district'   ,
-    'cityName'   ,
-    'stateName'  ,
-    'countryName',
-    'action'     ,
+    'nickname'  ,
+    'postalCode',
+    'street'    ,
+    'number'    ,
+    'complement',
+    'district'  ,
+    'city'      ,
+    'state'     ,
+    'country'   ,
+    'action'    ,
   ],
   columns       : [
     {
@@ -233,19 +234,19 @@ const SETTINGS = {
       label: 'Bairro'
     },
     {
-      name : 'cityName',
+      name : 'city',
       field: row => row.city,
       align: 'left',
       label: 'Cidade'
     },
     {
-      name : 'stateName',
+      name : 'state',
       field: row => row.state,
       align: 'left',
       label: 'Estado'
     },
     {
-      name : 'countryName',
+      name : 'country',
       field: row => row.country,
       align: 'left',
       label: 'País'
@@ -299,10 +300,11 @@ export default {
   methods: {
     // store method
     getItems() {
-      return this.api.private('/addresses', { params: { 'people': this.id } })
+      let endpoint = `customers/${this.id}/addresses`;
+      return this.api.private(endpoint)
         .then(response => response.json())
-        .then(data => {
-          return data['hydra:member'];
+        .then(result => {
+          return result.response.data;
         });
     },
 
@@ -314,11 +316,41 @@ export default {
         body   : JSON.stringify(values),
       };
 
-      return this.api.private(`people/${this.id}/profile/address`, options)
+      let endpoint = `customers/${this.id}/addresses`;
+      return this.api.private(endpoint, options)
         .then(response => response.json())
         .then(data => {
+          if (data.response) {
+            if (data.response.success === false)
+              throw new Error(data.response.error);
 
-          return data;
+            return data.response.data;
+          }
+
+          return null;
+        });
+    },
+
+    // store method
+    delete(id) {
+      let options = {
+        method : 'DELETE',
+        headers: new Headers({ 'Content-Type': 'application/ld+json' }),
+        body   : JSON.stringify({ id }),
+      };
+
+      let endpoint = `customers/${this.id}/addresses`;
+      return this.api.private(endpoint, options)
+        .then(response => response.json())
+        .then(data => {
+          if (data.response) {
+            if (data.response.success === false)
+              throw new Error(data.response.error);
+
+            return data.response.data;
+          }
+
+          return null;
         });
     },
 
@@ -329,18 +361,15 @@ export default {
             this.saving = true;
 
             this.save({
-              "operation": "post",
-              "payload"  : {
-                nickname   : this.item.nickname,
-                country    : this.item.country,
-                state      : this.item.state,
-                city       : this.item.city,
-                district   : this.item.district,
-                postal_code: this.item.postalCode,
-                street     : this.item.street,
-                number     : this.item.number,
-                complement : this.item.complement,
-              }
+              nickname   : this.item.nickname,
+              country    : this.item.country,
+              state      : this.item.state,
+              city       : this.item.city,
+              district   : this.item.district,
+              postal_code: this.item.postalCode,
+              street     : this.item.street,
+              number     : this.item.number,
+              complement : this.item.complement,
             })
               .then (data => {
                 if (data) {
@@ -367,23 +396,18 @@ export default {
       if (window.confirm('Tem certeza que deseja eliminar este registro?')) {
         item._bussy = true;
 
-        this.save({
-          "operation": "delete",
-          "payload"  : {
-            "id": item.id
-          }
-        })
-        .then (data => {
-          if (data) {
-            this.cleanItem(item['id']);
-          }
-        })
-        .catch(error => {
-          this.$emit('error', { message: error.message });
-        })
-        .finally(() => {
-          item._bussy = false;
-        });
+        this.delete(item.id)
+          .then (data => {
+            if (data) {
+              this.cleanItem(item.id);
+            }
+          })
+          .catch(error => {
+            this.$emit('error', { message: error.message });
+          })
+          .finally(() => {
+            item._bussy = false;
+          });
       }
     },
 
@@ -400,22 +424,22 @@ export default {
       this.isLoading = true;
 
       this.getItems()
-        .then(items => {
+        .then(data => {
           let _items = [];
 
-          if (items.length) {
-            for (let index in items) {
+          if (data.members.length) {
+            for (let index in data.members) {
               _items.push({
-                id        : items[index]['@id'].match(/^\/addresses\/([a-z0-9-]*)$/)[1],
-                nickname  : items[index].nickname,
-                country   : items[index].street.district.city.state.country.countryname,
-                state     : items[index].street.district.city.state.uf,
-                city      : items[index].street.district.city.city,
-                district  : items[index].street.district.district,
-                postalCode: items[index].street.cep.cep,
-                street    : items[index].street.street,
-                number    : items[index].number,
-                complement: items[index].complement,
+                id        : data.members[index].id,
+                nickname  : data.members[index].nickname,
+                country   : data.members[index].country,
+                state     : data.members[index].state,
+                city      : data.members[index].city,
+                district  : data.members[index].district,
+                postalCode: data.members[index].postalCode,
+                street    : data.members[index].street,
+                number    : data.members[index].number,
+                complement: data.members[index].complement,
                 _bussy    : false,
               });
             }
