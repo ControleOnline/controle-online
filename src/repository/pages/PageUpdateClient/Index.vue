@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-12 q-pa-md text-h6">
-      Atualização de cadastro
+      Atualização de cadastro de cliente
     </div>
 
     <div class="col-12">
@@ -17,17 +17,33 @@
         v-model    ="currentTab"
         class      ="bg-white text-primary"
       >
-        <q-tab
-          name ="emails"
-          label="Emails"
-        />
-        <q-tab
-          name ="users"
-          label="Usuários"
+        <q-tab v-if="client.type === 'J'"
+          name ="employees"
+          label="Funcionários"
         />
         <q-tab
           name ="address"
           label="Endereços"
+        />
+        <q-tab
+          name ="documents"
+          label="Documentos"
+        />
+        <q-tab v-if="client.type === 'F'"
+          name ="emails"
+          label="Emails"
+        />
+        <q-tab v-if="client.type === 'F'"
+          name ="users"
+          label="Usuários"
+        />
+        <q-tab v-if="client.type === 'F'"
+          name ="phones"
+          label="Telefones"
+        />
+        <q-tab
+          name ="billing"
+          label="Faturamento"
         />
       </q-tabs>
 
@@ -98,6 +114,90 @@
             }"
           />
         </q-tab-panel>
+
+        <q-tab-panel name="phones">
+          <ClientAdminPhones
+            :api  ="api"
+            :id   ="clientId"
+            @error="(error) => {
+              this.$q.notify({
+                message : error.message,
+                position: 'bottom',
+                type    : 'negative',
+              });
+            }"
+            @saved="(data) => {
+              this.$q.notify({
+                message : 'Os dados foram salvos com sucesso',
+                position: 'bottom',
+                type    : 'positive',
+              });
+            }"
+          />
+        </q-tab-panel>
+
+        <q-tab-panel name="documents">
+          <ClientAdminDocuments
+            :api  ="api"
+            :id   ="clientId"
+            @error="(error) => {
+              this.$q.notify({
+                message : error.message,
+                position: 'bottom',
+                type    : 'negative',
+              });
+            }"
+            @saved="(data) => {
+              this.$q.notify({
+                message : 'Os dados foram salvos com sucesso',
+                position: 'bottom',
+                type    : 'positive',
+              });
+            }"
+          />
+        </q-tab-panel>
+
+        <q-tab-panel name="employees">
+          <ClientAdminEmployees
+            :api  ="api"
+            :id   ="clientId"
+            @error="(error) => {
+              this.$q.notify({
+                message : error.message,
+                position: 'bottom',
+                type    : 'negative',
+              });
+            }"
+            @saved="(data) => {
+              this.$q.notify({
+                message : 'Os dados foram salvos com sucesso',
+                position: 'bottom',
+                type    : 'positive',
+              });
+            }"
+          />
+        </q-tab-panel>
+
+        <q-tab-panel name="billing">
+          <ClientAdminBilling
+            :api  ="api"
+            :id   ="clientId"
+            @error="(error) => {
+              this.$q.notify({
+                message : error.message,
+                position: 'bottom',
+                type    : 'negative',
+              });
+            }"
+            @saved="(data) => {
+              this.$q.notify({
+                message : 'Os dados foram salvos com sucesso',
+                position: 'bottom',
+                type    : 'positive',
+              });
+            }"
+          />
+        </q-tab-panel>
       </q-tab-panels>
     </div>
 
@@ -109,6 +209,10 @@ import Api                  from '../../utils/api';
 import ClientAdminEmails    from '../../components/ClientAdminEmails';
 import ClientAdminUsers     from '../../components/ClientAdminUsers';
 import ClientAdminAddresses from '../../components/ClientAdminAddresses';
+import ClientAdminPhones    from '../../components/ClientAdminPhones';
+import ClientAdminDocuments from '../../components/ClientAdminDocuments';
+import ClientAdminEmployees from '../../components/ClientAdminEmployees';
+import ClientAdminBilling   from '../../components/ClientAdminBilling';
 
 export default {
   props: {
@@ -125,6 +229,10 @@ export default {
     ClientAdminEmails   ,
     ClientAdminUsers    ,
     ClientAdminAddresses,
+    ClientAdminPhones   ,
+    ClientAdminDocuments,
+    ClientAdminEmployees,
+    ClientAdminBilling  ,
   },
 
   created() {
@@ -137,11 +245,12 @@ export default {
 
   data () {
     return {
-      currentTab: 'emails',
+      currentTab: null,
       api       : null,
       clientId  : this.id,
       client    : {
-        name: '...'
+        name: '...',
+        type: null,
       }
     }
   },
@@ -152,7 +261,10 @@ export default {
         .then(response => response.json())
         .then(data => {
           if (data['@id']) {
-            this.client.name = data.name;
+            this.client.name = data.peopleType === 'J' ? data.alias : `${data.name} ${data.alias}`;
+            this.client.type = data.peopleType;
+
+            this.currentTab  = data.peopleType === 'J' ? 'employees' : 'address';
           }
         });
     }
