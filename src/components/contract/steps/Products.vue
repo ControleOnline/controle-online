@@ -63,6 +63,7 @@
       ref      ="productsRef"
       class    ="q-mt-md"
       :contract="contract"
+      :editMode="editMode"
       @loaded  ="onProductsLoaded"
     />
 
