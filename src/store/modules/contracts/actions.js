@@ -240,3 +240,12 @@ export const requestSignatures = ({ commit }, id) => {
       return null;
     });
 };
+
+export const deleteContractProduct = ({ commit }, id) => {
+  commit(types.SET_ERROR, '');
+
+  return fetch(`${id}`, { method: 'DELETE' })
+    .then(() => {
+      return true;
+    });
+};
