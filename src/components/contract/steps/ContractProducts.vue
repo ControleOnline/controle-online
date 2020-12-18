@@ -19,6 +19,14 @@
         <q-td key="name"     :props="props">{{ props.row.name     }}</q-td>
         <q-td key="quantity" :props="props">{{ props.row.quantity }}</q-td>
         <q-td key="price"    :props="props">{{ props.row.price    }}</q-td>
+        <q-td auto-width>
+          <q-btn flat round dense v-if="editMode"
+            color   ="red"
+            icon    ="delete"
+            @click  ="removeItem(props.row)"
+            :loading="props.row._bussy"
+          />
+        </q-td>
       </q-tr>
     </template>
   </q-table>
@@ -30,10 +38,10 @@ import { formatMoney }            from '../../../utils/formatter';
 
 const SETTINGS = {
   visibleColumns: [
-    'id'      ,
     'name'    ,
     'quantity',
     'price'   ,
+    'action'  ,
   ],
   columns       : [
     {
@@ -54,6 +62,9 @@ const SETTINGS = {
       align: 'left',
       label: 'Preço'
     },
+    {
+      name : 'action'
+    }
   ],
 };
 
@@ -64,7 +75,12 @@ export default {
     contract: {
       type    : Object,
       required: true
-    }
+    },
+    editMode: {
+      type    : Boolean,
+      required: false,
+      default : true
+    },
   },
 
   data() {
@@ -85,6 +101,7 @@ export default {
   methods: {
     ...mapActions({
       getItems: 'contracts/getContractProducts',
+      delete  : 'contracts/deleteContractProduct',
     }),
 
     reload() {
@@ -92,6 +109,29 @@ export default {
         pagination: this.pagination,
         filter    : null,
       });
+    },
+
+    removeItem(item) {
+      if (window.confirm('Tem certeza que deseja eliminar este registro?')) {
+        item._bussy = true;
+
+        this.delete(item['@id'])
+          .then (data => {
+            if (data) {
+              this.reload();
+            }
+          })
+          .catch(error => {
+            this.$q.notify({
+              message : error.message,
+              position: 'bottom',
+              type    : 'negative',
+            });
+          })
+          .finally(() => {
+            item._bussy = false;
+          });
+      }
     },
 
     onRequest(props) {
@@ -125,10 +165,11 @@ export default {
 
             products.forEach(product => {
               data.push({
-                '@id'     : product.product['@id'],
+                '@id'     : product['@id'],
                 'name'    : product.product.product,
                 'quantity': product.quantity,
                 'price'   : formatMoney(product.price, 'BRL', 'pt-br'),
+                '_bussy'  : false,
               });
             });
 
