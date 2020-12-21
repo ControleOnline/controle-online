@@ -155,13 +155,13 @@ export default {
 
   methods: {
     // store method
-    getClients(params) {
-      return this.api.private('/clients', { params })
+    getCustomers(params) {
+      return this.api.private('/customers', { params })
         .then(response => response.json())
-        .then(data => {
+        .then(result => {
           return {
-            members   : data['hydra:member'],
-            totalItems: data['hydra:totalItems']
+            members   : result.response.data.members,
+            totalItems: result.response.data.total
           };
         });
     },
@@ -189,18 +189,20 @@ export default {
           sortBy,
           descending
       }          = props.pagination;
-      let params = { itemsPerPage: rowsPerPage, page };
+      let params = {};
 
-      params['type'] = 'new';
-      params['from'] = this.formatDate(this.fromDate);
-      params['to']   = this.formatDate(this.toDate  );
+      params['type']  = 'new';
+      params['from']  = this.formatDate(this.fromDate);
+      params['to']    = this.formatDate(this.toDate  );
+      params['page']  = page;
+      params['limit'] = rowsPerPage;
 
       if (this.searchBy.length > 1)
         params['searchBy'] = this.searchBy;
 
       this.$emit('before', params);
 
-      this.getClients(params)
+      this.getCustomers(params)
         .then(data => {
           let _data = [];
 
@@ -209,22 +211,13 @@ export default {
             let client = {};
 
             client = {
-              '@id'  : item['@id'],
-              'id'   : item['@id'].match(/^\/clients\/([0-9]+)$/)[1],
-              'cnpj' : item.document.length > 0 ? item.document[0].document : '',
+              'id'   : item.id,
+              'cnpj' : item.document,
               'alias': item.alias,
               'name' : item.name,
-              'email': '',
-              'phone': '',
+              'email': item.email,
+              'phone': item.phone
             };
-
-            if (item.peopleEmployee.length > 0) {
-              if (item.peopleEmployee[0].employee.email.length > 0)
-                client.email = `${item.peopleEmployee[0].employee.email[0].email}`;
-
-              if (item.peopleEmployee[0].employee.phone.length > 0)
-                client.phone = `${item.peopleEmployee[0].employee.phone[0].ddd}${item.peopleEmployee[0].employee.phone[0].phone}`;
-            }
 
             _data.push(client);
           }
