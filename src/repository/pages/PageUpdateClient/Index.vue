@@ -45,6 +45,14 @@
           name ="billing"
           label="Faturamento"
         />
+        <q-tab
+          name ="orders"
+          label="Pedidos"
+        />
+        <q-tab
+          name ="contracts"
+          label="Contratos"
+        />
       </q-tabs>
 
       <q-separator />
@@ -198,6 +206,48 @@
             }"
           />
         </q-tab-panel>
+
+        <q-tab-panel name="orders">
+          <CustomerOrders
+            :api  ="api"
+            :id   ="clientId"
+            @error="(error) => {
+              this.$q.notify({
+                message : error.message,
+                position: 'bottom',
+                type    : 'negative',
+              });
+            }"
+            @saved="(data) => {
+              this.$q.notify({
+                message : 'Os dados foram salvos com sucesso',
+                position: 'bottom',
+                type    : 'positive',
+              });
+            }"
+          />
+        </q-tab-panel>
+
+        <q-tab-panel name="contracts">
+          <CustomerContracts
+            :api  ="api"
+            :id   ="clientId"
+            @error="(error) => {
+              this.$q.notify({
+                message : error.message,
+                position: 'bottom',
+                type    : 'negative',
+              });
+            }"
+            @saved="(data) => {
+              this.$q.notify({
+                message : 'Os dados foram salvos com sucesso',
+                position: 'bottom',
+                type    : 'positive',
+              });
+            }"
+          />
+        </q-tab-panel>
       </q-tab-panels>
     </div>
 
@@ -213,6 +263,8 @@ import ClientAdminPhones    from '../../components/ClientAdminPhones';
 import ClientAdminDocuments from '../../components/ClientAdminDocuments';
 import ClientAdminEmployees from '../../components/ClientAdminEmployees';
 import ClientAdminBilling   from '../../components/ClientAdminBilling';
+import CustomerOrders       from '../../components/CustomerOrders';
+import CustomerContracts    from '../../components/CustomerContracts';
 
 export default {
   props: {
@@ -233,6 +285,8 @@ export default {
     ClientAdminDocuments,
     ClientAdminEmployees,
     ClientAdminBilling  ,
+    CustomerOrders      ,
+    CustomerContracts   ,
   },
 
   created() {
@@ -249,7 +303,7 @@ export default {
       api       : null,
       clientId  : this.id,
       client    : {
-        name: '...',
+        name: 'Carregando...',
         type: null,
       }
     }
