@@ -9,7 +9,7 @@
       Carregando...
     </div>
 
-    <div class="col-12 q-mt-md">
+    <div class="col-12 q-mt-md" :style="isLoading ? 'visibility:hidden' : 'visibility:visible'">
       <q-markup-table v-if="item !== null">
         <tbody>
           <tr>
