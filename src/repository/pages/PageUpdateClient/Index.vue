@@ -17,6 +17,10 @@
         v-model    ="currentTab"
         class      ="bg-white text-primary"
       >
+        <q-tab
+          name ="summary"
+          label="Resumo"
+        />
         <q-tab v-if="client.type === 'J'"
           name ="employees"
           label="Funcionários"
@@ -43,7 +47,7 @@
         />
         <q-tab
           name ="billing"
-          label="Faturamento"
+          label="Financeiro"
         />
         <q-tab
           name ="orders"
@@ -60,6 +64,27 @@
       <q-tab-panels
         v-model="currentTab"
       >
+        <q-tab-panel name="summary">
+          <CustomerSummary
+            :api  ="api"
+            :id   ="clientId"
+            @error="(error) => {
+              this.$q.notify({
+                message : error.message,
+                position: 'bottom',
+                type    : 'negative',
+              });
+            }"
+            @saved="(data) => {
+              this.$q.notify({
+                message : 'Os dados foram salvos com sucesso',
+                position: 'bottom',
+                type    : 'positive',
+              });
+            }"
+          />
+        </q-tab-panel>
+
         <q-tab-panel name="emails">
           <ClientAdminEmails
             :api  ="api"
@@ -265,6 +290,7 @@ import ClientAdminEmployees from '../../components/ClientAdminEmployees';
 import ClientAdminBilling   from '../../components/ClientAdminBilling';
 import CustomerOrders       from '../../components/CustomerOrders';
 import CustomerContracts    from '../../components/CustomerContracts';
+import CustomerSummary      from '../../components/CustomerSummary';
 
 export default {
   props: {
@@ -287,6 +313,7 @@ export default {
     ClientAdminBilling  ,
     CustomerOrders      ,
     CustomerContracts   ,
+    CustomerSummary     ,
   },
 
   created() {
@@ -299,7 +326,7 @@ export default {
 
   data () {
     return {
-      currentTab: null,
+      currentTab: 'summary',
       api       : null,
       clientId  : this.id,
       client    : {
@@ -317,8 +344,6 @@ export default {
           if (data['@id']) {
             this.client.name = data.peopleType === 'J' ? data.alias : `${data.name} ${data.alias}`;
             this.client.type = data.peopleType;
-
-            this.currentTab  = data.peopleType === 'J' ? 'employees' : 'address';
           }
         });
     }
