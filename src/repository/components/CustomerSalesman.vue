@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-12 q-mt-md">
-      <q-table flat grid hide-header
+      <q-table flat grid hide-header hide-pagination
         :loading="isLoading"
         :data   ="items"
         row-key ="id"
@@ -26,11 +26,19 @@
             <q-card>
               <q-img basic :src="props.row.image">
                 <div class="absolute-bottom text-subtitle1 text-center">
-                  {{ `${props.row.name} ${props.row.alias}` }}
+                  {{ props.row.name }}
                 </div>
               </q-img>
               <q-card-section>
                 <q-list>
+                  <q-item dense>
+                    <q-item-section avatar>
+                      <q-icon name="perm_identity" />
+                    </q-item-section>
+                    <q-item-section side>
+                      <q-item-label caption>{{ props.row.document }}</q-item-label>
+                    </q-item-section>
+                  </q-item>
                   <q-item dense>
                     <q-item-section avatar>
                       <q-icon name="email" />
@@ -59,7 +67,7 @@
                   icon    ="delete"
                   @click  ="removeItem(props.row)"
                   :loading="props.row._bussy"
-                  :disable="items.length == 1"
+                  :disable="props.row.isProvider"
                 >
                   <q-tooltip>Eliminar</q-tooltip>
                 </q-btn>
@@ -73,63 +81,49 @@
     <q-dialog v-model="dialog">
       <q-card style="width: 700px; max-width: 80vw;">
         <q-card-section class="row items-center">
-          <div class="text-h6">Novo funcionário</div>
+          <div class="text-h6">Buscar vendedor</div>
           <q-space />
           <q-btn icon="close" flat round dense v-close-popup />
         </q-card-section>
         <q-card-section>
           <q-form ref="myForm" @submit="onSubmit" class="q-mt-md">
-            <div class="row q-col-gutter-xs q-pb-xs">
-              <h6 class="col-xs-12 q-mt-sm q-mb-sm">Dados pessoais</h6>
-              <div class="col-xs-12 col-sm-6 q-mb-sm">
-                <q-input stack-label lazy-rules unmasked-value hide-bottom-space
-                  v-model="item.name"
-                  type   ="text"
-                  label  ="Nome"
-                  :rules ="[isInvalid('name')]"
+            <div class="row q-col-gutter-sm">
+              <div class="col-xs-12">
+                <q-input outlined stack-label lazy-rules unmasked-value
+                  v-model     ="item.document"
+                  type        ="text"
+                  class       ="q-mb-sm"
+                  :label      ="$t('CNPJ')"
+                  :mask       ="'##.###.###/####-##'"
+                  :placeholder="'Digite o CNPJ'"
+                  :rules      ="[isInvalid('document')]"
+                  :loading    ="searching"
+                  @input      ="searchSalesman"
                 />
               </div>
-              <div class="col-xs-12 col-sm-6 q-mb-sm">
-                <q-input stack-label lazy-rules hide-bottom-space
-                  v-model="item.lastname"
-                  type   ="text"
-                  label  ="Sobrenome"
-                  :rules ="[isInvalid('lastname')]"
-                />
-              </div>
-              <div class="col-xs-12 col-sm-6 q-mb-sm">
-                <q-input stack-label lazy-rules hide-bottom-space
-                  v-model="item.email"
-                  type   ="text"
-                  label  ="Email"
-                  :rules ="[isInvalid('email')]"
-                />
-              </div>
-              <h6 class="col-xs-12 q-mt-sm q-mb-sm">Dados de usuário</h6>
-              <div class="col-xs-12 col-sm-6 q-mb-sm">
-                <q-input stack-label lazy-rules reverse-fill-mask
-                  v-model    ="item.username"
-                  type       ="text"
-                  :label     ="$t('Usuário')"
-                  placeholder="Digite seu usuário (nickname)"
-                  class      ="q-mb-md"
-                  mask       ="x"
-                  :rules     ="[isInvalid('username')]"
-                  hint       ="Use apenas letras e números sem espaços"
-                />
-              </div>
-              <div class="col-xs-12 col-sm-6 q-mb-sm">
+              <div class="col-xs-12 col-sm-6">
                 <q-input stack-label lazy-rules
-                  v-model    ="item.password"
-                  type       ="password"
-                  :label     ="$t('Senha')"
-                  placeholder="Digite sua senha"
-                  :rules     ="[isInvalid('password')]"
-                  hint       ="Use seis ou mais caracteres com uma combinação de letras, números e símbolos"
+                  v-model     ="item.name"
+                  type        ="text"
+                  class       ="q-mb-sm"
+                  :label      ="$t('Razão social')"
+                  :placeholder="'Razão social'"
+                  :rules      ="[isInvalid('name')]"
+                  :outlined   ="true"
+                />
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <q-input stack-label lazy-rules
+                  v-model     ="item.alias"
+                  type        ="text"
+                  class       ="q-mb-sm"
+                  :label      ="$t('Nome Fantasia')"
+                  :placeholder="'Nome fantasia'"
+                  :rules      ="[isInvalid('alias')]"
+                  :outlined   ="true"
                 />
               </div>
             </div>
-
             <div class="row justify-end">
               <q-btn
                 :loading="saving"
@@ -152,6 +146,7 @@
 import Api                from '../utils/api';
 import { formatDocument } from '../utils/formatters';
 import md5                from 'md5';
+import { mapGetters }     from 'vuex';
 
 export default {
   props: {
@@ -170,17 +165,11 @@ export default {
       dialog   : false,
       saving   : false,
       isLoading: false,
-      docMask  : '',
+      searching: false,
       item     : {
+        document: '',
         name    : '',
-        lastname: '',
-        phone   : {
-          ddd  : '',
-          phone: '',
-        },
-        email   : '',
-        username: '',
-        password: '',
+        alias   : '',
       }
     };
   },
@@ -189,11 +178,16 @@ export default {
     this.onRequest();
   },
 
+  computed: {
+    ...mapGetters({
+      myProvider: 'people/currentCompany',
+    }),
+  },
+
   methods: {
     // store method
     getItems() {
-      let endpoint = `customers/${this.id}/employees`;
-      return this.api.private(endpoint)
+      return this.api.private(`customers/${this.id}/salesman`)
         .then(response => response.json())
         .then(result => {
           return result.response.data;
@@ -206,10 +200,12 @@ export default {
         method : 'PUT',
         headers: new Headers({ 'Content-Type': 'application/ld+json' }),
         body   : JSON.stringify(values),
+        params : {
+          myProvider: this.myProvider.id
+        }
       };
 
-      let endpoint = `customers/${this.id}/employees`;
-      return this.api.private(endpoint, options)
+      return this.api.private(`customers/${this.id}/salesman`, options)
         .then(response => response.json())
         .then(data => {
           if (data.response) {
@@ -231,8 +227,7 @@ export default {
         body   : JSON.stringify({ id }),
       };
 
-      let endpoint = `customers/${this.id}/employees`;
-      return this.api.private(endpoint, options)
+      return this.api.private(`customers/${this.id}/salesman`, options)
         .then(response => response.json())
         .then(data => {
           if (data.response) {
@@ -246,6 +241,44 @@ export default {
         });
     },
 
+    // store method
+    getSalesman(id) {
+      return this.api.private('customers/search-salesman', { params: { document: id } })
+        .then(response => response.json())
+        .then(data => {
+          if (data.response) {
+            if (data.response.success === false)
+              throw new Error(data.response.error);
+
+            return data.response.data;
+          }
+
+          return null;
+        });;
+    },
+
+    searchSalesman() {
+      if (this.item.document.length != 14) {
+        return;
+      }
+
+      this.searching = true;
+
+      this.getSalesman(this.item.document)
+        .then(data => {
+          if (data) {
+            this.item.name  = data.name;
+            this.item.alias = data.alias;
+          }
+        })
+        .catch(error => {
+          this.$emit('error', { message: error.message });
+        })
+        .finally(() => {
+          this.searching = false;
+        });
+    },
+
     gravatar(email) {
       return 'https://www.gravatar.com/avatar/' + md5(email) + '?s=400';
     },
@@ -256,20 +289,11 @@ export default {
           if (success) {
             this.saving = true;
 
-            let payload = {
-              "name" : this.item.name,
-              "alias": this.item.lastname,
-              "email": this.item.email
-            };
-
-            if (this.item.username.length) {
-              payload['user'] = {
-                username: this.item.username,
-                password: this.item.password
-              };
-            }
-
-            this.save(payload)
+            this.save({
+              "document": this.item.document,
+              "name"    : this.item.name,
+              "alias"   : this.item.alias,
+            })
               .then (data => {
                 if (data) {
                   this.$refs.myForm.reset();
@@ -328,13 +352,21 @@ export default {
 
           if (data.members.length) {
             for (let index in data.members) {
+              let image = data.members[index].image ? data.members[index].image.url : null;
+              if (image == null) {
+                if (data.members[index].email) {
+                  image = this.gravatar(data.members[index].email);
+                }
+              }
+
               _items.push({
-                id      : data.members[index].id,
-                name    : data.members[index].name,
-                alias   : data.members[index].alias,
-                image   : !data.members[index].image ? this.gravatar(data.members[index].email) : data.members[index].image.url,
-                email   : data.members[index].email,
-                _bussy  : false,
+                id        : data.members[index].id,
+                name      : data.members[index].type == 'J' ? data.members[index].name : `${data.members[index].name} ${data.members[index].alias}`,
+                image     : image,
+                email     : data.members[index].email,
+                document  : formatDocument(data.members[index].document),
+                isProvider: data.members[index].is_provider,
+                _bussy    : false,
               });
             }
           }
@@ -353,12 +385,6 @@ export default {
 
         if (key == 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))
           return this.$t('messages.emailInvalid');
-
-        if (key == 'password' && val.length < 6)
-          return this.$t('A senha deve ter no mínimo 6 caracteres');
-
-        if (key == 'confirm' && (this.item.password != this.item.confirmPassword))
-          return this.$t('As senhas não coincidem');
 
         return true;
       };
