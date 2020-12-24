@@ -354,9 +354,7 @@ export default {
             for (let index in data.members) {
               let image = data.members[index].image ? data.members[index].image.url : null;
               if (image == null) {
-                if (data.members[index].email) {
-                  image = this.gravatar(data.members[index].email);
-                }
+                image = this.gravatar(data.members[index].email ? data.members[index].email : 'email@gmail.com');
               }
 
               _items.push({
