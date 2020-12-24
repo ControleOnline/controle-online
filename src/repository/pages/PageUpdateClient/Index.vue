@@ -21,6 +21,10 @@
           name ="summary"
           label="Resumo"
         />
+        <q-tab
+          name ="salesman"
+          label="Vendedor"
+        />
         <q-tab v-if="client.type === 'J'"
           name ="employees"
           label="Funcionários"
@@ -66,6 +70,27 @@
       >
         <q-tab-panel name="summary">
           <CustomerSummary
+            :api  ="api"
+            :id   ="clientId"
+            @error="(error) => {
+              this.$q.notify({
+                message : error.message,
+                position: 'bottom',
+                type    : 'negative',
+              });
+            }"
+            @saved="(data) => {
+              this.$q.notify({
+                message : 'Os dados foram salvos com sucesso',
+                position: 'bottom',
+                type    : 'positive',
+              });
+            }"
+          />
+        </q-tab-panel>
+
+        <q-tab-panel name="salesman">
+          <CustomerSalesman
             :api  ="api"
             :id   ="clientId"
             @error="(error) => {
@@ -291,6 +316,7 @@ import ClientAdminBilling   from '../../components/ClientAdminBilling';
 import CustomerOrders       from '../../components/CustomerOrders';
 import CustomerContracts    from '../../components/CustomerContracts';
 import CustomerSummary      from '../../components/CustomerSummary';
+import CustomerSalesman     from '../../components/CustomerSalesman';
 
 export default {
   props: {
@@ -314,6 +340,7 @@ export default {
     CustomerOrders      ,
     CustomerContracts   ,
     CustomerSummary     ,
+    CustomerSalesman    ,
   },
 
   created() {
