@@ -9,9 +9,6 @@
         :loading        ="isLoading"
       >
         <template v-slot:top>
-          <div class="col-3 q-mb-md text-h6">
-            Lista de telefones
-          </div>
           <div class="col-9 q-mb-md">
             <div class="row justify-end">
               <q-btn
