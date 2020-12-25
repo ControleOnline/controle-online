@@ -196,16 +196,17 @@
 
         <q-tab-panel name="documents">
           <ClientAdminDocuments
-            :api  ="api"
-            :id   ="clientId"
-            @error="(error) => {
+            :api     ="api"
+            :id      ="clientId"
+            :customer="client"
+            @error   ="(error) => {
               this.$q.notify({
                 message : error.message,
                 position: 'bottom',
                 type    : 'negative',
               });
             }"
-            @saved="(data) => {
+            @saved   ="(data) => {
               this.$q.notify({
                 message : 'Os dados foram salvos com sucesso',
                 position: 'bottom',
