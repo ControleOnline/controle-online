@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-12 q-mt-md">
-      <q-table flat
+      <q-table flat hide-pagination
         :data           ="items"
         :columns        ="settings.columns"
         :visible-columns="settings.visibleColumns"
@@ -9,10 +9,7 @@
         :loading        ="isLoading"
       >
         <template v-slot:top>
-          <div class="col-3 q-mb-md text-h6">
-            Lista de documentos
-          </div>
-          <div class="col-9 q-mb-md">
+          <div class="col-12 q-mb-md">
             <div class="row justify-end">
               <q-btn
                 label ="Adicionar"
@@ -42,6 +39,47 @@
           </q-tr>
         </template>
       </q-table>
+    </div>
+
+    <div class="col-12">
+      <q-separator />
+      <div class="row q-col-gutter-sm q-mt-md">
+        <div class="col-12 q-mb-md text-h6">
+          Arquivos <span class="text-caption text-weight-light">{{ fileing ? 'Carregando...' : '' }}</span>
+        </div>
+        <div
+          v-for="(field, index) in particulars"
+          :key ="index"
+          class="col-xs-12 col-sm-grow"
+        >
+          <q-file outlined stack-label bottom-slots
+            v-model   ="field.file"
+            :label    ="$t(field.label)"
+            @input    ="(file) => {
+              field._updated = true;
+              uploadFile(field, file);
+            }"
+            :accept   ="field.accept"
+            :loading  ="field._isUpld"
+            :clearable="field.id === null && field._isUpld === false"
+          >
+            <template v-slot:append>
+              <q-icon
+                v-if ="field.id === null"
+                name ="attachment"
+                color="primary"
+              />
+              <q-btn flat round dense
+                v-if    ="field.id !== null && field._updated === false"
+                color   ="red"
+                icon    ="delete"
+                @click  ="removeFile(field)"
+                :loading="field._isDelet"
+              />
+            </template>
+          </q-file>
+        </div>
+      </div>
     </div>
 
     <q-dialog v-model="dialog">
@@ -150,17 +188,23 @@ export default {
       type    : Api,
       required: true
     },
+    customer: {
+      type    : Object,
+      required: true
+    },
   },
 
   data() {
     return {
-      items    : [],
-      dialog   : false,
-      settings : SETTINGS,
-      saving   : false,
-      isLoading: false,
-      docMask  : '',
-      item     : {
+      items      : [],
+      dialog     : false,
+      settings   : SETTINGS,
+      saving     : false,
+      isLoading  : false,
+      fileing    : false,
+      docMask    : '',
+      particulars: [],
+      item       : {
         type    : null,
         document: null,
       }
@@ -169,6 +213,7 @@ export default {
 
   created() {
     this.onRequest();
+    this.loadParticulars();
   },
 
   watch: {
@@ -190,8 +235,7 @@ export default {
   methods: {
     // store method
     getItems() {
-      let endpoint = `customers/${this.id}/documents`;
-      return this.api.private(endpoint)
+      return this.api.private(`customers/${this.id}/documents`)
         .then(response => response.json())
         .then(result => {
           return result.response.data;
@@ -206,8 +250,7 @@ export default {
         body   : JSON.stringify(values),
       };
 
-      let endpoint = `customers/${this.id}/documents`;
-      return this.api.private(endpoint, options)
+      return this.api.private(`customers/${this.id}/documents`, options)
         .then(response => response.json())
         .then(data => {
           if (data.response) {
@@ -229,8 +272,79 @@ export default {
         body   : JSON.stringify({ id }),
       };
 
-      let endpoint = `customers/${this.id}/documents`;
-      return this.api.private(endpoint, options)
+      return this.api.private(`customers/${this.id}/documents`, options)
+        .then(response => response.json())
+        .then(data => {
+          if (data.response) {
+            if (data.response.success === false)
+              throw new Error(data.response.error);
+
+            return data.response.data;
+          }
+
+          return null;
+        });
+    },
+
+    // store method
+    getParticulars() {
+      let params = {
+        'peopleType': this.customer.type,
+        'context'   : 'clients',
+        'fieldType' : 'file'
+      };
+
+      return this.api.private('particulars_types', { params })
+        .then(response => response.json())
+        .then(result => {
+          return result['hydra:member'];
+        });
+    },
+
+    // store method
+    getFiles() {
+      return this.api.private(`customers/${this.id}/files`)
+        .then(response => response.json())
+        .then(result => {
+          return result.response.data;
+        });
+    },
+
+    // store method
+    deleteFile(id) {
+      let options = {
+        method : 'DELETE',
+        headers: new Headers({ 'Content-Type': 'application/ld+json' }),
+        body   : JSON.stringify({ id }),
+      };
+
+      return this.api.private(`customers/${this.id}/files`, options)
+        .then(response => response.json())
+        .then(data => {
+          if (data.response) {
+            if (data.response.success === false)
+              throw new Error(data.response.error);
+
+            return data.response.data;
+          }
+
+          return null;
+        });
+    },
+
+    // store method
+    saveFile(data) {
+      const dataForm = new FormData();
+
+      dataForm.append('customer', this.id  );
+      dataForm.append('type'    , data.type);
+      dataForm.append('file'    , data.file);
+
+      if (data.id !== null) {
+        dataForm.append('id', data.id);
+      }
+
+      return this.api.private('customers/files', { method: 'POST', body: dataForm })
         .then(response => response.json())
         .then(data => {
           if (data.response) {
@@ -280,17 +394,17 @@ export default {
         item._bussy = true;
 
         this.delete(item.id)
-        .then (data => {
-          if (data) {
-            this.cleanItem(item.id);
-          }
-        })
-        .catch(error => {
-          this.$emit('error', { message: error.message });
-        })
-        .finally(() => {
-          item._bussy = false;
-        });
+          .then(data => {
+            if (data) {
+              this.cleanItem(item.id);
+            }
+          })
+          .catch(error => {
+            this.$emit('error', { message: error.message });
+          })
+          .finally(() => {
+            item._bussy = false;
+          });
       }
     },
 
@@ -298,6 +412,33 @@ export default {
       let item   = this.items.find(obj => obj['id'] == id);
       let indx   = this.items.indexOf(item);
       this.items = [...this.items.slice(0, indx), ...this.items.slice(indx + 1)];
+    },
+
+    removeFile(data) {
+      if (window.confirm('Tem certeza que deseja eliminar este arquivo?')) {
+        data._isDelet = true;
+
+        this.deleteFile(data.id)
+          .then(result => {
+            if (result === true) {
+              let field = this.particulars.find(f => f.id == data.id);
+              let index = this.particulars.indexOf(field);
+              if (field) {
+                this.particulars[index].id       = null;
+                this.particulars[index].file     = null;
+                this.particulars[index].value    = null;
+                this.particulars[index].name     = null;
+                this.particulars[index]._updated = false;
+              }
+            }
+          })
+          .catch(error => {
+            this.$emit('error', { message: error.message });
+          })
+          .finally(() => {
+            data._isDelet = false;
+          });
+      }
     },
 
     onRequest() {
@@ -325,6 +466,91 @@ export default {
         })
         .finally(() => {
           this.isLoading = false;
+        });
+    },
+
+    loadParticulars() {
+      this.fileing = true;
+
+      this.getParticulars()
+        .then(types => {
+          if (!types.length) {
+            return;
+          }
+
+          this.getFiles()
+            .then(files => {
+              let _types = [];
+
+              types.forEach(type => {
+                let item = {
+                  id      : null,
+                  typeId  : type['@id'].replace(/\D/g, ''),
+                  label   : type.typeValue,
+                  value   : null,
+                  required: type.required === null ? false : ((type.required.split(':')).includes('clients')),
+                  type    : type.fieldType,
+                  file    : null,
+                  name    : null,
+                  accept  : type.fieldConfigs ? (JSON.parse(type.fieldConfigs)).accept : null,
+                  _updated: false,
+                  _isDelet: false,
+                  _isUpld : false,
+                };
+
+                if (files.length) {
+                  let particular = files.find(p => p.type.id == item.typeId);
+                  if (particular) {
+                    item.id    = particular.id;
+                    item.value = particular.value;
+                    item.name  = particular.value ? particular.value.name : null;
+                    item.file  = new File(["foo"], item.name, { type: "text/plain" });
+                  }
+                }
+
+                _types.push(item);
+              });
+
+              this.particulars = _types;
+          })
+          .finally(() => {
+              this.fileing = false;
+          });
+        });
+    },
+
+    uploadFile(item, file) {
+      if (!file) {
+        return;
+      }
+
+      item._isUpld = true;
+
+      this.saveFile({
+        id  : item.id,
+        type: item.typeId,
+        file: file
+      })
+        .then (data => {
+          if (data) {
+
+            // update particular
+
+            let field = this.particulars.find(f => f.typeId == data.type.id);
+            let index = this.particulars.indexOf(field);
+            if (field) {
+              this.particulars[index].id       = data.id;
+              this.particulars[index]._updated = false;
+            }
+
+            this.$emit('saved', data);
+          }
+        })
+        .catch(error => {
+          this.$emit('error', { message: error.message });
+        })
+        .finally(() => {
+          item._isUpld = false;
         });
     },
 
