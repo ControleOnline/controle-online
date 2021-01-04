@@ -76,6 +76,12 @@
                 @click  ="removeFile(field)"
                 :loading="field._isDelet"
               />
+              <q-btn flat round dense
+                v-if    ="field.id !== null"
+                color   ="blue"
+                icon    ="cloud_download"
+                @click  ="downloadFile({ id: field.fileId, name: field.name })"
+              />
             </template>
           </q-file>
         </div>
@@ -134,6 +140,7 @@
 <script>
 import Api                from '../utils/api';
 import { formatDocument } from '../utils/formatters';
+import { exportFile }     from 'quasar';
 
 const SETTINGS = {
   visibleColumns: [
@@ -358,6 +365,17 @@ export default {
         });
     },
 
+    // store method
+    downloadFile(file) {
+      return this.api.private(`customers/${this.id}/files/${file.id}`)
+        .then(response => response.blob())
+        .then((blob) => {
+          if (!exportFile(file.name, blob, blob.type)) {
+            throw new Error('Erro no download');
+          }
+        });
+    },
+
     onSubmit() {
       this.$refs.myForm.validate()
         .then(success => {
@@ -492,6 +510,7 @@ export default {
                   type    : type.fieldType,
                   file    : null,
                   name    : null,
+                  fileId  : null,
                   accept  : type.fieldConfigs ? (JSON.parse(type.fieldConfigs)).accept : null,
                   _updated: false,
                   _isDelet: false,
@@ -501,10 +520,11 @@ export default {
                 if (files.length) {
                   let particular = files.find(p => p.type.id == item.typeId);
                   if (particular) {
-                    item.id    = particular.id;
-                    item.value = particular.value;
-                    item.name  = particular.value ? particular.value.name : null;
-                    item.file  = new File(["foo"], item.name, { type: "text/plain" });
+                    item.id     = particular.id;
+                    item.value  = particular.value;
+                    item.name   = particular.value ? particular.value.name : null;
+                    item.file   = new File(["foo"], item.name, { type: "text/plain" });
+                    item.fileId = particular.value ? particular.value.file : null;
                   }
                 }
 
