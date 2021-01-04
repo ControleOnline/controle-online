@@ -41,7 +41,7 @@
       </q-table>
     </div>
 
-    <div class="col-12">
+    <div v-if="particulars.length > 0" class="col-12">
       <q-separator />
       <div class="row q-col-gutter-sm q-mt-md">
         <div class="col-12 q-mb-md text-h6">

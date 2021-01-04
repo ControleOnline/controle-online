@@ -1,9 +1,9 @@
 version : '3.4'
 
 services:
-  webapp:
-    image         : rchdev/frontend-genesis:1.0
-    container_name: ctr-accounting
+  contabcrm:
+    image         : rchdev/quafront-app:latest
+    container_name: contabcrm-app
     build         :
       context: ./
     environment:
