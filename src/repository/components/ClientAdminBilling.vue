@@ -192,7 +192,7 @@ export default {
 
       this.getItems()
         .then(data => {
-          this.item.billing     = data.billing;
+          this.item.billing     = (parseFloat(data.billing) + 0.001).toFixed(2);
           this.item.billingDays = data.billingDays;
           this.item.paymentTerm = data.paymentTerm;
         })
