@@ -10,7 +10,7 @@
           <div class="col-12 q-mb-md">
             <div class="row justify-end">
               <q-btn
-                label ="Adicionar"
+                :label="$t('Adicionar')"
                 icon  ="add"
                 size  ="md"
                 color ="primary"
@@ -43,16 +43,19 @@
               </q-card-section>
               <q-separator />
               <q-card-actions align="around">
-                <!--
                 <q-btn flat round dense
+                  :to   ="{
+                    name  : 'CustomersDetails',
+                    params: {
+                      id: props.row.id
+                    }
+                  }"
                   color   ="primary"
                   icon    ="edit"
-                  @click  ="editItem(props.row)"
                   :disable="props.row._bussy"
                 >
                   <q-tooltip>Editar</q-tooltip>
                 </q-btn>
-                -->
 
                 <q-btn flat round dense
                   color   ="red"
@@ -63,7 +66,7 @@
                 >
                   <q-tooltip>Eliminar</q-tooltip>
                 </q-btn>
-              </q-card-actions>             
+              </q-card-actions>
             </q-card>
           </div>
         </template>
@@ -105,29 +108,6 @@
                   :rules ="[isInvalid('email')]"
                 />
               </div>
-              <h6 class="col-xs-12 q-mt-sm q-mb-sm">Dados de usuário</h6>
-              <div class="col-xs-12 col-sm-6 q-mb-sm">
-                <q-input stack-label lazy-rules reverse-fill-mask
-                  v-model    ="item.username"
-                  type       ="text"
-                  :label     ="$t('Usuário')"
-                  placeholder="Digite seu usuário (nickname)"
-                  class      ="q-mb-md"
-                  mask       ="x"
-                  :rules     ="[isInvalid('username')]"
-                  hint       ="Use apenas letras e números sem espaços"
-                />
-              </div>
-              <div class="col-xs-12 col-sm-6 q-mb-sm">
-                <q-input stack-label lazy-rules
-                  v-model    ="item.password"
-                  type       ="password"
-                  :label     ="$t('Senha')"
-                  placeholder="Digite sua senha"
-                  :rules     ="[isInvalid('password')]"
-                  hint       ="Use seis ou mais caracteres com uma combinação de letras, números e símbolos"
-                />
-              </div>
             </div>
 
             <div class="row justify-end">
@@ -135,7 +115,7 @@
                 :loading="saving"
                 icon    ="save"
                 type    ="submit"
-                label   ="Salvar"
+                :label  ="$t('Salvar')"
                 size    ="md"
                 color   ="primary"
                 class   ="q-mt-md"
@@ -152,6 +132,7 @@
 import Api                from '../utils/api';
 import { formatDocument } from '../utils/formatters';
 import md5                from 'md5';
+import { mapGetters }     from 'vuex';
 
 export default {
   props: {
@@ -170,7 +151,7 @@ export default {
       dialog   : false,
       saving   : false,
       isLoading: false,
-      docMask  : '',
+      user     : this.$store.getters['auth/user'],
       item     : {
         name    : '',
         lastname: '',
@@ -178,6 +159,7 @@ export default {
           ddd  : '',
           phone: '',
         },
+        document: '',
         email   : '',
         username: '',
         password: '',
@@ -185,8 +167,20 @@ export default {
     };
   },
 
+  computed: {
+    ...mapGetters({
+      theCompany: 'people/currentCompany',
+    }),
+  },
+
   created() {
     this.onRequest();
+  },
+
+  watch: {
+    '$route'(to) {
+      this.$router.go(to);
+    },
   },
 
   methods: {
@@ -206,6 +200,7 @@ export default {
         method : 'PUT',
         headers: new Headers({ 'Content-Type': 'application/ld+json' }),
         body   : JSON.stringify(values),
+        params : { 'company': this.theCompany.id }
       };
 
       let endpoint = `customers/${this.id}/employees`;
@@ -247,6 +242,9 @@ export default {
     },
 
     gravatar(email) {
+      if (!email || email === null) {
+        return '';
+      }
       return 'https://www.gravatar.com/avatar/' + md5(email) + '?s=400';
     },
 
@@ -254,13 +252,22 @@ export default {
       this.$refs.myForm.validate()
         .then(success => {
           if (success) {
-            this.saving = true;
-
             let payload = {
               "name" : this.item.name,
               "alias": this.item.lastname,
               "email": this.item.email
             };
+
+            if (this.item.document.length == 11) {
+              payload['document'] = this.item.document;
+            }
+
+            if (this.item.phone.ddd.length && this.item.phone.phone.length) {
+              payload['phone'] = {
+                ddd  : this.item.phone.ddd,
+                phone: this.item.phone.phone
+              };
+            }
 
             if (this.item.username.length) {
               payload['user'] = {
@@ -269,13 +276,11 @@ export default {
               };
             }
 
+            this.saving = true;
+
             this.save(payload)
               .then (data => {
                 if (data) {
-                  this.$refs.myForm.reset();
-
-                  this.onRequest();
-
                   this.$emit('saved', data);
                 }
               })
@@ -292,7 +297,7 @@ export default {
     },
 
     removeItem(item) {
-      if (window.confirm('Tem certeza que deseja eliminar este registro?')) {
+      if (window.confirm(this.$t('Are you sure about to remove this element?'))) {
         item._bussy = true;
 
         this.delete(item.id)
