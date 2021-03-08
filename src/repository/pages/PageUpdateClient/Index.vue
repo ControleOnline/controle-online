@@ -12,10 +12,9 @@
 
     <div class="col-12">
       <q-tabs
-        :horizontal="$q.screen.gt.xs"
-        align      ="justify"
-        v-model    ="currentTab"
-        class      ="bg-white text-primary"
+        align  ="justify"
+        v-model="currentTab"
+        class  ="bg-white text-primary"
       >
         <q-tab
           name ="summary"
@@ -54,12 +53,12 @@
           label="Financeiro"
         />
         <q-tab
-          name ="orders"
-          label="Pedidos"
-        />
-        <q-tab
           name ="contracts"
           label="Contratos"
+        />
+        <q-tab v-if="client.type === 'F'"
+          name ="companies"
+          label="Empresas"
         />
       </q-tabs>
 
@@ -81,7 +80,7 @@
             }"
             @saved="(data) => {
               this.$q.notify({
-                message : 'Os dados foram salvos com sucesso',
+                message : 'Data successfully saved',
                 position: 'bottom',
                 type    : 'positive',
               });
@@ -102,7 +101,7 @@
             }"
             @saved="(data) => {
               this.$q.notify({
-                message : 'Os dados foram salvos com sucesso',
+                message : 'Data successfully saved',
                 position: 'bottom',
                 type    : 'positive',
               });
@@ -123,7 +122,7 @@
             }"
             @saved="(data) => {
               this.$q.notify({
-                message : 'Os dados foram salvos com sucesso',
+                message : 'Data successfully saved',
                 position: 'bottom',
                 type    : 'positive',
               });
@@ -144,7 +143,7 @@
             }"
             @saved="(data) => {
               this.$q.notify({
-                message : 'Os dados foram salvos com sucesso',
+                message : 'Data successfully saved',
                 position: 'bottom',
                 type    : 'positive',
               });
@@ -165,7 +164,7 @@
             }"
             @saved="(data) => {
               this.$q.notify({
-                message : 'Os dados foram salvos com sucesso',
+                message : 'Data successfully saved',
                 position: 'bottom',
                 type    : 'positive',
               });
@@ -186,7 +185,7 @@
             }"
             @saved="(data) => {
               this.$q.notify({
-                message : 'Os dados foram salvos com sucesso',
+                message : 'Data successfully saved',
                 position: 'bottom',
                 type    : 'positive',
               });
@@ -196,19 +195,18 @@
 
         <q-tab-panel name="documents">
           <ClientAdminDocuments
-            :api     ="api"
-            :id      ="clientId"
-            :customer="client"
-            @error   ="(error) => {
+            :api  ="api"
+            :id   ="clientId"
+            @error="(error) => {
               this.$q.notify({
                 message : error.message,
                 position: 'bottom',
                 type    : 'negative',
               });
             }"
-            @saved   ="(data) => {
+            @saved="(data) => {
               this.$q.notify({
-                message : 'Os dados foram salvos com sucesso',
+                message : 'Data successfully saved',
                 position: 'bottom',
                 type    : 'positive',
               });
@@ -229,10 +227,17 @@
             }"
             @saved="(data) => {
               this.$q.notify({
-                message : 'Os dados foram salvos com sucesso',
+                message : 'Data successfully saved',
                 position: 'bottom',
                 type    : 'positive',
               });
+
+              if (data.id) {
+                this.$router.push({
+                  name  : 'ClientsDetails',
+                  params: { id: data.id }
+                });
+              }
             }"
           />
         </q-tab-panel>
@@ -250,28 +255,7 @@
             }"
             @saved="(data) => {
               this.$q.notify({
-                message : 'Os dados foram salvos com sucesso',
-                position: 'bottom',
-                type    : 'positive',
-              });
-            }"
-          />
-        </q-tab-panel>
-
-        <q-tab-panel name="orders">
-          <CustomerOrders
-            :api  ="api"
-            :id   ="clientId"
-            @error="(error) => {
-              this.$q.notify({
-                message : error.message,
-                position: 'bottom',
-                type    : 'negative',
-              });
-            }"
-            @saved="(data) => {
-              this.$q.notify({
-                message : 'Os dados foram salvos com sucesso',
+                message : 'Data successfully saved',
                 position: 'bottom',
                 type    : 'positive',
               });
@@ -292,10 +276,38 @@
             }"
             @saved="(data) => {
               this.$q.notify({
-                message : 'Os dados foram salvos com sucesso',
+                message : 'Data successfully saved',
                 position: 'bottom',
                 type    : 'positive',
               });
+            }"
+          />
+        </q-tab-panel>
+
+        <q-tab-panel name="companies">
+          <CustomerCompany
+            :api  ="api"
+            :id   ="clientId"
+            @error="(error) => {
+              this.$q.notify({
+                message : error.message,
+                position: 'bottom',
+                type    : 'negative',
+              });
+            }"
+            @saved="(data) => {
+              this.$q.notify({
+                message : 'Data successfully saved',
+                position: 'bottom',
+                type    : 'positive',
+              });
+
+              if (data.id) {
+                this.$router.push({
+                  name  : 'ClientsDetails',
+                  params: { id: data.id }
+                });
+              }
             }"
           />
         </q-tab-panel>
@@ -314,10 +326,10 @@ import ClientAdminPhones    from '../../components/ClientAdminPhones';
 import ClientAdminDocuments from '../../components/ClientAdminDocuments';
 import ClientAdminEmployees from '../../components/ClientAdminEmployees';
 import ClientAdminBilling   from '../../components/ClientAdminBilling';
-import CustomerOrders       from '../../components/CustomerOrders';
 import CustomerContracts    from '../../components/CustomerContracts';
 import CustomerSummary      from '../../components/CustomerSummary';
 import CustomerSalesman     from '../../components/CustomerSalesman';
+import CustomerCompany      from '../../components/CustomerCompany';
 
 export default {
   props: {
@@ -327,7 +339,7 @@ export default {
     config: {
       type    : Object,
       required: true
-    },   
+    },
   },
 
   components: {
@@ -338,10 +350,10 @@ export default {
     ClientAdminDocuments,
     ClientAdminEmployees,
     ClientAdminBilling  ,
-    CustomerOrders      ,
     CustomerContracts   ,
     CustomerSummary     ,
     CustomerSalesman    ,
+    CustomerCompany     ,
   },
 
   created() {
