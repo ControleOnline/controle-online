@@ -195,8 +195,9 @@
 
         <q-tab-panel name="documents">
           <ClientAdminDocuments
-            :api  ="api"
-            :id   ="clientId"
+            :api     ="api"
+            :id      ="clientId"
+            :customer="client"
             @error="(error) => {
               this.$q.notify({
                 message : error.message,
