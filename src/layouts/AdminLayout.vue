@@ -123,45 +123,6 @@
             <q-icon size="35px" name="library_books" color="orange" />
             <div class="GPL__side-btn__label">Contratos</div>
           </q-btn>
-
-          <q-btn
-            flat
-            stack
-            no-caps
-            size="26px"
-            color="white"
-            class="GPL__side-btn"
-            :to="{ name: 'SalesOrderIndex' }"
-          >
-            <q-icon size="35px" name="shopping_cart" color="orange" />
-            <div class="GPL__side-btn__label">Pedidos de Venda</div>
-          </q-btn>
-
-          <q-btn v-if="currentCompany && currentCompany.commission > 0"
-            flat
-            stack
-            no-caps
-            size="26px"
-            class="GPL__side-btn"
-            color="white"
-            :to="{ name: 'ComissionIndex' }"
-          >
-            <q-icon size="35px" name="attach_money" color="orange" />
-            <div class="GPL__side-btn__label">Comissões</div>
-          </q-btn>
-
-          <q-btn
-            flat
-            stack
-            no-caps
-            size="26px"
-            class="GPL__side-btn"
-            color="white"
-            :to="{ name: 'News' }"
-          >
-            <q-icon size="35px" name="featured_play_list" color="orange" />
-            <div class="GPL__side-btn__label">Artigos</div>
-          </q-btn>
         </div>
       </q-scroll-area>
     </q-drawer>
@@ -291,7 +252,7 @@ export default {
 .logo-container
   width: 100%
 .main-logo,.logo-container a,.current-logo,.current-logo-container
-  margin: auto  
+  margin: auto
   margin-top: 3px
   min-height: 50px
   height: 50px
