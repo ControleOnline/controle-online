@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-12 q-mt-md">
-      <q-table flat hide-pagination
+      <q-table flat
         :data           ="items"
         :columns        ="settings.columns"
         :visible-columns="settings.visibleColumns"
@@ -9,10 +9,13 @@
         :loading        ="isLoading"
       >
         <template v-slot:top>
-          <div class="col-12 q-mb-md">
+          <div class="col-3 q-mb-md text-h6">
+            Lista de documentos
+          </div>
+          <div class="col-9 q-mb-md">
             <div class="row justify-end">
               <q-btn
-                label ="Adicionar"
+                :label="$t('Adicionar')"
                 icon  ="add"
                 size  ="md"
                 color ="primary"
@@ -45,7 +48,7 @@
       <q-separator />
       <div class="row q-col-gutter-sm q-mt-md">
         <div class="col-12 q-mb-md text-h6">
-          Arquivos <span class="text-caption text-weight-light">{{ fileing ? 'Carregando...' : '' }}</span>
+          {{ $t('Arquivos') }} <span class="text-caption text-weight-light">{{ fileing ? `${$t('loading')}...` : '' }}</span>
         </div>
         <div
           v-for="(field, index) in particulars"
@@ -105,7 +108,7 @@
               <template v-slot:no-option>
                 <q-item>
                   <q-item-section class="text-grey">
-                  Sem resultados
+                  {{ $t('No results') }}
                   </q-item-section>
                 </q-item>
               </template>
@@ -124,7 +127,7 @@
                 :loading="saving"
                 icon    ="save"
                 type    ="submit"
-                label   ="Salvar"
+                :label  ="$t('Save')"
                 size    ="md"
                 color   ="primary"
                 class   ="q-mt-md"
@@ -188,10 +191,10 @@ Object.freeze(SETTINGS);
 
 export default {
   props: {
-    id: {
+    id      : {
       required: true,
     },
-    api: {
+    api     : {
       type    : Api,
       required: true
     },
@@ -203,18 +206,18 @@ export default {
 
   data() {
     return {
-      items      : [],
-      dialog     : false,
-      settings   : SETTINGS,
-      saving     : false,
-      isLoading  : false,
-      fileing    : false,
-      docMask    : '',
-      particulars: [],
-      item       : {
+      items    : [],
+      dialog   : false,
+      settings : SETTINGS,
+      saving   : false,
+      isLoading: false,
+      fileing  : false,
+      docMask  : '',
+      item     : {
         type    : null,
         document: null,
-      }
+      },
+      particulars: [],
     };
   },
 
@@ -242,7 +245,8 @@ export default {
   methods: {
     // store method
     getItems() {
-      return this.api.private(`customers/${this.id}/documents`)
+      let endpoint = `customers/${this.id}/documents`;
+      return this.api.private(endpoint)
         .then(response => response.json())
         .then(result => {
           return result.response.data;
@@ -257,7 +261,8 @@ export default {
         body   : JSON.stringify(values),
       };
 
-      return this.api.private(`customers/${this.id}/documents`, options)
+      let endpoint = `customers/${this.id}/documents`;
+      return this.api.private(endpoint, options)
         .then(response => response.json())
         .then(data => {
           if (data.response) {
@@ -279,7 +284,8 @@ export default {
         body   : JSON.stringify({ id }),
       };
 
-      return this.api.private(`customers/${this.id}/documents`, options)
+      let endpoint = `customers/${this.id}/documents`;
+      return this.api.private(endpoint, options)
         .then(response => response.json())
         .then(data => {
           if (data.response) {
@@ -371,7 +377,7 @@ export default {
         .then(response => response.blob())
         .then((blob) => {
           if (!exportFile(file.name, blob, blob.type)) {
-            throw new Error('Erro no download');
+            throw new Error(this.$t('Download error'));
           }
         });
     },
@@ -408,21 +414,21 @@ export default {
     },
 
     removeItem(item) {
-      if (window.confirm('Tem certeza que deseja eliminar este registro?')) {
+      if (window.confirm(this.$t('Tem certeza que deseja eliminar este registro?'))) {
         item._bussy = true;
 
         this.delete(item.id)
-          .then(data => {
-            if (data) {
-              this.cleanItem(item.id);
-            }
-          })
-          .catch(error => {
-            this.$emit('error', { message: error.message });
-          })
-          .finally(() => {
-            item._bussy = false;
-          });
+        .then (data => {
+          if (data) {
+            this.cleanItem(item.id);
+          }
+        })
+        .catch(error => {
+          this.$emit('error', { message: error.message });
+        })
+        .finally(() => {
+          item._bussy = false;
+        });
       }
     },
 
@@ -433,7 +439,7 @@ export default {
     },
 
     removeFile(data) {
-      if (window.confirm('Tem certeza que deseja eliminar este arquivo?')) {
+      if (window.confirm(this.$t('Tem certeza que deseja eliminar este arquivo?'))) {
         data._isDelet = true;
 
         this.deleteFile(data.id)
@@ -488,13 +494,13 @@ export default {
     },
 
     loadParticulars() {
-      this.fileing = true;
-
       this.getParticulars()
         .then(types => {
           if (!types.length) {
             return;
           }
+
+          this.fileing = true;
 
           this.getFiles()
             .then(files => {
@@ -506,7 +512,7 @@ export default {
                   typeId  : type['@id'].replace(/\D/g, ''),
                   label   : type.typeValue,
                   value   : null,
-                  required: type.required === null ? false : ((type.required.split(':')).includes('clients')),
+                  required: type.required === null ? false : ((type.required.split(':')).includes('customers')),
                   type    : type.fieldType,
                   file    : null,
                   name    : null,
@@ -577,7 +583,7 @@ export default {
     isInvalid(key) {
       return val => {
         if (!(val && val.length > 0))
-          return 'Este campo é obrigatório';
+          return this.$t('messages.fieldRequired');
 
         return true;
       };
