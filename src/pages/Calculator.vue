@@ -64,21 +64,29 @@
         </q-card-section>
         <q-card-section class="q-pt-none">
           <div class="q-gutter-md q-mt-md">
-            <q-select outlined dense
+            <q-select outlined dense emit-value map-options
               v-model ="products[0].plan"
               :options="options"
+              :rules  ="[val => val !== null || 'Selecione um tipo']"
             />
-            <q-input outlined dense
+            <q-input outlined dense reverse-fill-mask
               v-model    ="products[0].socios"
               placeholder="Nº Socios"
+              mask       ="#"
+              :rules     ="[val => val !== null || 'Informe um valor']"
             />
-            <q-input outlined dense
+            <q-input outlined dense reverse-fill-mask
               v-model    ="products[0].funcionarios"
               placeholder="Nº Funcionários"
+              mask       ="#"
+              :rules     ="[val => val !== null || 'Informe um valor']"
             />
-            <q-input outlined dense
+            <q-input outlined dense reverse-fill-mask
+              prefix     ="R$"
               v-model    ="products[0].faturamento"
               placeholder="Faturamento"
+              mask       ="#,##"
+              :rules     ="[val => val !== null || 'Informe um valor']"
             />
             <div class="text-center text-h4">
               {{ `R$${products[0].price}` }}
@@ -101,24 +109,32 @@
         </q-card-section>
         <q-card-section class="q-pt-none">
           <div class="q-gutter-md q-mt-md">
-            <q-select outlined dense
+            <q-select outlined dense emit-value map-options
               v-model ="products[1].plan"
               :options="options"
+              :rules  ="[val => val !== null || 'Selecione um tipo']"
             />
-            <q-input outlined dense
+            <q-input outlined dense reverse-fill-mask
               v-model    ="products[1].socios"
               placeholder="Nº Socios"
+              mask       ="#"
+              :rules     ="[val => val !== null || 'Informe um valor']"
             />
-            <q-input outlined dense
+            <q-input outlined dense reverse-fill-mask
               v-model    ="products[1].funcionarios"
               placeholder="Nº Funcionários"
+              mask       ="#"
+              :rules     ="[val => val !== null || 'Informe um valor']"
             />
-            <q-input outlined dense
+            <q-input outlined dense reverse-fill-mask
+              prefix     ="R$"
               v-model    ="products[1].faturamento"
               placeholder="Faturamento"
+              mask       ="#,##"
+              :rules     ="[val => val !== null || 'Informe um valor']"
             />
             <div class="text-center text-h4">
-              {{ `R$${products[0].price}` }}
+              {{ `R$${products[1].price}` }}
             </div>
           </div>
         </q-card-section>
@@ -138,24 +154,32 @@
         </q-card-section>
         <q-card-section class="q-pt-none">
           <div class="q-gutter-md q-mt-md">
-            <q-select outlined dense
+            <q-select outlined dense emit-value map-options
               v-model ="products[2].plan"
               :options="options"
+              :rules  ="[val => val !== null || 'Selecione um tipo']"
             />
-            <q-input outlined dense
+            <q-input outlined dense reverse-fill-mask
               v-model    ="products[2].socios"
               placeholder="Nº Socios"
+              mask       ="#"
+              :rules     ="[val => val !== null || 'Informe um valor']"
             />
-            <q-input outlined dense
+            <q-input outlined dense reverse-fill-mask
               v-model    ="products[2].funcionarios"
               placeholder="Nº Funcionários"
+              mask       ="#"
+              :rules     ="[val => val !== null || 'Informe um valor']"
             />
-            <q-input outlined dense
+            <q-input outlined dense reverse-fill-mask
+              prefix     ="R$"
               v-model    ="products[2].faturamento"
               placeholder="Faturamento"
+              mask       ="#,##"
+              :rules     ="[val => val !== null || 'Informe um valor']"
             />
             <div class="text-center text-h4">
-              {{ `R$${products[0].price}` }}
+              {{ `R$${products[2].price}` }}
             </div>
           </div>
         </q-card-section>
@@ -237,7 +261,7 @@ export default {
 .bg-page {
   background-color   : #e46a32;
   background         : url('~assets/calculator_bg.jpg');
-  background-position: center !important;
+  background-position: center center !important;
   background-repeat  : no-repeat !important;
   background-size    : cover !important;
   -webkit-transition : background opacity 3s ease-in-out;
