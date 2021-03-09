@@ -16,18 +16,16 @@
     <div class="q-pa-md row justify-center q-gutter-md">
       <q-card class="my-card">
         <q-card-section class="bg-primary text-white">
-          <div class="text-h6 text-center">MEI SERVIÇOS</div>
+          <div class="card-header">MEI SERVIÇOS</div>
         </q-card-section>
-        <q-separator />
         <q-card-section class="q-pt-none">
-          <ul>
+          <ul class="q-pl-md">
             <li style="text-align: left;">1 Funcionário</li>
             <li style="text-align: left;">Faturamento até R$ 6.750/mês</li>
             <li style="text-align: left;">Sistema Financeiro: Básico</li>
             <li style="text-align: left;">Suporte MEI</li>
           </ul>
         </q-card-section>
-        <q-separator />
         <q-card-actions align="around">
           <q-btn unelevated rounded
             class="full-width text-purple"
@@ -40,18 +38,16 @@
 
       <q-card class="my-card">
         <q-card-section class="bg-primary text-white">
-          <div class="text-h6 text-center">MEI SERVIÇOS E COMÉRCIO</div>
+          <div class="card-header">MEI SERVIÇOS E COMÉRCIO</div>
         </q-card-section>
-        <q-separator />
         <q-card-section class="q-pt-none">
-          <ul>
+          <ul class="q-pl-md">
             <li style="text-align: left;">1 Funcionário</li>
             <li style="text-align: left;">Faturamento até R$ 6.750/mês</li>
             <li style="text-align: left;">Sistema Financeiro: Básico</li>
             <li style="text-align: left;">Suporte MEI</li>
           </ul>
         </q-card-section>
-        <q-separator />
         <q-card-actions align="around">
           <q-btn unelevated rounded
             class="full-width text-purple"
@@ -64,9 +60,8 @@
 
       <q-card class="my-card">
         <q-card-section class="bg-primary text-white">
-          <div class="text-h6 text-center">SIMPLES SERVIÇOS</div>
+          <div class="card-header">SIMPLES SERVIÇOS</div>
         </q-card-section>
-        <q-separator />
         <q-card-section class="q-pt-none">
           <div class="q-gutter-md q-mt-md">
             <q-select outlined dense
@@ -90,7 +85,6 @@
             </div>
           </div>
         </q-card-section>
-        <q-separator />
         <q-card-actions align="around">
           <q-btn unelevated rounded
             class="full-width text-purple"
@@ -103,9 +97,8 @@
 
       <q-card class="my-card">
         <q-card-section class="bg-primary text-white">
-          <div class="text-h6 text-center">SIMPLES SERVIÇOS E COMÉRCIO</div>
+          <div class="card-header">SIMPLES SERVIÇOS E COMÉRCIO</div>
         </q-card-section>
-        <q-separator />
         <q-card-section class="q-pt-none">
           <div class="q-gutter-md q-mt-md">
             <q-select outlined dense
@@ -129,7 +122,6 @@
             </div>
           </div>
         </q-card-section>
-        <q-separator />
         <q-card-actions align="around">
           <q-btn unelevated rounded
             class="full-width text-purple"
@@ -142,9 +134,8 @@
 
       <q-card class="my-card">
         <q-card-section class="bg-primary text-white">
-          <div class="text-h6 text-center">LUCRO PRESUMIDO SERVIÇOS</div>
+          <div class="card-header">LUCRO PRESUMIDO SERVIÇOS</div>
         </q-card-section>
-        <q-separator />
         <q-card-section class="q-pt-none">
           <div class="q-gutter-md q-mt-md">
             <q-select outlined dense
@@ -168,7 +159,6 @@
             </div>
           </div>
         </q-card-section>
-        <q-separator />
         <q-card-actions align="around">
           <q-btn unelevated rounded
             class="full-width text-purple"
@@ -257,7 +247,24 @@ export default {
 }
 
 .my-card {
-  width    : 100%;
-  max-width: 230px;
+  width          : 100%;
+  max-width      : 230px;
+  display        : flex;
+  flex-direction : column;
+  justify-content: space-between;
+
+  & li {
+    font-size: 16px;
+  }
+
+  & .card-header {
+    display        : flex;
+    justify-content: center;
+    align-content  : center;
+    flex-direction : column;
+    min-height     : 50px;
+    text-align     : center;
+    font-weight    : bold;
+  }
 }
 </style>
