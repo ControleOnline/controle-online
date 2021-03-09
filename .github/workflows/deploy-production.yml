@@ -5,40 +5,40 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:              
+    steps:
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
           node-version: 12.18.1
       - name: Check out Git repository
-        uses: actions/checkout@v1        
-      - name: Building the project                                
-        run: |              
+        uses: actions/checkout@v1
+      - name: Building the project
+        run: |
               cd /home/runner/work/accounting/accounting
               echo "export const ENTRYPOINT_LOCAL = 'https://api.controleonline.com'" > ./src/config/entrypoint.local.js
-              npm install              
+              npm install
               npx quasar build
       - name: Copy to Controle Online
         uses: horochx/deploy-via-scp@master
         with:
-          local: /home/runner/work/accounting/accounting/dist/spa 
+          local: /home/runner/work/accounting/accounting/dist/spa
           remote: /home/control2/sistemas/controleonline/accounting/dist
           host: ssh.controleonline.com
-          port: 2222
+          port: 22212
           user: control2
-          key: ${{ secrets.CONTROLEONLINE }}          
-      - name: Building the project                                
-        run: |              
+          key: ${{ secrets.CONTROLEONLINE }}
+      - name: Building the project
+        run: |
               cd /home/runner/work/accounting/accounting
               echo "export const ENTRYPOINT_LOCAL = 'https://api.contabion.com.br'" > ./src/config/entrypoint.local.js
-              npm install              
-              npx quasar build      
+              npm install
+              npx quasar build
       - name: Copy to Contabion
         uses: horochx/deploy-via-scp@master
         with:
-          local: /home/runner/work/accounting/accounting/dist/spa 
+          local: /home/runner/work/accounting/accounting/dist/spa
           remote: /home/contabio/sistemas/accounting/dist
           host: ssh.digital17.cloudserver8.com
-          port: 2222
+          port: 22217
           user: contabio
-          key: ${{ secrets.CONTABION }}      
+          key: ${{ secrets.CONTABION }}
