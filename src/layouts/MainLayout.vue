@@ -7,27 +7,27 @@
 </template>
 
 <script>
-import MyCompanies from "../components/common/MyCompanies";
+import MyCompanies                from "../components/common/MyCompanies";
 import { mapActions, mapGetters } from "vuex";
-import { fetch } from "../boot/myapi";
-import Analytics from "../utils/analytics";
+import { fetch }                  from "../boot/myapi";
 
 export default {
-  name: "MainLayout",  
-  components: {},
+  name   : "MainLayout",
+
   methods: {
     ...mapActions({
-      config: "config/appConfig",
       peopleDefaultCompany: "people/defaultCompany",
     }),
+
     style() {
-      console.log(this.defaultCompany);
-      if (this.defaultCompany && this.defaultCompany.background){
+      if (this.defaultCompany && this.defaultCompany.background) {
         return "background: #182840 url('"+this.defaultCompany.background+"')";
-      }else{
+      }
+      else {
         return "background: #182840";
       }
-    },    
+    },
+
     discoveryDefaultCompany() {
       this.peopleDefaultCompany().then((response) => {
         let data = [];
@@ -50,28 +50,19 @@ export default {
               background: background || null
             });
           }
-        }        
+        }
         this.defaultCompany = data[0];
       });
-    },    
+    },
   },
-  mounted() {    
-    this.config().then((config) => {
-      if (config.gtmId !== null)
-        Analytics.init({
-          gtmId: config.gtmId,
-        });
-    });
+
+  mounted() {
     this.discoveryDefaultCompany()
   },
-  computed: {
-    ...mapGetters({
-      cfLoading: "config/isLoading",
-    })    
-  },
+
   data() {
     return {
-      defaultCompany: [],  
+      defaultCompany: [],
     };
   },
 };
@@ -79,13 +70,13 @@ export default {
 
 <style lang="scss">
 .bg-image {
-  background-color: #182840;
+  background-color   : #182840;
   background-position: center !important;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
-  -webkit-transition: background opacity 3s ease-in-out;
-  -moz-transition: background opacity 3s ease-in-out;
-  -o-transition: background opacity 3s ease-in-out;
-  transition: background opacity 3s ease-in-out;
+  background-repeat  : no-repeat !important;
+  background-size    : cover !important;
+  -webkit-transition : background opacity 3s ease-in-out;
+  -moz-transition    : background opacity 3s ease-in-out;
+  -o-transition      : background opacity 3s ease-in-out;
+  transition         : background opacity 3s ease-in-out;
 }
 </style>
