@@ -68,18 +68,21 @@
               v-model ="products[0].plan"
               :options="options"
               :rules  ="[val => val !== null || 'Selecione um tipo']"
+              @input  ="calculate(0)"
             />
             <q-input outlined dense reverse-fill-mask
               v-model    ="products[0].socios"
               placeholder="Nº Socios"
               mask       ="#"
               :rules     ="[val => val !== null || 'Informe um valor']"
+              @input     ="calculate(0)"
             />
             <q-input outlined dense reverse-fill-mask
               v-model    ="products[0].funcionarios"
               placeholder="Nº Funcionários"
               mask       ="#"
               :rules     ="[val => val !== null || 'Informe um valor']"
+              @input     ="calculate(0)"
             />
             <q-input outlined dense reverse-fill-mask
               prefix     ="R$"
@@ -87,9 +90,10 @@
               placeholder="Faturamento"
               mask       ="#,##"
               :rules     ="[val => val !== null || 'Informe um valor']"
+              @input     ="calculate(0)"
             />
             <div class="text-center text-h4">
-              {{ `R$${products[0].price}` }}
+              {{ products[0].price }}
             </div>
           </div>
         </q-card-section>
@@ -113,18 +117,21 @@
               v-model ="products[1].plan"
               :options="options"
               :rules  ="[val => val !== null || 'Selecione um tipo']"
+              @input  ="calculate(1)"
             />
             <q-input outlined dense reverse-fill-mask
               v-model    ="products[1].socios"
               placeholder="Nº Socios"
               mask       ="#"
               :rules     ="[val => val !== null || 'Informe um valor']"
+              @input     ="calculate(1)"
             />
             <q-input outlined dense reverse-fill-mask
               v-model    ="products[1].funcionarios"
               placeholder="Nº Funcionários"
               mask       ="#"
               :rules     ="[val => val !== null || 'Informe um valor']"
+              @input     ="calculate(1)"
             />
             <q-input outlined dense reverse-fill-mask
               prefix     ="R$"
@@ -132,9 +139,10 @@
               placeholder="Faturamento"
               mask       ="#,##"
               :rules     ="[val => val !== null || 'Informe um valor']"
+              @input     ="calculate(1)"
             />
             <div class="text-center text-h4">
-              {{ `R$${products[1].price}` }}
+              {{ products[1].price }}
             </div>
           </div>
         </q-card-section>
@@ -158,18 +166,21 @@
               v-model ="products[2].plan"
               :options="options"
               :rules  ="[val => val !== null || 'Selecione um tipo']"
+              @input  ="calculate(2)"
             />
             <q-input outlined dense reverse-fill-mask
               v-model    ="products[2].socios"
               placeholder="Nº Socios"
               mask       ="#"
               :rules     ="[val => val !== null || 'Informe um valor']"
+              @input     ="calculate(2)"
             />
             <q-input outlined dense reverse-fill-mask
               v-model    ="products[2].funcionarios"
               placeholder="Nº Funcionários"
               mask       ="#"
               :rules     ="[val => val !== null || 'Informe um valor']"
+              @input     ="calculate(2)"
             />
             <q-input outlined dense reverse-fill-mask
               prefix     ="R$"
@@ -177,9 +188,10 @@
               placeholder="Faturamento"
               mask       ="#,##"
               :rules     ="[val => val !== null || 'Informe um valor']"
+              @input     ="calculate(2)"
             />
             <div class="text-center text-h4">
-              {{ `R$${products[2].price}` }}
+              {{ products[2].price }}
             </div>
           </div>
         </q-card-section>
@@ -199,6 +211,7 @@
 </template>
 
 <script>
+import { formatMoney  } from './../utils/formatter';
 
 const OPTIONS = [
   {
@@ -223,6 +236,27 @@ const OPTIONS = [
   },
 ];
 
+const PLANS = {
+  'simples_basico'  : {
+    'bronze': 69.9,
+  	'prata' : 114.9,
+  	'ouro'  : 144.9,
+  	'mensal': 89.9
+  },
+  'simples_comercio': {
+    'bronze': 99.9,
+  	'prata' : 149.9,
+  	'ouro'  : 209.9,
+  	'mensal': 119.9
+  },
+  'lucro_presumido' : {
+    'bronze': 199.9,
+  	'prata' : 244.9,
+  	'ouro'  : 274.9,
+  	'mensal': 209.9
+  },
+};
+
 Object.freeze(OPTIONS);
 
 export default {
@@ -234,26 +268,84 @@ export default {
           socios      : null,
           funcionarios: null,
           faturamento : null,
-          price       : 0
+          price       : 'R$ 0'
         },
         {
           plan        : OPTIONS[0],
           socios      : null,
           funcionarios: null,
           faturamento : null,
-          price       : 0
+          price       : 'R$ 0'
         },
         {
           plan        : OPTIONS[0],
           socios      : null,
           funcionarios: null,
           faturamento : null,
-          price       : 0
+          price       : 'R$ 0'
         },
       ],
       options: OPTIONS
     };
   },
+
+  methods: {
+    calculate(index) {
+      let total        = 0;
+      let socios       = 0;
+      let funcionarios = 0;
+      let faturamento  = 0;
+
+      if (this.products[index].socios !== null && this.products[index].socios.length) {
+        socios = parseFloat(this.products[index].socios);
+      }
+
+      if (this.products[index].funcionarios !== null && this.products[index].funcionarios.length) {
+        funcionarios = parseFloat(this.products[index].funcionarios);
+      }
+
+      if (this.products[index].faturamento !== null && this.products[index].faturamento.length) {
+        faturamento = parseFloat(this.products[index].faturamento.replace(",", "."));
+      }
+
+      if (this.products[index].plan !== null) {
+        switch(index) {
+          case 0:
+            total = PLANS['simples_basico'  ][this.products[index].plan];
+          break;
+          case 1:
+            total = PLANS['simples_comercio'][this.products[index].plan];
+          break;
+          case 2:
+            total = PLANS['lucro_presumido' ][this.products[index].plan];
+          break;
+        }
+
+        // add socios
+
+        if (socios > 2) {
+          total = total + (socios * 28);
+        }
+
+        // add funcionarios
+
+        total = total + (funcionarios * 28);
+
+        // add faturamento
+
+        if (faturamento > 30000) {
+          total = total + ((Math.round((faturamento - 30000) / 5000)) * 20);
+        }
+      }
+
+      if (total > 0) {
+        this.products[index].price = formatMoney(total, 'BRL', 'pt-br');
+      }
+      else {
+        this.products[index].price = 'R$ 0';
+      }
+    }
+  }
 }
 </script>
 
