@@ -113,7 +113,26 @@
             }"
           >
             <q-icon size="35px" name="person" color="orange" />
-            <div class="GPL__side-btn__label">Informações básicas</div>
+            <div class="GPL__side-btn__label">
+              {{ $t('Informações básicas') }}
+            </div>
+          </q-btn>
+
+          <q-btn
+            :flat   ="true"
+            :stack  ="true"
+            :no-caps="true"
+            size    ="26px"
+            class   ="GPL__side-btn"
+            color   ="white"
+            :to     ="{
+              name  : 'PlansIndex',
+            }"
+          >
+            <q-icon size="35px" name="person" color="orange" />
+            <div class="GPL__side-btn__label">
+              {{ $t('Planos') }}
+            </div>
           </q-btn>
 
           <q-btn
@@ -126,7 +145,9 @@
             :to     ="{ name: 'ClientsIndex' }"
           >
             <q-icon size="35px" name="person" color="orange" />
-            <div class="GPL__side-btn__label">Clientes</div>
+            <div class="GPL__side-btn__label">
+              {{ $t('Clientes') }}
+            </div>
           </q-btn>
 
           <q-btn
@@ -139,7 +160,9 @@
             :to     ="{ name: 'ContractIndex' }"
           >
             <q-icon size="35px" name="library_books" color="orange" />
-            <div class="GPL__side-btn__label">Contratos</div>
+            <div class="GPL__side-btn__label">
+              {{ $t('Contratos') }}
+            </div>
           </q-btn>
         </div>
       </q-scroll-area>

@@ -93,6 +93,27 @@ const routes = [
     ]
   },
   {
+    path     : '/planos/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'PlansIndex',
+        path     : '',
+        component: () => import('pages/Plans/Index.vue'),
+      },
+      {
+        name     : 'PlansDetails',
+        path     : ':id',
+        component: () => import('pages/Plans/Details.vue')
+      },
+      {
+        name     : 'PlansCreate',
+        path     : 'novo',
+        component: () => import('pages/Plans/Create.vue')
+      },
+    ]
+  },
+  {
     path: '*', redirect: '/finance/receive'
   },
 ]
