@@ -109,7 +109,7 @@
               name  : 'DashboardIndex',
             }"
           >
-            <q-icon size="35px" name="person" color="orange" />
+            <q-icon size="35px" name="dashboard" color="orange" />
             <div class="GPL__side-btn__label">
               {{ $t('Dashboard') }}
             </div>
@@ -129,7 +129,7 @@
               }
             }"
           >
-            <q-icon size="35px" name="person" color="orange" />
+            <q-icon size="35px" name="account_circle" color="orange" />
             <div class="GPL__side-btn__label">
               {{ $t('Informações básicas') }}
             </div>
@@ -146,7 +146,7 @@
               name  : 'PlansIndex',
             }"
           >
-            <q-icon size="35px" name="person" color="orange" />
+            <q-icon size="35px" name="table_view" color="orange" />
             <div class="GPL__side-btn__label">
               {{ $t('Planos') }}
             </div>
@@ -163,7 +163,7 @@
               name  : 'StepsRegistration',
             }"
           >
-            <q-icon size="35px" name="person" color="orange" />
+            <q-icon size="35px" name="list" color="orange" />
             <div class="GPL__side-btn__label">
               {{ $t('Checklists') }}
             </div>

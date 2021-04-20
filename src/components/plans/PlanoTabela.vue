@@ -9,18 +9,19 @@
       >
         <template v-slot:body="props">
           <q-tr :props="props">
-            <q-td key="id" :props="props">
-              <q-btn outline dense
+            <q-td key="name" :props="props">{{ props.row.name }}</q-td>
+            <q-td auto-width>
+              <q-btn flat round dense
+                color ="primary"
+                icon  ="edit"
                 :to   ="{
                   name  : 'PlansDetails',
                   params: {
                     id: props.row.id
                   }
                 }"
-                :label="props.row.id"
               />
             </q-td>
-            <q-td key="name" :props="props">{{ props.row.name }}</q-td>
             <q-td auto-width>
               <q-btn flat round dense
                 color   ="red"
@@ -43,16 +44,14 @@ import { mapActions, mapGetters } from 'vuex';
 const SETTINGS = {
   columns       : [
     {
-      name : 'id',
-      field: row => row.id,
-      align: 'left',
-      label: 'ID'
-    },
-    {
       name : 'name',
       field: row => row.name,
       align: 'left',
       label: 'Nome'
+    },
+    {
+      name : 'id',
+      field: row => row.id,
     },
     { name: 'action' },
   ],
