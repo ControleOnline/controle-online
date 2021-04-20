@@ -82,6 +82,17 @@ const routes = [
     ]
   },
   {
+    path     : '/infos/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'BasicInfoIndex',
+        path     : ':id',
+        component: () => import('pages/BasicInfo/Index.vue')
+      },
+    ]
+  },
+  {
     path: '*', redirect: '/finance/receive'
   },
 ]

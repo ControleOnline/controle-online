@@ -99,26 +99,44 @@
         </q-toolbar>
         <div class="q-pt-xl q-px-sm column">
           <q-btn
-            flat
-            stack
-            no-caps
-            size="26px"
-            class="GPL__side-btn"
-            color="white"
-            :to="{ name: 'ClientsIndex' }"
+            :flat   ="true"
+            :stack  ="true"
+            :no-caps="true"
+            size    ="26px"
+            class   ="GPL__side-btn"
+            color   ="white"
+            :to     ="{
+              name  : 'BasicInfoIndex',
+              params: {
+                id: user.people ? user.people : null
+              }
+            }"
+          >
+            <q-icon size="35px" name="person" color="orange" />
+            <div class="GPL__side-btn__label">Informações básicas</div>
+          </q-btn>
+
+          <q-btn
+            :flat   ="true"
+            :stack  ="true"
+            :no-caps="true"
+            size    ="26px"
+            class   ="GPL__side-btn"
+            color   ="white"
+            :to     ="{ name: 'ClientsIndex' }"
           >
             <q-icon size="35px" name="person" color="orange" />
             <div class="GPL__side-btn__label">Clientes</div>
           </q-btn>
 
           <q-btn
-            flat
-            stack
-            no-caps
-            size="26px"
-            class="GPL__side-btn"
-            color="white"
-            :to="{ name: 'ContractIndex' }"
+            :flat   ="true"
+            :stack  ="true"
+            :no-caps="true"
+            size    ="26px"
+            class   ="GPL__side-btn"
+            color   ="white"
+            :to     ="{ name: 'ContractIndex' }"
           >
             <q-icon size="35px" name="library_books" color="orange" />
             <div class="GPL__side-btn__label">Contratos</div>
@@ -134,11 +152,10 @@
 </template>
 
 <script>
-import MyCompanies from "../components/common/MyCompanies";
-import md5 from "md5";
+import MyCompanies                from "../components/common/MyCompanies";
+import md5                        from "md5";
 import { mapActions, mapGetters } from "vuex";
-import Analytics from "../utils/analytics";
-import { LocalStorage } from "quasar";
+import { LocalStorage }           from "quasar";
 
 export default {
   name: "AdminLayout",
@@ -149,8 +166,8 @@ export default {
 
   data() {
     return {
-      defaultCompany: [],
-      leftDrawerOpen: this.$q.screen.gt.sm,
+      defaultCompany : [],
+      leftDrawerOpen : this.$q.screen.gt.sm,
       companySelected: -1,
     };
   },
@@ -161,10 +178,6 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      cfLoading: "config/isLoading",
-    }),
-
     user() {
       return this.$store.getters["auth/user"] || {};
     },
@@ -184,25 +197,14 @@ export default {
     },
   },
 
-  mounted() {
-    this.config().then((config) => {
-      if (config.gtmId !== null)
-        Analytics.init({
-          gtmId: config.gtmId,
-        });
-    });
-  },
-
   methods: {
     ...mapActions({
-      config: "config/appConfig",
       peopleDefaultCompany: "people/defaultCompany",
     }),
 
     onCompanySelected(company) {
       let session = LocalStorage.has("session")
-        ? LocalStorage.getItem("session")
-        : {};
+        ? LocalStorage.getItem("session") : {};
 
       session.mycompany = company.id;
 
@@ -211,10 +213,11 @@ export default {
 
     selectMyCompanyInSession() {
       let session = LocalStorage.has("session")
-        ? LocalStorage.getItem("session")
-        : {};
-      if (session.mycompany !== undefined)
+        ? LocalStorage.getItem("session") : {};
+
+      if (session.mycompany !== undefined) {
         this.companySelected = session.mycompany;
+      }
     },
 
     discoveryDefaultCompany() {
@@ -230,7 +233,7 @@ export default {
             }
 
             data.push({
-              id: item.id,
+              id  : item.id,
               name: item.alias,
               logo: logo || null,
             });
