@@ -106,6 +106,23 @@
             class   ="GPL__side-btn"
             color   ="white"
             :to     ="{
+              name  : 'DashboardIndex',
+            }"
+          >
+            <q-icon size="35px" name="person" color="orange" />
+            <div class="GPL__side-btn__label">
+              {{ $t('Dashboard') }}
+            </div>
+          </q-btn>
+
+          <q-btn
+            :flat   ="true"
+            :stack  ="true"
+            :no-caps="true"
+            size    ="26px"
+            class   ="GPL__side-btn"
+            color   ="white"
+            :to     ="{
               name  : 'BasicInfoIndex',
               params: {
                 id: user.people ? user.people : null
