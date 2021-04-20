@@ -114,6 +114,17 @@ const routes = [
     ]
   },
   {
+    path     : '/etapas-do-cadastro/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'StepsRegistration',
+        path     : '',
+        component: () => import('pages/StepsRegistration/Index.vue')
+      },
+    ]
+  },
+  {
     path: '*', redirect: '/finance/receive'
   },
 ]
