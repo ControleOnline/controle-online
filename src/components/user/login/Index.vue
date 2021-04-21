@@ -5,9 +5,6 @@
         <div class="text-h6 text-uppercase">
           {{ $t('Faça login') }}
         </div>
-        <div class="text-subtitle2 text-uppercase">
-          {{ $t('Sistema Cotafácil') }}
-        </div>
       </q-card-section>
 
       <q-card-section>
@@ -84,7 +81,7 @@ export default {
 .login-page
   background-position: center    !important
   background-repeat  : no-repeat !important
-  background-size    : cover     !important  
+  background-size    : cover     !important
   padding-left       : 30px
   padding-right      : 30px
 
