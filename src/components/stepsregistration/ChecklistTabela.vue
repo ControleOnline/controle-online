@@ -16,12 +16,26 @@
             <q-td key="status"         :props="props">{{ props.row.status         }}</q-td>
             <q-td auto-width>
               <q-btn outline
-                label="Analisar"
+                :label="$t('Analisar')"
+                icon  ="visibility"
+                :to   ="{
+                  name  : 'StepsRegistrationAnalysis',
+                  params: {
+                    id: 1616532664
+                  }
+                }"
               />
             </q-td>
             <q-td auto-width>
               <q-btn outline
-                label="Histórico"
+                :label="$t('Histórico')"
+                icon  ="list"
+                :to   ="{
+                  name  : 'StepsRegistrationHistory',
+                  params: {
+                    id: 34
+                  }
+                }"
               />
             </q-td>
           </q-tr>

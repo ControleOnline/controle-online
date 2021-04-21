@@ -176,6 +176,23 @@
             size    ="26px"
             class   ="GPL__side-btn"
             color   ="white"
+            :to     ="{
+              name  : 'CompaniesIndex',
+            }"
+          >
+            <q-icon size="35px" name="business" color="orange" />
+            <div class="GPL__side-btn__label">
+              {{ $t('Empresas') }}
+            </div>
+          </q-btn>
+
+          <q-btn
+            :flat   ="true"
+            :stack  ="true"
+            :no-caps="true"
+            size    ="26px"
+            class   ="GPL__side-btn"
+            color   ="white"
             :to     ="{ name: 'ClientsIndex' }"
           >
             <q-icon size="35px" name="person" color="orange" />
