@@ -122,6 +122,16 @@ const routes = [
         path     : '',
         component: () => import('pages/StepsRegistration/Index.vue')
       },
+      {
+        name     : 'StepsRegistrationAnalysis',
+        path     : ':id',
+        component: () => import('pages/StepsRegistration/Analysis.vue')
+      },
+      {
+        name     : 'StepsRegistrationHistory',
+        path     : ':id/historico',
+        component: () => import('pages/StepsRegistration/Historico.vue')
+      },
     ]
   },
   {
