@@ -122,6 +122,37 @@ const routes = [
         path     : '',
         component: () => import('pages/StepsRegistration/Index.vue')
       },
+      {
+        name     : 'StepsRegistrationAnalysis',
+        path     : ':id',
+        component: () => import('pages/StepsRegistration/Analysis.vue')
+      },
+      {
+        name     : 'StepsRegistrationHistory',
+        path     : ':id/historico',
+        component: () => import('pages/StepsRegistration/Historico.vue')
+      },
+    ]
+  },
+  {
+    path     : '/empresas/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'CompaniesIndex',
+        path     : '',
+        component: () => import('pages/Companies/Index.vue')
+      },
+      {
+        name     : 'CompaniesDetails',
+        path     : ':id',
+        component: () => import('pages/Companies/Details.vue')
+      },
+      {
+        name     : 'CompaniesCreate',
+        path     : 'novo',
+        component: () => import('pages/Companies/Create.vue')
+      },
     ]
   },
   {

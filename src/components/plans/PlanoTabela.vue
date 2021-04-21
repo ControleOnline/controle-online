@@ -11,9 +11,10 @@
           <q-tr :props="props">
             <q-td key="name" :props="props">{{ props.row.name }}</q-td>
             <q-td auto-width>
-              <q-btn flat round dense
+              <q-btn outline
                 color ="primary"
                 icon  ="edit"
+                :label="$t('Editar')"
                 :to   ="{
                   name  : 'PlansDetails',
                   params: {
@@ -23,9 +24,10 @@
               />
             </q-td>
             <q-td auto-width>
-              <q-btn flat round dense
+              <q-btn
                 color   ="red"
                 icon    ="delete"
+                :label  ="$t('Apagar')"
                 @click  ="removeItem(props.row)"
                 :disable="items.length == 1"
                 :loading="props.row._bussy"

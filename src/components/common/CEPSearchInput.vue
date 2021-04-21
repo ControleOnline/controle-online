@@ -7,7 +7,6 @@
     :rules     ="rules"
     placeholder="Busque o endereço pelo CEP"
     :loading   ="loading"
-    :outlined  ="editMode"
     :borderless="!editMode"
     :readonly  ="!editMode"
   />
