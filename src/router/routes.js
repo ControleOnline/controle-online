@@ -135,6 +135,27 @@ const routes = [
     ]
   },
   {
+    path     : '/empresas/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'CompaniesIndex',
+        path     : '',
+        component: () => import('pages/Companies/Index.vue')
+      },
+      {
+        name     : 'CompaniesDetails',
+        path     : ':id',
+        component: () => import('pages/Companies/Details.vue')
+      },
+      {
+        name     : 'CompaniesCreate',
+        path     : 'novo',
+        component: () => import('pages/Companies/Create.vue')
+      },
+    ]
+  },
+  {
     path: '*', redirect: '/finance/receive'
   },
 ]
