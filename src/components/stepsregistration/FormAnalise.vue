@@ -308,12 +308,12 @@ export default {
     },
 
     onCEPFound(address) {
-      this.item.estado     = address.state;
-      this.item.cidade     = address.city;
-      this.item.bairro     = address.district;
-      this.item.cep        = address.postalCode;
-      this.item.logradouro = address.street;
-      this.item.complement = '';
+      this.item.estado      = address.state;
+      this.item.cidade      = address.city;
+      this.item.bairro      = address.district;
+      this.item.cep         = address.postalCode;
+      this.item.logradouro  = address.street;
+      this.item.complemento = '';
     },
 
     uploadFile(item, file) {
