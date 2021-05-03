@@ -107,9 +107,31 @@
 
           <q-separator inset class="q-my-sm" />
 
+          <q-expansion-item expand-icon-toggle :content-inset-level="0.3"
+            icon  ="done_all"
+            class ="GNL__drawer-item"
+            :label="$t('Auditoria')"
+          >
+            <q-item v-ripple clickable
+              class="GNL__drawer-item"
+              v-for="link in links2"
+              :key ="link.text"
+              :to  ="link.to"
+            >
+              <q-item-section avatar>
+                <q-icon :name="link.icon" />
+              </q-item-section>
+              <q-item-section no-wrap>
+                <q-item-label>{{ link.text }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-expansion-item>
+
+          <q-separator inset class="q-my-sm" />
+
           <q-item v-ripple clickable
             class="GNL__drawer-item"
-            v-for="link in links2"
+            v-for="link in links3"
             :key ="link.text"
             :to  ="link.to"
           >
@@ -156,6 +178,12 @@ export default {
         { icon: 'business'  , text: this.$t('Empresas')  , to: { name: 'CompaniesIndex'    }},
       ],
       links2         : [
+        { icon: 'chevron_right', text: this.$t('Fiscal')        , to: { name: '' }},
+        { icon: 'chevron_right', text: this.$t('Contábil')      , to: { name: '' }},
+        { icon: 'chevron_right', text: this.$t('Depto. Pessoal'), to: { name: '' }},
+        { icon: 'chevron_right', text: this.$t('Societário')    , to: { name: '' }},
+      ],
+      links3         : [
         { icon: 'person'       , text: this.$t('Clientes') , to: { name: 'ClientsIndex'  }},
         { icon: 'library_books', text: this.$t('Contratos'), to: { name: 'ContractIndex' }},
       ],
