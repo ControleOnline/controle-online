@@ -123,26 +123,6 @@
             class   ="GPL__side-btn"
             color   ="white"
             :to     ="{
-              name  : 'BasicInfoIndex',
-              params: {
-                id: user.people ? user.people : null
-              }
-            }"
-          >
-            <q-icon size="35px" name="account_circle" color="orange" />
-            <div class="GPL__side-btn__label">
-              {{ $t('Informações básicas') }}
-            </div>
-          </q-btn>
-
-          <q-btn
-            :flat   ="true"
-            :stack  ="true"
-            :no-caps="true"
-            size    ="26px"
-            class   ="GPL__side-btn"
-            color   ="white"
-            :to     ="{
               name  : 'PlansIndex',
             }"
           >
