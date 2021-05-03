@@ -17,7 +17,7 @@
             <q-td auto-width>
               <q-btn outline
                 :label="$t('Analisar')"
-                icon  ="visibility"
+                size  ="sm"
                 :to   ="{
                   name  : 'StepsRegistrationAnalysis',
                   params: {
@@ -29,7 +29,7 @@
             <q-td auto-width>
               <q-btn outline
                 :label="$t('Histórico')"
-                icon  ="list"
+                size  ="sm"
                 :to   ="{
                   name  : 'StepsRegistrationHistory',
                   params: {
