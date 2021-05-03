@@ -13,8 +13,8 @@
             <q-td auto-width>
               <q-btn outline
                 color ="primary"
-                icon  ="edit"
                 :label="$t('Editar')"
+                size  ="sm"
                 :to   ="{
                   name  : 'PlansDetails',
                   params: {
@@ -26,8 +26,8 @@
             <q-td auto-width>
               <q-btn
                 color   ="red"
-                icon    ="delete"
                 :label  ="$t('Apagar')"
+                size    ="sm"
                 @click  ="removeItem(props.row)"
                 :disable="items.length == 1"
                 :loading="props.row._bussy"

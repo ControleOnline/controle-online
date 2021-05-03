@@ -18,15 +18,6 @@
         </div>
         <q-space />
         <div class="q-gutter-sm row items-center no-wrap">
-          <!--
-          <q-btn round dense flat color="grey-8" icon="notifications">
-            <q-badge color="red" text-color="white" floating>
-              2
-            </q-badge>
-            <q-tooltip>Notificações</q-tooltip>
-          </q-btn>
-          -->
-
           <q-btn icon="account_circle" flat round>
             <q-tooltip>Minha conta</q-tooltip>
             <q-menu>
@@ -97,125 +88,62 @@
             @selected="onCompanySelected"
           />
         </q-toolbar>
-        <div class="q-pt-xl q-px-sm column">
-          <q-btn
-            :flat   ="true"
-            :stack  ="true"
-            :no-caps="true"
-            size    ="26px"
-            class   ="GPL__side-btn"
-            color   ="white"
-            :to     ="{
-              name  : 'DashboardIndex',
-            }"
-          >
-            <q-icon size="35px" name="dashboard" color="orange" />
-            <div class="GPL__side-btn__label">
-              {{ $t('Dashboard') }}
-            </div>
-          </q-btn>
 
-          <q-btn
-            :flat   ="true"
-            :stack  ="true"
-            :no-caps="true"
-            size    ="26px"
-            class   ="GPL__side-btn"
-            color   ="white"
-            :to     ="{
-              name  : 'BasicInfoIndex',
-              params: {
-                id: user.people ? user.people : null
-              }
-            }"
-          >
-            <q-icon size="35px" name="account_circle" color="orange" />
-            <div class="GPL__side-btn__label">
-              {{ $t('Informações básicas') }}
-            </div>
-          </q-btn>
+        <q-list padding>
 
-          <q-btn
-            :flat   ="true"
-            :stack  ="true"
-            :no-caps="true"
-            size    ="26px"
-            class   ="GPL__side-btn"
-            color   ="white"
-            :to     ="{
-              name  : 'PlansIndex',
-            }"
+          <q-item v-ripple clickable
+            class="GNL__drawer-item"
+            v-for="link in links1"
+            :key ="link.text"
+            :to  ="link.to"
           >
-            <q-icon size="35px" name="table_view" color="orange" />
-            <div class="GPL__side-btn__label">
-              {{ $t('Planos') }}
-            </div>
-          </q-btn>
+            <q-item-section avatar>
+              <q-icon :name="link.icon" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>{{ link.text }}</q-item-label>
+            </q-item-section>
+          </q-item>
 
-          <q-btn
-            :flat   ="true"
-            :stack  ="true"
-            :no-caps="true"
-            size    ="26px"
-            class   ="GPL__side-btn"
-            color   ="white"
-            :to     ="{
-              name  : 'StepsRegistration',
-            }"
-          >
-            <q-icon size="35px" name="list" color="orange" />
-            <div class="GPL__side-btn__label">
-              {{ $t('Checklists') }}
-            </div>
-          </q-btn>
+          <q-separator inset class="q-my-sm" />
 
-          <q-btn
-            :flat   ="true"
-            :stack  ="true"
-            :no-caps="true"
-            size    ="26px"
-            class   ="GPL__side-btn"
-            color   ="white"
-            :to     ="{
-              name  : 'CompaniesIndex',
-            }"
+          <q-expansion-item expand-icon-toggle :content-inset-level="0.3"
+            icon  ="done_all"
+            class ="GNL__drawer-item"
+            :label="$t('Auditoria')"
           >
-            <q-icon size="35px" name="business" color="orange" />
-            <div class="GPL__side-btn__label">
-              {{ $t('Empresas') }}
-            </div>
-          </q-btn>
+            <q-item v-ripple clickable
+              class="GNL__drawer-item"
+              v-for="link in links2"
+              :key ="link.text"
+              :to  ="link.to"
+            >
+              <q-item-section avatar>
+                <q-icon :name="link.icon" />
+              </q-item-section>
+              <q-item-section no-wrap>
+                <q-item-label>{{ link.text }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-expansion-item>
 
-          <q-btn
-            :flat   ="true"
-            :stack  ="true"
-            :no-caps="true"
-            size    ="26px"
-            class   ="GPL__side-btn"
-            color   ="white"
-            :to     ="{ name: 'ClientsIndex' }"
-          >
-            <q-icon size="35px" name="person" color="orange" />
-            <div class="GPL__side-btn__label">
-              {{ $t('Clientes') }}
-            </div>
-          </q-btn>
+          <q-separator inset class="q-my-sm" />
 
-          <q-btn
-            :flat   ="true"
-            :stack  ="true"
-            :no-caps="true"
-            size    ="26px"
-            class   ="GPL__side-btn"
-            color   ="white"
-            :to     ="{ name: 'ContractIndex' }"
+          <q-item v-ripple clickable
+            class="GNL__drawer-item"
+            v-for="link in links3"
+            :key ="link.text"
+            :to  ="link.to"
           >
-            <q-icon size="35px" name="library_books" color="orange" />
-            <div class="GPL__side-btn__label">
-              {{ $t('Contratos') }}
-            </div>
-          </q-btn>
-        </div>
+            <q-item-section avatar>
+              <q-icon :name="link.icon" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>{{ link.text }}</q-item-label>
+            </q-item-section>
+          </q-item>
+
+        </q-list>
       </q-scroll-area>
     </q-drawer>
 
@@ -243,6 +171,22 @@ export default {
       defaultCompany : [],
       leftDrawerOpen : this.$q.screen.gt.sm,
       companySelected: -1,
+      links1         : [
+        { icon: 'dashboard' , text: this.$t('Dashboard') , to: { name: 'DashboardIndex'    }},
+        { icon: 'table_view', text: this.$t('Planos')    , to: { name: 'PlansIndex'        }},
+        { icon: 'list'      , text: this.$t('Checklists'), to: { name: 'StepsRegistration' }},
+        { icon: 'business'  , text: this.$t('Empresas')  , to: { name: 'CompaniesIndex'    }},
+      ],
+      links2         : [
+        { icon: 'chevron_right', text: this.$t('Fiscal')        , to: { name: '' }},
+        { icon: 'chevron_right', text: this.$t('Contábil')      , to: { name: '' }},
+        { icon: 'chevron_right', text: this.$t('Depto. Pessoal'), to: { name: '' }},
+        { icon: 'chevron_right', text: this.$t('Societário')    , to: { name: '' }},
+      ],
+      links3         : [
+        { icon: 'person'       , text: this.$t('Clientes') , to: { name: 'ClientsIndex'  }},
+        { icon: 'library_books', text: this.$t('Contratos'), to: { name: 'ContractIndex' }},
+      ],
     };
   },
 
@@ -326,30 +270,45 @@ export default {
 </script>
 
 <style lang="sass">
-.logo-container
-  width: 100%
-.main-logo,.logo-container a,.current-logo,.current-logo-container
-  margin: auto
-  margin-top: 3px
-  min-height: 50px
-  height: 50px
-  max-width: 100%
-  max-height: 100%
-.bg-image
-  background-position: center    !important
-  background-repeat  : no-repeat !important
-  background-size    : cover     !important
-  background-color   : $pagebg   !important
-  background         : #123c69
+  .logo-container
+    width: 100%
+  .main-logo,.logo-container a,.current-logo,.current-logo-container
+    margin: auto
+    margin-top: 3px
+    min-height: 50px
+    height: 50px
+    max-width: 100%
+    max-height: 100%
+  .bg-image
+    background-position: center    !important
+    background-repeat  : no-repeat !important
+    background-size    : cover     !important
+    background-color   : $pagebg   !important
+    background         : #123c69
 
-.GPL
-  &__toolbar
-    height: 64px
-  &__side-btn
-    margin-bottom: 20px
-    &__label
-      font-size     : 14px
-      font-family   : 'Exo', Helvetica,Arial,Lucida,sans-serif
-      font-weight   : 600
-      text-transform: uppercase
+  .GNL
+    &__toolbar
+      height: 64px
+    &__toolbar-input
+      width : 55%
+    &__drawer-item
+      line-height  : 24px
+      border-radius: 0 24px 24px 0
+      margin-right : 12px
+      .q-item__section--avatar
+        .q-icon
+          color: $accent
+      .q-item__label
+        color         : #ffffff
+        letter-spacing: .01785714em
+        font-size     : .875rem
+        font-weight   : 500
+        line-height   : 1.25rem
+    &__drawer-footer-link
+      color          : inherit
+      text-decoration: none
+      font-weight    : 500
+      font-size      : .75rem
+      &:hover
+        color: $accent
 </style>
