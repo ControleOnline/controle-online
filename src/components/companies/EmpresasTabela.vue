@@ -14,41 +14,41 @@
             <q-td key="cliente" :props="props">{{ props.row.cliente }}</q-td>
             <q-td key="plano"   :props="props">{{ props.row.plano   }}</q-td>
             <q-td auto-width>
-              <q-btn dense
+              <q-btn
+                size  ="sm"
                 color ="positive"
-                icon  ="download"
                 @click=""
                 :label="$t('Contrato')"
               />
             </q-td>
             <q-td auto-width>
-              <q-btn dense
+              <q-btn
                 color ="positive"
-                icon  ="download"
+                size  ="sm"
                 @click=""
                 :label="$t('Dados da empresa')"
               />
             </q-td>
             <q-td auto-width>
-              <q-btn dense
+              <q-btn
                 color ="positive"
-                icon  ="download"
-                @click  =""
-                :label  ="$t('Funcionários')"
+                size  ="sm"
+                @click=""
+                :label="$t('Funcionários')"
               />
             </q-td>
             <q-td auto-width>
-              <q-btn dense
+              <q-btn
                 color ="positive"
-                icon  ="download"
-                @click  =""
-                :label  ="$t('Sócios')"
+                size  ="sm"
+                @click=""
+                :label="$t('Sócios')"
               />
             </q-td>
             <q-td auto-width>
-              <q-btn outline dense
+              <q-btn outline
                 color ="primary"
-                icon  ="edit"
+                size  ="sm"
                 :label="$t('Editar')"
                 :to   ="{
                   name  : 'CompaniesDetails',
@@ -59,11 +59,11 @@
               />
             </q-td>
             <q-td auto-width>
-              <q-btn dense
+              <q-btn
                 color ="blue"
-                icon  ="visibility"
-                @click  =""
-                :label  ="$t('Visualizar')"
+                size  ="sm"
+                @click=""
+                :label="$t('Visualizar')"
               />
             </q-td>
           </q-tr>
@@ -110,6 +110,7 @@ const SETTINGS = {
       name : 'id',
       field: row => row.id,
     },
+    { name: 'view_company'     },
   ],
 };
 
