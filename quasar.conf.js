@@ -222,7 +222,7 @@ module.exports = function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'accounting'
+        appId: 'contabion_crm'
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
