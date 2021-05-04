@@ -4,7 +4,7 @@
       <q-card-section>
         <div class="row">
           <div class="col-12 q-mb-md text-h6 text-left">
-            {{ $t('Auditoria Fiscal') }}
+            {{ $t('Auditoria Societário') }}
           </div>
         </div>
       </q-card-section>
@@ -15,12 +15,8 @@
         class  ="bg-white text-primary"
       >
         <q-tab
-          name  ="impostos"
-          :label="$t('Impostos')"
-        />
-        <q-tab
-          name  ="declaracoes"
-          :label="$t('Declarações')"
+          name  ="societario"
+          :label="$t('Societário')"
         />
       </q-tabs>
 
@@ -29,12 +25,8 @@
       <q-tab-panels
         v-model="currentTab"
       >
-        <q-tab-panel name="impostos">
-          <AuditFiscalImpostos />
-        </q-tab-panel>
-
-        <q-tab-panel name="declaracoes">
-          <AuditFiscalDeclaracoes />
+        <q-tab-panel name="societario">
+          <AuditSocietario />
         </q-tab-panel>
       </q-tab-panels>
     </q-card>
@@ -42,13 +34,11 @@
 </template>
 
 <script>
-import AuditFiscalImpostos    from './../../../components/fiscal/AuditFiscalImpostos';
-import AuditFiscalDeclaracoes from './../../../components/fiscal/AuditFiscalDeclaracoes';
+import AuditSocietario from './../../../components/societario/AuditSocietario';
 
 export default {
   components: {
-    AuditFiscalImpostos   ,
-    AuditFiscalDeclaracoes,
+    AuditSocietario,
   },
 
   computed: {
@@ -59,7 +49,7 @@ export default {
 
   data () {
     return {
-      currentTab: 'impostos',
+      currentTab: 'societario',
     }
   },
 

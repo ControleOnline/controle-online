@@ -64,8 +64,6 @@ import AuditAdministrativo from './../../../components/contabil/AuditAdministrat
 import AuditExtratos       from './../../../components/contabil/AuditExtratos';
 
 export default {
-  name      : 'AuditFiscalIndex',
-
   components: {
     AuditImpostos      ,
     AuditDeclaracoes   ,

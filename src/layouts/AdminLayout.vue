@@ -181,7 +181,7 @@ export default {
         { icon: 'chevron_right', text: this.$t('Fiscal')        , to: { name: 'AuditFiscalIndex'       }},
         { icon: 'chevron_right', text: this.$t('Contábil')      , to: { name: 'AuditContabilIndex'     }},
         { icon: 'chevron_right', text: this.$t('Depto. Pessoal'), to: { name: 'AuditDeptoPessoalIndex' }},
-        { icon: 'chevron_right', text: this.$t('Societário')    , to: { name: '' }},
+        { icon: 'chevron_right', text: this.$t('Societário')    , to: { name: 'AuditSocietarioIndex'   }},
       ],
       links3         : [
         { icon: 'person'       , text: this.$t('Clientes') , to: { name: 'ClientsIndex'  }},
