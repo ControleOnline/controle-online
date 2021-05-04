@@ -4,7 +4,7 @@
       <q-card-section>
         <div class="row">
           <div class="col-12 q-mb-md text-h6 text-left">
-            {{ $t('Auditoria Fiscal') }}
+            {{ $t('Auditoria Contábil') }}
           </div>
         </div>
       </q-card-section>
@@ -22,6 +22,14 @@
           name  ="declaracoes"
           :label="$t('Declarações')"
         />
+        <q-tab
+          name  ="administrativo"
+          :label="$t('Administrativo')"
+        />
+        <q-tab
+          name  ="extratos_movimentacoes"
+          :label="$t('Extratos e Movimentações')"
+        />
       </q-tabs>
 
       <q-separator />
@@ -36,21 +44,33 @@
         <q-tab-panel name="declaracoes">
           <AuditDeclaracoes />
         </q-tab-panel>
+
+        <q-tab-panel name="administrativo">
+          <AuditAdministrativo />
+        </q-tab-panel>
+
+        <q-tab-panel name="extratos_movimentacoes">
+          <AuditExtratos />
+        </q-tab-panel>
       </q-tab-panels>
     </q-card>
   </q-page>
 </template>
 
 <script>
-import AuditImpostos    from './../../../components/audit/AuditImpostos';
-import AuditDeclaracoes from './../../../components/audit/AuditDeclaracoes';
+import AuditImpostos       from './../../../components/contabil/AuditImpostos';
+import AuditDeclaracoes    from './../../../components/contabil/AuditDeclaracoes';
+import AuditAdministrativo from './../../../components/contabil/AuditAdministrativo';
+import AuditExtratos       from './../../../components/contabil/AuditExtratos';
 
 export default {
   name      : 'AuditFiscalIndex',
 
   components: {
-    AuditImpostos   ,
-    AuditDeclaracoes,
+    AuditImpostos      ,
+    AuditDeclaracoes   ,
+    AuditAdministrativo,
+    AuditExtratos      ,
   },
 
   computed: {
