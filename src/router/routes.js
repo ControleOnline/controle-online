@@ -189,6 +189,21 @@ const routes = [
         path     : 'contabil/:id/historico',
         component: () => import('pages/Audit/Contabil/Historico.vue'),
       },
+      {
+        name     : 'AuditDeptoPessoalIndex',
+        path     : 'depto-pessoal',
+        component: () => import('pages/Audit/Depto/Index.vue'),
+      },
+      {
+        name     : 'AuditDeptoPessoalDetails',
+        path     : 'depto-pessoal/:id',
+        component: () => import('pages/Audit/Depto/Details.vue'),
+      },
+      {
+        name     : 'AuditDeptoPessoalHistorico',
+        path     : 'depto-pessoal/:id/historico',
+        component: () => import('pages/Audit/Depto/Historico.vue'),
+      },
     ]
   },
   {
