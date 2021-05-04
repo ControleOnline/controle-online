@@ -227,6 +227,27 @@ const routes = [
     ]
   },
   {
+    path     : '/fiscal/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'FiscalImpostoIndex',
+        path     : 'impostos',
+        component: () => import('pages/Fiscal/Impostos/Index.vue'),
+      },
+      {
+        name     : 'FiscalImpostoCreate',
+        path     : 'impostos/novo',
+        component: () => import('pages/Fiscal/Impostos/Create.vue')
+      },
+      {
+        name     : 'FiscalImpostoEdit',
+        path     : 'impostos/:id/editar',
+        component: () => import('pages/Fiscal/Impostos/Edit.vue')
+      },
+    ]
+  },
+  {
     path: '*', redirect: '/home/dashboard'
   },
 ]

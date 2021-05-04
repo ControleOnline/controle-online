@@ -127,11 +127,31 @@
             </q-item>
           </q-expansion-item>
 
+          <q-expansion-item expand-icon-toggle :content-inset-level="0.3"
+            icon  ="stream"
+            class ="GNL__drawer-item"
+            :label="$t('Fiscal')"
+          >
+            <q-item v-ripple clickable
+              class="GNL__drawer-item"
+              v-for="link in links3"
+              :key ="link.text"
+              :to  ="link.to"
+            >
+              <q-item-section avatar>
+                <q-icon :name="link.icon" />
+              </q-item-section>
+              <q-item-section no-wrap>
+                <q-item-label>{{ link.text }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-expansion-item>
+
           <q-separator inset class="q-my-sm" />
 
           <q-item v-ripple clickable
             class="GNL__drawer-item"
-            v-for="link in links3"
+            v-for="link in links4"
             :key ="link.text"
             :to  ="link.to"
           >
@@ -184,6 +204,9 @@ export default {
         { icon: 'chevron_right', text: this.$t('Societário')    , to: { name: 'AuditSocietarioIndex'   }},
       ],
       links3         : [
+        { icon: 'chevron_right', text: this.$t('Impostos')      , to: { name: 'FiscalImpostoIndex'     }},
+      ],
+      links4         : [
         { icon: 'person'       , text: this.$t('Clientes') , to: { name: 'ClientsIndex'  }},
         { icon: 'library_books', text: this.$t('Contratos'), to: { name: 'ContractIndex' }},
       ],
