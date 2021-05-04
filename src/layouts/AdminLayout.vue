@@ -205,6 +205,7 @@ export default {
       ],
       links3         : [
         { icon: 'chevron_right', text: this.$t('Impostos')      , to: { name: 'FiscalImpostoIndex'     }},
+        { icon: 'chevron_right', text: this.$t('Declarações')   , to: { name: 'FiscalDeclaracaoIndex'  }},
       ],
       links4         : [
         { icon: 'person'       , text: this.$t('Clientes') , to: { name: 'ClientsIndex'  }},
