@@ -178,9 +178,9 @@ export default {
         { icon: 'business'  , text: this.$t('Empresas')  , to: { name: 'CompaniesIndex'    }},
       ],
       links2         : [
-        { icon: 'chevron_right', text: this.$t('Fiscal')        , to: { name: 'AuditFiscalIndex'   }},
-        { icon: 'chevron_right', text: this.$t('Contábil')      , to: { name: 'AuditContabilIndex' }},
-        { icon: 'chevron_right', text: this.$t('Depto. Pessoal'), to: { name: '' }},
+        { icon: 'chevron_right', text: this.$t('Fiscal')        , to: { name: 'AuditFiscalIndex'       }},
+        { icon: 'chevron_right', text: this.$t('Contábil')      , to: { name: 'AuditContabilIndex'     }},
+        { icon: 'chevron_right', text: this.$t('Depto. Pessoal'), to: { name: 'AuditDeptoPessoalIndex' }},
         { icon: 'chevron_right', text: this.$t('Societário')    , to: { name: '' }},
       ],
       links3         : [
