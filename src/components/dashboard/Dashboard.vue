@@ -1,10 +1,8 @@
 <template>
   <q-card>
-    <q-linear-progress :query="isLoading" color="orange" />
-
     <q-card-section>
       <div class="row">
-        <div class="col-xs-12 col-sm-6 q-pa-sm">
+        <div class="col-xs-12 col-sm-grow q-pa-sm">
           <q-input stack-label
             v-model="fromDate"
             label  ="Data inicio"
@@ -23,7 +21,7 @@
             </template>
           </q-input>
         </div>
-        <div class="col-xs-12 col-sm-6 q-pa-sm">
+        <div class="col-xs-12 col-sm-grow q-pa-sm">
           <q-input stack-label
             v-model="toDate"
             label  ="Data fim"
@@ -41,6 +39,18 @@
               </q-icon>
             </template>
           </q-input>
+        </div>
+        <div class="col-xs-12 col-sm-grow q-pa-sm text-right">
+          <q-btn
+            :loading="isLoading"
+            icon    ="search"
+            type    ="submit"
+            label   ="Consultar"
+            size    ="md"
+            color   ="primary"
+            class   ="q-mt-md full-width"
+            @click  ="getDashboardData"
+          />
         </div>
       </div>
     </q-card-section>
@@ -111,22 +121,18 @@ export default {
 
       this.data = data;
     },
-
-    fromDate(dateString) {
-      if (dateString.length == 10)
-        this.request();
-    },
-
-    toDate  (dateString) {
-      if (dateString.length == 10)
-        this.request();
-    },
   },
 
   methods: {
     ...mapActions({
       getTotals: 'dashboard/getTotals',
     }),
+
+    getDashboardData() {
+      if (this.fromDate.length == 10 && this.toDate.length == 10) {
+        this.request();
+      }
+    },
 
     formatDate(dateString) {
       return date.formatDate(date.extractDate(dateString, 'DD/MM/YYYY'), 'YYYY-MM-DD');
@@ -141,7 +147,7 @@ export default {
       this.getTotals({
         "fromDate"  : this.formatDate(this.fromDate),
         "toDate"    : this.formatDate(this.toDate  ),
-        "providerId": this.theCompany.id
+        "providerId": this.theCompany !== null ? this.theCompany.id : null
       }).finally(() => {
         this.isLoading = false;
       });

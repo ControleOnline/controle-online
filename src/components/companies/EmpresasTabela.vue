@@ -16,14 +16,14 @@
             <q-td auto-width>
               <q-btn
                 size  ="sm"
-                color ="positive"
+                color ="secondary"
                 @click=""
                 :label="$t('Contrato')"
               />
             </q-td>
             <q-td auto-width>
               <q-btn
-                color ="positive"
+                color ="secondary"
                 size  ="sm"
                 @click=""
                 :label="$t('Dados da empresa')"
@@ -31,7 +31,7 @@
             </q-td>
             <q-td auto-width>
               <q-btn
-                color ="positive"
+                color ="secondary"
                 size  ="sm"
                 @click=""
                 :label="$t('Funcionários')"
@@ -39,7 +39,7 @@
             </q-td>
             <q-td auto-width>
               <q-btn
-                color ="positive"
+                color ="secondary"
                 size  ="sm"
                 @click=""
                 :label="$t('Sócios')"
