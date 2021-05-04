@@ -156,7 +156,114 @@ const routes = [
     ]
   },
   {
-    path: '*', redirect: '/finance/receive'
+    path     : '/auditoria/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'AuditFiscalIndex',
+        path     : 'fiscal',
+        component: () => import('pages/Audit/Fiscal/Index.vue'),
+      },
+      {
+        name     : 'AuditFiscalDetails',
+        path     : 'fiscal/:id',
+        component: () => import('pages/Audit/Fiscal/Details.vue'),
+      },
+      {
+        name     : 'AuditFiscalHistorico',
+        path     : 'fiscal/:id/historico',
+        component: () => import('pages/Audit/Fiscal/Historico.vue'),
+      },
+      {
+        name     : 'AuditContabilIndex',
+        path     : 'contabil',
+        component: () => import('pages/Audit/Contabil/Index.vue'),
+      },
+      {
+        name     : 'AuditContabilDetails',
+        path     : 'contabil/:id',
+        component: () => import('pages/Audit/Contabil/Details.vue'),
+      },
+      {
+        name     : 'AuditContabilHistorico',
+        path     : 'contabil/:id/historico',
+        component: () => import('pages/Audit/Contabil/Historico.vue'),
+      },
+      {
+        name     : 'AuditDeptoPessoalIndex',
+        path     : 'depto-pessoal',
+        component: () => import('pages/Audit/Depto/Index.vue'),
+      },
+      {
+        name     : 'AuditDeptoPessoalDetails',
+        path     : 'depto-pessoal/:id',
+        component: () => import('pages/Audit/Depto/Details.vue'),
+      },
+      {
+        name     : 'AuditDeptoPessoalHistorico',
+        path     : 'depto-pessoal/:id/historico',
+        component: () => import('pages/Audit/Depto/Historico.vue'),
+      },
+      {
+        name     : 'AuditSocietarioIndex',
+        path     : 'societario',
+        component: () => import('pages/Audit/Societario/Index.vue'),
+      },
+      {
+        name     : 'AuditSocietarioDetails',
+        path     : 'societario/:id',
+        component: () => import('pages/Audit/Societario/Details.vue'),
+      },
+      {
+        name     : 'AuditSocietarioHistorico',
+        path     : 'societario/:id/historico',
+        component: () => import('pages/Audit/Societario/Historico.vue'),
+      },
+      {
+        name     : 'AuditSocietarioMessages',
+        path     : 'societario/:id/mensagens',
+        component: () => import('pages/Audit/Societario/Mensagens.vue'),
+      },
+    ]
+  },
+  {
+    path     : '/fiscal/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'FiscalImpostoIndex',
+        path     : 'impostos',
+        component: () => import('pages/Fiscal/Impostos/Index.vue'),
+      },
+      {
+        name     : 'FiscalImpostoCreate',
+        path     : 'impostos/novo',
+        component: () => import('pages/Fiscal/Impostos/Create.vue')
+      },
+      {
+        name     : 'FiscalImpostoEdit',
+        path     : 'impostos/:id/editar',
+        component: () => import('pages/Fiscal/Impostos/Edit.vue')
+      },
+      {
+        name     : 'FiscalDeclaracaoIndex',
+        path     : 'declaracoes',
+        component: () => import('pages/Fiscal/Declaracoes/Index.vue'),
+      },
+      {
+        name     : 'FiscalDeclaracaoCreate',
+        path     : 'declaracoes/novo',
+        component: () => import('pages/Fiscal/Declaracoes/Create.vue')
+      },
+      {
+        name     : 'FiscalDeclaracaoEdit',
+        path     : 'declaracoes/:id/editar',
+        component: () => import('pages/Fiscal/Declaracoes/Edit.vue')
+      },
+    ]
+  },
+  {
+    path: '*', redirect: '/home/dashboard'
   },
 ]
 
