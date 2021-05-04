@@ -219,6 +219,11 @@ const routes = [
         path     : 'societario/:id/historico',
         component: () => import('pages/Audit/Societario/Historico.vue'),
       },
+      {
+        name     : 'AuditSocietarioMessages',
+        path     : 'societario/:id/mensagens',
+        component: () => import('pages/Audit/Societario/Mensagens.vue'),
+      },
     ]
   },
   {
