@@ -28,6 +28,19 @@
             <q-td auto-width>
               <q-btn outline
                 color ="primary"
+                :label="$t('Mensagens')"
+                size  ="sm"
+                :to   ="{
+                  name  : 'AuditSocietarioMessages',
+                  params: {
+                    id: props.row.id
+                  }
+                }"
+              />
+            </q-td>
+            <q-td auto-width>
+              <q-btn outline
+                color ="primary"
                 :label="$t('Histórico')"
                 size  ="sm"
                 :to   ="{
