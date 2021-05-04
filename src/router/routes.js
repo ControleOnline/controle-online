@@ -174,6 +174,21 @@ const routes = [
         path     : 'fiscal/:id/historico',
         component: () => import('pages/Audit/Fiscal/Historico.vue'),
       },
+      {
+        name     : 'AuditContabilIndex',
+        path     : 'contabil',
+        component: () => import('pages/Audit/Contabil/Index.vue'),
+      },
+      {
+        name     : 'AuditContabilDetails',
+        path     : 'contabil/:id',
+        component: () => import('pages/Audit/Contabil/Details.vue'),
+      },
+      {
+        name     : 'AuditContabilHistorico',
+        path     : 'contabil/:id/historico',
+        component: () => import('pages/Audit/Contabil/Historico.vue'),
+      },
     ]
   },
   {
