@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import HistoricoTabela from './../../../components/fiscal/HistoricoTabela';
+import HistoricoTabela from './../../../components/societario/HistoricoTabela';
 
 export default {
   components: {

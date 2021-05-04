@@ -91,8 +91,6 @@ import AuditFolhaPonto     from './../../../components/depto/AuditFolhaPonto';
 import AuditProLabore      from './../../../components/depto/AuditProLabore';
 
 export default {
-  name      : 'AuditFiscalIndex',
-
   components: {
     AuditImpostos      ,
     AuditDeclaracoes   ,

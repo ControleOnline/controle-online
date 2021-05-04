@@ -13,7 +13,6 @@ export default {
   data() {
     return {
       items   : [],
-      settings: SETTINGS,
       saving  : false,
       loading : false,
     };

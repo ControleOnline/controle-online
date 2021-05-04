@@ -204,10 +204,25 @@ const routes = [
         path     : 'depto-pessoal/:id/historico',
         component: () => import('pages/Audit/Depto/Historico.vue'),
       },
+      {
+        name     : 'AuditSocietarioIndex',
+        path     : 'societario',
+        component: () => import('pages/Audit/Societario/Index.vue'),
+      },
+      {
+        name     : 'AuditSocietarioDetails',
+        path     : 'societario/:id',
+        component: () => import('pages/Audit/Societario/Details.vue'),
+      },
+      {
+        name     : 'AuditSocietarioHistorico',
+        path     : 'societario/:id/historico',
+        component: () => import('pages/Audit/Societario/Historico.vue'),
+      },
     ]
   },
   {
-    path: '*', redirect: '/finance/receive'
+    path: '*', redirect: '/home/dashboard'
   },
 ]
 
