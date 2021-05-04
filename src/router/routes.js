@@ -156,6 +156,27 @@ const routes = [
     ]
   },
   {
+    path     : '/auditoria/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'AuditFiscalIndex',
+        path     : 'fiscal',
+        component: () => import('pages/Audit/Fiscal/Index.vue'),
+      },
+      {
+        name     : 'AuditFiscalDetails',
+        path     : 'fiscal/:id',
+        component: () => import('pages/Audit/Fiscal/Details.vue'),
+      },
+      {
+        name     : 'AuditFiscalHistorico',
+        path     : 'fiscal/:id/historico',
+        component: () => import('pages/Audit/Fiscal/Historico.vue'),
+      },
+    ]
+  },
+  {
     path: '*', redirect: '/finance/receive'
   },
 ]
