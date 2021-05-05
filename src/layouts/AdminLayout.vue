@@ -72,7 +72,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" :width="225" content-class="bg-primary">
+    <q-drawer v-model="leftDrawerOpen" :width="250" content-class="bg-primary">
       <q-scroll-area class="fit">
         <q-toolbar class="GPL__toolbar">
           <div class="q-gutter-sm items-center row current-logo-container">
@@ -128,7 +128,7 @@
           </q-expansion-item>
 
           <q-expansion-item expand-icon-toggle :content-inset-level="0.3"
-            icon  ="stream"
+            icon  ="fact_check"
             class ="GNL__drawer-item"
             :label="$t('Fiscal')"
           >
@@ -147,11 +147,51 @@
             </q-item>
           </q-expansion-item>
 
+          <q-expansion-item expand-icon-toggle :content-inset-level="0.3"
+            icon  ="calculate"
+            class ="GNL__drawer-item"
+            :label="$t('Contábil')"
+          >
+            <q-item v-ripple clickable
+              class="GNL__drawer-item"
+              v-for="link in links4"
+              :key ="link.text"
+              :to  ="link.to"
+            >
+              <q-item-section avatar>
+                <q-icon :name="link.icon" />
+              </q-item-section>
+              <q-item-section no-wrap>
+                <q-item-label>{{ link.text }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-expansion-item>
+
+          <q-expansion-item expand-icon-toggle :content-inset-level="0.3"
+            icon  ="contacts"
+            class ="GNL__drawer-item"
+            :label="$t('Departamento Pessoal')"
+          >
+            <q-item v-ripple clickable
+              class="GNL__drawer-item"
+              v-for="link in links5"
+              :key ="link.text"
+              :to  ="link.to"
+            >
+              <q-item-section avatar>
+                <q-icon :name="link.icon" />
+              </q-item-section>
+              <q-item-section no-wrap>
+                <q-item-label>{{ link.text }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-expansion-item>
+
           <q-separator inset class="q-my-sm" />
 
           <q-item v-ripple clickable
             class="GNL__drawer-item"
-            v-for="link in links4"
+            v-for="link in links6"
             :key ="link.text"
             :to  ="link.to"
           >
@@ -206,8 +246,55 @@ export default {
       links3         : [
         { icon: 'chevron_right', text: this.$t('Impostos')      , to: { name: 'FiscalImpostoIndex'     }},
         { icon: 'chevron_right', text: this.$t('Declarações')   , to: { name: 'FiscalDeclaracaoIndex'  }},
+        {
+          icon: 'chevron_right',
+          text: this.$t('Serviços Adicionais'),
+          to  : {
+            name: 'FiscalServicosAdicionaisIndex'
+          }
+        },
       ],
       links4         : [
+        {
+          icon: 'chevron_right',
+          text: this.$t('Extratos e Movimentações'),
+          to  : {
+            name: 'ContabilExtratosIndex'
+          }
+        },
+        {
+          icon: 'chevron_right',
+          text: this.$t('Declarações'),
+          to  : {
+            name: 'ContabilDeclaracaoIndex'
+          }
+        },
+        {
+          icon: 'chevron_right',
+          text: this.$t('Serviços Adicionais'),
+          to  : {
+            name: 'ContabilServicosAdicionaisIndex'
+          }
+        },
+        {
+          icon: 'chevron_right',
+          text: this.$t('Administrativo'),
+          to  : {
+            name: 'ContabilAdministrativoIndex'
+          }
+        },
+      ],
+      links5         : [
+        { icon: 'chevron_right', text: this.$t('Impostos')           , to: { name: 'DeptoImpostoIndex'     }},
+        { icon: 'chevron_right', text: this.$t('Declarações')        , to: { name: 'ContabilExtratosIndex' }},
+        { icon: 'chevron_right', text: this.$t('Folhas de Pagamento'), to: { name: 'ContabilExtratosIndex' }},
+        { icon: 'chevron_right', text: this.$t('Pro-Labore')         , to: { name: 'ContabilExtratosIndex' }},
+        { icon: 'chevron_right', text: this.$t('Funcionários')       , to: { name: 'ContabilExtratosIndex' }},
+        { icon: 'chevron_right', text: this.$t('Sócios')             , to: { name: 'ContabilExtratosIndex' }},
+        { icon: 'chevron_right', text: this.$t('Administrativo')     , to: { name: 'ContabilExtratosIndex' }},
+        { icon: 'chevron_right', text: this.$t('Serviços Adicionais'), to: { name: 'ContabilExtratosIndex' }},
+      ],
+      links6         : [
         { icon: 'person'       , text: this.$t('Clientes') , to: { name: 'ClientsIndex'  }},
         { icon: 'library_books', text: this.$t('Contratos'), to: { name: 'ContractIndex' }},
       ],
@@ -318,15 +405,15 @@ export default {
     &__drawer-item
       line-height  : 24px
       border-radius: 0 24px 24px 0
-      margin-right : 12px
       .q-item__section--avatar
+        min-width: 30px
         .q-icon
           color: $accent
       .q-item__label
         color         : #ffffff
         letter-spacing: .01785714em
-        font-size     : .875rem
-        font-weight   : 500
+        font-size     : .800rem
+        font-weight   : 400
         line-height   : 1.25rem
     &__drawer-footer-link
       color          : inherit
