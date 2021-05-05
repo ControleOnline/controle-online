@@ -405,15 +405,15 @@ export default {
     &__drawer-item
       line-height  : 24px
       border-radius: 0 24px 24px 0
-      margin-right : 12px
       .q-item__section--avatar
+        min-width: 30px
         .q-icon
           color: $accent
       .q-item__label
         color         : #ffffff
         letter-spacing: .01785714em
-        font-size     : .875rem
-        font-weight   : 500
+        font-size     : .800rem
+        font-weight   : 400
         line-height   : 1.25rem
     &__drawer-footer-link
       color          : inherit
