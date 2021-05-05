@@ -296,6 +296,16 @@ const routes = [
         path     : 'servicos-adicionais',
         component: () => import('pages/Contabil/Servicos/Index.vue'),
       },
+      {
+        name     : 'ContabilAdministrativoIndex',
+        path     : 'administrativo',
+        component: () => import('pages/Contabil/Administrativo/Index.vue'),
+      },
+      {
+        name     : 'ContabilAdministrativoCreate',
+        path     : 'administrativo/novo',
+        component: () => import('pages/Contabil/Administrativo/Create.vue')
+      },
     ]
   },
   {
