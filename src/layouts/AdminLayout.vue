@@ -249,6 +249,13 @@ export default {
             name: 'ContabilDeclaracaoIndex'
           }
         },
+        {
+          icon: 'chevron_right',
+          text: this.$t('Serviços Adicionais'),
+          to  : {
+            name: 'ContabilServicosAdicionaisIndex'
+          }
+        },
       ],
       links5         : [
         { icon: 'person'       , text: this.$t('Clientes') , to: { name: 'ClientsIndex'  }},
