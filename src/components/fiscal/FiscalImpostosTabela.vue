@@ -76,7 +76,7 @@ const SETTINGS = {
       name : 'nome',
       field: row => row.nome,
       align: 'left',
-      label: 'Nome da Empresa'
+      label: 'Nome'
     },
     {
       name : 'empresa',

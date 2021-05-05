@@ -268,6 +268,32 @@ const routes = [
     ]
   },
   {
+    path     : '/contabil/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'ContabilExtratosIndex',
+        path     : 'extratos',
+        component: () => import('pages/Contabil/Extratos/Index.vue'),
+      },
+      {
+        name     : 'ContabilDeclaracaoIndex',
+        path     : 'declaracoes',
+        component: () => import('pages/Contabil/Declaracoes/Index.vue'),
+      },
+      {
+        name     : 'ContabilDeclaracaoCreate',
+        path     : 'declaracoes/novo',
+        component: () => import('pages/Contabil/Declaracoes/Create.vue')
+      },
+      {
+        name     : 'ContabilDeclaracaoEdit',
+        path     : 'declaracoes/:id/editar',
+        component: () => import('pages/Contabil/Declaracoes/Edit.vue')
+      },
+    ]
+  },
+  {
     path: '*', redirect: '/home/dashboard'
   },
 ]

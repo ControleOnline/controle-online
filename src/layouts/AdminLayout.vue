@@ -72,7 +72,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" :width="225" content-class="bg-primary">
+    <q-drawer v-model="leftDrawerOpen" :width="250" content-class="bg-primary">
       <q-scroll-area class="fit">
         <q-toolbar class="GPL__toolbar">
           <div class="q-gutter-sm items-center row current-logo-container">
@@ -128,7 +128,7 @@
           </q-expansion-item>
 
           <q-expansion-item expand-icon-toggle :content-inset-level="0.3"
-            icon  ="stream"
+            icon  ="fact_check"
             class ="GNL__drawer-item"
             :label="$t('Fiscal')"
           >
@@ -147,11 +147,31 @@
             </q-item>
           </q-expansion-item>
 
+          <q-expansion-item expand-icon-toggle :content-inset-level="0.3"
+            icon  ="calculate"
+            class ="GNL__drawer-item"
+            :label="$t('Contábil')"
+          >
+            <q-item v-ripple clickable
+              class="GNL__drawer-item"
+              v-for="link in links4"
+              :key ="link.text"
+              :to  ="link.to"
+            >
+              <q-item-section avatar>
+                <q-icon :name="link.icon" />
+              </q-item-section>
+              <q-item-section no-wrap>
+                <q-item-label>{{ link.text }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-expansion-item>
+
           <q-separator inset class="q-my-sm" />
 
           <q-item v-ripple clickable
             class="GNL__drawer-item"
-            v-for="link in links4"
+            v-for="link in links5"
             :key ="link.text"
             :to  ="link.to"
           >
@@ -215,6 +235,22 @@ export default {
         },
       ],
       links4         : [
+        {
+          icon: 'chevron_right',
+          text: this.$t('Extratos e Movimentações'),
+          to  : {
+            name: 'ContabilExtratosIndex'
+          }
+        },
+        {
+          icon: 'chevron_right',
+          text: this.$t('Declarações'),
+          to  : {
+            name: 'ContabilDeclaracaoIndex'
+          }
+        },
+      ],
+      links5         : [
         { icon: 'person'       , text: this.$t('Clientes') , to: { name: 'ClientsIndex'  }},
         { icon: 'library_books', text: this.$t('Contratos'), to: { name: 'ContractIndex' }},
       ],
