@@ -256,6 +256,13 @@ export default {
             name: 'ContabilServicosAdicionaisIndex'
           }
         },
+        {
+          icon: 'chevron_right',
+          text: this.$t('Administrativo'),
+          to  : {
+            name: 'ContabilAdministrativoIndex'
+          }
+        },
       ],
       links5         : [
         { icon: 'person'       , text: this.$t('Clientes') , to: { name: 'ClientsIndex'  }},
