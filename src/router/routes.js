@@ -26,7 +26,7 @@ const routes = [
     ]
   },
   {
-    path: '/contracts/',
+    path: '/contratos/',
     component: () => import('layouts/AdminLayout.vue'),
     children: [
       { name: 'ContractIndex'  , path: ''      , component: () => import('pages/Contracts/Index.vue'  ) },
@@ -34,14 +34,14 @@ const routes = [
     ]
   },
   {
-    path     : '/user/',
+    path     : '/usuario/',
     component: () => import('layouts/AdminLayout.vue'),
     children : [
       { name: 'UserProfile', path: 'profile', component: () => import('pages/User/Profile.vue') },
     ]
   },
   {
-    path     : '/support/',
+    path     : '/soporte/',
     component: () => import('layouts/AdminLayout.vue'),
     children : [
       { name: 'FAQ',  path: 'faq',  component: () => import('pages/Support/FAQ.vue') },
@@ -50,7 +50,7 @@ const routes = [
     ]
   },
   {
-    path     : '/company/',
+    path     : '/minha-empresa/',
     component: () => import('layouts/AdminLayout.vue'),
     children : [
       {
@@ -66,7 +66,7 @@ const routes = [
     ]
   },
   {
-    path     : '/customers/',
+    path     : '/clientes/',
     component: () => import('layouts/AdminLayout.vue'),
     children : [
       {
