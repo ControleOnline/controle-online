@@ -291,6 +291,11 @@ const routes = [
         path     : 'declaracoes/:id/editar',
         component: () => import('pages/Contabil/Declaracoes/Edit.vue')
       },
+      {
+        name     : 'ContabilServicosAdicionaisIndex',
+        path     : 'servicos-adicionais',
+        component: () => import('pages/Contabil/Servicos/Index.vue'),
+      },
     ]
   },
   {
