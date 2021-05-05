@@ -260,6 +260,11 @@ const routes = [
         path     : 'declaracoes/:id/editar',
         component: () => import('pages/Fiscal/Declaracoes/Edit.vue')
       },
+      {
+        name     : 'FiscalServicosAdicionaisIndex',
+        path     : 'servicos-adicionais',
+        component: () => import('pages/Fiscal/Servicos/Index.vue'),
+      },
     ]
   },
   {

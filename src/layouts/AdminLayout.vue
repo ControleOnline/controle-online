@@ -206,6 +206,13 @@ export default {
       links3         : [
         { icon: 'chevron_right', text: this.$t('Impostos')      , to: { name: 'FiscalImpostoIndex'     }},
         { icon: 'chevron_right', text: this.$t('Declarações')   , to: { name: 'FiscalDeclaracaoIndex'  }},
+        {
+          icon: 'chevron_right',
+          text: this.$t('Serviços Adicionais'),
+          to  : {
+            name: 'FiscalServicosAdicionaisIndex'
+          }
+        },
       ],
       links4         : [
         { icon: 'person'       , text: this.$t('Clientes') , to: { name: 'ClientsIndex'  }},
