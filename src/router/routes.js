@@ -26,7 +26,7 @@ const routes = [
     ]
   },
   {
-    path: '/contracts/',
+    path: '/contratos/',
     component: () => import('layouts/AdminLayout.vue'),
     children: [
       { name: 'ContractIndex'  , path: ''      , component: () => import('pages/Contracts/Index.vue'  ) },
@@ -34,14 +34,14 @@ const routes = [
     ]
   },
   {
-    path     : '/user/',
+    path     : '/usuario/',
     component: () => import('layouts/AdminLayout.vue'),
     children : [
       { name: 'UserProfile', path: 'profile', component: () => import('pages/User/Profile.vue') },
     ]
   },
   {
-    path     : '/support/',
+    path     : '/soporte/',
     component: () => import('layouts/AdminLayout.vue'),
     children : [
       { name: 'FAQ',  path: 'faq',  component: () => import('pages/Support/FAQ.vue') },
@@ -50,7 +50,7 @@ const routes = [
     ]
   },
   {
-    path     : '/company/',
+    path     : '/minha-empresa/',
     component: () => import('layouts/AdminLayout.vue'),
     children : [
       {
@@ -66,7 +66,7 @@ const routes = [
     ]
   },
   {
-    path     : '/customers/',
+    path     : '/clientes/',
     component: () => import('layouts/AdminLayout.vue'),
     children : [
       {
@@ -259,6 +259,63 @@ const routes = [
         name     : 'FiscalDeclaracaoEdit',
         path     : 'declaracoes/:id/editar',
         component: () => import('pages/Fiscal/Declaracoes/Edit.vue')
+      },
+      {
+        name     : 'FiscalServicosAdicionaisIndex',
+        path     : 'servicos-adicionais',
+        component: () => import('pages/Fiscal/Servicos/Index.vue'),
+      },
+    ]
+  },
+  {
+    path     : '/contabil/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'ContabilExtratosIndex',
+        path     : 'extratos',
+        component: () => import('pages/Contabil/Extratos/Index.vue'),
+      },
+      {
+        name     : 'ContabilDeclaracaoIndex',
+        path     : 'declaracoes',
+        component: () => import('pages/Contabil/Declaracoes/Index.vue'),
+      },
+      {
+        name     : 'ContabilDeclaracaoCreate',
+        path     : 'declaracoes/novo',
+        component: () => import('pages/Contabil/Declaracoes/Create.vue')
+      },
+      {
+        name     : 'ContabilDeclaracaoEdit',
+        path     : 'declaracoes/:id/editar',
+        component: () => import('pages/Contabil/Declaracoes/Edit.vue')
+      },
+      {
+        name     : 'ContabilServicosAdicionaisIndex',
+        path     : 'servicos-adicionais',
+        component: () => import('pages/Contabil/Servicos/Index.vue'),
+      },
+      {
+        name     : 'ContabilAdministrativoIndex',
+        path     : 'administrativo',
+        component: () => import('pages/Contabil/Administrativo/Index.vue'),
+      },
+      {
+        name     : 'ContabilAdministrativoCreate',
+        path     : 'administrativo/novo',
+        component: () => import('pages/Contabil/Administrativo/Create.vue')
+      },
+    ]
+  },
+  {
+    path     : '/depto-pessoal/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'DeptoImpostoIndex',
+        path     : 'impostos',
+        component: () => import('pages/Depto/Impostos/Index.vue'),
       },
     ]
   },

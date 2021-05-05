@@ -45,7 +45,7 @@
                   :label="$t('Editar')"
                   size  ="sm"
                   :to   ="{
-                    name  : 'FiscalDeclaracaoEdit',
+                    name  : 'ContabilDeclaracaoEdit',
                     params: {
                       id: props.row.id
                     }
@@ -150,38 +150,6 @@ export default {
     onRequest() {
       let params = {};
       let items  = [];
-
-      items.push({
-        id     : 1,
-        nome   : 'DEFIS (Declaração simples)',
-        empresa: 'MARIA NISHIKAWO 81071499904',
-        periodo: 'Jan 2021',
-        pago   : true,
-      });
-
-      items.push({
-        id     : 2,
-        nome   : 'DEFIS (Declaração simples)',
-        empresa: 'MARCELO AUGUSTO PINTO 11110607847',
-        periodo: 'Jan 2021',
-        pago   : false,
-      });
-
-      items.push({
-        id     : 3,
-        nome   : 'DEFIS (Declaração simples)',
-        empresa: 'Julio Cesar Monte',
-        periodo: 'Mar 2021',
-        pago   : true,
-      });
-
-      items.push({
-        id     : 4,
-        nome   : 'DEFIS (Declaração simples)',
-        empresa: 'ADRIANA MELINO FRANCA 99906148860',
-        periodo: 'Abr 2021',
-        pago   : true,
-      });
 
       this.items = items;
     },
