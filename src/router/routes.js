@@ -309,6 +309,17 @@ const routes = [
     ]
   },
   {
+    path     : '/depto-pessoal/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'DeptoImpostoIndex',
+        path     : 'impostos',
+        component: () => import('pages/Depto/Impostos/Index.vue'),
+      },
+    ]
+  },
+  {
     path: '*', redirect: '/home/dashboard'
   },
 ]
