@@ -420,6 +420,22 @@ const routes = [
     ]
   },
   {
+    path     : '/societario/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'SocietarioIndex',
+        path     : '',
+        component: () => import('pages/Societario/Index.vue'),
+      },
+      {
+        name     : 'SocietarioMessages',
+        path     : ':id/mensagens',
+        component: () => import('pages/Societario/Mensagens.vue'),
+      },
+    ]
+  },
+  {
     path: '*', redirect: '/home/dashboard'
   },
 ]
