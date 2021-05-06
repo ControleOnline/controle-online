@@ -291,7 +291,7 @@ export default {
         { icon: 'chevron_right', text: this.$t('Pro-Labore')         , to: { name: 'DeptoProLaboreIndex'      }},
         { icon: 'chevron_right', text: this.$t('Funcionários')       , to: { name: 'DeptoFuncionariosIndex'   }},
         { icon: 'chevron_right', text: this.$t('Sócios')             , to: { name: 'DeptoSociosIndex'         }},
-        { icon: 'chevron_right', text: this.$t('Administrativo')     , to: { name: 'ContabilExtratosIndex'    }},
+        { icon: 'chevron_right', text: this.$t('Administrativo')     , to: { name: 'DeptoAdministrativoIndex' }},
         { icon: 'chevron_right', text: this.$t('Serviços Adicionais'), to: { name: 'ContabilExtratosIndex'    }},
       ],
       links6         : [
