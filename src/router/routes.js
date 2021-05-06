@@ -342,6 +342,21 @@ const routes = [
         path     : 'declaracoes/:id/editar',
         component: () => import('pages/Depto/Declaracoes/Edit.vue')
       },
+      {
+        name     : 'DeptoFolhaPagamentoIndex',
+        path     : 'folhas-pagamento',
+        component: () => import('pages/Depto/Folhas/Index.vue'),
+      },
+      {
+        name     : 'DeptoFolhaPagamentoCreate',
+        path     : 'folhas-pagamento/novo',
+        component: () => import('pages/Depto/Folhas/Create.vue')
+      },
+      {
+        name     : 'DeptoFolhaPagamentoEdit',
+        path     : 'folhas-pagamento/:id/editar',
+        component: () => import('pages/Depto/Folhas/Edit.vue')
+      },
     ]
   },
   {
