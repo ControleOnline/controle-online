@@ -387,6 +387,21 @@ const routes = [
         path     : 'funcionarios/:id/folhas',
         component: () => import('pages/Depto/Funcionarios/Folhas.vue')
       },
+      {
+        name     : 'DeptoSociosIndex',
+        path     : 'socios',
+        component: () => import('pages/Depto/Socios/Index.vue'),
+      },
+      {
+        name     : 'DeptoSociosDependentes',
+        path     : 'socios/:id/dependentes',
+        component: () => import('pages/Depto/Socios/Dependentes.vue')
+      },
+      {
+        name     : 'DeptoSociosFolhas',
+        path     : 'socios/:id/folhas',
+        component: () => import('pages/Depto/Socios/Folhas.vue')
+      },
     ]
   },
   {
