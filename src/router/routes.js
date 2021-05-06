@@ -412,6 +412,11 @@ const routes = [
         path     : 'administrativo/novo',
         component: () => import('pages/Depto/Administrativo/Create.vue')
       },
+      {
+        name     : 'DeptoServicosAdicionaisIndex',
+        path     : 'servicos-adicionais',
+        component: () => import('pages/Depto/Servicos/Index.vue'),
+      },
     ]
   },
   {
