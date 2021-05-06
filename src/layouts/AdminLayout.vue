@@ -286,7 +286,7 @@ export default {
       ],
       links5         : [
         { icon: 'chevron_right', text: this.$t('Impostos')           , to: { name: 'DeptoImpostoIndex'     }},
-        { icon: 'chevron_right', text: this.$t('Declarações')        , to: { name: 'ContabilExtratosIndex' }},
+        { icon: 'chevron_right', text: this.$t('Declarações')        , to: { name: 'DeptoDeclaracaoIndex'  }},
         { icon: 'chevron_right', text: this.$t('Folhas de Pagamento'), to: { name: 'ContabilExtratosIndex' }},
         { icon: 'chevron_right', text: this.$t('Pro-Labore')         , to: { name: 'ContabilExtratosIndex' }},
         { icon: 'chevron_right', text: this.$t('Funcionários')       , to: { name: 'ContabilExtratosIndex' }},
