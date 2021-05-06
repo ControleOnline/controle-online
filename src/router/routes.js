@@ -372,6 +372,21 @@ const routes = [
         path     : 'pro-labore/:id/editar',
         component: () => import('pages/Depto/Prolabore/Edit.vue')
       },
+      {
+        name     : 'DeptoFuncionariosIndex',
+        path     : 'funcionarios',
+        component: () => import('pages/Depto/Funcionarios/Index.vue'),
+      },
+      {
+        name     : 'DeptoFuncionariosDependentes',
+        path     : 'funcionarios/:id/dependentes',
+        component: () => import('pages/Depto/Funcionarios/Dependentes.vue')
+      },
+      {
+        name     : 'DeptoFuncionariosFolhas',
+        path     : 'funcionarios/:id/folhas',
+        component: () => import('pages/Depto/Funcionarios/Folhas.vue')
+      },
     ]
   },
   {
