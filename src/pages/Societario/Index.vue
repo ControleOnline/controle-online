@@ -4,29 +4,39 @@
       <q-card-section>
         <div class="row">
           <div class="col-12 q-mb-md text-h6 text-left">
-            {{$t('Novo imposto')}}
-          </div>
-          <div class="col-12 q-mb-md">
-            <FormImposto />
+            {{ $t('Societário') }}
           </div>
         </div>
       </q-card-section>
+
+      <SocietarioTabela />
+
     </q-card>
   </q-page>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import FormImposto    from './../../../components/depto/FormImposto';
+import SocietarioTabela from './../../components/societario/SocietarioTabela';
 
 export default {
   components: {
-    FormImposto
+    SocietarioTabela,
+  },
+
+  computed: {
+    user() {
+      return this.$store.getters['auth/user'] || {};
+    },
   },
 
   data () {
     return {
+      currentTab: 'societario',
     }
+  },
+
+  methods: {
+
   },
 }
 </script>

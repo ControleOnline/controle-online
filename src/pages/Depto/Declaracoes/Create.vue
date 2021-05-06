@@ -4,12 +4,10 @@
       <q-card-section>
         <div class="row">
           <div class="col-12 q-mb-md text-h6 text-left">
-            {{$t('Editar imposto')}}
+            {{$t('Nova declaração')}}
           </div>
           <div class="col-12 q-mb-md">
-            <FormImposto
-              :id="id"
-            />
+            <FormDeclaracao />
           </div>
         </div>
       </q-card-section>
@@ -19,22 +17,15 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import FormImposto    from './../../../components/depto/FormImposto';
+import FormDeclaracao from './../../../components/depto/FormDeclaracao';
 
 export default {
   components: {
-    FormImposto
-  },
-
-  created() {
-    if (this.$route.params.id) {
-      this.id = decodeURIComponent(this.$route.params.id);
-    }
+    FormDeclaracao
   },
 
   data () {
     return {
-      id: null,
     }
   },
 }

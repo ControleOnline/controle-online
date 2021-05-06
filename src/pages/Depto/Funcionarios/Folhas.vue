@@ -4,26 +4,24 @@
       <q-card-section>
         <div class="row">
           <div class="col-12 q-mb-md text-h6 text-left">
-            {{$t('Editar imposto')}}
-          </div>
-          <div class="col-12 q-mb-md">
-            <FormImposto
-              :id="id"
-            />
+            {{$t('Funcionários Folhas de Ponto')}}
           </div>
         </div>
       </q-card-section>
+
+      <DeptoFolhasTabela />
+
     </q-card>
   </q-page>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import FormImposto    from './../../../components/depto/FormImposto';
+import { mapGetters }     from 'vuex';
+import DeptoFolhasTabela from './../../../components/depto/DeptoFolhasTabela';
 
 export default {
   components: {
-    FormImposto
+    DeptoFolhasTabela
   },
 
   created() {

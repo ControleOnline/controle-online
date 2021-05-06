@@ -317,6 +317,122 @@ const routes = [
         path     : 'impostos',
         component: () => import('pages/Depto/Impostos/Index.vue'),
       },
+      {
+        name     : 'DeptoImpostoCreate',
+        path     : 'impostos/novo',
+        component: () => import('pages/Depto/Impostos/Create.vue')
+      },
+      {
+        name     : 'DeptoImpostoEdit',
+        path     : 'impostos/:id/editar',
+        component: () => import('pages/Depto/Impostos/Edit.vue')
+      },
+      {
+        name     : 'DeptoDeclaracaoIndex',
+        path     : 'declaracoes',
+        component: () => import('pages/Depto/Declaracoes/Index.vue'),
+      },
+      {
+        name     : 'DeptoDeclaracaoCreate',
+        path     : 'declaracoes/novo',
+        component: () => import('pages/Depto/Declaracoes/Create.vue')
+      },
+      {
+        name     : 'DeptoDeclaracaoEdit',
+        path     : 'declaracoes/:id/editar',
+        component: () => import('pages/Depto/Declaracoes/Edit.vue')
+      },
+      {
+        name     : 'DeptoFolhaPagamentoIndex',
+        path     : 'folhas-pagamento',
+        component: () => import('pages/Depto/Folhas/Index.vue'),
+      },
+      {
+        name     : 'DeptoFolhaPagamentoCreate',
+        path     : 'folhas-pagamento/novo',
+        component: () => import('pages/Depto/Folhas/Create.vue')
+      },
+      {
+        name     : 'DeptoFolhaPagamentoEdit',
+        path     : 'folhas-pagamento/:id/editar',
+        component: () => import('pages/Depto/Folhas/Edit.vue')
+      },
+      {
+        name     : 'DeptoProLaboreIndex',
+        path     : 'pro-labore',
+        component: () => import('pages/Depto/Prolabore/Index.vue'),
+      },
+      {
+        name     : 'DeptoProLaboreCreate',
+        path     : 'pro-labore/novo',
+        component: () => import('pages/Depto/Prolabore/Create.vue')
+      },
+      {
+        name     : 'DeptoProLaboreEdit',
+        path     : 'pro-labore/:id/editar',
+        component: () => import('pages/Depto/Prolabore/Edit.vue')
+      },
+      {
+        name     : 'DeptoFuncionariosIndex',
+        path     : 'funcionarios',
+        component: () => import('pages/Depto/Funcionarios/Index.vue'),
+      },
+      {
+        name     : 'DeptoFuncionariosDependentes',
+        path     : 'funcionarios/:id/dependentes',
+        component: () => import('pages/Depto/Funcionarios/Dependentes.vue')
+      },
+      {
+        name     : 'DeptoFuncionariosFolhas',
+        path     : 'funcionarios/:id/folhas',
+        component: () => import('pages/Depto/Funcionarios/Folhas.vue')
+      },
+      {
+        name     : 'DeptoSociosIndex',
+        path     : 'socios',
+        component: () => import('pages/Depto/Socios/Index.vue'),
+      },
+      {
+        name     : 'DeptoSociosDependentes',
+        path     : 'socios/:id/dependentes',
+        component: () => import('pages/Depto/Socios/Dependentes.vue')
+      },
+      {
+        name     : 'DeptoSociosFolhas',
+        path     : 'socios/:id/folhas',
+        component: () => import('pages/Depto/Socios/Folhas.vue')
+      },
+      {
+        name     : 'DeptoAdministrativoIndex',
+        path     : 'administrativo',
+        component: () => import('pages/Depto/Administrativo/Index.vue'),
+      },
+      {
+        name     : 'DeptoAdministrativoCreate',
+        path     : 'administrativo/novo',
+        component: () => import('pages/Depto/Administrativo/Create.vue')
+      },
+      {
+        name     : 'DeptoServicosAdicionaisIndex',
+        path     : 'servicos-adicionais',
+        component: () => import('pages/Depto/Servicos/Index.vue'),
+      },
+    ]
+  },
+  {
+    path     : '/societario/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'SocietarioIndex',
+        path     : '',
+        component: () => import('pages/Societario/Index.vue'),
+      },
+      {
+        name     : 'SocietarioMessages',
+        path     : ':id/mensagens',
+        component: () => import('pages/Societario/Mensagens.vue'),
+      },
     ]
   },
   {

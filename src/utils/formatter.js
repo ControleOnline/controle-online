@@ -55,3 +55,20 @@ export const formatMoney    = (value, currency, locale) => {
 
   return formatter.format(value);
 };
+
+export const formatDateYmdTodmY = (value, withTime = false) => {
+  let result = value.match(/^(\d{4})\-(\d{2})\-(\d{2})([\w:]*)/);
+
+  if (result === null)
+    return value;
+
+  if (withTime === true && result[4]) {
+    let time = result[4].match(/(\d{2})\:(\d{2})\:(\d{2})/);
+
+    if (time !== null) {
+      return `${result[3]}/${result[2]}/${result[1]} ${time[1]}:${time[2]}:${time[3]}`;
+    }
+  }
+
+  return `${result[3]}/${result[2]}/${result[1]}`;
+};
