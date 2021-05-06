@@ -318,7 +318,7 @@ export default {
       ],
       links6         : [
         {
-          icon: 'chevron_right',
+          icon: 'domain',
           text: this.$t('Societário'),
           to  : {
             name: 'SocietarioIndex'
