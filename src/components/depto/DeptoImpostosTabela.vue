@@ -45,7 +45,7 @@
                   :label="$t('Editar')"
                   size  ="sm"
                   :to   ="{
-                    name  : 'FiscalImpostoEdit',
+                    name  : 'DeptoImpostoEdit',
                     params: {
                       id: props.row.id
                     }
