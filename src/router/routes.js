@@ -317,6 +317,16 @@ const routes = [
         path     : 'impostos',
         component: () => import('pages/Depto/Impostos/Index.vue'),
       },
+      {
+        name     : 'DeptoImpostoCreate',
+        path     : 'impostos/novo',
+        component: () => import('pages/Depto/Impostos/Create.vue')
+      },
+      {
+        name     : 'DeptoImpostoEdit',
+        path     : 'impostos/:id/editar',
+        component: () => import('pages/Depto/Impostos/Edit.vue')
+      },
     ]
   },
   {

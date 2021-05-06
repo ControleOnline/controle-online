@@ -15,7 +15,7 @@
                 color  ="primary"
                 class  ="q-ml-sm"
                 :to    ="{
-                  name: 'FiscalImpostoCreate'
+                  name: 'DeptoImpostoCreate'
                 }"
               />
             </div>
