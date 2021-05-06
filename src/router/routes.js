@@ -357,6 +357,21 @@ const routes = [
         path     : 'folhas-pagamento/:id/editar',
         component: () => import('pages/Depto/Folhas/Edit.vue')
       },
+      {
+        name     : 'DeptoProLaboreIndex',
+        path     : 'pro-labore',
+        component: () => import('pages/Depto/Prolabore/Index.vue'),
+      },
+      {
+        name     : 'DeptoProLaboreCreate',
+        path     : 'pro-labore/novo',
+        component: () => import('pages/Depto/Prolabore/Create.vue')
+      },
+      {
+        name     : 'DeptoProLaboreEdit',
+        path     : 'pro-labore/:id/editar',
+        component: () => import('pages/Depto/Prolabore/Edit.vue')
+      },
     ]
   },
   {
