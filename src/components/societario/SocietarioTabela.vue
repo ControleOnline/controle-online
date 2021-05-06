@@ -18,7 +18,9 @@
                 :label     ="props.row.status"
               />
             </q-td>
-            <q-td key="criacao" :props="props">{{ props.row.criacao }}</q-td>
+            <q-td key="criacao" :props="props">
+              {{ props.row.criacao | formatDate }}
+            </q-td>
             <q-td auto-width>
               <q-btn outline
                 color ="primary"
@@ -41,6 +43,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { formatDateYmdTodmY }     from './../../utils/formatter';
 
 const SETTINGS = {
   columns       : [
@@ -116,7 +119,7 @@ export default {
         nome   : 'Levantamento de Pendências ref 2020',
         empresa: 'ANDRE LUIZ RAMOS 28372525111',
         status : 'Liberada',
-        criada : '2020-05-01 15:30',
+        criacao: '2020-05-01 15:30',
       });
 
       items.push({
@@ -124,7 +127,7 @@ export default {
         nome   : 'PGDAS',
         empresa: 'MARCIO ALAMO MARINHO 11133167843',
         status : 'Liberada',
-        criada : '2020-05-01 15:30',
+        criacao: '2020-05-01 15:30:00',
       });
 
       items.push({
@@ -132,10 +135,16 @@ export default {
         nome   : 'PGDAS',
         empresa: 'ALAN ALAMO MARINHO 09133167843',
         status : 'Liberada',
-        criada : '2020-05-01 15:30',
+        criacao: '2020-05-01 15:30:00',
       });
 
       this.items = items;
+    },
+  },
+
+  filters: {
+    formatDate(value) {
+      return formatDateYmdTodmY(value, true);
     },
   },
 };
