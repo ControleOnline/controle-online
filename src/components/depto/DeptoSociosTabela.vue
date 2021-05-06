@@ -19,33 +19,26 @@
         </template>
         <template v-slot:body="props">
           <q-tr :props="props">
-            <q-td key="nome"    :props="props">{{ props.row.nome    }}</q-td>
-            <q-td key="empresa" :props="props">{{ props.row.empresa }}</q-td>
-            <q-td key="periodo" :props="props">{{ props.row.periodo }}</q-td>
-            <q-td key="pago"    :props="props">
-              <q-badge
-                :color     ="props.row.pago ? 'green' : 'yellow'"
-                :text-color="props.row.pago ? 'white' : 'black'"
-                :label     ="props.row.pago ? 'Sim' : 'Não'"
-              />
-            </q-td>
-            <q-td key="arquivo" :props="props" auto-width>
-              <q-btn
-                color   ="secondary"
-                :label  ="$t('Baixar')"
-                size    ="sm"
-                @click  =""
-                :loading="false"
-              />
-            </q-td>
-            <q-td key="acoes" :props="props">
-              <div class="row q-gutter-xs items-center justify-center">
+            <q-td key="nome"  :props="props">{{ props.row.nome }}</q-td>
+            <q-td key="links" :props="props" auto-width>
+              <div class="col q-gutter-xs items-center">
                 <q-btn outline
                   color ="primary"
-                  :label="$t('Editar')"
+                  :label="$t('Dependentes')"
                   size  ="sm"
                   :to   ="{
-                    name  : 'DeptoImpostoEdit',
+                    name  : 'DeptoSociosDependentes',
+                    params: {
+                      id: props.row.id
+                    }
+                  }"
+                />
+                <q-btn outline
+                  color ="primary"
+                  :label="$t('Folhas de Ponto')"
+                  size  ="sm"
+                  :to   ="{
+                    name  : 'DeptoSociosFolhas',
                     params: {
                       id: props.row.id
                     }
@@ -79,34 +72,8 @@ const SETTINGS = {
       label: 'Nome'
     },
     {
-      name : 'empresa',
-      field: row => row.empresa,
-      align: 'left',
-      label: 'Empresa'
-    },
-    {
-      name : 'periodo',
-      field: row => row.periodo,
-      align: 'left',
-      label: 'Período'
-    },
-    {
-      name : 'pago',
-      field: row => row.pago,
-      align: 'left',
-      label: 'Pago'
-    },
-    {
-      name : 'arquivo',
+      name : 'links',
       field: row => row.id,
-      align: 'left',
-      label: 'Arquivo'
-    },
-    {
-      name : 'acoes',
-      field: row => row.id,
-      align: 'left',
-      label: 'Ações'
     },
   ],
 };
@@ -152,35 +119,23 @@ export default {
       let items  = [];
 
       items.push({
-        id     : 1,
-        nome   : 'DAS',
-        empresa: 'MARIA NISHIKAWO 81071499904',
-        periodo: 'Jan 2021',
-        pago   : true,
+        id  : 1,
+        nome: 'MARIA NISHIKAWO 81071499904',
       });
 
       items.push({
-        id     : 2,
-        nome   : 'DAS',
-        empresa: 'MARCELO AUGUSTO PINTO 11110607847',
-        periodo: 'Jan 2021',
-        pago   : false,
+        id  : 2,
+        nome: 'MARCELO AUGUSTO PINTO 11110607847',
       });
 
       items.push({
-        id     : 3,
-        nome   : 'DAS',
-        empresa: 'Julio Cesar Monte',
-        periodo: 'Mar 2021',
-        pago   : true,
+        id  : 3,
+        nome: 'Julio Cesar Monte',
       });
 
       items.push({
-        id     : 4,
-        nome   : 'DAS',
-        empresa: 'ADRIANA MELINO FRANCA 99906148860',
-        periodo: 'Abr 2021',
-        pago   : true,
+        id  : 4,
+        nome: 'ADRIANA MELINO FRANCA 99906148860',
       });
 
       this.items = items;

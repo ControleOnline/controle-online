@@ -45,7 +45,7 @@
                   :label="$t('Editar')"
                   size  ="sm"
                   :to   ="{
-                    name  : 'DeptoImpostoEdit',
+                    name  : 'DeptoDeclaracaoEdit',
                     params: {
                       id: props.row.id
                     }
@@ -153,7 +153,7 @@ export default {
 
       items.push({
         id     : 1,
-        nome   : 'DAS',
+        nome   : 'DEFIS (Declaração simples)',
         empresa: 'MARIA NISHIKAWO 81071499904',
         periodo: 'Jan 2021',
         pago   : true,
@@ -161,7 +161,7 @@ export default {
 
       items.push({
         id     : 2,
-        nome   : 'DAS',
+        nome   : 'DEFIS (Declaração simples)',
         empresa: 'MARCELO AUGUSTO PINTO 11110607847',
         periodo: 'Jan 2021',
         pago   : false,
@@ -169,7 +169,7 @@ export default {
 
       items.push({
         id     : 3,
-        nome   : 'DAS',
+        nome   : 'DEFIS (Declaração simples)',
         empresa: 'Julio Cesar Monte',
         periodo: 'Mar 2021',
         pago   : true,
@@ -177,7 +177,7 @@ export default {
 
       items.push({
         id     : 4,
-        nome   : 'DAS',
+        nome   : 'DEFIS (Declaração simples)',
         empresa: 'ADRIANA MELINO FRANCA 99906148860',
         periodo: 'Abr 2021',
         pago   : true,

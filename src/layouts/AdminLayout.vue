@@ -187,11 +187,25 @@
             </q-item>
           </q-expansion-item>
 
+          <q-item v-ripple clickable
+            class="GNL__drawer-item"
+            v-for="link in links6"
+            :key ="link.text"
+            :to  ="link.to"
+          >
+            <q-item-section avatar>
+              <q-icon :name="link.icon" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>{{ link.text }}</q-item-label>
+            </q-item-section>
+          </q-item>
+
           <q-separator inset class="q-my-sm" />
 
           <q-item v-ripple clickable
             class="GNL__drawer-item"
-            v-for="link in links6"
+            v-for="link in links7"
             :key ="link.text"
             :to  ="link.to"
           >
@@ -232,10 +246,12 @@ export default {
       leftDrawerOpen : this.$q.screen.gt.sm,
       companySelected: -1,
       links1         : [
-        { icon: 'dashboard' , text: this.$t('Dashboard') , to: { name: 'DashboardIndex'    }},
-        { icon: 'table_view', text: this.$t('Planos')    , to: { name: 'PlansIndex'        }},
-        { icon: 'list'      , text: this.$t('Checklists'), to: { name: 'StepsRegistration' }},
-        { icon: 'business'  , text: this.$t('Empresas')  , to: { name: 'CompaniesIndex'    }},
+        { icon: 'dashboard'    , text: this.$t('Dashboard') , to: { name: 'DashboardIndex'    }},
+        { icon: 'table_view'   , text: this.$t('Planos')    , to: { name: 'PlansIndex'        }},
+        { icon: 'list'         , text: this.$t('Checklists'), to: { name: 'StepsRegistration' }},
+        { icon: 'business'     , text: this.$t('Empresas')  , to: { name: 'CompaniesIndex'    }},
+        { icon: 'person'       , text: this.$t('Clientes')  , to: { name: 'ClientsIndex'      }},
+        { icon: 'library_books', text: this.$t('Contratos') , to: { name: 'ContractIndex'     }},
       ],
       links2         : [
         { icon: 'chevron_right', text: this.$t('Fiscal')        , to: { name: 'AuditFiscalIndex'       }},
@@ -285,18 +301,32 @@ export default {
         },
       ],
       links5         : [
-        { icon: 'chevron_right', text: this.$t('Impostos')           , to: { name: 'DeptoImpostoIndex'     }},
-        { icon: 'chevron_right', text: this.$t('Declarações')        , to: { name: 'ContabilExtratosIndex' }},
-        { icon: 'chevron_right', text: this.$t('Folhas de Pagamento'), to: { name: 'ContabilExtratosIndex' }},
-        { icon: 'chevron_right', text: this.$t('Pro-Labore')         , to: { name: 'ContabilExtratosIndex' }},
-        { icon: 'chevron_right', text: this.$t('Funcionários')       , to: { name: 'ContabilExtratosIndex' }},
-        { icon: 'chevron_right', text: this.$t('Sócios')             , to: { name: 'ContabilExtratosIndex' }},
-        { icon: 'chevron_right', text: this.$t('Administrativo')     , to: { name: 'ContabilExtratosIndex' }},
-        { icon: 'chevron_right', text: this.$t('Serviços Adicionais'), to: { name: 'ContabilExtratosIndex' }},
+        { icon: 'chevron_right', text: this.$t('Impostos')           , to: { name: 'DeptoImpostoIndex'        }},
+        { icon: 'chevron_right', text: this.$t('Declarações')        , to: { name: 'DeptoDeclaracaoIndex'     }},
+        { icon: 'chevron_right', text: this.$t('Folhas de Pagamento'), to: { name: 'DeptoFolhaPagamentoIndex' }},
+        { icon: 'chevron_right', text: this.$t('Pro-Labore')         , to: { name: 'DeptoProLaboreIndex'      }},
+        { icon: 'chevron_right', text: this.$t('Funcionários')       , to: { name: 'DeptoFuncionariosIndex'   }},
+        { icon: 'chevron_right', text: this.$t('Sócios')             , to: { name: 'DeptoSociosIndex'         }},
+        { icon: 'chevron_right', text: this.$t('Administrativo')     , to: { name: 'DeptoAdministrativoIndex' }},
+        {
+          icon: 'chevron_right',
+          text: this.$t('Serviços Adicionais'),
+          to  : {
+            name: 'DeptoServicosAdicionaisIndex'
+          }
+        },
       ],
       links6         : [
-        { icon: 'person'       , text: this.$t('Clientes') , to: { name: 'ClientsIndex'  }},
-        { icon: 'library_books', text: this.$t('Contratos'), to: { name: 'ContractIndex' }},
+        {
+          icon: 'domain',
+          text: this.$t('Societário'),
+          to  : {
+            name: 'SocietarioIndex'
+          }
+        },
+      ],
+      links7         : [
+
       ],
     };
   },

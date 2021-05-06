@@ -4,12 +4,10 @@
       <q-card-section>
         <div class="row">
           <div class="col-12 q-mb-md text-h6 text-left">
-            {{$t('Editar imposto')}}
+            {{$t('Nova Folha de Pagamento')}}
           </div>
           <div class="col-12 q-mb-md">
-            <FormImposto
-              :id="id"
-            />
+            <FormFolhaPagamento />
           </div>
         </div>
       </q-card-section>
@@ -18,23 +16,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import FormImposto    from './../../../components/depto/FormImposto';
+import { mapGetters }     from 'vuex';
+import FormFolhaPagamento from './../../../components/depto/FormFolhaPagamento';
 
 export default {
   components: {
-    FormImposto
-  },
-
-  created() {
-    if (this.$route.params.id) {
-      this.id = decodeURIComponent(this.$route.params.id);
-    }
+    FormFolhaPagamento
   },
 
   data () {
     return {
-      id: null,
     }
   },
 }
