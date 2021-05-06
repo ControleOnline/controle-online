@@ -327,6 +327,21 @@ const routes = [
         path     : 'impostos/:id/editar',
         component: () => import('pages/Depto/Impostos/Edit.vue')
       },
+      {
+        name     : 'DeptoDeclaracaoIndex',
+        path     : 'declaracoes',
+        component: () => import('pages/Depto/Declaracoes/Index.vue'),
+      },
+      {
+        name     : 'DeptoDeclaracaoCreate',
+        path     : 'declaracoes/novo',
+        component: () => import('pages/Depto/Declaracoes/Create.vue')
+      },
+      {
+        name     : 'DeptoDeclaracaoEdit',
+        path     : 'declaracoes/:id/editar',
+        component: () => import('pages/Depto/Declaracoes/Edit.vue')
+      },
     ]
   },
   {
