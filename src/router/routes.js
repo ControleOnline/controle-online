@@ -402,6 +402,16 @@ const routes = [
         path     : 'socios/:id/folhas',
         component: () => import('pages/Depto/Socios/Folhas.vue')
       },
+      {
+        name     : 'DeptoAdministrativoIndex',
+        path     : 'administrativo',
+        component: () => import('pages/Depto/Administrativo/Index.vue'),
+      },
+      {
+        name     : 'DeptoAdministrativoCreate',
+        path     : 'administrativo/novo',
+        component: () => import('pages/Depto/Administrativo/Create.vue')
+      },
     ]
   },
   {
