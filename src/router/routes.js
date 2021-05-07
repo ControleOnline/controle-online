@@ -474,6 +474,27 @@ const routes = [
     ]
   },
   {
+    path     : '/servicos-adicionais/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'ServicosAdicionaisIndex',
+        path     : '',
+        component: () => import('pages/Servicos/Index.vue'),
+      },
+      {
+        name     : 'ServicosAdicionaisCreate',
+        path     : 'novo',
+        component: () => import('pages/Servicos/Create.vue')
+      },
+      {
+        name     : 'ServicosAdicionaisEdit',
+        path     : ':id',
+        component: () => import('pages/Servicos/Edit.vue'),
+      },
+    ]
+  },
+  {
     path: '*', redirect: '/home/dashboard'
   },
 ]
