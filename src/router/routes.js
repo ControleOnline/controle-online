@@ -463,6 +463,17 @@ const routes = [
     ]
   },
   {
+    path     : '/assinaturas/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'AssinaturasIndex',
+        path     : '',
+        component: () => import('pages/Assinatura/Index.vue'),
+      },
+    ]
+  },
+  {
     path: '*', redirect: '/home/dashboard'
   },
 ]

@@ -338,6 +338,13 @@ export default {
             name: 'FinanceiroIndex'
           }
         },
+        {
+          icon: 'request_quote',
+          text: this.$t('Assinaturas'),
+          to  : {
+            name: 'AssinaturasIndex'
+          }
+        },
       ],
       links7         : [
 
