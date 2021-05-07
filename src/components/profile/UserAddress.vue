@@ -4,7 +4,6 @@
       <q-table flat
         :data           ="items"
         :columns        ="settings.columns"
-        :visible-columns="settings.visibleColumns"
         row-key         ="id"
         :loading        ="isLoading"
       >
@@ -28,21 +27,22 @@
 
         <template v-slot:body="props">
           <q-tr :props="props">
-            <q-td key="postalCode"  :props="props">{{ props.cols[0].value }}</q-td>
-            <q-td key="street"      :props="props">{{ props.cols[1].value }}</q-td>
-            <q-td key="number"      :props="props">{{ props.cols[2].value }}</q-td>
-            <q-td key="complement"  :props="props">{{ props.cols[3].value }}</q-td>
-            <q-td key="district"    :props="props">{{ props.cols[4].value }}</q-td>
-            <q-td key="cityName"    :props="props">{{ props.cols[5].value }}</q-td>
-            <q-td key="stateName"   :props="props">{{ props.cols[6].value }}</q-td>
-            <q-td key="countryName" :props="props">{{ props.cols[7].value }}</q-td>
+            <q-td key="nickname"    :props="props">{{ props.cols[0].value }}</q-td>
+            <q-td key="postalCode"  :props="props">{{ props.cols[1].value }}</q-td>
+            <q-td key="street"      :props="props">{{ props.cols[2].value }}</q-td>
+            <q-td key="number"      :props="props">{{ props.cols[3].value }}</q-td>
+            <q-td key="complement"  :props="props">{{ props.cols[4].value }}</q-td>
+            <q-td key="district"    :props="props">{{ props.cols[5].value }}</q-td>
+            <q-td key="cityName"    :props="props">{{ props.cols[6].value }}</q-td>
+            <q-td key="stateName"   :props="props">{{ props.cols[7].value }}</q-td>
+            <q-td key="countryName" :props="props">{{ props.cols[8].value }}</q-td>
             <q-td auto-width>
               <q-btn flat round dense
-              color   ="red"
-              icon    ="delete"
-              @click  ="removeItem(props.row)"
-              :disable="items.length == 1"
-              :loading="props.row._bussy"
+                color   ="red"
+                icon    ="delete"
+                @click  ="removeItem(props.row)"
+                :disable="items.length == 1"
+                :loading="props.row._bussy"
               />
             </q-td>
           </q-tr>
@@ -72,56 +72,59 @@ import { mapActions, mapGetters } from 'vuex';
 import { formatCEP  }             from './../../utils/formatter';
 
 const SETTINGS = {
-  visibleColumns: [
-    'postalCode' ,
-    'street'     ,
-    'number'     ,
-    'complement' ,
-    'district'   ,
-    'cityName'   ,
-    'stateName'  ,
-    'countryName',
-    'action'     ,
-  ],
   columns       : [
+    {
+      name : 'nickname',
+      field: row => row.nickname,
+      align: 'left',
+      label: 'Apelido'
+    },
     {
       name : 'postalCode',
       field: row => formatCEP(`${row.postalCode}`),
+      align: 'left',
       label: 'CEP'
     },
     {
       name : 'street',
       field: row => row.street,
+      align: 'left',
       label: 'Rua / Avenida'
     },
     {
       name : 'number',
       field: row => row.number,
+      align: 'left',
       label: 'Número'
     },
     {
       name : 'complement',
       field: row => row.complement,
+      align: 'left',
       label: 'Complemento'
     },
     {
       name : 'district',
       field: row => row.district,
+      align: 'left',
       label: 'Bairro'
     },
     {
       name : 'cityName',
       field: row => row.city,
+      align: 'left',
       label: 'Cidade'
     },
     {
       name : 'stateName',
       field: row => row.state,
+      align: 'left',
       label: 'Estado'
     },
     {
       name : 'countryName',
       field: row => row.country,
+      align: 'left',
       label: 'País'
     },
     { name: 'action' },
@@ -132,10 +135,10 @@ Object.freeze(SETTINGS);
 
 export default {
   props: {
-    companyId: {
-      type    : Number,
+    id: {
       required: true,
-    },
+      default : null,
+    }
   },
 
   components: {
@@ -152,13 +155,18 @@ export default {
   },
 
   created() {
-    this.onRequest();
+      this.onRequest();
   },
 
   computed: {
     ...mapGetters({
-      isLoading: 'profile/isLoading',
+      isLoading: 'profile/isLoading'    ,
+      myCompany: 'people/currentCompany',
     }),
+
+    user() {
+      return this.$store.getters['auth/user'];
+    },
   },
 
   methods: {
@@ -169,12 +177,12 @@ export default {
 
     onSave(data) {
       this.save({
-        id       : this.companyId,
+        id       : this.user.people,
         component: 'address',
         payload  : {
           "operation": "post",
           "payload"  : {
-            nickname   : '',
+            nickname   : data.nickname,
             country    : data.country,
             state      : data.state,
             city       : data.city,
@@ -215,7 +223,7 @@ export default {
         item._bussy = true;
 
         this.save({
-          id       : this.companyId,
+          id       : this.user.people,
           component: 'address',
           payload  : {
             "operation": "delete",
@@ -249,11 +257,11 @@ export default {
     },
 
     onRequest() {
-      let params = {};
+      let params = {
+        people: this.id
+      };
 
       this.items = [];
-
-      params['myCompany'] = this.companyId;
 
       this.getItems(params)
         .then(items => {

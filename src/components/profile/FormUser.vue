@@ -1,25 +1,27 @@
 <template>
   <q-form ref="myForm" @submit="onSubmit" class="q-mt-md">
-    <q-select stack-label
-        label   ="Tipo de documento"
-        v-model="item.type"
-        :options="settings.select.doctypes"
-    >
-        <template v-slot:no-option>
-            <q-item>
-                <q-item-section class="text-grey">
-                Sem resultados
-                </q-item-section>
-            </q-item>
-        </template>
-    </q-select>
+    <q-input lazy-rules stack-label
+      v-model="item.username"
+      type   ="text"
+      label  ="Nome de usuário"
+      class  ="q-mt-md"
+      :rules ="[isInvalid('username')]"
+    />
 
     <q-input lazy-rules stack-label
-      v-model="item.document"
-      type   ="text"
-      label  ="Documento"
+      v-model="item.password"
+      type   ="password"
+      label  ="Senha"
       class  ="q-mt-md"
-      :rules ="[isInvalid('phone')]"
+      :rules ="[isInvalid('password')]"
+    />
+
+    <q-input lazy-rules stack-label
+      v-model="item.confirm"
+      type   ="password"
+      label  ="Confirme sua senha"
+      class  ="q-mt-md"
+      :rules ="[isInvalid('confirm')]"
     />
 
     <div class="row justify-end">
@@ -37,33 +39,11 @@
 </template>
 
 <script>
-const SETTINGS = {
-  select        : {
-    doctypes: [
-      {
-        label: 'CNPJ',
-        value: 3,
-      },
-      {
-        label: 'Inscrição Estadual',
-        value: 4,
-      },
-      {
-        label: 'Inscrição Municipal',
-        value: 5,
-      },
-    ],
-  },
-};
-
-Object.freeze(SETTINGS);
-
 export default {
   data() {
     return {
-      settings: SETTINGS,
-      item    : {},
-      saving  : false,
+      saving: false,
+      item  : {},
     };
   },
 
@@ -73,8 +53,8 @@ export default {
         .then(success => {
           if (success) {
             let payload = {
-              "type"    : this.item.type,
-              "document": this.item.document,
+              "username": this.item.username,
+              "password": this.item.password,
             };
 
             this.saving = true;
@@ -94,6 +74,14 @@ export default {
           case 'email'   :
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))
               return 'O email informado não é válido';
+          break;
+          case 'password':
+            if (!val || val.length < 6)
+              return 'A senha deve ser no mínimo de 6 caracteres';
+          break;
+          case 'confirm' :
+            if (this.item.password != this.item.confirm)
+              return 'As senhas não coincidem';
           break;
           default:
             if (!(val && val.length > 0))

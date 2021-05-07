@@ -34,13 +34,6 @@ const routes = [
     ]
   },
   {
-    path     : '/usuario/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      { name: 'UserProfile', path: 'profile', component: () => import('pages/User/Profile.vue') },
-    ]
-  },
-  {
     path     : '/soporte/',
     component: () => import('layouts/AdminLayout.vue'),
     children : [
@@ -50,18 +43,34 @@ const routes = [
     ]
   },
   {
-    path     : '/minha-empresa/',
+    path     : '/minhas-empresas/',
     component: () => import('layouts/AdminLayout.vue'),
     children : [
       {
-        name     : 'CompanyIndex',
         path     : '',
+        name     : 'MyCompaniesIndex',
         component: () => import('pages/Company/Index.vue')
       },
       {
-        name     : 'CompanyDetailsPage',
-        path     : 'id/:id',
+        path     : ':id',
+        name     : 'MyCompanyDetails',
         component: () => import('pages/Company/Details.vue')
+      },
+      {
+        path     : ':id/funcionarios/:employeeId',
+        name     : 'MyCompanyEmployee',
+        component: () => import('pages/Company/Employee.vue')
+      },
+    ]
+  },
+  {
+    path     : '/meu-perfil/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        path     : '',
+        name     : 'MyProfileIndex',
+        component: () => import('pages/User/Profile.vue')
       },
     ]
   },

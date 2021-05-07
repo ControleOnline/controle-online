@@ -41,16 +41,12 @@ const SETTINGS = {
   select        : {
     doctypes: [
       {
-        label: 'CNPJ',
-        value: 3,
+        label: 'R.G.',
+        value: 1,
       },
       {
-        label: 'Inscrição Estadual',
-        value: 4,
-      },
-      {
-        label: 'Inscrição Municipal',
-        value: 5,
+        label: 'CPF',
+        value: 2,
       },
     ],
   },
