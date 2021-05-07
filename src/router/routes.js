@@ -436,6 +436,22 @@ const routes = [
     ]
   },
   {
+    path     : '/vendas/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'VendasIndex',
+        path     : '',
+        component: () => import('pages/Vendas/Index.vue'),
+      },
+      {
+        name     : 'VendasEdit',
+        path     : ':id',
+        component: () => import('pages/Vendas/Edit.vue'),
+      },
+    ]
+  },
+  {
     path: '*', redirect: '/home/dashboard'
   },
 ]

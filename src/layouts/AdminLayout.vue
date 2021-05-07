@@ -324,6 +324,13 @@ export default {
             name: 'SocietarioIndex'
           }
         },
+        {
+          icon: 'shopping_bag',
+          text: this.$t('Vendas'),
+          to  : {
+            name: 'VendasIndex'
+          }
+        },
       ],
       links7         : [
 
