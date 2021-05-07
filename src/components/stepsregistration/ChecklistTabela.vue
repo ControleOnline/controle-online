@@ -14,29 +14,29 @@
             <q-td key="cpfResponsavel" :props="props">{{ props.row.cpfResponsavel }}</q-td>
             <q-td key="cnpj"           :props="props">{{ props.row.cnpj           }}</q-td>
             <q-td key="status"         :props="props">{{ props.row.status         }}</q-td>
-            <q-td auto-width>
-              <q-btn outline
-                :label="$t('Analisar')"
-                size  ="sm"
-                :to   ="{
-                  name  : 'StepsRegistrationAnalysis',
-                  params: {
-                    id: 1616532664
-                  }
-                }"
-              />
-            </q-td>
-            <q-td auto-width>
-              <q-btn outline
-                :label="$t('Histórico')"
-                size  ="sm"
-                :to   ="{
-                  name  : 'StepsRegistrationHistory',
-                  params: {
-                    id: 34
-                  }
-                }"
-              />
+            <q-td key="acoes"          :props="props">
+              <div class="col q-gutter-xs items-center justify-center">
+                <q-btn outline
+                  :label="$t('Analisar')"
+                  size  ="sm"
+                  :to   ="{
+                    name  : 'StepsRegistrationAnalysis',
+                    params: {
+                      id: 1616532664
+                    }
+                  }"
+                />
+                <q-btn outline
+                  :label="$t('Histórico')"
+                  size  ="sm"
+                  :to   ="{
+                    name  : 'StepsRegistrationHistory',
+                    params: {
+                      id: 34
+                    }
+                  }"
+                />
+              </div>
             </q-td>
           </q-tr>
         </template>
@@ -80,8 +80,7 @@ const SETTINGS = {
       align: 'left',
       label: 'Status'
     },
-    { name: 'analisar'  },
-    { name: 'historico' },
+    { name: 'acoes'  },
   ],
 };
 

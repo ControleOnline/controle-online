@@ -34,13 +34,6 @@ const routes = [
     ]
   },
   {
-    path     : '/usuario/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      { name: 'UserProfile', path: 'profile', component: () => import('pages/User/Profile.vue') },
-    ]
-  },
-  {
     path     : '/soporte/',
     component: () => import('layouts/AdminLayout.vue'),
     children : [
@@ -50,18 +43,34 @@ const routes = [
     ]
   },
   {
-    path     : '/minha-empresa/',
+    path     : '/minhas-empresas/',
     component: () => import('layouts/AdminLayout.vue'),
     children : [
       {
-        name     : 'CompanyIndex',
         path     : '',
+        name     : 'MyCompaniesIndex',
         component: () => import('pages/Company/Index.vue')
       },
       {
-        name     : 'CompanyDetailsPage',
-        path     : 'id/:id',
+        path     : ':id',
+        name     : 'MyCompanyDetails',
         component: () => import('pages/Company/Details.vue')
+      },
+      {
+        path     : ':id/funcionarios/:employeeId',
+        name     : 'MyCompanyEmployee',
+        component: () => import('pages/Company/Employee.vue')
+      },
+    ]
+  },
+  {
+    path     : '/meu-perfil/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        path     : '',
+        name     : 'MyProfileIndex',
+        component: () => import('pages/User/Profile.vue')
       },
     ]
   },
@@ -432,6 +441,65 @@ const routes = [
         name     : 'SocietarioMessages',
         path     : ':id/mensagens',
         component: () => import('pages/Societario/Mensagens.vue'),
+      },
+    ]
+  },
+  {
+    path     : '/vendas/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'VendasIndex',
+        path     : '',
+        component: () => import('pages/Vendas/Index.vue'),
+      },
+      {
+        name     : 'VendasEdit',
+        path     : ':id',
+        component: () => import('pages/Vendas/Edit.vue'),
+      },
+    ]
+  },
+  {
+    path     : '/financeiro/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'FinanceiroIndex',
+        path     : '',
+        component: () => import('pages/Financeiro/Index.vue'),
+      },
+    ]
+  },
+  {
+    path     : '/assinaturas/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'AssinaturasIndex',
+        path     : '',
+        component: () => import('pages/Assinatura/Index.vue'),
+      },
+    ]
+  },
+  {
+    path     : '/servicos-adicionais/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'ServicosAdicionaisIndex',
+        path     : '',
+        component: () => import('pages/Servicos/Index.vue'),
+      },
+      {
+        name     : 'ServicosAdicionaisCreate',
+        path     : 'novo',
+        component: () => import('pages/Servicos/Create.vue')
+      },
+      {
+        name     : 'ServicosAdicionaisEdit',
+        path     : ':id',
+        component: () => import('pages/Servicos/Edit.vue'),
       },
     ]
   },

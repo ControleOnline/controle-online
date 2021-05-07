@@ -39,7 +39,7 @@
               />
             </q-td>
             <q-td key="acoes" :props="props">
-              <div class="row q-gutter-xs items-center justify-center">
+              <div class="col q-gutter-xs items-center justify-center">
                 <q-btn outline
                   color ="primary"
                   :label="$t('Editar')"

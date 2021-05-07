@@ -1,19 +1,19 @@
-import * as actions from './actions';
-import * as getters from './getters';
-import mutations    from './mutations';
+import * as actions from './actions'
+import * as getters from './getters'
+import mutations from './mutations'
 
 export default {
   namespaced: true,
-  state     : {
-    isLoading : false,
-    error     : '',
+  state: {
+    isLoading: false,
+    error: '',
     violations: null,
-    retrieved : null,
+    retrieved: null,
     totalItems: 10,
-    items     : [],
-    view      : [],
+    items: [],
+    view: []
   },
   actions,
   getters,
-  mutations,
-};
+  mutations
+}
