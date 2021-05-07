@@ -1,24 +1,22 @@
-import Vue              from "vue";
-import Vuex             from "vuex";
+import Vue             from "vue";
+import Vuex            from "vuex";
 
-import auth             from "./modules/auth";
-import gmaps            from "./modules/gmaps";
-import quote            from "./modules/quote";
-import people           from "./modules/people";
-import config           from "./modules/config";
-import salesOrder       from "./modules/order/sales";
-import purchasingOrder  from "./modules/order/purchasing";
-import comissionOrder   from "./modules/order/comission";
-import receiveInvoice   from "./modules/invoice/receive";
-import comissionInvoice from "./modules/invoice/comission";
-import payInvoice       from "./modules/invoice/pay";
-import profile          from "./modules/profile";
-import support          from "./modules/support";
-import user             from "./modules/user";
-import dashboard        from "./modules/dashboard";
-import client           from "./modules/client";
-import contracts        from "./modules/contracts";
-import particulars      from "./modules/particulars";
+import auth            from "./modules/auth";
+import gmaps           from "./modules/gmaps";
+import people          from "./modules/people";
+import config          from "./modules/config";
+import salesOrder      from "./modules/order/sales";
+import purchasingOrder from "./modules/order/purchasing";
+import comissionOrder  from "./modules/order/comission";
+import receiveInvoice  from "./modules/invoice/receive";
+import payInvoice      from "./modules/invoice/pay";
+import profile         from "./modules/profile";
+import support         from "./modules/support";
+import user            from "./modules/user";
+import dashboard       from "./modules/dashboard";
+import client          from "./modules/client";
+import contracts       from "./modules/contracts";
+import expense         from "./modules/expense";
 
 Vue.use(Vuex);
 
@@ -36,14 +34,12 @@ export default function(/* { ssrContext } */) {
     modules: {
       auth,
       gmaps,
-      quote,
       people,
       config,
       salesOrder,
       purchasingOrder,
       comissionOrder,
       receiveInvoice,
-      comissionInvoice,
       payInvoice,
       profile,
       support,
@@ -51,7 +47,7 @@ export default function(/* { ssrContext } */) {
       dashboard,
       client,
       contracts,
-      particulars,
+      expense,
     },
 
     // enable strict mode (adds overhead!)

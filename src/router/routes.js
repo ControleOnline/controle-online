@@ -452,6 +452,17 @@ const routes = [
     ]
   },
   {
+    path     : '/financeiro/',
+    component: () => import('layouts/AdminLayout.vue'),
+    children : [
+      {
+        name     : 'FinanceiroIndex',
+        path     : '',
+        component: () => import('pages/Financeiro/Index.vue'),
+      },
+    ]
+  },
+  {
     path: '*', redirect: '/home/dashboard'
   },
 ]
