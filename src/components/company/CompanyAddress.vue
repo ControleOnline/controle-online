@@ -69,7 +69,7 @@
 import { date, extend }           from 'quasar';
 import FormAddress                from './FormAddress';
 import { mapActions, mapGetters } from 'vuex';
-import { formatCEP  }             from '../../utils/formatter';
+import { formatCEP  }             from './../../utils/formatter';
 
 const SETTINGS = {
   visibleColumns: [

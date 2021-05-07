@@ -2,6 +2,25 @@
   <q-page padding>
     <div class="row">
       <div class="col-12">
+        <q-card class="q-mb-sm">
+          <q-card-section>
+            <q-breadcrumbs>
+              <q-breadcrumbs-el
+                icon="home"
+                :to ="{ name: 'DashboardIndex' }"
+              />
+              <q-breadcrumbs-el
+                label="Checklists"
+                icon ="list"
+                :to  ="{ name: 'StepsRegistration' }"
+              />
+              <q-breadcrumbs-el
+                label="Histórico"
+              />
+            </q-breadcrumbs>
+          </q-card-section>
+        </q-card>
+
         <q-card style="min-height: 90vh;">
           <q-card-section>
             <HistoricoTabela

@@ -28,18 +28,13 @@
       <template v-slot:item="props">
         <div class="q-pa-xs col-xs-12 col-sm-4 col-md-3 col-lg-2">
           <q-card>
-            <q-img basic v-if="props.row.logo == null"
-              src="./../../assets/business.png"
+            <q-img
+              :contain="true"
+              src     ="~assets/business.png"
+              style   ="height: 100px; max-width: 100%"
             >
               <div class="absolute-bottom text-subtitle1 text-center">
-                {{ props.row.alias }}
-              </div>
-            </q-img>
-            <q-img basic v-else
-              :src="props.row.logo"
-            >
-              <div class="absolute-bottom text-subtitle1 text-center">
-                {{ props.row.alias }}
+                {{ props.row.name || props.row.alias }}
               </div>
             </q-img>
             <q-card-section>
@@ -59,12 +54,17 @@
               <q-btn flat round dense
                 color   ="primary"
                 icon    ="edit"
-                @click  ="editItem(props.row)"
+                :to     ="{
+                  name  : 'MyCompanyDetails',
+                  params: {
+                    id: props.row.id
+                  }
+                }"
                 :disable="props.row._bussy"
               >
                 <q-tooltip>Editar</q-tooltip>
               </q-btn>
-            </q-card-actions>             
+            </q-card-actions>
           </q-card>
         </div>
       </template>
@@ -94,8 +94,8 @@
 <script>
 import { date, extend }           from 'quasar';
 import { mapActions, mapGetters } from 'vuex';
-import FormCompany                from '../user/signup/Company';
-import { formatDocument }         from '../../utils/formatter';
+import FormCompany                from './../user/signup/Company';
+import { formatDocument }         from './../../utils/formatter';
 
 export default {
   components: {
@@ -115,21 +115,11 @@ export default {
     this.onRequest();
   },
 
-  computed: {
-    ...mapGetters({
-      companies: 'people/companies',
-    }),
-  },
-
   methods: {
     ...mapActions({
-      getItems: 'people/myCompanies',
+      getItems: 'people/getMyCompanies',
       save    : 'people/company'    ,
     }),
-
-    editItem(company) {
-      this.$router.push({ name: 'CompanyDetailsPage', params: { id: company.id }});
-    },
 
     onSaved(hasErrors) {
       if (hasErrors == false) {
@@ -139,12 +129,12 @@ export default {
     },
 
     setCompanies(companies) {
-      this.items = [];
+      let _companies = [];
 
       for (let index in companies) {
-        this.items.push({
+        _companies.push({
           id      : companies[index].id,
-          alias   : companies[index].alias,
+          alias   : companies[index].name || companies[index].alias,
           logo    : (
             companies[index].logo !== null ?
               `https://${companies[index].logo.domain}${companies[index].logo.url}` : null
@@ -153,6 +143,8 @@ export default {
           _bussy  : false,
         });
       }
+
+      this.items = _companies;
     },
 
     onRequest() {

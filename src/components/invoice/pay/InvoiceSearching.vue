@@ -9,10 +9,23 @@
         row-key         ="id"
         :visible-columns="settings.visibleColumns"
         style           ="min-height: 90vh;"
+        :rows-per-page-options="[5, 10, 15, 20, 25, 50]"
     >
       <template v-slot:top v-if="search === true">
-        <div class="col-xs-12 q-pb-md text-h6">
-          Faturas
+        <div class="col-xs-12 col-sm-6 q-pb-md text-h6">
+          {{ $t('Contas a pagar') }}
+        </div>
+        <div class="col-xs-12 col-sm-6 q-mb-md">
+          <div class="row justify-end">
+            <q-btn
+              label   ="Adicionar despesa"
+              icon    ="add"
+              size    ="md"
+              color   ="primary"
+              class   ="q-ml-sm"
+              @click  ="dialogs.expense.visible = true"
+            />
+          </div>
         </div>
         <div class="col-sm-6 col-xs-12 q-pa-md">
           <q-input stack-label
@@ -45,9 +58,9 @@
         <q-tr :props="props">
           <q-td key="id"             :props="props">
             <q-btn outline dense
-              :to   ="{ name: 'InvoiceDetails', params: { id: props.row.id } }"
+              :to   ="{ name: 'Admin.InvoicePay.Details', params: { id: props.row.id } }"
               :label="props.cols[0].value"
-              :style="{color:props.row.color_status}"              
+              :style="{color:props.row.color_status}"
               class ="full-width"
             />
           </q-td>
@@ -90,7 +103,12 @@
                   <q-btn flat
                     color ="primary"
                     :label="`Ver pedido #${orderId}`"
-                    :to   ="{ name: 'OrderDetails', params: { id: orderId } }"
+                    :to   ="{
+                      name  : 'Admin.OrderPurchasing.Details',
+                      params: {
+                        id: orderId
+                      }
+                    }"
                   />
                 </td>
               </tr>
@@ -99,13 +117,27 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+
+    <q-dialog v-model="dialogs.expense.visible">
+      <q-card style="width: 700px; max-width: 80vw;">
+        <q-card-section class="row items-center">
+          <div class="text-h6">Nova despesa</div>
+          <q-space />
+          <q-btn icon="close" flat round dense v-close-popup />
+        </q-card-section>
+        <q-card-section>
+          <CreateExpense />
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
 <script>
-import { date, extend }           from 'quasar';
-import { formatMoney  }           from '../../../utils/formatter';
-import { mapActions, mapGetters } from 'vuex';
+import { date, extend }                    from 'quasar';
+import { mapActions, mapGetters }          from 'vuex';
+import { formatMoney, formatDateYmdTodmY } from './../../../utils/formatter';
+import CreateExpense                       from './../expense/CreateExpense';
 
 const SETTINGS = {
   visibleColumns: [
@@ -137,7 +169,7 @@ const SETTINGS = {
       field : 'dataVencimento',
       align : 'left',
       format: (val, row) => {
-        return date.formatDate(val, 'DD/MM/YYYY')
+        return formatDateYmdTodmY(val);
       },
       label : 'Data vencimento'
     },
@@ -145,7 +177,7 @@ const SETTINGS = {
       name : 'fornecedor',
       field: 'fornecedor',
       align: 'left',
-      label: 'Fornecedor'
+      label: 'Prestador'
     },
     {
       name  : 'status',
@@ -168,6 +200,10 @@ const SETTINGS = {
 Object.freeze(SETTINGS);
 
 export default {
+  components: {
+    CreateExpense,
+  },
+
   props: {
     search : {
       type    : Boolean,
@@ -210,6 +246,9 @@ export default {
           visible: false,
           items  : [],
           invoice: null,
+        },
+        expense: {
+          visible: false,
         },
       },
       data           : [],
@@ -276,7 +315,7 @@ export default {
           'pedidos'       : orders,
           'color_status'  : item.invoiceStatus.color,
           'dataVencimento': item.dueDate,
-          'fornecedor'    : item.order[0].order.provider.alias,
+          'fornecedor'    : `${item.order[0].order.provider.name} ${item.order[0].order.provider.alias}`,
           'status'        : item.invoiceStatus.status,
           'preco'         : item.price,
         });

@@ -6,9 +6,9 @@
       :pagination.sync="pagination"
       @request        ="onRequest"
       row-key         ="id"
-      :visible-columns="settings.visibleColumns"
       style           ="min-height: 90vh;"
-  >    
+      :rows-per-page-options="[5, 10, 15, 20, 25, 50]"
+  >
     <template v-slot:body="props">
       <q-tr :props="props">
         <q-td key="id"                :props="props">
@@ -17,24 +17,15 @@
             :label="`#${props.row.id}`"
             :style="{color:props.row.color_status}"
             class ="full-width"
-          />		  
+          />
         </q-td>
-        <q-td key="notaFiscal"        :props="props">{{ props.row.notaFiscal }}</q-td>        
+        <q-td key="notaFiscal"        :props="props">{{ props.row.notaFiscal }}</q-td>
         <q-td key="dataPedido"        :props="props">{{ props.cols[2].value }}</q-td>
         <q-td key="ultimaModificacao" :props="props">{{ props.cols[3].value }}</q-td>
         <q-td key="status"            :props="props" :style="{color:props.row.color_status}">
           {{ $t(`order.statuses.${props.row.status}`) }}
         </q-td>
-        <q-td key="coleta"            :props="props">
-          {{ props.row.localColeta  }}<br/>{{ props.row.coleta  }}
-        </q-td>
-        <q-td key="entrega"           :props="props">
-          {{ props.row.localEntrega }}<br/>{{ props.row.entrega }}
-        </q-td>
-        <q-td key="transportadora"    :props="props">
-          {{ props.row.transportadora }}
-        </q-td>        
-        <q-td key="preco"             :props="props">{{ props.cols[8].value }}</q-td>
+        <q-td key="preco"             :props="props">{{ props.cols[5].value }}</q-td>
       </q-tr>
     </template>
   </q-table>
@@ -46,17 +37,6 @@ import { formatMoney  }           from '../../../../utils/formatter';
 import { mapActions, mapGetters } from 'vuex';
 
 const SETTINGS = {
-  visibleColumns: [
-    'id'               ,
-    'notaFiscal'       ,
-    'dataPedido'       ,
-    'ultimaModificacao',
-    'status'           ,
-    'coleta'           ,
-    'entrega'          ,
-    'transportadora'   ,    
-    'preco'            ,
-  ],
   columns       : [
     {
       name  : 'id',
@@ -72,7 +52,7 @@ const SETTINGS = {
       format: (val, row) => {
         return val?'#'+val:''
       },
-    },    
+    },
     {
       name  : 'dataPedido',
       field : 'dataPedido',
@@ -97,36 +77,6 @@ const SETTINGS = {
       align : 'left',
       label : 'Status'
     },
-    {
-      name : 'coleta',
-      field: 'coleta',
-      align: 'left',
-      label: 'Coleta'
-    },
-    {
-      name : 'localColeta',
-      field: 'localColeta',
-      align: 'left',
-      label: 'Local de coleta'
-    },
-    {
-      name : 'entrega',
-      field: 'entrega',
-      align: 'left',
-      label: 'Entrega'
-    },
-    {
-      name : 'localEntrega',
-      field: 'localEntrega',
-      align: 'left',
-      label: 'Local de entrega'
-    },
-    {
-      name : 'transportadora',
-      field: 'transportadora',
-      align: 'left',
-      label: 'Transportadora'
-    },    
     {
       name  : 'preco',
       field : 'preco',
@@ -238,12 +188,6 @@ export default {
           'ultimaModificacao': item.alterDate,
           'status'           : item.orderStatus.status,
           'color_status'     : item.orderStatus.color,
-          'fornecedor'       : item.client.alias,
-          'coleta'           : item.retrievePeople !== null ? item.retrievePeople.name : '',
-          'localColeta'      : item.quote !== null ? `${item.quote.cityOrigin.city} / ${item.quote.cityOrigin.state.uf}` : '',
-          'entrega'          : item.deliveryPeople !== null ? item.deliveryPeople.name : '',
-          'localEntrega'     : item.quote !== null ? `${item.quote.cityDestination.city} / ${item.quote.cityDestination.state.uf}` : '',
-          'transportadora'   : item.quote !== null ? item.quote.carrier.name : '',          
           'preco'            : item.price,
         });
       }
@@ -314,7 +258,7 @@ export default {
 
       if (this.filters.status != null && this.filters.status.value != -1) {
         params['orderStatus'] = this.filters.status.value;
-      }      
+      }
 
       if (this.filters.company != null) {
         params['myCompany'] = this.filters.company.id;

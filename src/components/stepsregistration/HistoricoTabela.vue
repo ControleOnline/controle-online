@@ -1,8 +1,5 @@
 <template>
   <div class="row">
-    <div class="q-pa-md text-subtitle1">
-      {{ $t('Histórico') }}
-    </div>
     <div class="col-12 q-mt-md">
       <q-table flat
         :data   ="items"

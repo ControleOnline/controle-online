@@ -4,7 +4,7 @@
     @submit="onSubmit"
   >
     <div class="row q-col-gutter-xs q-pb-xs">
-      <div class="q-pa-md text-subtitle1">
+      <div class="col-xs-12 q-pa-md text-subtitle1">
         {{ item.empresa }}
       </div>
 
