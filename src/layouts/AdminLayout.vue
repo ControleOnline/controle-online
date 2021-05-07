@@ -325,10 +325,17 @@ export default {
           }
         },
         {
-          icon: 'shopping_bag',
+          icon: 'shopping_cart',
           text: this.$t('Vendas'),
           to  : {
             name: 'VendasIndex'
+          }
+        },
+        {
+          icon: 'attach_money',
+          text: this.$t('Financeiro'),
+          to  : {
+            name: 'FinanceiroIndex'
           }
         },
       ],

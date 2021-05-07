@@ -54,12 +54,12 @@
               <td class="text-center">
                 <div class="text-h6">{{ $t(`invoice.statuses.${invoice.invoiceStatus.status}`) }}</div>
               </td>
-            </tr>            
-            <tr>              
+            </tr>
+            <tr>
               <td class="text-center text-bold">
                 <!--{{ $t(`order.statuses.${invoice.invoiceStatus.status}`+' text') }}-->
               </td>
-            </tr>            
+            </tr>
           </tbody>
         </q-markup-table>
       </div>
@@ -75,15 +75,11 @@
           align      ="justify"
           v-model    ="currentTab"
           class      ="bg-white text-primary"
-        >          
-          <q-tab
-            name ="invoice"
-            label="Boleto"
-          />
+        >
           <q-tab
             name ="orders"
             label="Pedidos"
-          />          
+          />
         </q-tabs>
 
         <q-separator />
@@ -93,13 +89,6 @@
         >
           <q-tab-panel name="orders"  class="q-pa-none">
             <InvoiceOrders  :invoiceId="invoiceId" />
-          </q-tab-panel>
-
-          <q-tab-panel name="invoice" class="q-pa-none">
-            <InvoiceInvoice
-              :invoiceId="invoiceId"
-              :orderId  ="orderId"
-            />
           </q-tab-panel>
         </q-tab-panels>
       </div>
@@ -122,16 +111,14 @@
 </template>
 
 <script>
-import { date, extend }           from 'quasar';
-import { mapActions, mapGetters } from 'vuex';
-import InvoiceInvoice  from './details/InvoiceInvoice';
-import InvoiceOrders   from './details/InvoiceOrders';
-import { formatMoney } from '../../../utils/formatter';
+import { date, extend }                    from 'quasar';
+import { mapActions, mapGetters }          from 'vuex';
+import InvoiceOrders                       from './details/InvoiceOrders';
+import { formatMoney, formatDateYmdTodmY } from '../../../utils/formatter';
 
 export default {
   components: {
-    InvoiceInvoice,
-    InvoiceOrders ,
+    InvoiceOrders,
   },
 
   created() {
@@ -145,7 +132,7 @@ export default {
 
   data() {
     return {
-      currentTab: 'invoice',
+      currentTab: 'orders',
       invoiceId : null,
       orderId   : null,
       invoice   : null,
@@ -193,18 +180,18 @@ export default {
 
           if (data['@id']) {
             this.invoice  = data;
-            this.notFound = false;            
+            this.notFound = false;
 
             // format date
 
             if (this.invoice.dueDate)
-              this.invoice.dueDate = date.formatDate(this.invoice.dueDate, 'DD/MM/YYYY');
+              this.invoice.dueDate = formatDateYmdTodmY(this.invoice.dueDate);
 
             // set order
 
-            if (this.invoice.order.length > 0) {              
-              this.orderId = this.invoice.order[0].order['@id'].match(/^\/purchasing\/orders\/([a-z0-9-]*)$/)[1];
-              this.provider.name = this.invoice.order[0].order.provider.name;
+            if (this.invoice.order.length > 0) {
+              this.orderId       = this.invoice.order[0].order['@id'].replace(/[^0-9]/g,'');
+              this.provider.name = `${this.invoice.order[0].order.provider.name} ${this.invoice.order[0].order.provider.alias}`;
             }
           }
         })
