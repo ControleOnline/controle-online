@@ -4,13 +4,12 @@
       <q-table flat
         :data           ="items"
         :columns        ="settings.columns"
-        :visible-columns="settings.visibleColumns"
         row-key         ="id"
         :loading        ="isLoading"
       >
         <template v-slot:top>
           <div class="col-3 q-mb-md text-h6">
-            Lista de endereços
+            Lista de usuários
           </div>
           <div class="col-9 q-mb-md">
             <div class="row justify-end">
@@ -28,21 +27,15 @@
 
         <template v-slot:body="props">
           <q-tr :props="props">
-            <q-td key="postalCode"  :props="props">{{ props.cols[0].value }}</q-td>
-            <q-td key="street"      :props="props">{{ props.cols[1].value }}</q-td>
-            <q-td key="number"      :props="props">{{ props.cols[2].value }}</q-td>
-            <q-td key="complement"  :props="props">{{ props.cols[3].value }}</q-td>
-            <q-td key="district"    :props="props">{{ props.cols[4].value }}</q-td>
-            <q-td key="cityName"    :props="props">{{ props.cols[5].value }}</q-td>
-            <q-td key="stateName"   :props="props">{{ props.cols[6].value }}</q-td>
-            <q-td key="countryName" :props="props">{{ props.cols[7].value }}</q-td>
+            <q-td key="username" :props="props">{{ props.cols[0].value }}</q-td>
+            <q-td key="apikey"   :props="props">{{ props.cols[1].value }}</q-td>
             <q-td auto-width>
               <q-btn flat round dense
-              color   ="red"
-              icon    ="delete"
-              @click  ="removeItem(props.row)"
-              :disable="items.length == 1"
-              :loading="props.row._bussy"
+                color   ="red"
+                icon    ="delete"
+                @click  ="removeItem(props.row)"
+                :disable="items.length == 1"
+                :loading="props.row._bussy"
               />
             </q-td>
           </q-tr>
@@ -53,12 +46,12 @@
     <q-dialog v-model="dialog">
       <q-card style="width: 700px; max-width: 80vw;">
         <q-card-section class="row items-center">
-          <div class="text-h6">Novo endereço</div>
+          <div class="text-h6">Novo usuário</div>
           <q-space />
           <q-btn icon="close" flat round dense v-close-popup />
         </q-card-section>
         <q-card-section>
-          <FormAddress ref="myForm" @save="onSave" />
+          <FormUser ref="myForm" @save="onSave" />
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -67,62 +60,22 @@
 
 <script>
 import { date, extend }           from 'quasar';
-import FormAddress                from './FormAddress';
+import FormUser                   from './FormUser';
 import { mapActions, mapGetters } from 'vuex';
-import { formatCEP  }             from './../../utils/formatter';
 
 const SETTINGS = {
-  visibleColumns: [
-    'postalCode' ,
-    'street'     ,
-    'number'     ,
-    'complement' ,
-    'district'   ,
-    'cityName'   ,
-    'stateName'  ,
-    'countryName',
-    'action'     ,
-  ],
   columns       : [
     {
-      name : 'postalCode',
-      field: row => formatCEP(`${row.postalCode}`),
-      label: 'CEP'
+      name : 'username',
+      field: row => row.username,
+      align: 'left',
+      label: 'Nome de usuário'
     },
     {
-      name : 'street',
-      field: row => row.street,
-      label: 'Rua / Avenida'
-    },
-    {
-      name : 'number',
-      field: row => row.number,
-      label: 'Número'
-    },
-    {
-      name : 'complement',
-      field: row => row.complement,
-      label: 'Complemento'
-    },
-    {
-      name : 'district',
-      field: row => row.district,
-      label: 'Bairro'
-    },
-    {
-      name : 'cityName',
-      field: row => row.city,
-      label: 'Cidade'
-    },
-    {
-      name : 'stateName',
-      field: row => row.state,
-      label: 'Estado'
-    },
-    {
-      name : 'countryName',
-      field: row => row.country,
-      label: 'País'
+      name : 'apikey',
+      field: row => row.apikey,
+      align: 'left',
+      label: 'Chave da API'
     },
     { name: 'action' },
   ],
@@ -132,14 +85,14 @@ Object.freeze(SETTINGS);
 
 export default {
   props: {
-    companyId: {
-      type    : Number,
+    id: {
       required: true,
-    },
+      default : null,
+    }
   },
 
   components: {
-    FormAddress,
+    FormUser,
   },
 
   data() {
@@ -157,32 +110,30 @@ export default {
 
   computed: {
     ...mapGetters({
-      isLoading: 'profile/isLoading',
+      isLoading: 'profile/isLoading'    ,
+      myCompany: 'people/currentCompany',
     }),
+
+    user() {
+      return this.$store.getters['auth/user'];
+    },
   },
 
   methods: {
     ...mapActions({
-      getItems: 'profile/getAddress',
+      getItems: 'profile/getUsers',
       save    : 'profile/updateProfile',
     }),
 
     onSave(data) {
       this.save({
-        id       : this.companyId,
-        component: 'address',
+        id       : this.user.people,
+        component: 'user',
         payload  : {
           "operation": "post",
           "payload"  : {
-            nickname   : '',
-            country    : data.country,
-            state      : data.state,
-            city       : data.city,
-            district   : data.district,
-            postal_code: data.postalCode,
-            street     : data.street,
-            number     : data.number,
-            complement : data.complement,
+            "username": data.username,
+            "password": data.password
           }
         }
       })
@@ -215,8 +166,8 @@ export default {
         item._bussy = true;
 
         this.save({
-          id       : this.companyId,
-          component: 'address',
+          id       : this.user.people,
+          component: 'user',
           payload  : {
             "operation": "delete",
             "payload"  : {
@@ -249,28 +200,21 @@ export default {
     },
 
     onRequest() {
-      let params = {};
+      let params = {
+        people: this.id
+      };
 
       this.items = [];
-
-      params['myCompany'] = this.companyId;
 
       this.getItems(params)
         .then(items => {
           if (items.length) {
             for (let index in items) {
               this.items.push({
-                id        : items[index]['@id'].match(/^\/addresses\/([a-z0-9-]*)$/)[1],
-                nickname  : items[index].nickname,
-                country   : items[index].street.district.city.state.country.countryname,
-                state     : items[index].street.district.city.state.uf,
-                city      : items[index].street.district.city.city,
-                district  : items[index].street.district.district,
-                postalCode: items[index].street.cep.cep,
-                street    : items[index].street.street,
-                number    : items[index].number,
-                complement: items[index].complement,
-                _bussy    : false,
+                id   : items[index]['@id'].match(/^\/users\/([a-z0-9-]*)$/)[1],
+                username: items[index].username,
+                apikey  : items[index].apiKey,
+                _bussy  : false,
               });
             }
           }

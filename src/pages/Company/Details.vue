@@ -6,8 +6,8 @@
           <q-card-section>
             <q-btn flat no-caps
               icon ="arrow_back"
-              :to  ="{ name: 'CompanyIndex'}"
-              label="Voltar as Minhas empresas"
+              :to  ="{ name: 'MyCompaniesIndex'}"
+              label="Voltar às Minhas empresas"
             />
           </q-card-section>
           <div class="q-pa-md text-subtitle1 text-center">
@@ -30,6 +30,10 @@
               label="Funcionários"
             />
             <q-tab
+              name ="salesman"
+              label="Administrativos"
+            />
+            <q-tab
               name ="address"
               label="Endereços"
             />
@@ -49,7 +53,43 @@
             v-model="currentTab"
           >
             <q-tab-panel name="employees">
-              <CompanyEmployees   :companyId="companyId" />
+              <CompanyEmployees
+                :id   ="companyId"
+                @error="(error) => {
+                  this.$q.notify({
+                    message : error.message,
+                    position: 'bottom',
+                    type    : 'negative',
+                  });
+                }"
+                @saved="(data) => {
+                  this.$q.notify({
+                    message : 'Data successfully saved',
+                    position: 'bottom',
+                    type    : 'positive',
+                  });
+                }"
+              />
+            </q-tab-panel>
+
+            <q-tab-panel name="salesman">
+              <CompanySalesman
+                :id   ="companyId"
+                @error="(error) => {
+                  this.$q.notify({
+                    message : error.message,
+                    position: 'bottom',
+                    type    : 'negative',
+                  });
+                }"
+                @saved="(data) => {
+                  this.$q.notify({
+                    message : 'Data successfully saved',
+                    position: 'bottom',
+                    type    : 'positive',
+                  });
+                }"
+              />
             </q-tab-panel>
 
             <q-tab-panel name="address">
@@ -72,19 +112,19 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import CompanyEmployees   from '../../components/company/CompanyEmployees';
-import CompanyAddress     from '../../components/company/CompanyAddress';
-import CompanyDocuments   from '../../components/company/CompanyDocuments';
-import CompanyInvoicement from '../../components/company/CompanyInvoicement';
+import CompanyEmployees   from './../../components/company/CompanyEmployees';
+import CompanyAddress     from './../../components/company/CompanyAddress';
+import CompanyDocuments   from './../../components/company/CompanyDocuments';
+import CompanyInvoicement from './../../components/company/CompanyInvoicement';
+import CompanySalesman    from './../../components/company/CompanySalesman';
 
 export default {
-  name      : 'CompanyDetailsPage',
-
   components: {
     CompanyEmployees  ,
     CompanyAddress    ,
     CompanyDocuments  ,
     CompanyInvoicement,
+    CompanySalesman   ,
   },
 
   created() {
@@ -97,7 +137,7 @@ export default {
             this.company.name  = company.alias;
             this.company.image = (
               company.image !== null ?
-                `https://app.freteclick.com.br${company.image.url}` : null
+                `https://api.ipschool.com.br${company.image.url}` : null
             );
           }
         });

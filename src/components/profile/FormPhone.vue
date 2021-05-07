@@ -1,24 +1,20 @@
 <template>
   <q-form ref="myForm" @submit="onSubmit" class="q-mt-md">
-    <q-select stack-label
-        label   ="Tipo de documento"
-        v-model="item.type"
-        :options="settings.select.doctypes"
-    >
-        <template v-slot:no-option>
-            <q-item>
-                <q-item-section class="text-grey">
-                Sem resultados
-                </q-item-section>
-            </q-item>
-        </template>
-    </q-select>
+    <q-input lazy-rules stack-label
+      v-model="item.ddd"
+      type   ="text"
+      label  ="DDD"
+      mask   ="##"
+      class  ="q-mt-md"
+      :rules ="[isInvalid('ddd')]"
+    />
 
     <q-input lazy-rules stack-label
-      v-model="item.document"
+      v-model="item.number"
       type   ="text"
-      label  ="Documento"
+      label  ="Telefone"
       class  ="q-mt-md"
+      mask   ="#########"
       :rules ="[isInvalid('phone')]"
     />
 
@@ -37,33 +33,11 @@
 </template>
 
 <script>
-const SETTINGS = {
-  select        : {
-    doctypes: [
-      {
-        label: 'CNPJ',
-        value: 3,
-      },
-      {
-        label: 'Inscrição Estadual',
-        value: 4,
-      },
-      {
-        label: 'Inscrição Municipal',
-        value: 5,
-      },
-    ],
-  },
-};
-
-Object.freeze(SETTINGS);
-
 export default {
   data() {
     return {
-      settings: SETTINGS,
-      item    : {},
-      saving  : false,
+      item  : {},
+      saving: false,
     };
   },
 
@@ -73,8 +47,8 @@ export default {
         .then(success => {
           if (success) {
             let payload = {
-              "type"    : this.item.type,
-              "document": this.item.document,
+              "ddd"  : this.item.ddd,
+              "phone": this.item.number,
             };
 
             this.saving = true;

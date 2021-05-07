@@ -16,6 +16,15 @@
         />
       </div>
       <div class="col-xs-12 col-sm-8 q-mb-sm">
+        <q-input stack-label lazy-rules unmasked-value hide-bottom-space
+          v-model="item.nickname"
+          type       ="text"
+          label      ="Apelido"
+          :rules     ="[isInvalid('nickname')]"
+          placeholder="Informe um apelido para este endereço"
+        />
+      </div>
+      <div class="col-xs-12 col-sm-8 q-mb-sm">
         <q-input stack-label lazy-rules hide-bottom-space
           v-model="item.street"
           type   ="text"
@@ -93,9 +102,10 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
   data() {
     return {
-        saving   : false,
-        loading  : false,
-        item     : {
+        saving : false,
+        loading: false,
+        item   : {
+          nickname  : '',
           country   : '',
           state     : '',
           city      : '',
@@ -148,7 +158,7 @@ export default {
         .then(success => {
           if (success) {
             let payload = {
-              nickname   : '',
+              nickname   : this.item.nickname,
               country    : this.item.country,
               state      : this.item.state,
               city       : this.item.city,

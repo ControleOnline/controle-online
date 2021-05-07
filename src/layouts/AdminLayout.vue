@@ -23,22 +23,25 @@
             <q-menu>
               <div class="row no-wrap q-pa-md">
                 <div class="column">
-                  <div class="text-h6 q-mb-md">Minha conta</div>
                   <q-list>
-                    <q-item :to="{ name: 'UserProfile' }" exact>
+                    <q-item :to="{ name: 'MyProfileIndex' }" exact>
                       <q-item-section avatar>
                         <q-icon name="face" />
                       </q-item-section>
-                      <q-item-section side>
-                        <q-item-label>Meu Perfil</q-item-label>
+                      <q-item-section side no-wrap>
+                        <q-item-label>
+                          {{$t("Meu Perfil")}}
+                        </q-item-label>
                       </q-item-section>
                     </q-item>
-                    <q-item :to="{ name: 'CompanyIndex' }" exact>
+                    <q-item :to="{ name: 'MyCompaniesIndex' }" exact>
                       <q-item-section avatar>
                         <q-icon name="business" />
                       </q-item-section>
-                      <q-item-section side>
-                        <q-item-label>Minha empresa</q-item-label>
+                      <q-item-section side no-wrap>
+                        <q-item-label>
+                          {{$t("Minhas empresas")}}
+                        </q-item-label>
                       </q-item-section>
                     </q-item>
                   </q-list>
@@ -47,22 +50,22 @@
                 <q-separator vertical inset class="q-mx-lg" />
 
                 <div class="column items-stretch justify-between">
-                  <div class="text-center">
-                    <q-avatar size="64px">
-                      <q-img :src="user.avatar || gravatar" />
+                  <div class="text-center q-mb-sm">
+                    <q-avatar size="48px">
+                      <q-img :src="myUser.avatar || gravatar" />
                     </q-avatar>
                   </div>
 
-                  <div class="text-body2 text-center">
-                    {{ user.realname || "John Doe" }}
+                  <div class="text-body1 text-center">
+                    {{ myUser.realname || "John Doe" }}
                   </div>
 
-                  <q-btn
-                    v-close-popup
-                    color="primary"
-                    label="Sair"
-                    size="sm"
+                  <q-btn v-close-popup
+                    color ="primary"
+                    :label="$t('Sair')"
+                    size  ="sm"
                     @click="onLogout"
+                    class ="q-mt-sm"
                   />
                 </div>
               </div>
@@ -381,6 +384,10 @@ export default {
 
       return `https://www.gravatar.com/avatar/${md5(this.user.email)}?s=400`;
     },
+
+    myUser() {
+      return this.user || {};
+    }
   },
 
   methods: {

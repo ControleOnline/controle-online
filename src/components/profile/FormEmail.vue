@@ -1,25 +1,11 @@
 <template>
   <q-form ref="myForm" @submit="onSubmit" class="q-mt-md">
-    <q-select stack-label
-        label   ="Tipo de documento"
-        v-model="item.type"
-        :options="settings.select.doctypes"
-    >
-        <template v-slot:no-option>
-            <q-item>
-                <q-item-section class="text-grey">
-                Sem resultados
-                </q-item-section>
-            </q-item>
-        </template>
-    </q-select>
-
     <q-input lazy-rules stack-label
-      v-model="item.document"
+      v-model="item.email"
       type   ="text"
-      label  ="Documento"
+      label  ="Email"
       class  ="q-mt-md"
-      :rules ="[isInvalid('phone')]"
+      :rules ="[isInvalid('email')]"
     />
 
     <div class="row justify-end">
@@ -37,33 +23,11 @@
 </template>
 
 <script>
-const SETTINGS = {
-  select        : {
-    doctypes: [
-      {
-        label: 'CNPJ',
-        value: 3,
-      },
-      {
-        label: 'Inscrição Estadual',
-        value: 4,
-      },
-      {
-        label: 'Inscrição Municipal',
-        value: 5,
-      },
-    ],
-  },
-};
-
-Object.freeze(SETTINGS);
-
 export default {
   data() {
     return {
-      settings: SETTINGS,
-      item    : {},
-      saving  : false,
+      saving: false,
+      item  : {},
     };
   },
 
@@ -73,8 +37,7 @@ export default {
         .then(success => {
           if (success) {
             let payload = {
-              "type"    : this.item.type,
-              "document": this.item.document,
+              "email": this.item.email,
             };
 
             this.saving = true;

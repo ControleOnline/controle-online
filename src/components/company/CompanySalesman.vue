@@ -33,11 +33,19 @@
                 style   ="height: 150px; max-width: 100%"
               >
                 <div class="absolute-bottom text-subtitle1 text-center">
-                  {{ `${props.row.name} ${props.row.alias}` }}
+                  {{ props.row.name }}
                 </div>
               </q-img>
               <q-card-section>
                 <q-list>
+                  <q-item dense>
+                    <q-item-section avatar>
+                      <q-icon name="perm_identity" />
+                    </q-item-section>
+                    <q-item-section side>
+                      <q-item-label caption>{{ props.row.document }}</q-item-label>
+                    </q-item-section>
+                  </q-item>
                   <q-item dense>
                     <q-item-section avatar>
                       <q-icon name="email" />
@@ -52,7 +60,7 @@
               <q-card-actions align="around">
                 <q-btn flat round dense
                   :to   ="{
-                    name  : 'MyCompanyEmployee',
+                    name  : `${userTypeCapitalized}.Company.Employee`,
                     params: {
                       id        : id,
                       employeeId: props.row.id
@@ -70,7 +78,6 @@
                   icon    ="delete"
                   @click  ="removeItem(props.row)"
                   :loading="props.row._bussy"
-                  :disable="items.length == 1"
                 >
                   <q-tooltip>Eliminar</q-tooltip>
                 </q-btn>
@@ -84,45 +91,53 @@
     <q-dialog v-model="dialog">
       <q-card style="width: 700px; max-width: 80vw;">
         <q-card-section class="row items-center">
-          <div class="text-h6">Novo funcionário</div>
+          <div class="text-h6">Novo administrativo</div>
           <q-space />
           <q-btn icon="close" flat round dense v-close-popup />
         </q-card-section>
         <q-card-section>
           <q-form ref="myForm" @submit="onSubmit" class="q-mt-md">
-            <div class="row q-col-gutter-xs q-pb-xs">
-              <div class="col-xs-12 col-sm-6 q-mb-sm">
-                <q-input stack-label lazy-rules unmasked-value hide-bottom-space
-                  v-model="item.name"
-                  type   ="text"
-                  label  ="Nome"
-                  :rules ="[isInvalid('name')]"
+            <div class="row q-col-gutter-sm">
+              <div class="col-xs-12">
+                <q-input outlined stack-label lazy-rules unmasked-value
+                  v-model     ="item.document"
+                  type        ="text"
+                  class       ="q-mb-sm"
+                  :label      ="$t('CNPJ')"
+                  :mask       ="'##.###.###/####-##'"
+                  :placeholder="'Digite o CNPJ'"
+                  :rules      ="[isInvalid('document')]"
                 />
               </div>
-              <div class="col-xs-12 col-sm-6 q-mb-sm">
-                <q-input stack-label lazy-rules hide-bottom-space
-                  v-model="item.lastname"
-                  type   ="text"
-                  label  ="Sobrenome"
-                  :rules ="[isInvalid('lastname')]"
+              <div class="col-xs-12 col-sm-6">
+                <q-input stack-label lazy-rules
+                  v-model     ="item.name"
+                  type        ="text"
+                  class       ="q-mb-sm"
+                  :label      ="$t('Razão social')"
+                  :placeholder="'Razão social'"
+                  :rules      ="[isInvalid('name')]"
+                  :outlined   ="true"
                 />
               </div>
-              <div class="col-xs-12 col-sm-6 q-mb-sm">
-                <q-input stack-label lazy-rules hide-bottom-space
-                  v-model="item.email"
-                  type   ="text"
-                  label  ="Email"
-                  :rules ="[isInvalid('email')]"
+              <div class="col-xs-12 col-sm-6">
+                <q-input stack-label lazy-rules
+                  v-model     ="item.alias"
+                  type        ="text"
+                  class       ="q-mb-sm"
+                  :label      ="$t('Nome Fantasia')"
+                  :placeholder="'Nome fantasia'"
+                  :rules      ="[isInvalid('alias')]"
+                  :outlined   ="true"
                 />
               </div>
             </div>
-
             <div class="row justify-end">
               <q-btn
                 :loading="saving"
                 icon    ="save"
                 type    ="submit"
-                :label  ="$t('Save')"
+                :label  ="$t('Salvar')"
                 size    ="md"
                 color   ="primary"
                 class   ="q-mt-md"
@@ -140,7 +155,6 @@ import Api                from './../../utils/api';
 import { formatDocument } from './../../utils/formatter';
 import md5                from 'md5';
 import { mapGetters }     from 'vuex';
-import { ENTRYPOINT }     from './../../config/entrypoint';
 
 export default {
   props: {
@@ -156,9 +170,9 @@ export default {
       saving   : false,
       isLoading: false,
       item     : {
+        document: '',
         name    : '',
-        lastname: '',
-        email   : '',
+        alias   : '',
       },
       pagination     : {
         sortBy     : 'email',
@@ -170,36 +184,34 @@ export default {
     };
   },
 
-  computed: {
-    ...mapGetters({
-      theCompany: 'people/currentCompany',
-      user      : 'auth/user',
-    }),
-  },
-
   created() {
-    this.api = new Api(this.$store.getters['auth/user'].token);
+    this.api = new Api(this.user.token);
 
     this.onRequest({
       pagination: this.pagination
     });
   },
 
+  computed: {
+    ...mapGetters({
+      myProvider: 'people/currentCompany',
+      user      : 'auth/user',
+    }),
+
+    userTypeCapitalized() {
+      return this.user ?
+        `${this.user.type.charAt(0).toUpperCase()}${this.user.type.slice(1)}`
+        : 'Guest';
+    },
+  },
+
   methods: {
     // store method
     getItems(params) {
-      let options = {
-        method : 'GET',
-        params : params
-      };
-
-      return this.api.private('people', options)
+      return this.api.private(`companies/${this.id}/salesman`, { params })
         .then(response => response.json())
         .then(result => {
-          return {
-            members: result['hydra:member'],
-            total  : result['hydra:totalItems'],
-          };
+          return result.response.data;
         });
     },
 
@@ -209,11 +221,9 @@ export default {
         method : 'PUT',
         headers: new Headers({ 'Content-Type': 'application/ld+json' }),
         body   : JSON.stringify(values),
-        params : { 'company': this.theCompany.id }
       };
 
-      let endpoint = `people/${this.id}/profile/employee`;
-      return this.api.private(endpoint, options)
+      return this.api.private(`companies/${this.id}/salesman`, options)
         .then(response => response.json())
         .then(data => {
           if (data.response) {
@@ -230,16 +240,12 @@ export default {
     // store method
     delete(id) {
       let options = {
-        method : 'PUT',
+        method : 'DELETE',
         headers: new Headers({ 'Content-Type': 'application/ld+json' }),
-        body   : JSON.stringify({
-          operation: "delete",
-          payload  : { id }
-        }),
+        body   : JSON.stringify({ id }),
       };
 
-      let endpoint = `people/${this.id}/profile/employee`;
-      return this.api.private(endpoint, options)
+      return this.api.private(`companies/${this.id}/salesman`, options)
         .then(response => response.json())
         .then(data => {
           if (data.response) {
@@ -254,9 +260,6 @@ export default {
     },
 
     gravatar(email) {
-      if (!email || email === null) {
-        return '';
-      }
       return 'https://www.gravatar.com/avatar/' + md5(email) + '?s=400';
     },
 
@@ -264,25 +267,21 @@ export default {
       this.$refs.myForm.validate()
         .then(success => {
           if (success) {
-            let payload = {
-              operation: "post",
-              payload  : {
-                "name" : this.item.name,
-                "alias": this.item.lastname,
-                "email": this.item.email,
-                "type" : 'F',
-              },
-            };
-
             this.saving = true;
 
-            this.save(payload)
+            this.save({
+              "document": this.item.document,
+              "name"    : this.item.name,
+              "alias"   : this.item.alias,
+            })
               .then (data => {
-                this.$emit('saved', data);
+                this.$refs.myForm.reset();
 
                 this.onRequest({
                   pagination: this.pagination
                 });
+
+                this.$emit('saved', data);
               })
               .catch(error => {
                 this.$refs.myForm.reset();
@@ -302,11 +301,9 @@ export default {
 
         this.delete(item.id)
         .then (data => {
-          this.cleanItem(item.id);
-
-          this.onRequest({
-            pagination: this.pagination
-          });
+          if (data) {
+            this.cleanItem(item.id);
+          }
         })
         .catch(error => {
           this.$emit('error', { message: error.message });
@@ -336,8 +333,6 @@ export default {
       }          = props.pagination;
       let params = { itemsPerPage: rowsPerPage, page };
 
-      params.myCompany = this.id;
-
       this.isLoading = true;
 
       this.getItems(params)
@@ -346,12 +341,17 @@ export default {
 
           if (data.members.length) {
             for (let index in data.members) {
+              let image = data.members[index].image ? data.members[index].image.url : null;
+              if (image == null) {
+                image = this.gravatar(data.members[index].email ? data.members[index].email : 'email@gmail.com');
+              }
+
               _items.push({
-                id      : data.members[index]['@id'].replace(/\D/g, ""),
-                name    : data.members[index].name,
-                alias   : data.members[index].alias,
-                image   : !data.members[index].image ? this.gravatar(data.members[index].email) : data.members[index].image.url,
-                email   : data.members[index].email.length ? data.members[index].email[0].email : '',
+                id      : data.members[index].id,
+                name    : data.members[index].type == 'J' ? data.members[index].name : `${data.members[index].name} ${data.members[index].alias}`,
+                image   : image,
+                email   : data.members[index].email,
+                document: formatDocument(data.members[index].document),
                 _bussy  : false,
               });
             }
@@ -376,12 +376,6 @@ export default {
 
         if (key == 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))
           return this.$t('messages.emailInvalid');
-
-        if (key == 'password' && val.length < 6)
-          return this.$t('A senha deve ter no mínimo 6 caracteres');
-
-        if (key == 'confirm' && (this.item.password != this.item.confirmPassword))
-          return this.$t('As senhas não coincidem');
 
         return true;
       };
