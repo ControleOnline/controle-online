@@ -347,7 +347,13 @@ export default {
         },
       ],
       links7         : [
-
+        {
+          icon: 'note_add',
+          text: this.$t('Serviços Adicionais'),
+          to  : {
+            name: 'ServicosAdicionaisIndex'
+          }
+        },
       ],
     };
   },
