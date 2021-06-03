@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable -->
   <q-table hide-pagination
     :loading        ="isLoading"
     :data           ="data"
@@ -6,7 +7,6 @@
     :pagination.sync="pagination"
     @request        ="onRequest"
     row-key         ="id"
-    :visible-columns="settings.visibleColumns"
   >
     <template v-slot:top>
       <div class="col-3 q-mb-md text-h6">
@@ -19,6 +19,8 @@
         <q-td key="name"     :props="props">{{ props.row.name     }}</q-td>
         <q-td key="quantity" :props="props">{{ props.row.quantity }}</q-td>
         <q-td key="price"    :props="props">{{ props.row.price    }}</q-td>
+        <q-td key="payer"    :props="props">{{ props.row.payer    }}</q-td>
+        <q-td key="parcels"  :props="props">{{ props.row.parcels  }}</q-td>
         <q-td auto-width>
           <q-btn flat round dense v-if="editMode"
             color   ="red"
@@ -33,16 +35,11 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { mapActions, mapGetters } from 'vuex';
 import { formatMoney }            from '../../../utils/formatter';
 
 const SETTINGS = {
-  visibleColumns: [
-    'name'    ,
-    'quantity',
-    'price'   ,
-    'action'  ,
-  ],
   columns       : [
     {
       name : 'name',
@@ -61,6 +58,18 @@ const SETTINGS = {
       field: 'price',
       align: 'left',
       label: 'Preço'
+    },
+    {
+      name : 'payer',
+      field: 'payer',
+      align: 'left',
+      label: 'Pagador'
+    },
+    {
+      name : 'parcels',
+      field: 'parcels',
+      align: 'left',
+      label: 'Parcelado em'
     },
     {
       name : 'action'
@@ -98,6 +107,13 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters({
+      myProvider: 'people/currentCompany',
+      user      : 'auth/user',
+    }),
+  },
+
   methods: {
     ...mapActions({
       getItems: 'contracts/getContractProducts',
@@ -112,10 +128,9 @@ export default {
     },
 
     removeItem(item) {
-      if (window.confirm('Tem certeza que deseja eliminar este registro?')) {
+      if (window.confirm(this.$t('Are you sure about to remove this element?'))) {
         item._bussy = true;
-
-        this.delete(item['@id'])
+        this.delete(`/my_contract_products/${item['@id']}`)
           .then (data => {
             if (data) {
               this.reload();
@@ -150,8 +165,15 @@ export default {
 
       this.isLoading = true;
 
-      this.getItems(this.contract['@id'].match(/^\/my_contracts\/([a-z0-9-]*)$/)[1])
-        .then(products => {
+      let payload = {
+        contractId: this.contract['@id'].replace(/\D/g, ""),
+        params    : {}
+      };
+
+      payload.params[this.user.type == 'admin' ? 'myCompany' : 'myProvider'] = this.myProvider.id;
+
+      this.getItems(payload)
+        .then(response => {
 
           this.pagination.page        = page;
           this.pagination.rowsPerPage = rowsPerPage;
@@ -160,22 +182,24 @@ export default {
 
           // set data
 
-          if (products) {
+          if (response.members) {
             let data = [];
 
-            products.forEach(product => {
+            response.members.forEach(product => {
               data.push({
-                '@id'     : product['@id'],
-                'name'    : product.product.product,
+                '@id'     : product.id,
+                'name'    : product.product_name,
                 'quantity': product.quantity,
-                'price'   : formatMoney(product.price, 'BRL', 'pt-br'),
+                'price'   : formatMoney(product.product_price, 'BRL', 'pt-br'),
+                'payer'   : product.payer_name === null ? '-' : product.payer_name,
+                'parcels' : product.parcels == 0 ? '-' : `${product.parcels} ${product.parcels == 1 ? 'vez' : 'vezes'}`,
                 '_bussy'  : false,
               });
             });
 
             this.data = data;
 
-            this.$emit('loaded', data.length);
+            this.$emit('loaded', response.total);
           }
         })
         .catch(error => {
