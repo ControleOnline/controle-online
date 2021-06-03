@@ -18,6 +18,8 @@ export default {
           avatar  : payload.avatar,
           email   : payload.email,
           phone   : payload.phone,
+          active  : payload.active,
+          type    : payload.type
         };
 
         // save user data in LocalStorage
@@ -32,6 +34,8 @@ export default {
         session.avatar   = _user.avatar;
         session.email    = _user.email;
         session.phone    = _user.phone;
+        session.active   = _user.active;
+        session.type     = _user.type;
 
         LocalStorage.set('session', session);
       }
