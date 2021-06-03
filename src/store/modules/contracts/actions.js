@@ -1,3 +1,4 @@
+/* eslint-disable */
 import SubmissionError from '../../../error/SubmissionError';
 import { fetch }       from '../../../boot/myapi';
 import * as types      from './mutation_types';
@@ -37,13 +38,9 @@ export const reset = ({ commit }) => {
 };
 
 export const getItem = ({ commit }, { id, params = {} }) => {
-  commit(types.SET_ISLOADING);
-
   return fetch(`${RESOURCE_ENDPOINT}/${id}`, { params })
     .then(response => response.json())
     .then(data => {
-
-      commit(types.SET_ISLOADING, false);
 
       return data;
 
@@ -101,8 +98,8 @@ export const createPeopleContract = ({ commit }, { values, params }) => {
     });
 };
 
-export const getParticipants = ({ commit }, contractId) => {
-  return fetch(`/my_contracts/${contractId}/contract_peoples`)
+export const getParticipants = ({ commit }, { id, params = {} }) => {
+  return fetch(`/my_contracts/${id}/contract_peoples`, { params })
     .then(response => response.json())
     .then(data => {
 
@@ -121,33 +118,34 @@ export const getProducts = ({ commit }, params = {}) => {
     });
 };
 
-export const createProductContract = ({ commit }, values) => {
+export const createProductContract = ({ commit }, data) => {
   commit(types.SET_ERROR, '');
 
-  let params = {
-    method: 'POST',
-    body  : JSON.stringify(values)
+  let options = {
+    method: 'PUT',
+    body  : JSON.stringify(data.values),
+    params: data.params
   };
 
-  return fetch('/my_contract_products', params)
+  return fetch(`/my_contracts/${data.contractId}/add-product`, options)
     .then(response => response.json())
     .then(data => {
       return data;
     });
 };
 
-export const getContractProducts = ({ commit }, contractId) => {
-  return fetch(`/my_contracts/${contractId}/contract_products`)
+export const getContractProducts = ({ commit }, params) => {
+  return fetch(`/my_contracts/${params.contractId}/products`, { params: params.params })
     .then(response => response.json())
     .then(data => {
 
-      return data['hydra:member'];
+      return data;
 
     });
 };
 
-export const getParticipantsData = ({ commit }, contractId) => {
-  return fetch(`${contractId}/participants`)
+export const getParticipantsData = ({ commit }, { id, params = {} }) => {
+  return fetch(`${id}/participants`, { params })
     .then(response => response.json())
     .then(data => {
 
@@ -189,12 +187,13 @@ export const getParticipantRoles = ({ commit }, params) => {
     });
 };
 
-export const createAddendum = ({ commit }, id) => {
+export const createAddendum = ({ commit }, { id, params = {} }) => {
   commit(types.SET_ERROR, '');
 
   let options = {
     method: 'PUT',
     body  : JSON.stringify({}),
+    params: params
   };
 
   return fetch(`${id}/create-addendum`, options)
@@ -207,12 +206,13 @@ export const createAddendum = ({ commit }, id) => {
     });
 };
 
-export const cancelContract = ({ commit }, { id, endDate }) => {
+export const cancelContract = ({ commit }, { id, endDate, params = {} }) => {
   commit(types.SET_ERROR, '');
 
   let options = {
     method: 'PUT',
     body  : JSON.stringify({ endDate }),
+    params: params
   };
 
   return fetch(`${id}/cancel-contract`, options)
@@ -225,10 +225,11 @@ export const cancelContract = ({ commit }, { id, endDate }) => {
     });
 };
 
-export const requestSignatures = ({ commit }, id) => {
+export const requestSignatures = ({ commit }, { id, params = {} }) => {
   let options = {
     method: 'PUT',
     body  : JSON.stringify({}),
+    params: params
   };
 
   return fetch(`${id}/request-signatures`, options)
@@ -238,6 +239,13 @@ export const requestSignatures = ({ commit }, id) => {
         return contract;
 
       return null;
+    })
+    .catch(e => {
+      if (e instanceof SubmissionError) {
+        throw new Error(e.errors._error);
+      }
+
+      throw new Error(e.message);
     });
 };
 
@@ -247,5 +255,12 @@ export const deleteContractProduct = ({ commit }, id) => {
   return fetch(`${id}`, { method: 'DELETE' })
     .then(() => {
       return true;
+    });
+};
+
+export const getContractContent = ({ commit }, { id, params }) => {
+  return fetch(`my_contracts/${id}/document`, { params })
+    .then(response => {
+      return response;
     });
 };

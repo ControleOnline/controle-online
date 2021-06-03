@@ -1,5 +1,5 @@
 <template>
-
+  <!-- eslint-disable -->
   <q-form @submit="save" class="q-mt-sm" ref="myForm">
 
     <div class="row justify-center q-pb-md">
@@ -13,18 +13,34 @@
       />
     </div>
 
-    <q-input outlined stack-label lazy-rules unmasked-value
-      v-model     ="item.document"
-      type        ="text"
-      class       ="q-mb-sm"
-      :label      ="personType == 'PJ' ? $t('CNPJ') : $t('CPF')"
-      :mask       ="personType == 'PJ' ? '##.###.###/####-##' : '###.###.###-##'"
-      :placeholder="personType == 'PJ' ? 'Digite o CNPJ' : 'Digite o CPF'"
-      :rules      ="[isInvalid('document')]"
-      :loading    ="isSearching"
-    />
+    <div class="row q-mb-md">
+      <div class="col-xs-12">
+        <q-input outlined stack-label
+          v-model     ="search"
+          type        ="text"
+          :label      ="$t('Busca de cliente')"
+          :loading    ="isSearching"
+          debounce    ="700"
+          :placeholder="`${personType == 'PJ' ? 'Digite o CNPJ' : 'Digite o CPF ou email'} para buscar o cliente`"
+          class       ="q-mb-sm"
+        />
+      </div>
+    </div>
 
     <div class="row q-col-gutter-sm">
+      <div class="col-xs-12">
+        <q-input outlined stack-label lazy-rules unmasked-value
+          v-model     ="item.document"
+          type        ="text"
+          :label      ="personType == 'PJ' ? $t('CNPJ') : $t('CPF')"
+          :mask       ="personType == 'PJ' ? '##.###.###/####-##' : '###.###.###-##'"
+          :placeholder="personType == 'PJ' ? 'Digite o CNPJ' : 'Digite o CPF'"
+          :rules      ="personType == 'PJ' ? [isInvalid('document')] : [true]"
+          :outlined   ="editMode"
+          :borderless ="!editMode"
+          :readonly   ="!editMode"
+        />
+      </div>
       <div class="col-xs-12 col-sm-6">
         <q-input stack-label lazy-rules
           v-model     ="item.name"
@@ -81,12 +97,11 @@
         v-if ="personType == 'PF'"
         class="col-xs-12 col-sm-grow"
       >
-        <q-input stack-label lazy-rules
+        <q-input stack-label
           v-model    ="item.docrg"
           type       ="text"
           class      ="q-mb-sm"
           label      ="R.G."
-          :rules     ="[isInvalid('document')]"
           :outlined  ="editMode"
           :borderless="!editMode"
           :readonly  ="!editMode"
@@ -103,6 +118,7 @@
           :label     ="$t(field.label)"
           :rules     ="field.required ? [isInvalid('field_text')] : [true]"
           class      ="q-mb-sm"
+          @input     ="field._updated = true"
           :outlined  ="editMode"
           :borderless="!editMode"
           :readonly  ="!editMode"
@@ -160,14 +176,13 @@
         />
       </div>
       <div class="col-xs-12 col-sm-6">
-        <q-input stack-label lazy-rules unmasked-value
+        <q-input stack-label unmasked-value
           v-model    ="item.phone"
           type       ="text"
           class      ="q-mb-sm"
           :label     ="$t('Telefone')"
           mask       ="(##) #####-####"
           placeholder="Digite seu telefone"
-          :rules     ="[isInvalid('phone')]"
           :outlined  ="editMode"
           :borderless="!editMode"
           :readonly  ="!editMode"
@@ -177,10 +192,11 @@
 
     <div class="row q-col-gutter-sm">
       <div class="col-xs-12">
-        <q-select multiple use-chips outlined stack-label emit-value map-options
+        <q-select multiple use-chips outlined stack-label emit-value map-options lazy-rules
           v-model ="item.peopleType"
           label   ="Participação"
           :options="participantRoles"
+          :rules  ="[isInvalid('peopleType')]"
         />
       </div>
 
@@ -189,7 +205,7 @@
           suffix   ="%"
           v-model  ="item.percentage"
           type     ="text"
-          :label   ="$t('Percentagem')"
+          :label   ="$t('Porcentagem')"
           mask     ="#,##"
           fill-mask="0"
           :rules   ="[isInvalid('percentagem')]"
@@ -218,16 +234,6 @@
           ref      ="cepSearchRef"
           :editMode="editMode"
           @found   ="onCEPFound"
-          @error   ="(error) => {
-            this.item.address
-              .postalCode = error.postalCode;
-
-            this.$q.notify({
-              message : error.message,
-              position: 'bottom',
-              type    : 'warning',
-            });
-          }"
         />
       </div>
       <div class="col-xs-12 col-sm-grow">
@@ -329,6 +335,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { mapActions, mapGetters } from 'vuex';
 import ListAutocomplete           from '../../common/ListAutocomplete';
 import CEPSearchInput             from '../../common/CEPSearchInput';
@@ -358,6 +365,7 @@ export default {
       personType   : 'PJ',
       isSaving     : false,
       editMode     : true,
+      search       : null,
       item         : {
         id           : null,
         name         : null,
@@ -367,7 +375,7 @@ export default {
         docrg        : null,
         email        : null,
         phone        : null,
-        peopleType   : null,
+        peopleType   : [],
         percentage   : null,
         contact_name : null,
         contact_alias: null,
@@ -404,104 +412,125 @@ export default {
       this.reset();
     },
 
-    'item.document'(document) {
-      if (document !== null) {
-        let documentMaxLength = this.personType == 'PJ' ? 14 : 11;
-
-        if (document.length == documentMaxLength) {
-          this.isSearching = true;
-
-          this.searchClient(document)
-            .then(response => {
-              if (response.success === false) {
-                this.$q.notify({
-                  message : response.error,
-                  position: 'bottom',
-                  type    : 'warning',
-                });
-
-                this.reset();
-
-                return;
-              }
-
-              this.editMode        = false;
-
-              this.item.id         = response.data.id;
-              this.item.name       = response.data.name;
-              this.item.alias      = response.data.alias;
-              this.item.type       = response.data.type;
-              this.item.paymentDay = response.data.payment.dueDay;
-
-              if (response.data.birthday) {
-                this.item.birthday = response.data
-                  .birthday.replace(/^(\d{4})\-(\d{2})\-(\d{2})[\W\w\d]*$/g, "\$3\-\$2\-\$1");
-              }
-
-              // set documents
-
-              if (response.data.documents) {
-                response.data.documents.forEach(document => {
-                  if (document.type == 'R.G') {
-                    this.item.docrg = document.document;
-                  }
-                });
-              }
-
-              if (response.data.contact) {
-                this.item.contact_name  = response.data.contact.name;
-                this.item.contact_alias = response.data.contact.alias;
-                this.item.email         = response.data.contact.email;
-                this.item.phone         = response.data.contact.phone;
-              }
-
-              // set address
-
-              if (response.data.address) {
-                this.item.address.id         = response.data.address.id ? response.data.address.id : null;
-                this.item.address.country    = response.data.address.country;
-                this.item.address.state      = response.data.address.state;
-                this.item.address.city       = response.data.address.city;
-                this.item.address.district   = response.data.address.district;
-                this.item.address.postalCode = response.data.address.postalCode;
-                this.item.address.street     = response.data.address.street;
-                this.item.address.number     = response.data.address.number.toString();
-                this.item.address.complement = response.data.address.complement;
-
-                this.$refs.cepSearchRef.setPostalCode(response.data.address.postalCode);
-              }
-              else {
-                this.item.address.id         = null;
-                this.item.address.country    = '';
-                this.item.address.state      = '';
-                this.item.address.city       = '';
-                this.item.address.district   = '';
-                this.item.address.postalCode = '';
-                this.item.address.street     = '';
-                this.item.address.number     = '';
-                this.item.address.complement = '';
-              }
-
-              // set particulars
-
-              if (response.data.particulars) {
-                response.data.particulars.forEach(particular => {
-                  let field = this.particulars.find(f => f.id == particular.type.id);
-                  let index = this.particulars.indexOf(field);
-
-                  if (field)
-                    this.particulars[index].value = particular.value;
-                });
-              }
-            })
-            .catch(error => {
-
-            })
-            .finally(() => {
-              this.isSearching = false;
-            });
-        }
+    search(documentOrEmail) {
+      if (documentOrEmail === null || !documentOrEmail.length) {
+        this.reset();
+        return;
       }
+
+      let searchBy = {};
+
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(documentOrEmail)) {
+        searchBy['email'] = encodeURIComponent(documentOrEmail);
+      }
+      else {
+        let _document = documentOrEmail.replace(/\D/g, '');
+
+        if (this.personType == 'PJ' && _document.length != 14) {
+          return;
+        }
+
+        if (this.personType == 'PF' && _document.length != 11) {
+          return;
+        }
+
+        searchBy['document'] = encodeURIComponent(_document);
+      }
+
+      this.isSearching = true;
+
+      this.searchClient(searchBy)
+        .then(response => {
+          if (response.success === false) {
+            this.$q.notify({
+              message : response.error,
+              position: 'bottom',
+              type    : 'warning',
+            });
+
+            this.reset();
+
+            return;
+          }
+
+          this.editMode        = false;
+
+          this.item.id         = response.data.id;
+          this.item.name       = response.data.name;
+          this.item.alias      = response.data.alias;
+          this.item.type       = response.data.type;
+          this.item.paymentDay = response.data.payment.dueDay;
+
+          if (response.data.birthday) {
+            this.item.birthday = response.data
+              .birthday.replace(/^(\d{4})\-(\d{2})\-(\d{2})[\W\w\d]*$/g, "\$3\-\$2\-\$1");
+          }
+
+          // set documents
+
+          if (response.data.documents) {
+            response.data.documents.forEach(document => {
+              if (document.type == 'R.G') {
+                this.item.docrg = document.document;
+              }
+              if (document.type == 'CPF' || document.type == 'CNPJ') {
+                this.item.document = document.document;
+              }
+            });
+          }
+
+          if (response.data.contact) {
+            this.item.contact_name  = response.data.contact.name;
+            this.item.contact_alias = response.data.contact.alias;
+            this.item.email         = response.data.contact.email;
+            this.item.phone         = response.data.contact.phone;
+          }
+
+          // set address
+
+          if (response.data.address) {
+            this.item.address.id         = response.data.address.id ? response.data.address.id : null;
+            this.item.address.country    = response.data.address.country;
+            this.item.address.state      = response.data.address.state;
+            this.item.address.city       = response.data.address.city;
+            this.item.address.district   = response.data.address.district;
+            this.item.address.postalCode = response.data.address.postalCode;
+            this.item.address.street     = response.data.address.street;
+            this.item.address.number     = response.data.address.number.toString();
+            this.item.address.complement = response.data.address.complement;
+
+            this.$refs.cepSearchRef.setPostalCode(response.data.address.postalCode);
+          }
+          else {
+            this.item.address.id         = null;
+            this.item.address.country    = '';
+            this.item.address.state      = '';
+            this.item.address.city       = '';
+            this.item.address.district   = '';
+            this.item.address.postalCode = '';
+            this.item.address.street     = '';
+            this.item.address.number     = '';
+            this.item.address.complement = '';
+          }
+
+          // set particulars
+
+          if (response.data.particulars) {
+            response.data.particulars.forEach(particular => {
+              let field = this.particulars.find(f => f.id == particular.type.id);
+              let index = this.particulars.indexOf(field);
+
+              if (field)
+                this.particulars[index].value = particular.value;
+            });
+          }
+        })
+        .catch(error => {
+
+        })
+        .finally(() => {
+          this.isSearching = false;
+        });
     },
   },
 
@@ -541,11 +570,6 @@ export default {
         });
       this.participantRoles
         .push({
-          label: this.$t(`contracts.roles.Witness`),
-          value: 'Witness',
-        });
-      this.participantRoles
-        .push({
           label: this.$t(`contracts.roles.Payer`),
           value: 'Payer',
         });
@@ -560,13 +584,17 @@ export default {
           let _types = [];
 
           types.forEach(type => {
-            _types.push({
-              id      : type['@id'].match(/^\/particulars_types\/([a-z0-9-]*)$/)[1],
+            let item = {
+              id      : null,
+              typeId  : type['@id'].replace(/\D/g, ''),
               label   : type.typeValue,
               value   : null,
               required: type.required === null ? false : ((type.required.split(':')).includes('contracts')),
-              type    : type.fieldType
-            });
+              type    : type.fieldType,
+              _updated: false
+            };
+
+            _types.push(item);
           });
 
           this.particulars = _types;
@@ -579,11 +607,13 @@ export default {
       // adding particulars data
 
       this.particulars.forEach(field => {
-        this.item.particulars
-          .push({
-            id   : field.id,
-            value: field.value,
-          });
+        if (field.value) {
+          this.item.particulars
+            .push({
+              id   : field.typeId,
+              value: field.value,
+            });
+        }
       });
 
       this.$emit('save', this.item);
@@ -596,6 +626,7 @@ export default {
       this.item.name               = null;
       this.item.alias              = null;
       this.item.birthday           = null;
+      this.item.document           = null;
       this.item.docrg              = null;
       this.item.contact_name       = null;
       this.item.contact_alias      = null;

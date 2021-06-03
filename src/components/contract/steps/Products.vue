@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable -->
   <div>
 
     <q-form v-if="editMode"
@@ -15,7 +16,7 @@
             :options="products"
             :loading="isloadingProds"
             @input  ="setProductPrice"
-            :rules  ="[isInvalid('product')]"
+            :rules  ="[val => val !== null || 'Selecione um produto']"
           >
           </q-select>
         </div>
@@ -36,10 +37,22 @@
           <q-input outlined stack-label reverse-fill-mask
             v-model  ="item.quantity"
             type     ="text"
-            :label   ="$t('Quantidade')"
+            :label   ="item.product !== null && item.product.type == 'Registration' ? $t('Parcelas') : $t('Quantidade')"
             mask     ="#"
             fill-mask="0"
             :rules   ="[isInvalid('quantity')]"
+          />
+        </div>
+
+        <div v-if="item.product !== null && item.product.type == 'Registration'"
+          class="col-xs-12"
+        >
+          <q-select outlined stack-label emit-value map-options
+            v-model ="item.payer"
+            label   ="Pagador"
+            :options="payers"
+            :rules  ="[val => (val !== null && item.product !== null && item.product.type == 'Registration') || 'Selecione um pagador']"
+            :loading="isloadingPayers"
           />
         </div>
 
@@ -71,7 +84,7 @@
       class="row q-mt-md justify-end"
     >
       <q-btn
-        color   ="positive"
+        color   ="deep-orange"
         label   ="Seguinte"
         :disable="!nextAllowed"
         @click  ="$emit('saved')"
@@ -82,9 +95,11 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { mapActions, mapGetters } from 'vuex';
 import ContractProducts           from './ContractProducts';
 import { formatMoney }            from '../../../utils/formatter';
+import { fetch }                  from '../../../boot/myapi';
 
 export default {
   components: {
@@ -109,6 +124,7 @@ export default {
 
   created() {
     this.loadingProducts();
+    this.getPayers();
   },
 
   mounted() {
@@ -120,19 +136,24 @@ export default {
       item          : {
         product : null,
         quantity: null,
-        price   : null,
+        price   : 0,
+        payer   : null,
+        parcels : null,
       },
-      isSearching   : false,
-      isAdding      : false,
-      nextAllowed   : false,
-      products      : [],
-      isloadingProds: false,
+      isSearching    : false,
+      isAdding       : false,
+      nextAllowed    : false,
+      products       : [],
+      payers         : [],
+      isloadingProds : false,
+      isloadingPayers: false,
     };
   },
 
   computed: {
     ...mapGetters({
-      provider: 'people/currentCompany',
+      myProvider: 'people/currentCompany',
+      user      : 'auth/user',
     }),
   },
 
@@ -163,17 +184,16 @@ export default {
 
       this.isloadingProds = true;
 
-      this.getProducts({
-        'productProvider': this.provider.id,
-      })
+      this.getProducts()
         .then(products => {
           if (products) {
             products.forEach(product => {
               this.products
                 .push({
                   label : product.product,
-                  value : product['@id'],
+                  value : product['@id'].replace(/\D/g, ""),
                   price : product.price,
+                  type  : product.productType
                 });
             });
           }
@@ -186,18 +206,67 @@ export default {
         });
     },
 
+    getPayers() {
+      if (this.isloadingPayers)
+        return;
+
+      this.isloadingPayers = true;
+
+      return fetch(`${this.contract['@id']}/contract_peoples`, { params: { peopleType: 'Payer' } })
+        .then(response => response.json())
+        .then(data => {
+          if (data['hydra:member']) {
+            let payers = [];
+
+            data['hydra:member'].forEach(contractPeople => {
+              payers.push({
+                  label: `${contractPeople.people.name} ${contractPeople.people.alias}`,
+                  value: contractPeople.people['@id'].replace(/\D/g, ""),
+                });
+            });
+
+            this.payers = payers;
+          }
+        })
+        .finally(() => {
+          this.isloadingPayers = false;
+        });
+    },
+
     save() {
+      let payload = {
+        contractId: this.contract['@id'].replace(/\D/g, ""),
+        values    : {
+        	"product" : this.item.product.value,
+        	"quantity": this.item.product.type == 'Registration' ? 1 : parseInt(this.item.quantity),
+        	"price"   : parseFloat(this.item.price.replace(',', '.')),
+        	"payer"   : this.item.product.type == 'Registration' ? this.item.payer : null,
+        	"parcels" : this.item.product.type == 'Registration' ? parseInt(this.item.quantity) : null
+        },
+        params: {}
+      };
+
+      payload.params[this.user.type == 'admin' ? 'myCompany' : 'myProvider'] = this.myProvider.id;
+
       this.isAdding = true;
 
-      this.create({
-        "contract": this.contract['@id'],
-        "product" : this.item.product.value,
-        "quantity": parseInt(this.item.quantity),
-        "price"   : parseFloat(this.item.price.replace(',', '.'))
-      })
-        .then(productContract => {
-          if (productContract['@id']) {
-            this.$refs.productsRef.reload();
+      this.create(payload)
+        .then(data => {
+          if (data.response) {
+            if (data.response.success === false)
+              this.$q.notify({
+                message : data.response.error,
+                position: 'bottom',
+                type    : 'negative',
+              });
+            else {
+              this.$q.notify({
+                message : 'Os dados foram salvos com sucesso',
+                position: 'bottom',
+                type    : 'positive',
+              });
+              this.$refs.productsRef.reload();
+            }
           }
         })
         .finally(() => {
