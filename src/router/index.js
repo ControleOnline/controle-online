@@ -72,6 +72,8 @@ export default function ({ store }) {
               phone   : session.phone,
               avatar  : session.avatar,
               realname: session.realname,
+              active  : session.active,
+              type    : session.type
             }
           );
 
