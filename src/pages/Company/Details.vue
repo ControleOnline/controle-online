@@ -45,6 +45,10 @@
               name ="invoicement"
               label="Faturamento"
             />
+            <q-tab
+              name ="integrations"
+              label="Integrações"
+            />
           </q-tabs>
 
           <q-separator />
@@ -103,6 +107,10 @@
             <q-tab-panel name="invoicement">
               <CompanyInvoicement :companyId="companyId" />
             </q-tab-panel>
+
+            <q-tab-panel name="integrations">
+              <CompanyIntegrations :companyId="companyId" />
+            </q-tab-panel>
           </q-tab-panels>
         </q-card>
       </div>
@@ -112,11 +120,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import CompanyEmployees   from './../../components/company/CompanyEmployees';
-import CompanyAddress     from './../../components/company/CompanyAddress';
-import CompanyDocuments   from './../../components/company/CompanyDocuments';
-import CompanyInvoicement from './../../components/company/CompanyInvoicement';
-import CompanySalesman    from './../../components/company/CompanySalesman';
+import CompanyEmployees    from './../../components/company/CompanyEmployees';
+import CompanyAddress      from './../../components/company/CompanyAddress';
+import CompanyDocuments    from './../../components/company/CompanyDocuments';
+import CompanyInvoicement  from './../../components/company/CompanyInvoicement';
+import CompanySalesman     from './../../components/company/CompanySalesman';
+import CompanyIntegrations from './../../components/company/CompanyIntegrations';
 
 export default {
   components: {
@@ -125,6 +134,7 @@ export default {
     CompanyDocuments  ,
     CompanyInvoicement,
     CompanySalesman   ,
+    CompanyIntegrations,
   },
 
   created() {
