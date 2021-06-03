@@ -1,7 +1,11 @@
 <template>
+  <!-- eslint-disable -->
   <q-card style="min-height: 90vh;">
-    <q-card-section v-if="isLoading || contract === null">
-      <div class="flex flex-center">
+    <q-card-section v-if="contract === null">
+      <div
+        v-if ="isLoading"
+        class="flex flex-center"
+      >
         <q-circular-progress :indeterminate="isLoading"
           size ="sm"
           color="primary"
@@ -9,28 +13,48 @@
         />
         Carregando...
       </div>
+
+      <div
+        v-if ="contract === null || isLoading === false"
+        class="row items-center justify-center"
+        style="min-height: 90vh;"
+      >
+        <q-banner class="text-white bg-red text-center text-h3" rounded>
+          <template v-slot:avatar>
+            <q-icon name="error" color="white" />
+          </template>
+          {{ $t('O contrato não foi encontrado') }}
+        </q-banner>
+      </div>
     </q-card-section>
 
     <q-card-section v-else>
       <!-- PAGE TITLE -->
-      <div class="text-h5">{{ participant }}</div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <div class="text-h5">{{ participant }}</div>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+          <div class="row q-gutter-xs justify-end">
+            <q-btn v-if="original !== null"
+              :to     ="{
+                name  : user.type === 'admin' ? 'Admin.Contract.Details' : 'Salesman.Contract.Details',
+                params: { id: original.replace(/\D/g, '') }
+              }"
+              :label  ="$t('Contrato original')"
+              :outline="true"
+            />
 
-      <!-- CONTRACT ACTIONS -->
-      <div v-if="contract !== null"
-        class="row q-gutter-xs q-mt-md justify-end"
-      >
-        <q-btn v-if="['Draft', 'Active'].includes(contract.contractStatus) && contract.endDate == null"
-          color   ="primary"
-          label   ="Cancelar contrato"
-          @click  ="cancelDialog = true"
-        />
-
-        <q-btn v-if="contract.contractStatus == 'Active'"
-          color   ="primary"
-          label   ="Criar adendo de contrato"
-          :loading="isAddendum"
-          @click  ="createAddendum"
-        />
+            <q-btn v-if="amended !== null"
+              :to     ="{
+                name  : user.type === 'admin' ? 'Admin.Contract.Details' : 'Salesman.Contract.Details',
+                params: { id: amended.replace(/\D/g, '') }
+              }"
+              :label  ="$t('Contrato adendo')"
+              :outline="true"
+            />
+          </div>
+        </div>
       </div>
 
       <!-- CONTRACT FORM -->
@@ -86,14 +110,33 @@
         </div>
       </div>
 
+      <!-- CONTRACT ACTIONS -->
+      <div v-if="contract !== null"
+        class="row q-gutter-xs q-mb-md justify-end"
+      >
+        <q-btn v-if="['Draft', 'Active'].includes(contract.contractStatus) && contract.endDate == null"
+          color   ="negative"
+          label   ="Cancelar contrato"
+          @click  ="cancelDialog = true"
+        />
+
+        <q-btn v-if="contract.contractStatus == 'Active'"
+          color   ="primary"
+          label   ="Criar adendo de contrato"
+          :loading="isAddendum"
+          @click  ="createAddendum"
+        />
+      </div>
+
       <!-- CONTRACT PARTS -->
       <div class="row q-mt-md" v-if="contract !== null">
         <div class="col-xs-12">
           <q-stepper alternative-labels header-nav
-            v-model  ="currentStep"
-            ref      ="stepper"
-            color    ="primary"
-            :vertical="$q.screen.lt.sm"
+            v-model     ="currentStep"
+            ref         ="stepper"
+            color       ="primary"
+            :vertical   ="$q.screen.lt.sm"
+            active-color="deep-orange"
           >
             <q-step :header-nav="steps.participants.hasErrors === false || !editMode"
               name  ="participants"
@@ -103,6 +146,7 @@
               :error="steps.participants.hasErrors === true"
             >
               <Participants
+                ref      ="participants"
                 :steps   ="steps"
                 :contract="contract"
                 :editMode="editMode"
@@ -178,11 +222,13 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { mapActions, mapGetters } from 'vuex';
 import Participants               from './steps/Participants';
 import Products                   from './steps/Products';
 import Contract                   from './steps/Contract';
 import { date }                   from 'quasar';
+import SubmissionError            from '../../error/SubmissionError';
 
 export default {
   components: {
@@ -219,6 +265,7 @@ export default {
       editMode      : false,
       cancelDate    : null,
       currentStep   : 'participants',
+      isLoading     : false,
       steps         : {
         participants: {
           hasErrors: null,
@@ -229,14 +276,19 @@ export default {
         contract    : {
           hasErrors: null,
         },
+        schedule    : {
+          hasErrors: null,
+        },
       },
+      amended       : null,
+      original      : null,
     };
   },
 
   computed: {
     ...mapGetters({
       myCompany: 'people/currentCompany',
-      isLoading: 'contracts/isLoading',
+      user     : 'auth/user',
     }),
   },
 
@@ -254,6 +306,10 @@ export default {
       this.editMode = data.contractStatus == 'Draft';
 
       this.loadContractModels();
+    },
+
+    '$route'(to) {
+      this.$router.go(to);
     },
   },
 
@@ -285,10 +341,20 @@ export default {
       this.cancel({
         id     : this.contract['@id'],
         endDate: this.cancelDate.replace(/^(\d{2})\/(\d{2})\/(\d{4})$/, "\$3\-\$2\-\$1"),
+        params : { 'myCompany': this.myCompany.id }
       })
         .then(contract => {
           if (contract !== null)
             this.setContract(contract);
+        })
+        .catch(e => {
+          const error = e instanceof SubmissionError ? e.errors._error : e.message;
+
+          this.$q.notify({
+            message : error,
+            position: 'bottom',
+            type    : 'negative',
+          });
         })
         .finally(() => {
           this.isCanceling  = false;
@@ -299,10 +365,28 @@ export default {
     createAddendum() {
       this.isAddendum = true;
 
-      this.addendum(this.contract['@id'])
+      this.addendum({
+        id    : this.contract['@id'],
+        params: { 'myCompany': this.myCompany.id }
+      })
         .then(contract => {
-          if (contract !== null)
-            this.setContract(contract);
+          if (contract['@id']) {
+            this.$router.push({
+              name  : this.user.type === 'admin' ? 'Admin.Contract.Details' : 'Salesman.Contract.Details',
+              params: { id: contract['@id'].replace(/\D/g, "") }
+            });
+
+            // this.setContract(contract);
+          }
+        })
+        .catch(e => {
+          const error = e instanceof SubmissionError ? e.errors._error : e.message;
+
+          this.$q.notify({
+            message : error,
+            position: 'bottom',
+            type    : 'negative',
+          });
         })
         .finally(() => {
           this.isAddendum = false;
@@ -321,26 +405,37 @@ export default {
     save() {
       this.isSaving = true;
 
-      this.update({
+      let payload = {
         id    : this.contractId,
         values: {
           "contractModel": this.model,
           "startDate"    : this.startDate.replace(/^(\d{2})\/(\d{2})\/(\d{4})$/, "\$3\-\$2\-\$1"),
         },
-        params: {
-          'myProvider': this.myCompany.id
-        }
-      })
+        params: { }
+      };
+
+      payload.params[this.user.type == 'admin' ? 'myCompany' : 'myProvider'] = this.myCompany.id;
+
+      this.update(payload)
         .then(contract => {
           if (contract['@id']) {
             this.contract = contract;
 
             this.$q.notify({
-              message : 'Os dados foram salvos com sucesso',
+              message : 'Data successfully saved',
               position: 'bottom',
               type    : 'positive',
             });
           }
+        })
+        .catch(e => {
+          const error = e instanceof SubmissionError ? e.errors._error : e.message;
+
+          this.$q.notify({
+            message : error,
+            position: 'bottom',
+            type    : 'negative',
+          });
         })
         .finally(() => {
           this.isSaving = false;
@@ -370,9 +465,6 @@ export default {
             this.model = this.contract.contractModel['@id'];
           }
         })
-        .catch(error => {
-
-        })
         .finally(() => {
           this.loadingModels = false;
         });
@@ -382,11 +474,19 @@ export default {
       if (this.isLoading)
         return;
 
-      this.getItem({ id: contractId })
+      this.isLoading = true;
+
+      this.getItem({ id: contractId, params: { 'myCompany': this.myCompany.id } })
         .then(contract => {
           if (contract) {
             this.setContract(contract);
           }
+        })
+        .catch(error => {
+          this.contract  = null;
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
 
@@ -400,6 +500,16 @@ export default {
         let contractPeople = contract.contractPeople.find(p => p.peopleType == 'Beneficiary');
         if (contractPeople) {
           this.participant = contractPeople.people.name;
+        }
+      }
+
+      if (contract.contractParent !== null) {
+        this.original = contract.contractParent['@id'];
+      }
+
+      if (contract.contractChild !== null) {
+        if (contract.contractChild.length > 0) {
+          this.amended = contract.contractChild[0]['@id'];
         }
       }
     },
