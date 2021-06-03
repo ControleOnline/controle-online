@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable -->
   <div class="row q-pa-md">
     <div class="col-12" v-if="participants.length > 0">
       <div
@@ -8,9 +9,6 @@
       >
         {{ participant }}
       </div>
-    </div>
-    <div class="col-12" v-else>
-      Carregando participantes...
     </div>
 
     <div class="col-12">
@@ -35,6 +33,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { mapActions, mapGetters }    from 'vuex';
 import { formatCEP, formatDocument } from '../../../utils/formatter';
 
@@ -57,7 +56,10 @@ export default {
 
   created() {
     if (this.contract['@id'])
-      this.getParticipants(this.contract['@id'])
+      this.getParticipants({
+        id    : this.contract['@id'],
+        params: { 'myCompany': this.myCompany.id }
+      })
         .then(response => {
           if (response.data) {
             if (response.success) {
@@ -109,6 +111,12 @@ export default {
     };
   },
 
+  computed: {
+    ...mapGetters({
+      myCompany: 'people/currentCompany',
+    }),
+  },
+
   watch: {
     'contract.contractModel'() {
       this.printContract();
@@ -118,21 +126,49 @@ export default {
   methods: {
     ...mapActions({
       getParticipants  : 'contracts/getParticipantsData',
+      getContent       : 'contracts/getContractContent',
       requestSignatures: 'contracts/requestSignatures',
     }),
 
     printContract() {
-      this.$refs.contractModel.innerHTML = this.contract.contractModel.content;
-      this.steps.contract.hasErrors      = false;
+      this.getContent({
+        id    : this.contract['@id'].replace(/\D/g, ''),
+        params: {
+          'company'  : this.myCompany !== null ? this.myCompany.id : null,
+          'myCompany': this.myCompany !== null ? this.myCompany.id : null
+        }
+      })
+        .then(response => {
+          if (response.status == 200) {
+            return response.text();
+          }
+        })
+        .then(content => {
+          this.$refs.contractModel.innerHTML = content;
+          this.steps.contract.hasErrors      = false;
+        })
+        .catch(error => {
+          this.steps.contract.hasErrors      = true;
+        });
     },
 
     doRequestSignatures() {
       this.isRequesting = true;
 
-      this.requestSignatures(this.contract['@id'])
+      this.requestSignatures({
+        id    : this.contract['@id'],
+        params: { 'myCompany': this.myCompany.id }
+      })
         .then(contract => {
           if (contract !== null)
             this.$emit('requested', contract);
+        })
+        .catch(error => {
+          this.$q.notify({
+            message : error.message,
+            position: 'bottom',
+            type    : 'negative',
+          });
         })
         .finally(() => {
           this.isRequesting = false;

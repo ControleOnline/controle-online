@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable -->
   <div>
 
     <div v-if="editMode"
@@ -25,7 +26,7 @@
       class="row q-mt-md justify-end"
     >
       <q-btn
-        color   ="positive"
+        color   ="deep-orange"
         label   ="Seguinte"
         :disable="!nextAllowed"
         @click  ="$emit('saved')"
@@ -52,6 +53,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { mapActions, mapGetters } from 'vuex';
 import ContractParticipants       from './ContractParticipants';
 import ContactForm                from './ContactForm';
@@ -92,6 +94,7 @@ export default {
   computed: {
     ...mapGetters({
       myProvider: 'people/currentCompany',
+      user      : 'auth/user',
     }),
   },
 
@@ -101,17 +104,35 @@ export default {
       createClient     : 'client/save',
     }),
 
-    onContactDialogHide() {
+    reload() {
       this.$refs.participantsRef.reload();
+    },
+
+    onContactDialogHide() {
+      this.reload();
     },
 
     onContactSave(contact) {
       this.save(contact);
     },
 
-    onParticipantsLoaded(total) {
-      this.nextAllowed                  = total > 0;
-      this.steps.participants.hasErrors = !this.nextAllowed;
+    onParticipantsLoaded(data) {
+      let allowed = false;
+
+      if (data.length >= 3) {
+        let minimum = 0;
+
+        data.forEach((item) => {
+          if (['Provider', 'Payer', 'Beneficiary'].includes(item.peopleType)) {
+            minimum++;
+          }
+        });
+
+        allowed = minimum >= 3;
+      }
+
+      this.nextAllowed                  = allowed;
+      this.steps.participants.hasErrors = !allowed;
     },
 
     save(participant) {
@@ -129,12 +150,12 @@ export default {
           if (participant.id == null) {
             let payload  = {
               params: {
-                'myProvider': this.myProvider.id,
+                'myProvider': this.myProvider.id
               },
               values: {
                 "name"    : participant.name,
                 "alias"   : participant.alias,
-                "document": participant.document,
+                "document": participant.document === null || !participant.document.length ? null : participant.document,
                 "docrg"   : participant.docrg,
                 "birthday": participant.birthday !== null ? participant.birthday.replace(/^(\d{2})\/(\d{2})\/(\d{4})$/, "\$3\-\$2\-\$1") : null,
                 "contact" : {
@@ -157,6 +178,17 @@ export default {
               }
             };
 
+            if (this.user.type === 'admin') {
+              payload.params = {
+                'myCompany' : this.myProvider.id
+              };
+            }
+            else {
+              payload.params = {
+                'myProvider': this.myProvider.id
+              };
+            }
+
             if (participant.paymentDay !== null) {
               payload.values['paymentDay'] = parseInt(participant.paymentDay);
             }
@@ -172,18 +204,30 @@ export default {
             }
           }
 
-          await this.addParticipant({
+          // create people participant
+
+          let data = {
             values: {
               "contract"          : this.contract['@id'],
               "people"            : `/people/${participant.id}`,
               "peopleType"        : typeName,
               "contractPercentage": parseFloat(participant.percentage.replace(/([,])/g, "\."))
-            },
-            params: {
-              'myProvider'        : this.myProvider.id,
             }
-          });
+          };
 
+          if (this.user.type === 'admin') {
+            data.params = {
+              'myCompany' : this.myProvider.id,
+              'myProvider': this.myProvider.id
+            };
+          }
+          else {
+            data.params = {
+              'myProvider': this.myProvider.id
+            };
+          }
+
+          await this.addParticipant(data);
         });
 
         this.$refs.contactFormRef.reset();
@@ -221,15 +265,6 @@ export default {
 
           throw new Error(message);
         });
-    },
-
-    isInvalid(key) {
-      return val => {
-        if (!(val && val.length > 0))
-          return this.$t('messages.fieldRequired');
-
-        return true;
-      };
     },
   },
 };
