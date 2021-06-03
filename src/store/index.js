@@ -17,6 +17,7 @@ import dashboard       from "./modules/dashboard";
 import client          from "./modules/client";
 import contracts       from "./modules/contracts";
 import expense         from "./modules/expense";
+import company         from "./modules/company";
 
 Vue.use(Vuex);
 
@@ -48,6 +49,7 @@ export default function(/* { ssrContext } */) {
       client,
       contracts,
       expense,
+      company,
     },
 
     // enable strict mode (adds overhead!)

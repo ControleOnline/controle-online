@@ -42,13 +42,22 @@ export default {
   },
 
   created() {
-    this.getMyCompanies();
+    if (this.user.type === 'salesman') {
+      this.getMyCompanies();
+    } else if (this.user.type === 'admin') {
+      this.loadCompanies({peopleId: this.user.people})
+        .then(() => {
+          this.setCompanies(this.userCompanies)
+        })
+    }
   },
 
   computed: {
     ...mapGetters({
-      myCompany: 'people/currentCompany',
-      companies: 'people/companies'     ,
+      myCompany    : 'people/currentCompany',
+      companies    : 'people/companies'     ,
+      user         : 'auth/user'            ,
+      userCompanies: 'company/companies'    ,
     }),
   },
 
@@ -64,8 +73,10 @@ export default {
 
   methods: {
     ...mapActions({
-      getCompanies: 'people/mySaleCompanies',
-      setCompany  : 'people/currentCompany' ,
+      getCompanies      : 'people/mySaleCompanies',
+      setCompany        : 'people/currentCompany' ,
+      loadCompanies     : 'company/loadCompanies',
+      setSelectedCompany: 'company/setSelectedCompany'
     }),
 
     setCompanies(companies) {
@@ -75,13 +86,13 @@ export default {
         let item = companies[index];
         let logo = null;
 
-        if (item.logo !== null) {
+        if (item.logo) {
           logo = 'https://' + item.logo.domain + item.logo.url;
         }
 
         data.push({
           'id'        : item.id,
-          'name'      : item.alias,
+          'name'      : item.alias || item.name,
           'logo'      : logo || null,
           'commission': item.commission,
         });
@@ -98,8 +109,10 @@ export default {
       else
         this.currentCompany = data.length > 0 ? data[0] : null;
 
-      if (this.currentCompany !== null)
+      if (this.currentCompany !== null) {
         this.setCompany(this.currentCompany);
+        this.setSelectedCompany(this.currentCompany);
+      }
     },
 
     getMyCompanies() {
@@ -115,6 +128,7 @@ export default {
       this.currentCompany = company;
 
       this.setCompany(company);
+      this.setSelectedCompany(company);
     },
   },
 };
