@@ -16,10 +16,12 @@ export const company = ({ commit }, values) => {
   commit(types.SET_ERROR, '')
   commit(types.SET_ISLOADING)
 
-  if (values.origin.country.length === 0) {
-    values.origin.country = values.address.country
-    values.origin.city = values.address.city
-    values.origin.state = values.address.state
+  if (values.origin !== undefined) {
+    if (values.origin.country === undefined || values.origin.country === null) {
+      values.origin.country = values.address.country;
+      values.origin.city    = values.address.city;
+      values.origin.state   = values.address.state;
+    }
   }
 
   return fetch('companies', { method: 'POST', body: JSON.stringify(values) })
