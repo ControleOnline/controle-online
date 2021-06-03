@@ -99,4 +99,11 @@ export default {
       'Contractor' : 'Prestador de serviço',
     },
   },
+  'default_provider'  : 'Serviços padrão',
+  'zapsign-sandbox'   : 'Usar ambiente de teste do Zapsign',
+  'zapsign-token'     : 'Zapsign Token',
+  'zapsign-webhook'   : 'Zapsign Webhook',
+  'clicksign-token'   : 'Clicksign Token',
+  'clicksign-webhook' : 'Clicksign Webhook',
+  'clicksign-sandbox' : 'Usar ambiente de teste da Clicksign',
 }
