@@ -1,6 +1,7 @@
 import SubmissionError from '../../../error/SubmissionError';
 import fetch           from '../../../utils/fetch';
 import * as types      from './mutation_types';
+import * as myapi      from '../../../boot/myapi';
 
 export const appConfig = ({ commit }) => {
   commit(types.SET_ISLOADING);
@@ -44,5 +45,33 @@ export const appConfig = ({ commit }) => {
       }
 
       commit(types.SET_ERROR, e.message);
+    });
+};
+
+export const getConfig = ({ commit }, peopleId) => {
+  const params = {
+    method: 'GET'
+  };
+
+  return myapi.fetch(`/configs/${peopleId}`, params)
+    .then(response => response.json())
+    .then(response => {
+
+      return response.response ? response.response.data : null;
+
+    });
+}
+
+export const saveConfig = ({ commit }, { peopleId, values, params }) => {
+  let options = {
+    method: 'PUT',
+    body  : JSON.stringify(values),
+    params: params
+  };
+
+  return myapi.fetch(`/configs/${peopleId}`, options)
+    .then(response => response.json())
+    .then(response => {
+      return response;
     });
 };
