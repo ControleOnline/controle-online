@@ -2,26 +2,38 @@
   <q-page padding>
     <div class="row">
       <div class="col-12">
-        <ContractSearching />
+        <contract-list
+          :config="setConfig"
+        />
       </div>
     </div>
   </q-page>
 </template>
 
 <script>
-import ContractSearching from '../../components/contract/ContractSearching';
+import { ENTRYPOINT } from './../../config/entrypoint'
 
 export default {
-  name      : 'ContractIndexPage',
+  methods: {
+    setConfig(configs) {
 
-  components: {
-    ContractSearching,
+      // config api
+
+      configs.Api.setAsFake (false);
+      configs.Api.setBaseUrl(ENTRYPOINT);
+      configs.Api.setToken  (this.$store.getters['auth/user'].token);
+
+      // config routes
+
+      configs.Routes.Details.name = 'ContractDetails';
+
+      // config params
+
+      configs.Params.Company
+        .getter = () => {
+          return this.$store.getters['company/selectedCompany'].id;
+        };
+    },
   },
-
-  data () {
-    return {
-
-    }
-  }
-}
+};
 </script>
