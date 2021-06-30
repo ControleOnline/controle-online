@@ -211,7 +211,7 @@
 </template>
 
 <script>
-import { formatMoney  } from './../utils/formatter';
+import { formatMoney } from '@freteclick/quasar-common-ui/src/utils/formatter';
 
 const OPTIONS = [
   {

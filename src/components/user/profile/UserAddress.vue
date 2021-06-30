@@ -67,10 +67,9 @@
 </template>
 
 <script>
-import { date, extend }           from 'quasar';
 import FormAddress                from './FormAddress';
 import { mapActions, mapGetters } from 'vuex';
-import { formatCEP  }             from '../../../utils/formatter';
+import { formatCEP  }             from '@freteclick/quasar-common-ui/src/utils/formatter';
 
 const SETTINGS = {
   visibleColumns: [

@@ -32,8 +32,8 @@
 
 <script>
 import { date }                        from 'quasar';
-import { formatDocument, formatPhone } from '../../../utils/formatters';
-import Api                             from '../../../utils/api';
+import { formatDocument, formatPhone } from '@freteclick/quasar-common-ui/src/utils/formatter';
+import Api                             from '@freteclick/quasar-common-ui/src/utils/api';
 
 const SETTINGS = {
   visibleColumns: [

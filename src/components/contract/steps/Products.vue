@@ -98,7 +98,6 @@
 /* eslint-disable */
 import { mapActions, mapGetters } from 'vuex';
 import ContractProducts           from './ContractProducts';
-import { formatMoney }            from '../../../utils/formatter';
 import { fetch }                  from '../../../boot/myapi';
 
 export default {

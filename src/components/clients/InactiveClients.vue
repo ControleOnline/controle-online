@@ -31,9 +31,9 @@
 </template>
 
 <script>
-import { date }                           from 'quasar';
-import { mapActions, mapGetters }         from 'vuex';
-import { formatDocument, formatTelefone } from '../../utils/formatter';
+import { date }                        from 'quasar';
+import { mapActions, mapGetters }      from 'vuex';
+import { formatDocument, formatPhone } from '@freteclick/quasar-common-ui/src/utils/formatter';
 
 const SETTINGS = {
   visibleColumns: [
@@ -83,7 +83,7 @@ const SETTINGS = {
       field : 'phone',
       align : 'left',
       format: (val, row) => {
-        return formatTelefone(val);
+        return formatPhone(val);
       },
       label : 'Telefone'
     },

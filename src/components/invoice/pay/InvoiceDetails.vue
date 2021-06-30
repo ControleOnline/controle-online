@@ -111,10 +111,9 @@
 </template>
 
 <script>
-import { date, extend }                    from 'quasar';
 import { mapActions, mapGetters }          from 'vuex';
 import InvoiceOrders                       from './details/InvoiceOrders';
-import { formatMoney, formatDateYmdTodmY } from '../../../utils/formatter';
+import { formatMoney, formatDateYmdTodmY } from '@freteclick/quasar-common-ui/src/utils/formatter';
 
 export default {
   components: {

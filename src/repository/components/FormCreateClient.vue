@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import Api from '../utils/api';
+import Api from '@freteclick/quasar-common-ui/src/utils/api';
 
 export default {
   props: {

@@ -153,7 +153,7 @@ import TableClientsInactive  from './components/TableClientsInactive';
 import TableClientsProspects from './components/TableClientsProspects';
 import TableClientsActive    from './components/TableClientsActive';
 import TableClientsNew       from './components/TableClientsNew';
-import Api                   from '../../utils/api';
+import Api                   from '@freteclick/quasar-common-ui/src/utils/api';
 
 export default {
   props: {

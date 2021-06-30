@@ -134,9 +134,8 @@
 </template>
 
 <script>
-import { date, extend }                    from 'quasar';
 import { mapActions, mapGetters }          from 'vuex';
-import { formatMoney, formatDateYmdTodmY } from './../../../utils/formatter';
+import { formatMoney, formatDateYmdTodmY } from '@freteclick/quasar-common-ui/src/utils/formatter';
 import CreateExpense                       from './../expense/CreateExpense';
 
 const SETTINGS = {

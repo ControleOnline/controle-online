@@ -136,7 +136,6 @@
 </template>
 
 <script>
-import { version                } from '../../package.json'
 import { mapActions, mapGetters } from 'vuex';
 import { LocalStorage }           from 'quasar';
 
@@ -150,9 +149,9 @@ import LoginPage                  from '../components/user/login/Index';
 import SignUpPage                 from '../components/user/signup/Index';
 import ContractPage               from '../components/contracting/Index';
 
-import { MyPackage }              from '../utils/mypackage';
-import { formatTelefone }         from '../utils/formatter';
-import Analytics                  from '../utils/analytics';
+import { MyPackage }              from '@freteclick/quasar-common-ui/src/utils/mypackage';
+import { formatPhone }            from '@freteclick/quasar-common-ui/src/utils/formatter';
+import Analytics                  from '@freteclick/quasar-common-ui/src/utils/analytics';
 
 export default {
   name      : 'PageIndex',
@@ -297,7 +296,7 @@ export default {
     }),
 
     formatPhone(phone) {
-      return formatTelefone(phone);
+      return formatPhone(phone);
     },
 
     // do logout

@@ -35,7 +35,7 @@
 <script>
 /* eslint-disable */
 import { mapActions, mapGetters }    from 'vuex';
-import { formatCEP, formatDocument } from '../../../utils/formatter';
+import { formatCEP, formatDocument } from '@freteclick/quasar-common-ui/src/utils/formatter';
 
 export default {
   props: {
