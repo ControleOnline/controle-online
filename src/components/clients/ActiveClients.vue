@@ -33,7 +33,7 @@
 <script>
 import { date }                           from 'quasar';
 import { mapActions, mapGetters }         from 'vuex';
-import { formatDocument, formatTelefone } from '../../utils/formatter';
+import { formatDocument, formatTelefone } from '@freteclick/quasar-common-ui/src/utils/formatter';
 
 const SETTINGS = {
   visibleColumns: [

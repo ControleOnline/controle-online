@@ -96,9 +96,8 @@
 </template>
 
 <script>
-import { date, extend, exportFile }  from 'quasar';
-import { formatCEP, formatDocument } from '../../../../utils/formatter';
-import UploadFileForm                from '../../../../components/common/UploadFileForm';
+import { formatCEP, formatDocument } from '@freteclick/quasar-common-ui/src/utils/formatter';
+import UploadFileForm                from '@freteclick/quasar-common-ui/src/components/common/UploadFileForm';
 import { mapActions, mapGetters }    from 'vuex';
 import { ENTRYPOINT }                from '../../../../config/entrypoint';
 

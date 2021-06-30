@@ -143,8 +143,8 @@
 </template>
 
 <script>
-import Api                from '../utils/api';
-import { formatDocument } from '../utils/formatters';
+import Api                from '@freteclick/quasar-common-ui/src/utils/api';
+import { formatDocument } from '@freteclick/quasar-common-ui/src/utils/formatter';
 import md5                from 'md5';
 import { mapGetters }     from 'vuex';
 

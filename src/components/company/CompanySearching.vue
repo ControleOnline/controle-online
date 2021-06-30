@@ -92,10 +92,9 @@
 </template>
 
 <script>
-import { date, extend }           from 'quasar';
-import { mapActions, mapGetters } from 'vuex';
-import FormCompany                from './../user/signup/Company';
-import { formatDocument }         from './../../utils/formatter';
+import { mapActions }     from 'vuex';
+import FormCompany        from '@controleonline/quasar-login-ui/src/components/user/signup/Company.vue';
+import { formatDocument } from '@freteclick/quasar-common-ui/src/utils/formatter';
 
 export default {
   components: {

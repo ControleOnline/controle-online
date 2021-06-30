@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import Api              from '../../utils/api';
+import Api              from '@freteclick/quasar-common-ui/src/utils/api';
 import FormCreateClient from '../../components/FormCreateClient';
 import PageSearchClient from '../PageSearchClients/Index';
 

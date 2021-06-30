@@ -37,7 +37,7 @@
 <script>
 /* eslint-disable */
 import { mapActions, mapGetters } from 'vuex';
-import { formatMoney }            from '../../../utils/formatter';
+import { formatMoney }            from '@freteclick/quasar-common-ui/src/utils/formatter';
 
 const SETTINGS = {
   columns       : [

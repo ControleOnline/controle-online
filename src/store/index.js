@@ -1,7 +1,7 @@
 import Vue             from "vue";
 import Vuex            from "vuex";
 
-import auth            from "./modules/auth";
+import auth            from '@controleonline/quasar-login-ui/src/store/modules/auth';
 import gmaps           from "./modules/gmaps";
 import people          from "./modules/people";
 import config          from "./modules/config";

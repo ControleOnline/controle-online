@@ -319,7 +319,7 @@
 </template>
 
 <script>
-import Api                  from '../../utils/api';
+import Api                  from '@freteclick/quasar-common-ui/src/utils/api';
 import ClientAdminEmails    from '../../components/ClientAdminEmails';
 import ClientAdminUsers     from '../../components/ClientAdminUsers';
 import ClientAdminAddresses from '../../components/ClientAdminAddresses';

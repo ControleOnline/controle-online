@@ -217,9 +217,7 @@
 </template>
 
 <script>
-import { formatMoney, formatDateYmdTodmY } from '../../../utils/formatter';
-import { mapActions, mapGetters }          from 'vuex';
-import { date }                            from 'quasar';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   created() {

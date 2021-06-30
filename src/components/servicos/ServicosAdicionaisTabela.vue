@@ -53,8 +53,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
-import { formatMoney }            from './../../utils/formatter';
+import { mapGetters }  from 'vuex';
+import { formatMoney } from '@freteclick/quasar-common-ui/src/utils/formatter';
 
 const SETTINGS = {
   columns       : [

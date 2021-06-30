@@ -1,5 +1,5 @@
-import SubmissionError from '../../../error/SubmissionError';
-import fetch           from '../../../utils/fetch';
+import SubmissionError from '@freteclick/quasar-common-ui/src/error/SubmissionError';
+import fetch           from '@freteclick/quasar-common-ui/src/utils/fetch';
 import * as types      from './mutation_types';
 import * as myapi      from '../../../boot/myapi';
 

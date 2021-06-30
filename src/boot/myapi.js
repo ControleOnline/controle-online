@@ -1,6 +1,4 @@
-import myFetch         from '../utils/fetch';
-import SubmissionError from '../error/SubmissionError';
-import { ENTRYPOINT }  from '../config/entrypoint';
+import myFetch from '@freteclick/quasar-common-ui/src/utils/fetch';
 
 let myStore = null;
 

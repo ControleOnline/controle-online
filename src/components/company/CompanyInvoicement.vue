@@ -31,9 +31,8 @@
 </template>
 
 <script>
-import { date, extend }           from 'quasar';
 import { mapActions, mapGetters } from 'vuex';
-import { formatMoney }            from '../../utils/formatter';
+import { formatMoney }            from '@freteclick/quasar-common-ui/src/utils/formatter';
 
 export default {
   props: {
