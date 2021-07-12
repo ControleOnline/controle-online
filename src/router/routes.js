@@ -1,7 +1,9 @@
 import * as Login from '@controleonline/quasar-login-ui/src/router/routes';
+import * as Customers from '@controleonline/quasar-customers-ui/src/router/routes';
 
 const routes = [
   ...Login.routes,
+  ...Customers.routes,
   {
     path     : '/',
     component: () => import('layouts/MainLayout.vue'),
@@ -75,22 +77,7 @@ const routes = [
       },
     ]
   },
-  {
-    path     : '/clientes/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'ClientsIndex',
-        path     : '',
-        component: () => import('pages/Clients/Index.vue')
-      },
-      {
-        name     : 'ClientsDetails',
-        path     : 'id/:id',
-        component: () => import('pages/Clients/Details.vue')
-      },
-    ]
-  },
+
   {
     path     : '/infos/',
     component: () => import('layouts/AdminLayout.vue'),
