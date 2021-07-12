@@ -145,27 +145,6 @@ const routes = [
     ]
   },
   {
-    path     : '/empresas/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'CompaniesIndex',
-        path     : '',
-        component: () => import('pages/Companies/Index.vue')
-      },
-      {
-        name     : 'CompaniesDetails',
-        path     : ':id',
-        component: () => import('pages/Companies/Details.vue')
-      },
-      {
-        name     : 'CompaniesCreate',
-        path     : 'novo',
-        component: () => import('pages/Companies/Create.vue')
-      },
-    ]
-  },
-  {
     path     : '/auditoria/',
     component: () => import('layouts/AdminLayout.vue'),
     children : [
@@ -446,41 +425,19 @@ const routes = [
     ]
   },
   {
-    path     : '/vendas/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'VendasIndex',
-        path     : '',
-        component: () => import('pages/Vendas/Index.vue'),
-      },
-      {
-        name     : 'VendasEdit',
-        path     : ':id',
-        component: () => import('pages/Vendas/Edit.vue'),
-      },
-    ]
-  },
-  {
     path     : '/financeiro/',
     component: () => import('layouts/AdminLayout.vue'),
     children : [
       {
         name     : 'FinanceiroIndex',
-        path     : '',
-        component: () => import('pages/Financeiro/Index.vue'),
+        path     : 'pagar',
+        component: () => import('@controleonline/quasar-financial-ui/src/pages/Invoice/Pay/Index.vue'),
       },
-    ]
-  },
-  {
-    path     : '/assinaturas/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
       {
-        name     : 'AssinaturasIndex',
-        path     : '',
-        component: () => import('pages/Assinatura/Index.vue'),
-      },
+        name     : 'FinanceiroReceberIndex',
+        path     : 'receber',
+        component: () => import('@controleonline/quasar-financial-ui/src/pages/Invoice/Receive/Index.vue'),
+      }
     ]
   },
   {
