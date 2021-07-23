@@ -14,8 +14,10 @@ export const fetch = function(id, options = {}) {
   let myPromisse = myFetch(id, options);
 
   myPromisse.catch(e => {
-    if (e.message == 'Unauthorized')
+    if (e.message == 'Unauthorized' || e.message == 'Invalid credentials.')
       myStore.dispatch('auth/logOut');
+      localStorage.clear();
+      location.reload();
   });
 
   return myPromisse;
