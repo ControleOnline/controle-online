@@ -251,10 +251,10 @@
 </template>
 
 <script>
-import MyCompanies                from "../components/common/MyCompanies";
-import md5                        from "md5";
-import { mapActions, mapGetters } from "vuex";
-import { LocalStorage }           from "quasar";
+import MyCompanies      from "@freteclick/quasar-common-ui/src/components/common/MyCompanies.vue";
+import md5              from "md5";
+import { mapActions }   from "vuex";
+import { LocalStorage } from "quasar";
 
 export default {
   name: "AdminLayout",

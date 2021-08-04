@@ -268,13 +268,13 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import ContactForm                from '@freteclick/quasar-common-ui/src/components/common/ContactForm';
 import {
   formatDocument,
   formatMoney   ,
   formatPhone   ,
   formatCEP     ,
 } from '@freteclick/quasar-common-ui/src/utils/formatter';
-import ContactForm                from '@freteclick/quasar-common-ui/src/components/common/ContactForm';
 
 export default {
   props: {

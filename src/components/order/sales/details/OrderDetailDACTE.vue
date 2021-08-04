@@ -58,8 +58,7 @@
 </template>
 
 <script>
-import { date }                   from 'quasar';
-import UploadFileForm             from '../../../../components/common/UploadFileForm';
+import UploadFileForm             from '@freteclick/quasar-common-ui/src/components/common/UploadFileForm.vue';
 import { mapActions, mapGetters } from 'vuex';
 import { ENTRYPOINT }             from '../../../../config/entrypoint';
 
