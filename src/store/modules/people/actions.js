@@ -13,8 +13,8 @@ export function loadPeople (context, peopleId) {
 }
 
 export const company = ({ commit }, values) => {
-  commit(types.SET_ERROR, '')
-  commit(types.SET_ISLOADING)
+  commit(types.SET_ERROR, '');
+  commit(types.SET_ISLOADING);
 
   if (values.origin !== undefined) {
     if (values.origin.country === undefined || values.origin.country === null) {
@@ -26,9 +26,9 @@ export const company = ({ commit }, values) => {
 
   return fetch('companies', { method: 'POST', body: JSON.stringify(values) })
     .then(response => {
-      commit(types.SET_ISLOADING, false)
+      commit(types.SET_ISLOADING, false);
 
-      return response.json()
+      return response.json();
     })
     .then(data => {
       if (data.response && data.response.success) {
@@ -39,14 +39,16 @@ export const company = ({ commit }, values) => {
         }
       }
 
-      return data.response ? data.response : null
+      return data.response ? data.response : null;
     })
     .catch(e => {
-      commit(types.SET_ISLOADING, false)
+      commit(types.SET_ISLOADING, false);
 
-      if (e instanceof SubmissionError) { throw new Error(e.errors._error) }
+      if (e instanceof SubmissionError) { 
+        throw new Error(e.errors._error);
+      }
 
-      throw new Error(e.message)
+      throw new Error(e.message);
     })
 }
 
@@ -145,7 +147,7 @@ export const getClientContact = ({ commit }, searchBy) => {
     })
 }
 
-export const myCompanies = ({ commit }) => {
+export const myCompanies = ({ commit, dispatch }) => {
   commit(types.SET_ISLOADING);
 
   return fetch(`${RESOURCE_ENDPOINT}/my-companies`)
@@ -161,6 +163,10 @@ export const myCompanies = ({ commit }) => {
 
     }).catch(e => {
       commit(types.SET_ISLOADING, false);
+
+      dispatch('auth/logOut', null, { root: true });
+      localStorage.clear();
+      location.reload();
 
       if (e instanceof SubmissionError) {
         commit(types.SET_VIOLATIONS, e.errors);
@@ -198,7 +204,37 @@ export const mySaleCompanies = ({ commit }) => {
 
       commit(types.SET_ERROR, e.message)
     })
-}
+};
+
+export const defaultCompany = ({ commit, dispatch }) => {
+  commit(types.SET_ISLOADING);
+
+  return fetch(`${RESOURCE_ENDPOINT}/default-company?domain=` + location.host)
+    .then(response => response.json())
+    .then(data => {
+      commit(types.SET_ISLOADING, false);
+
+      commit(types.SET_DEFAULT_COMPANY, data.response.data[0]);
+
+      return data.response;
+
+    }).catch(e => {
+      commit(types.SET_ISLOADING, false);
+
+      dispatch('auth/logOut', null, { root: true });
+      localStorage.clear();
+      location.reload();
+
+      if (e instanceof SubmissionError) {
+        commit(types.SET_VIOLATIONS, e.errors);
+        // eslint-disable-next-line
+        commit(types.SET_ERROR, e.errors._error);
+        return;
+      }
+
+      commit(types.SET_ERROR, e.message);
+    });
+};
 
 export const getPeople = ({ commit }, id) => {
   return fetch(`${RESOURCE_ENDPOINT}/${id}`)
@@ -215,29 +251,5 @@ export const getMyCompanies = ({ commit }) => {
     .then(response => response.json())
     .then(data => {
       return data.response;
-    });
-};
-
-export const defaultCompany = ({ commit }) => {
-  commit(types.SET_ISLOADING);
-
-  return fetch(`${RESOURCE_ENDPOINT}/default-company`)
-    .then(response => response.json())
-    .then(data => {
-      commit(types.SET_ISLOADING, false);
-
-      return data.response;
-
-    }).catch(e => {
-      commit(types.SET_ISLOADING, false);
-
-      if (e instanceof SubmissionError) {
-        commit(types.SET_VIOLATIONS, e.errors);
-        // eslint-disable-next-line
-        commit(types.SET_ERROR, e.errors._error);
-        return;
-      }
-
-      commit(types.SET_ERROR, e.message);
     });
 };

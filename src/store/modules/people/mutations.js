@@ -42,4 +42,18 @@ export default {
 
     }
   },
+  [types.SET_DEFAULT_COMPANY](state, company) {
+    try {
+      let session = LocalStorage.has('session') ? LocalStorage.getItem('session') : {};
+
+      session.default = company.id;  
+
+      LocalStorage.set('session', session);
+
+      Object.assign(state, { defaultCompany: company });
+
+    } catch(e) {
+
+    }
+  },
 };
