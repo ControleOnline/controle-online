@@ -11,6 +11,7 @@ export default {
     retrieved     : null,
     company       : null,
     currentCompany: null,
+    defaultCompany: null,
     companies     : [],
   },
   actions,

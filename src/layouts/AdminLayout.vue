@@ -349,6 +349,13 @@ export default {
       ],
       links7: [
         {
+          icon: 'person',
+          text: this.$t('Fornecedores'),
+          to  : {
+            name: 'ProvidersIndex'
+          }
+        },
+        {
           icon: 'attach_money',
           text: this.$t('Contas a Pagar'),
           to  : {
