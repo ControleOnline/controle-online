@@ -250,9 +250,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
-import CEPSearchInput             from './../common/CEPSearchInput';
-import { exportFile }             from 'quasar';
+import CEPSearchInput from '@freteclick/quasar-common-ui/src/components/common/CEPSearchInput.vue';
 
 export default {
   props: {

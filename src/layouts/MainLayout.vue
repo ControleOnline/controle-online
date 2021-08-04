@@ -7,9 +7,7 @@
 </template>
 
 <script>
-import MyCompanies                from "../components/common/MyCompanies";
-import { mapActions, mapGetters } from "vuex";
-import { fetch }                  from "../boot/myapi";
+import { mapActions } from "vuex";
 
 export default {
   name   : "MainLayout",

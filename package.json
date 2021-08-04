@@ -14,7 +14,7 @@
     "@controleonline/quasar-financial-ui": "^1.0.17",
     "@controleonline/quasar-login-ui": "^1.0.15",
     "@controleonline/quasar-providers-ui": "^1.0.7",
-    "@freteclick/quasar-common-ui": "^1.0.2",
+    "@freteclick/quasar-common-ui": "^1.0.5",
     "@quasar/extras": "^1.9.3",
     "axios": "^0.21.1",
     "core-js": "^3.0.0",
