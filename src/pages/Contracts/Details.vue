@@ -1,6 +1,17 @@
 <template>
   <q-page padding>
+
+    <div v-if="pageLoading" class="row">
+      <div class="col-12 pageloader">
+        <q-spinner
+          color="primary"
+          class="q-uploader__spinner"
+        />
+      </div>
+    </div>
+
     <contract-detail
+      v-else
       ref    ="contractDetail"
       :id    ="id"
       :config="setConfig"
@@ -62,22 +73,41 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { ENTRYPOINT } from './../../config/entrypoint'
 
 export default {
   data () {
     return {
-      id    : null,
-      panels: []
+      id         : null,
+      panels     : [],
+      pageLoading: true,
     }
   },
 
+  computed: {
+    ...mapGetters({
+      defaultCompany : 'people/defaultCompany',
+    })
+  },
+
   created() {
+    if (this.defaultCompany) {
+      this.pageLoading = false;
+    }
+    
     if (this.$route.params.id) {
       this.id = decodeURIComponent(this.$route.params.id);
     }
-
     this.setPanels();
+  },
+  
+  watch: {
+    defaultCompany(data) {
+      if (data) {
+        this.pageLoading = false;
+      }
+    }
   },
 
   methods: {
@@ -102,29 +132,31 @@ export default {
 
     setPanels() {
       let panels = [];
-
       panels.push({
         name: 'contract',
         icon: 'edit'
       });
-
       panels.push({
         name: 'participants',
         icon: 'people'
       });
-
       panels.push({
         name: 'products',
         icon: 'shopping_cart'
       });
-
       panels.push({
         name: 'document',
         icon: 'article'
       });
-
       this.panels = panels;
     },
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.pageloader{
+  text-align: center;
+  margin-top: 200px;
+}
+</style>
