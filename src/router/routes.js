@@ -1,7 +1,7 @@
 import * as Login from '@controleonline/quasar-login-ui/src/router/routes';
 import * as Customers from '@controleonline/quasar-customers-ui/src/router/routes';
 import * as Providers from '@controleonline/quasar-providers-ui/src/router/routes';
-import * as Tasks from '@controleonline/quasar-providers-ui/src/tasks/routes';
+import * as Tasks from '@controleonline/quasar-providers-ui/src/router/routes';
 
 const routes = [
   ...Login.routes,
