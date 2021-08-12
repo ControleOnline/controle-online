@@ -207,5 +207,9 @@ export default {
     username: 'Usuário',
     weakPass: 'Esta senha não é segura. Crie uma senha mais forte',
     passNoMatch: 'As senhas não coincidem'
+  },
+
+  customers: {
+    separeteServices : 'Serviços avulsos'
   }
 }
