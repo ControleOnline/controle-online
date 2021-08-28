@@ -73,7 +73,7 @@
 
 <script>
 import { date, extend }           from 'quasar';
-import { formatMoney  }           from '../../../utils/formatter';
+import { formatMoney  }           from '@freteclick/quasar-common-ui/src/utils/formatter';
 import { mapActions, mapGetters } from 'vuex';
 
 const SETTINGS = {

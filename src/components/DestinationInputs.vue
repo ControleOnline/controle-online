@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
-import ListAutocomplete           from './common/ListAutocomplete'
+import { mapActions }   from 'vuex';
+import ListAutocomplete from '@freteclick/quasar-common-ui/src/components/common/ListAutocomplete.vue';
 
 export default {
   props: {

@@ -59,9 +59,8 @@
 </template>
 
 <script>
-import { date, extend }           from 'quasar';
 import FormDocument               from './FormDocument';
-import { formatDocument }         from './../../utils/formatter';
+import { formatDocument }         from '@freteclick/quasar-common-ui/src/utils/formatter';
 import { mapActions, mapGetters } from 'vuex';
 
 const SETTINGS = {

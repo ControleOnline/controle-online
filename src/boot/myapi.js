@@ -1,6 +1,4 @@
-import myFetch         from '../utils/fetch';
-import SubmissionError from '../error/SubmissionError';
-import { ENTRYPOINT }  from '../config/entrypoint';
+import myFetch from '@freteclick/quasar-common-ui/src/utils/fetch';
 
 let myStore = null;
 
@@ -16,8 +14,11 @@ export const fetch = function(id, options = {}) {
   let myPromisse = myFetch(id, options);
 
   myPromisse.catch(e => {
-    if (e.message == 'Unauthorized')
+    if (e.message == 'Unauthorized' || e.message == 'Invalid credentials.') {
       myStore.dispatch('auth/logOut');
+      localStorage.clear();
+      location.reload();
+    }
   });
 
   return myPromisse;

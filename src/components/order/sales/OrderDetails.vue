@@ -180,7 +180,7 @@ import OrderDetailQuotation       from './details/OrderDetailQuotation';
 import OrderDetailNotaFiscal      from './details/OrderDetailNotaFiscal';
 import OrderDetailInvoice         from './details/OrderDetailInvoice';
 import OrderDetailDACTE           from './details/OrderDetailDACTE';
-import { formatMoney }            from '../../../utils/formatter';
+import { formatMoney }            from '@freteclick/quasar-common-ui/src/utils/formatter';
 
 export default {
   components: {

@@ -204,11 +204,31 @@
             </q-item-section>
           </q-item>
 
+          <q-expansion-item expand-icon-toggle :content-inset-level="0.3"
+            icon  ="attach_money"
+            class ="GNL__drawer-item"
+            :label="$t('Financeiro')"
+          >
+            <q-item v-ripple clickable
+              class="GNL__drawer-item"
+              v-for="link in links7"
+              :key ="link.text"
+              :to  ="link.to"
+            >
+              <q-item-section avatar>
+                <q-icon :name="link.icon" />
+              </q-item-section>
+              <q-item-section no-wrap>
+                <q-item-label>{{ link.text }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-expansion-item>
+
           <q-separator inset class="q-my-sm" />
 
           <q-item v-ripple clickable
             class="GNL__drawer-item"
-            v-for="link in links7"
+            v-for="link in links8"
             :key ="link.text"
             :to  ="link.to"
           >
@@ -231,10 +251,10 @@
 </template>
 
 <script>
-import MyCompanies                from "../components/common/MyCompanies";
-import md5                        from "md5";
-import { mapActions, mapGetters } from "vuex";
-import { LocalStorage }           from "quasar";
+import MyCompanies      from "@freteclick/quasar-common-ui/src/components/common/MyCompanies.vue";
+import md5              from "md5";
+import { mapActions }   from "vuex";
+import { LocalStorage } from "quasar";
 
 export default {
   name: "AdminLayout",
@@ -252,7 +272,6 @@ export default {
         { icon: 'dashboard'    , text: this.$t('Dashboard') , to: { name: 'DashboardIndex'    }},
         { icon: 'table_view'   , text: this.$t('Planos')    , to: { name: 'PlansIndex'        }},
         { icon: 'list'         , text: this.$t('Checklists'), to: { name: 'StepsRegistration' }},
-        { icon: 'business'     , text: this.$t('Empresas')  , to: { name: 'CompaniesIndex'    }},
         { icon: 'person'       , text: this.$t('Clientes')  , to: { name: 'ClientsIndex'      }},
         { icon: 'library_books', text: this.$t('Contratos') , to: { name: 'ContractIndex'     }},
       ],
@@ -327,29 +346,31 @@ export default {
             name: 'SocietarioIndex'
           }
         },
+      ],
+      links7: [
         {
-          icon: 'shopping_cart',
-          text: this.$t('Vendas'),
+          icon: 'person',
+          text: this.$t('Fornecedores'),
           to  : {
-            name: 'VendasIndex'
+            name: 'ProvidersIndex'
           }
         },
         {
           icon: 'attach_money',
-          text: this.$t('Financeiro'),
+          text: this.$t('Contas a Pagar'),
           to  : {
             name: 'FinanceiroIndex'
           }
         },
         {
-          icon: 'request_quote',
-          text: this.$t('Assinaturas'),
+          icon: 'attach_money',
+          text: this.$t('Contas a Receber'),
           to  : {
-            name: 'AssinaturasIndex'
+            name: 'FinanceiroReceberIndex'
           }
         },
       ],
-      links7         : [
+      links8         : [
         {
           icon: 'note_add',
           text: this.$t('Serviços Adicionais'),

@@ -136,11 +136,9 @@
 </template>
 
 <script>
-import Api                from './../../utils/api';
-import { formatDocument } from './../../utils/formatter';
+import Api                from '@freteclick/quasar-common-ui/src/utils/api';
 import md5                from 'md5';
 import { mapGetters }     from 'vuex';
-import { ENTRYPOINT }     from './../../config/entrypoint';
 
 export default {
   props: {

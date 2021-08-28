@@ -1,1 +1,1 @@
-export const ENTRYPOINT_LOCAL = 'https://localhost:8081/';
+export const ENTRYPOINT_LOCAL = 'http://localhost:8000/';

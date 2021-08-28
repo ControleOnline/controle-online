@@ -267,15 +267,14 @@
 </template>
 
 <script>
-import { date, extend }           from 'quasar';
 import { mapActions, mapGetters } from 'vuex';
+import ContactForm                from '@freteclick/quasar-common-ui/src/components/common/ContactForm';
 import {
   formatDocument,
   formatMoney   ,
-  formatTelefone,
+  formatPhone   ,
   formatCEP     ,
-} from '../../../../utils/formatter';
-import ContactForm                from './../../../common/ContactForm';
+} from '@freteclick/quasar-common-ui/src/utils/formatter';
 
 export default {
   props: {
@@ -546,7 +545,7 @@ export default {
     seeDetails(data) {
       this.dialogs.details.data.name        = data.contact.name;
       this.dialogs.details.data.email       = data.contact.email;
-      this.dialogs.details.data.phone       = formatTelefone(data.contact.phone);
+      this.dialogs.details.data.phone       = formatPhone(data.contact.phone);
       this.dialogs.details.data.state       = data.address.state;
       this.dialogs.details.data.city        = data.address.city;
       this.dialogs.details.data.district    = data.address.district;

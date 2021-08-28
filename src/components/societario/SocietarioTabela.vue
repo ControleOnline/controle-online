@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
-import { formatDateYmdTodmY }     from './../../utils/formatter';
+import { mapGetters }         from 'vuex';
+import { formatDateYmdTodmY } from '@freteclick/quasar-common-ui/src/utils/formatter';
 
 const SETTINGS = {
   columns       : [

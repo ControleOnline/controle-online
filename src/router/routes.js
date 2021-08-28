@@ -1,10 +1,17 @@
+import * as Login from '@controleonline/quasar-login-ui/src/router/routes';
+import * as Customers from '@controleonline/quasar-customers-ui/src/router/routes';
+import * as Providers from '@controleonline/quasar-providers-ui/src/router/routes';
+import * as Tasks from '@controleonline/quasar-providers-ui/src/router/routes';
 
 const routes = [
+  ...Login.routes,
+  ...Customers.routes,
+  ...Providers.routes,
+  ...Tasks.routes,
   {
     path     : '/',
     component: () => import('layouts/MainLayout.vue'),
     children : [
-      { name: 'LoginIndex'     , path: ''          , component: () => import('pages/Login.vue') },
       { name: 'CalculatorIndex', path: 'calculator', component: () => import('pages/Calculator.vue') }
     ]
   },
@@ -74,22 +81,7 @@ const routes = [
       },
     ]
   },
-  {
-    path     : '/clientes/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'ClientsIndex',
-        path     : '',
-        component: () => import('pages/Clients/Index.vue')
-      },
-      {
-        name     : 'ClientsDetails',
-        path     : 'id/:id',
-        component: () => import('pages/Clients/Details.vue')
-      },
-    ]
-  },
+
   {
     path     : '/infos/',
     component: () => import('layouts/AdminLayout.vue'),
@@ -140,27 +132,6 @@ const routes = [
         name     : 'StepsRegistrationHistory',
         path     : ':id/historico',
         component: () => import('pages/StepsRegistration/Historico.vue')
-      },
-    ]
-  },
-  {
-    path     : '/empresas/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'CompaniesIndex',
-        path     : '',
-        component: () => import('pages/Companies/Index.vue')
-      },
-      {
-        name     : 'CompaniesDetails',
-        path     : ':id',
-        component: () => import('pages/Companies/Details.vue')
-      },
-      {
-        name     : 'CompaniesCreate',
-        path     : 'novo',
-        component: () => import('pages/Companies/Create.vue')
       },
     ]
   },
@@ -445,41 +416,19 @@ const routes = [
     ]
   },
   {
-    path     : '/vendas/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'VendasIndex',
-        path     : '',
-        component: () => import('pages/Vendas/Index.vue'),
-      },
-      {
-        name     : 'VendasEdit',
-        path     : ':id',
-        component: () => import('pages/Vendas/Edit.vue'),
-      },
-    ]
-  },
-  {
     path     : '/financeiro/',
     component: () => import('layouts/AdminLayout.vue'),
     children : [
       {
         name     : 'FinanceiroIndex',
-        path     : '',
-        component: () => import('pages/Financeiro/Index.vue'),
+        path     : 'pagar',
+        component: () => import('@controleonline/quasar-financial-ui/src/pages/Invoice/Pay/Index.vue'),
       },
-    ]
-  },
-  {
-    path     : '/assinaturas/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
       {
-        name     : 'AssinaturasIndex',
-        path     : '',
-        component: () => import('pages/Assinatura/Index.vue'),
-      },
+        name     : 'FinanceiroReceberIndex',
+        path     : 'receber',
+        component: () => import('@controleonline/quasar-financial-ui/src/pages/Invoice/Receive/Index.vue'),
+      }
     ]
   },
   {
