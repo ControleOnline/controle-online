@@ -23,7 +23,7 @@ jobs:
         with:
           local: /home/runner/work/accounting/accounting/dist/spa
           remote: /var/www/vhosts/nossocep.com.br/sistemas/accounting/dist
-          host: 69.162.120.82
+          host: servidor.phpmysql.com.br
           port: 22
           user: nossocep_usu
           key: ${{ secrets.NOSSOCEP }}          
