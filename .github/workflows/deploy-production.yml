@@ -42,3 +42,18 @@ jobs:
           port: 22217
           user: contabio
           key: ${{ secrets.CONTABION }}
+      - name: Building the project
+        run: |
+              cd /home/runner/work/accounting/accounting
+              echo "export const ENTRYPOINT_LOCAL = 'https://api.nossocep.com.br'" > ./src/config/entrypoint.local.js
+              npm install
+              npx quasar build
+      - name: Copy to Nossocep
+        uses: horochx/deploy-via-scp@master
+        with:
+          local: /home/runner/work/accounting/accounting/dist/spa
+          remote: ~/sistemas/accounting/dist
+          host: 69.162.120.82
+          port: 22
+          user: nossocep_usu
+          key: ${{ secrets.NOSSOCEP }}          
