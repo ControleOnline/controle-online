@@ -268,8 +268,8 @@
 </template>
 
 <script>
-import { formatDocument, formatPhone, formatCEP } from '@freteclick/quasar-common-ui/src/utils/formatter';
-import ContactForm                                from '@freteclick/quasar-common-ui/src/components//common/ContactForm.vue'
+import { formatDocument, formatPhone, formatCEP } from '@controleonline/quasar-common-ui/src/utils/formatter';
+import ContactForm                                from '@controleonline/quasar-common-ui/src/components//common/ContactForm.vue'
 
 export default {
   components: {

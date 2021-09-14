@@ -60,7 +60,7 @@
 
 <script>
 import FormDocument               from './FormDocument';
-import { formatDocument }         from '@freteclick/quasar-common-ui/src/utils/formatter';
+import { formatDocument }         from '@controleonline/quasar-common-ui/src/utils/formatter';
 import { mapActions, mapGetters } from 'vuex';
 
 const SETTINGS = {

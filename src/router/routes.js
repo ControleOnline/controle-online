@@ -2,12 +2,14 @@ import * as Login from '@controleonline/quasar-login-ui/src/router/routes';
 import * as Customers from '@controleonline/quasar-customers-ui/src/router/routes';
 import * as Providers from '@controleonline/quasar-providers-ui/src/router/routes';
 import * as Tasks from '@controleonline/quasar-providers-ui/src/router/routes';
+import * as Orders from '@controleonline/quasar-orders-ui/src/router/routes';
 
 const routes = [
   ...Login.routes,
   ...Customers.routes,
   ...Providers.routes,
   ...Tasks.routes,
+  ...Orders.routes,
   {
     path     : '/',
     component: () => import('layouts/MainLayout.vue'),

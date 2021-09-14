@@ -25,7 +25,7 @@
 
 <script>
 import { mapGetters }                         from 'vuex';
-import { formatDocument, formatDateYmdTodmY } from '@freteclick/quasar-common-ui/src/utils/formatter';
+import { formatDocument, formatDateYmdTodmY } from '@controleonline/quasar-common-ui/src/utils/formatter';
 
 const SETTINGS = {
   columns       : [

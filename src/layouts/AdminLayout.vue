@@ -251,7 +251,7 @@
 </template>
 
 <script>
-import MyCompanies      from "@freteclick/quasar-common-ui/src/components/common/MyCompanies.vue";
+import MyCompanies      from "@controleonline/quasar-common-ui/src/components/common/MyCompanies.vue";
 import md5              from "md5";
 import { mapActions }   from "vuex";
 import { LocalStorage } from "quasar";

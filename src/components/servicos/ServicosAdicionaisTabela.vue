@@ -54,7 +54,7 @@
 
 <script>
 import { mapGetters }  from 'vuex';
-import { formatMoney } from '@freteclick/quasar-common-ui/src/utils/formatter';
+import { formatMoney } from '@controleonline/quasar-common-ui/src/utils/formatter';
 
 const SETTINGS = {
   columns       : [
