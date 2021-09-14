@@ -32,7 +32,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import { formatMoney }            from '@freteclick/quasar-common-ui/src/utils/formatter';
+import { formatMoney }            from '@controleonline/quasar-common-ui/src/utils/formatter';
 
 export default {
   props: {

@@ -207,7 +207,7 @@
 </template>
 
 <script>
-import { MyPackage } from '@freteclick/quasar-common-ui/src/utils/mypackage';
+import { MyPackage } from '@controleonline/quasar-common-ui/src/utils/mypackage';
 
 export default {
   props: {

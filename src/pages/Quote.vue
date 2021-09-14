@@ -149,9 +149,9 @@ import LoginPage                  from '../components/user/login/Index';
 import SignUpPage                 from '../components/user/signup/Index';
 import ContractPage               from '../components/contracting/Index';
 
-import { MyPackage }              from '@freteclick/quasar-common-ui/src/utils/mypackage';
-import { formatPhone }            from '@freteclick/quasar-common-ui/src/utils/formatter';
-import Analytics                  from '@freteclick/quasar-common-ui/src/utils/analytics';
+import { MyPackage }              from '@controleonline/quasar-common-ui/src/utils/mypackage';
+import { formatPhone }            from '@controleonline/quasar-common-ui/src/utils/formatter';
+import Analytics                  from '@controleonline/quasar-common-ui/src/utils/analytics';
 
 export default {
   name      : 'PageIndex',

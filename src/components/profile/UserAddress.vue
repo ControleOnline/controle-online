@@ -68,7 +68,7 @@
 <script>
 import FormAddress                from './FormAddress';
 import { mapActions, mapGetters } from 'vuex';
-import { formatCEP  }             from '@freteclick/quasar-common-ui/src/utils/formatter';
+import { formatCEP  }             from '@controleonline/quasar-common-ui/src/utils/formatter';
 
 const SETTINGS = {
   columns       : [

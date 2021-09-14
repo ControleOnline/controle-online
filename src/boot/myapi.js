@@ -1,4 +1,4 @@
-import myFetch from '@freteclick/quasar-common-ui/src/utils/fetch';
+import myFetch from '@controleonline/quasar-common-ui/src/utils/fetch';
 
 let myStore = null;
 
