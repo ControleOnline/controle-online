@@ -19,10 +19,7 @@ export default {
 
     style() {
       if (this.defaultCompany && this.defaultCompany.background) {
-        return "background: #182840 url('"+this.defaultCompany.background+"')";
-      }
-      else {
-        return "background: #182840";
+        return "background-image: url('"+this.defaultCompany.background+"')";
       }
     },
 
@@ -65,16 +62,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.bg-image {
-  background-color   : #182840;
-  background-position: center !important;
-  background-repeat  : no-repeat !important;
-  background-size    : cover !important;
-  -webkit-transition : background opacity 3s ease-in-out;
-  -moz-transition    : background opacity 3s ease-in-out;
-  -o-transition      : background opacity 3s ease-in-out;
-  transition         : background opacity 3s ease-in-out;
-}
-</style>

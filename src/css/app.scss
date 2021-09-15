@@ -1,1 +1,16 @@
 // app global css in SCSS form
+.bg-primary {
+    background-color: #671544 !important;
+  }
+
+
+.bg-image {
+    background-color   : #671544;
+    background-position: center !important;
+    background-repeat  : no-repeat !important;
+    background-size    : cover !important;
+    -webkit-transition : background opacity 3s ease-in-out;
+    -moz-transition    : background opacity 3s ease-in-out;
+    -o-transition      : background opacity 3s ease-in-out;
+    transition         : background opacity 3s ease-in-out;
+  }

@@ -1,24 +1,8 @@
-import Vue             from "vue";
-import Vuex            from "vuex";
+import Vue       from "vue";
+import Vuex      from "vuex";
 
-import auth            from '@controleonline/quasar-login-ui/src/store/modules/auth';
-import gmaps           from "./modules/gmaps";
-import people          from "./modules/people";
-import config          from "./modules/config";
-import salesOrder      from "./modules/order/sales";
-import purchasingOrder from "./modules/order/purchasing";
-import comissionOrder  from "./modules/order/comission";
-import receiveInvoice  from "./modules/invoice/receive";
-import payInvoice      from "./modules/invoice/pay";
-import profile         from "./modules/profile";
-import support         from "./modules/support";
-import user            from "./modules/user";
-import dashboard       from "./modules/dashboard";
-import client          from "./modules/client";
-import contracts       from "./modules/contracts";
-import expense         from "./modules/expense";
-import company         from "./modules/company";
-import particulars     from "./modules/particulars";
+import * as modules from "@controleonline/quasar-common-ui/src/store/modules";
+
 
 Vue.use(Vuex);
 
@@ -33,26 +17,7 @@ Vue.use(Vuex);
 
 export default function(/* { ssrContext } */) {
   const Store = new Vuex.Store({
-    modules: {
-      auth,
-      gmaps,
-      people,
-      config,
-      salesOrder,
-      purchasingOrder,
-      comissionOrder,
-      receiveInvoice,
-      payInvoice,
-      profile,
-      support,
-      user,
-      dashboard,
-      client,
-      contracts,
-      expense,
-      company,
-      particulars,
-    },
+    modules: {modules},
 
     // enable strict mode (adds overhead!)
     // for dev mode only
