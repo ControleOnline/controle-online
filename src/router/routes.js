@@ -1,89 +1,34 @@
 import * as Login from '@controleonline/quasar-login-ui/src/router/routes';
-import * as Customers from '@controleonline/quasar-customers-ui/src/router/routes';
+import * as Quote from '@freteclick/quasar-quote-ui/src/router/routes';
+import * as Financial from '@controleonline/quasar-financial-ui/src/router/routes';
 import * as Providers from '@controleonline/quasar-providers-ui/src/router/routes';
-import * as Tasks from '@controleonline/quasar-providers-ui/src/router/routes';
-import * as Orders from '@controleonline/quasar-orders-ui/src/router/routes';
+import * as Customers from '@controleonline/quasar-customers-ui/src/router/routes';
+import * as Contracts from '@controleonline/quasar-contracts-ui/src/router/routes';
+import * as Tasks from '@controleonline/quasar-tasks-ui/src/router/routes';
+import * as Quotations from '@controleonline/quasar-orders-ui/src/router/routes';
+import * as Users from '@controleonline/quasar-users-ui/src/router/routes';
+import * as Carrier from '@freteclick/quasar-carrier-ui/src/router/routes';
+import * as Dashboard from '@controleonline/quasar-dashboard-ui/src/router/routes';
 
 const routes = [
   ...Login.routes,
-  ...Customers.routes,
+  ...Quote.routes,
+  ...Quotations.routes,
+  ...Financial.routes,
   ...Providers.routes,
+  ...Customers.routes,
+  ...Contracts.routes,
   ...Tasks.routes,
-  ...Orders.routes,
+  ...Carrier.routes,  
+  ...Users.routes,  
+  ...Dashboard.routes,
   {
     path     : '/',
     component: () => import('layouts/MainLayout.vue'),
     children : [
       { name: 'CalculatorIndex', path: 'calculator', component: () => import('pages/Calculator.vue') }
     ]
-  },
-  {
-    path     : '/forgot-password',
-    component: () => import('layouts/MainLayout.vue'),
-    children : [
-      {
-        path     : ':hash/:lost',
-        component: () => import('pages/User/Recovery/AccessRecovery.vue')
-      },
-    ]
-  },
-  {
-    path     : '/home/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      { name: 'DashboardIndex', path: 'dashboard', component: () => import('pages/Home/Dashboard.vue') },
-    ]
-  },
-  {
-    path: '/contratos/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children: [
-      { name: 'ContractIndex'  , path: ''      , component: () => import('pages/Contracts/Index.vue'  ) },
-      { name: 'ContractDetails', path: 'id/:id', component: () => import('pages/Contracts/Details.vue') },
-    ]
-  },
-  {
-    path     : '/soporte/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      { name: 'FAQ',  path: 'faq',  component: () => import('pages/Support/FAQ.vue') },
-      { name: 'News', path: 'news', component: () => import('pages/Support/News.vue') },
-      { name: 'NewsDetail', path: 'news/:id', component: () => import('pages/Support/NewsDetail.vue') },
-    ]
-  },
-  {
-    path     : '/minhas-empresas/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        path     : '',
-        name     : 'MyCompaniesIndex',
-        component: () => import('pages/Company/Index.vue')
-      },
-      {
-        path     : ':id',
-        name     : 'MyCompanyDetails',
-        component: () => import('pages/Company/Details.vue')
-      },
-      {
-        path     : ':id/funcionarios/:employeeId',
-        name     : 'MyCompanyEmployee',
-        component: () => import('pages/Company/Employee.vue')
-      },
-    ]
-  },
-  {
-    path     : '/meu-perfil/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        path     : '',
-        name     : 'MyProfileIndex',
-        component: () => import('pages/User/Profile.vue')
-      },
-    ]
-  },
-
+  },    
   {
     path     : '/infos/',
     component: () => import('layouts/AdminLayout.vue'),
@@ -415,22 +360,6 @@ const routes = [
         path     : ':id/mensagens',
         component: () => import('pages/Societario/Mensagens.vue'),
       },
-    ]
-  },
-  {
-    path     : '/financeiro/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'FinanceiroIndex',
-        path     : 'pagar',
-        component: () => import('@controleonline/quasar-financial-ui/src/pages/Invoice/Pay/Index.vue'),
-      },
-      {
-        name     : 'FinanceiroReceberIndex',
-        path     : 'receber',
-        component: () => import('@controleonline/quasar-financial-ui/src/pages/Invoice/Receive/Index.vue'),
-      }
     ]
   },
   {
