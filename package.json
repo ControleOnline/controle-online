@@ -30,7 +30,7 @@
     "@controleonline/quasar-providers-ui": "^1.0.12",
     "@controleonline/quasar-tasks-ui": "^1.0.18",
     "@controleonline/quasar-users-ui": "^1.0.6",
-    "@controleonline/quasar-orders-ui": "^1.0.65",
+    "@controleonline/quasar-orders-ui": "^1.0.66",
     "@freteclick/quasar-quote-ui": "^2.0.96"
   },
   "devDependencies": {
