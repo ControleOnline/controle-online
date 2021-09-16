@@ -23,25 +23,22 @@
             <q-menu>
               <div class="row no-wrap q-pa-md">
                 <div class="column">
+                  <div class="text-h6 q-mb-md">{{ $t('menu.myacount') }}</div>
                   <q-list>
-                    <q-item :to="{ name: 'MyProfileIndex' }" exact>
+                    <q-item :to="{ name: 'UserProfile' }" exact>
                       <q-item-section avatar>
                         <q-icon name="face" />
                       </q-item-section>
-                      <q-item-section side no-wrap>
-                        <q-item-label>
-                          {{$t("Meu Perfil")}}
-                        </q-item-label>
+                      <q-item-section side>
+                        <q-item-label>{{ $t('menu.myprofile') }}</q-item-label>
                       </q-item-section>
                     </q-item>
-                    <q-item :to="{ name: 'MyCompaniesIndex' }" exact>
+                    <q-item :to="{ name: 'CompanyIndex' }" exact>
                       <q-item-section avatar>
                         <q-icon name="business" />
                       </q-item-section>
-                      <q-item-section side no-wrap>
-                        <q-item-label>
-                          {{$t("Minhas empresas")}}
-                        </q-item-label>
+                      <q-item-section side>
+                        <q-item-label>{{ $t('menu.mycompany') }}</q-item-label>
                       </q-item-section>
                     </q-item>
                   </q-list>
