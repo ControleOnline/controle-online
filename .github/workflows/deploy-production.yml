@@ -17,6 +17,7 @@ jobs:
               cd /home/runner/work/accounting/accounting
               echo "export const ENTRYPOINT_LOCAL = 'https://api.controleonline.com'" > ./src/config/entrypoint.local.js
               yarn
+              npm install
               npm update
               npx quasar build
       - name: Copy to Controle Online
@@ -33,6 +34,7 @@ jobs:
               cd /home/runner/work/accounting/accounting
               echo "export const ENTRYPOINT_LOCAL = 'https://api.contabion.com.br'" > ./src/config/entrypoint.local.js
               yarn
+              npm install
               npm update
               npx quasar build
       - name: Copy to Contabion
