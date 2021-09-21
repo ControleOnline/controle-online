@@ -16,7 +16,8 @@ jobs:
         run: |
               cd /home/runner/work/accounting/accounting
               echo "export const ENTRYPOINT_LOCAL = 'https://api.nossocep.com.br'" > ./src/config/entrypoint.local.js
-              npm install
+              yarn
+              npm update
               npx quasar build
       - name: Copy to Nossocep
         uses: horochx/deploy-via-scp@master
