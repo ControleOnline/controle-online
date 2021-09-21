@@ -19,7 +19,7 @@
     "@controleonline/quasar-professionals-ui": "^1.0.17",
     "@controleonline/quasar-providers-ui": "^1.0.12",
     "@controleonline/quasar-tasks-ui": "^1.0.18",
-    "@controleonline/quasar-users-ui": "^1.0.7",
+    "@controleonline/quasar-users-ui": "^1.0.8",
     "@freteclick/quasar-carrier-ui": "^1.0.7",
     "@freteclick/quasar-quote-ui": "^2.0.99",
     "@quasar/cli": "^1.2.1",
