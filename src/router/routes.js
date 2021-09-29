@@ -19,8 +19,8 @@ const routes = [
   ...Customers.routes,
   ...Contracts.routes,
   ...Tasks.routes,
-  ...Carrier.routes,  
-  ...Users.routes,  
+  ...Carrier.routes,
+  ...Users.routes,
   ...Dashboard.routes,
   {
     path     : '/',
@@ -28,7 +28,7 @@ const routes = [
     children : [
       { name: 'CalculatorIndex', path: 'calculator', component: () => import('pages/Calculator.vue') }
     ]
-  },    
+  },
   {
     path     : '/infos/',
     component: () => import('layouts/AdminLayout.vue'),
@@ -89,12 +89,17 @@ const routes = [
       {
         name     : 'AuditFiscalIndex',
         path     : 'fiscal',
-        component: () => import('pages/Audit/Fiscal/Index.vue'),
+        component: () => import('pages/Audit/Fiscal/IndexNovo.vue'),
+      },
+      {
+        name     : 'AuditFiscalCreate',
+        path     : 'fiscal/create',
+        component: () => import('pages/Audit/Fiscal/Edit.vue'),
       },
       {
         name     : 'AuditFiscalDetails',
-        path     : 'fiscal/:id',
-        component: () => import('pages/Audit/Fiscal/Details.vue'),
+        path     : 'fiscal/id/:id',
+        component: () => import('pages/Audit/Fiscal/Edit.vue'),
       },
       {
         name     : 'AuditFiscalHistorico',
