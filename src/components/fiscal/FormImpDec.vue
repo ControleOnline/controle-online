@@ -1,21 +1,20 @@
 <!--suppress ALL -->
 <template>
-  <q-form ref="myForm" @submit="onSubmit">
+  <q-form ref="myForm" @submit="onSubmit" autocomplete="off">
     <div class="row q-col-gutter-xs q-pb-xs">
       <div class="col-xs-12 col-md-6">
         <q-select
+          autocomplete="off"
           v-model="item.empresa"
           use-input
           use-chips
           input-debounce="0"
           label="Empresa"
-          value=""
           :options="optionsQselect"
           option-value="id"
           option-label="name"
           :loading="loading"
           @filter="searchPeopleByDocumentOrName"
-          @filter-abort="abortFilterFn"
           :rules="[isInvalid('select')]"
           hint="Digite o CNPJ ou Razão Social"
         >
@@ -579,10 +578,6 @@ export default {
             this.optionsQselect = dataRhesus;
           });
         });
-    },
-    // Call abort() at any time if you can't retrieve data somehow
-    abortFilterFn() {
-      console.log('delayed filter aborted')
     },
 
     getPeopleByDocumentAndNameApi(search) {
