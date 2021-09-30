@@ -10,7 +10,7 @@
         :data="items"
         :columns="settings.columns"
         row-key="id"
-        :loading="loading">
+        :loading="loadingQtable">
         <template v-slot:top>
           <div class="col-xs-12">
             <q-input stack-label
@@ -35,8 +35,19 @@
                 :label="props.row.paid === 'sim' ? 'Sim' : 'Não'"
               />
             </q-td>
-            <q-td key="arquivo" :props="props" auto-width>
+            <q-td key="arquivoGuia" :props="props" auto-width>
               <q-btn
+                v-if="props.row.file_name_guide !== null"
+                color="secondary"
+                label="Baixar"
+                size="sm"
+                @click=""
+                :loading="false"
+              />
+            </q-td>
+            <q-td key="arquivoRecibo" :props="props" auto-width>
+              <q-btn
+                v-if="props.row.file_name_receipt !== null"
                 color="secondary"
                 label="Baixar"
                 size="sm"
@@ -63,6 +74,9 @@
               </div>
             </q-td>
           </q-tr>
+        </template>
+        <template v-slot:loading>
+          <q-inner-loading showing color="primary"/>
         </template>
       </q-table>
     </div>
@@ -134,10 +148,16 @@ const SETTINGS = {
       label: 'Pago'
     },
     {
-      name: 'arquivo',
-      field: row => row.id,
+      name: 'arquivoGuia',
+      field: row => row.file_name_guide,
       align: 'center',
-      label: 'Arquivo'
+      label: 'Guia'
+    },
+    {
+      name: 'arquivoRecibo',
+      field: row => row.file_name_receipt,
+      align: 'center',
+      label: 'Recibo'
     },
     {
       name: 'acoes',
@@ -147,6 +167,7 @@ const SETTINGS = {
     },
   ],
 };
+
 
 Object.freeze(SETTINGS);
 
@@ -161,7 +182,7 @@ export default {
       items: [],
       settings: SETTINGS,
       saving: false,
-      loading: false,
+      loadingQtable: false,
       filters: {
         empresa: ''
       }
@@ -194,8 +215,16 @@ export default {
   },
 
   methods: {
-    nowDelete(id){
-      this.setClassRow(id, false);
+    nowDelete(id) {
+      this.loadingQtable = true;
+
+      this.deleteCallApi(id)
+        .then(success => {
+          this.loadingQtable = false;
+          this.setClassRow(id, false);
+          this.getValuesToLoad();
+        });
+
     },
     setClassRow(id, action) {
       if (action) {
@@ -213,9 +242,33 @@ export default {
       let msg = ''
       msg += 'Você deseja realmente Excluir o Arquivo:<br>';
       msg += `ID: ${id} - ${company}`;
-      console.log("data: " + id);
       this.msgDelete = msg;
       this.confirmDelete = true;
+    },
+    deleteCallApi(id) {
+
+      let params = {
+        method: 'DELETE',
+        params: {'myProvider': this.myCompanyLocal}
+      };
+
+      return fetch('/filesb/' + id, params)
+        .then(response => response.json())
+        .then(data => {
+          if (data !== null) {
+            let success = data.response.success;
+            let message = data.response.message;
+            if (success) {
+              this.alertNotify(message, 'p');
+            } else {
+              this.alertNotify(message, 'n');
+            }
+            return success;
+          }
+        }).catch(error => {
+          this.alertNotify(error, 'n');
+        });
+
     },
     getCollectionFiles() {
 
@@ -236,15 +289,11 @@ export default {
               this.items = data.response.data;
             } else {
               this.items = [];
-              console.log("message: " + message);
             }
-
-            // console.table(data);
-
           }
 
         }).catch(error => {
-        console.error('Error: ' + error);
+          this.alertNotify(error, 'n');
       }).finally(error => {
         this.$q.loading.hide();
       });
@@ -262,6 +311,22 @@ export default {
           this.myCompanyLocal = this.myCompany.id;
         }
       }
+    },
+    /**
+     * Exibe Alerta Positivo ou Negativo
+     * @param msg
+     * @param tipo ('n','p')
+     */
+    alertNotify(msg, tipo) {
+      let status = (tipo === 'n') ? 'negative' : 'positive';
+      this.$q.notify({
+        message: msg,
+        html: true,
+        group: false,
+        multiLine: true,
+        position: 'bottom',
+        type: status,
+      });
     },
     onRequest() {
       let params = {};
@@ -311,16 +376,8 @@ export default {
       this.items = items;
     },
     getValuesToLoad() {
-      console.log('entrou aqui');
-      console.log("this.myCompany.id: " + this.myCompany.id);
-      console.log("this.myCompanyLocal: " + this.myCompanyLocal);
-      // debugger;
       this.$q.loading.show();
-
-      //this.onRequest();
       this.getCollectionFiles();
-
-
     }
   },
   created() {
