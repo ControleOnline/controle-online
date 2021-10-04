@@ -37,22 +37,24 @@
             </q-td>
             <q-td key="arquivoGuia" :props="props" auto-width>
               <q-btn
+                :ref="'btnguide' + props.row.id"
                 v-if="props.row.file_name_guide !== null"
                 color="secondary"
                 label="Baixar"
                 size="sm"
-                @click=""
-                :loading="false"
+                @click="downloadFilesCallApi(props.row.id, 'guide', props.row.file_name_guide);"
+                :loading="loadArr['guide_' + props.row.id]"
               />
             </q-td>
             <q-td key="arquivoRecibo" :props="props" auto-width>
               <q-btn
+                :ref="'btnreceipt' + props.row.id"
                 v-if="props.row.file_name_receipt !== null"
                 color="secondary"
                 label="Baixar"
                 size="sm"
-                @click=""
-                :loading="false"
+                @click="downloadFilesCallApi(props.row.id, 'receipt', props.row.file_name_receipt);"
+                :loading="loadArr['receipt_' + props.row.id]"
               />
             </q-td>
             <q-td key="acoes" :props="props">
@@ -107,7 +109,24 @@
 <script>
 import {fetch} from 'boot/myapi';
 import {mapActions, mapGetters} from 'vuex';
+import axios from 'axios';
+import {ENTRYPOINT} from '../../../src/config/entrypoint';
+import Api from '@controleonline/quasar-common-ui/src/utils/api';
 
+function forceDownloadFile(blob, fileName) {
+  if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(blob);
+    return;
+  }
+  const data = window.URL.createObjectURL(blob);
+  var link = document.createElement('a');
+  link.href = data;
+  link.download = fileName;
+  link.click();
+  setTimeout(function () {
+    window.URL.revokeObjectURL(data);
+  }, 100);
+}
 
 const SETTINGS = {
   columns: [
@@ -168,12 +187,15 @@ const SETTINGS = {
   ],
 };
 
-
 Object.freeze(SETTINGS);
 
 export default {
   data() {
     return {
+      loadArr: [],
+      loadingDownloadReceipt: false,
+      loadingDownloadGuide: false,
+      apiImp: new Api(this.$store.getters['auth/user'].token),
       idRowToDelete: null,
       msgDelete: null,
       confirmDelete: false,
@@ -270,6 +292,30 @@ export default {
         });
 
     },
+    downloadFilesCallApi(id, type, fileName) {
+
+      this.$set(this.loadArr, type + '_' + id, true); // Reatividade para itens de array, usar o $set
+
+      axios({
+        url: ENTRYPOINT + `/filesb/${id}/download?type=${type}&timestamp=${new Date().getTime()}`,
+        method: 'get',
+        responseType: 'blob',
+        headers: {
+          'api-token': this.apiImp.token
+        }
+      }).then((response) => {
+        if (response.data.type === 'application/json') {
+          this.alertNotify('Arquivo não foi encontrado', 'n');
+          this.$set(this.loadArr, type + '_' + id, false);
+          return false;
+        }
+        const content = response.headers['content-type'];
+        let blob = new Blob([response.data], {type: content}), url = window.URL.createObjectURL(blob);
+        forceDownloadFile(blob, fileName);
+        this.$set(this.loadArr, type + '_' + id, false);
+      });
+
+    },
     getCollectionFiles() {
 
       let params = {
@@ -284,8 +330,11 @@ export default {
           if (data !== null) {
             let success = data.response.success;
             let message = data.response.message;
-
             if (success) {
+              data.response.data.forEach((val) => {
+                this.$set(this.loadArr, 'guide' + '_' + val.id, false);
+                this.$set(this.loadArr, 'receipt_' + '_' + val.id, false);
+              });
               this.items = data.response.data;
             } else {
               this.items = [];
@@ -293,7 +342,7 @@ export default {
           }
 
         }).catch(error => {
-          this.alertNotify(error, 'n');
+        this.alertNotify(error, 'n');
       }).finally(error => {
         this.$q.loading.hide();
       });
