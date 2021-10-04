@@ -84,11 +84,21 @@
             <q-icon name="attach_file"/>
           </template>
         </q-file>
+
         <q-btn
           v-if="checkFilesIsAtached('arquivoGuia', arquivoGuia)"
           @click="checkConfirm('arquivoGuia')"
-          size="sm" color="red-10" icon="cancel" label="Excluir PDF Guia"
+          size="sm" color="red-10" icon="cancel" label="Excluir Guia"
         />
+        <q-btn
+          v-if="btnSeeGuideVis"
+          ref="btnSeeGuide"
+          :loading="btnSeeGuideLoading"
+          class="q-ml-sm"
+          @click="downloadFilesCallApi('guide');"
+          size="sm" color="secondary" icon="download_for_offline" label="Download"
+        />
+
       </div>
       <div class="col-xs-12 col-md-6 q-mt-xs-lg q-mt-md-none">
         <q-file
@@ -104,7 +114,15 @@
         <q-btn
           v-if="checkFilesIsAtached('arquivoRecibo', arquivoRecibo)"
           @click="checkConfirm('arquivoRecibo')"
-          size="sm" color="red-10" icon="cancel" label="Excluir PDF Recibo"
+          size="sm" color="red-10" icon="cancel" label="Excluir Recibo"
+        />
+        <q-btn
+          v-if="btnSeeReceiptVis"
+          ref="btnSeeReceipt"
+          :loading="btnSeeReceiptLoading"
+          class="q-ml-sm"
+          @click="downloadFilesCallApi('receipt');"
+          size="sm" color="secondary" icon="download_for_offline" label="Download"
         />
       </div>
 
@@ -159,6 +177,21 @@ import Api from '@controleonline/quasar-common-ui/src/utils/api';
 
 const msgErro = 'Este campo é obrigatório';
 
+function forceDownloadFile(blob, fileName) {
+  if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(blob);
+    return;
+  }
+  const data = window.URL.createObjectURL(blob);
+  var link = document.createElement('a');
+  link.href = data;
+  link.download = fileName;
+  link.click();
+  setTimeout(function () {
+    window.URL.revokeObjectURL(data);
+  }, 100);
+}
+
 /**
  * Verifica se o objeto arquivo é válido
  * @param fileObj
@@ -166,6 +199,10 @@ const msgErro = 'Este campo é obrigatório';
  */
 function fileExists(fileObj) {
   return (fileObj !== null && typeof fileObj !== 'undefined');
+}
+
+function sizeIsFic(fileObj) {
+  return (fileObj.size >= 2 && fileObj.size <= 5);
 }
 
 /**
@@ -177,7 +214,7 @@ function fileIsFictitious(fileObj) {
   if (!fileExists(fileObj)) {
     return false;
   }
-  return (fileObj.size >= 2 && fileObj.size <= 5);
+  return sizeIsFic(fileObj);
 }
 
 function findIn(obj, search) {
@@ -193,6 +230,11 @@ export default {
   },
   data() {
     return {
+      btnSeeGuideVis: true,
+      btnSeeGuideLoading: false,
+      btnSeeReceiptVis: true,
+      btnSeeReceiptLoading: false,
+      btnSeeReceiptHidden: true,
       editMode: false, // Quando 'true', modo de edição de registro existente, quando 'false' modo de inserção de novo registro
       myCompanyLocal: null,
       myCompanyLocalLoaded: false,
@@ -263,6 +305,19 @@ export default {
     },
     '$data': { // Monitora alteração de determinada variável, OBS: Resolve o BUG do delay no watch da myCompany
       handler: function (objNew) {
+        // --------------------
+        if (objNew.arquivoGuia !== null) { // Apresenta ou oculta o Botão ver Guia
+          this.btnSeeGuideVis = sizeIsFic(objNew.arquivoGuia);
+        } else {
+          this.btnSeeGuideVis = false;
+        }
+        // --------------------
+        if (objNew.arquivoRecibo !== null) { // Apresenta ou oculta o Botão ver Recibo
+          this.btnSeeReceiptVis = sizeIsFic(objNew.arquivoRecibo);
+        } else {
+          this.btnSeeReceiptVis = false;
+        }
+        // --------------------
         if (!this.myCompanyLocalLoaded) {
           if (objNew.myCompanyLocal !== null) {
             this.getValuesToLoad();
@@ -274,6 +329,57 @@ export default {
     }
   },
   methods: {
+    /**
+     * @param type ('guide','receipt')
+     * @param action ('hide','show')
+     */
+    guiRecHideShowLoading(type, action) {
+      if (action === 'hide') {
+        if (type === 'guide') {
+          this.btnSeeGuideLoading = false;
+        }
+        if (type === 'receipt') {
+          this.btnSeeReceiptLoading = false;
+        }
+      }
+      if (action === 'show') {
+        if (type === 'guide') {
+          this.btnSeeGuideLoading = true;
+        }
+        if (type === 'receipt') {
+          this.btnSeeReceiptLoading = true;
+        }
+      }
+    },
+    downloadFilesCallApi(type) {
+      let id = this.idRoute;
+      this.guiRecHideShowLoading(type, 'show');
+      axios({
+        url: ENTRYPOINT + `/filesb/${id}/download?type=${type}&timestamp=${new Date().getTime()}`,
+        method: 'get',
+        responseType: 'blob',
+        headers: {
+          'api-token': this.apiImp.token
+        }
+      }).then((response) => {
+        if (response.data.type === 'application/json') {
+          this.alertNotify('Arquivo não foi encontrado', 'n');
+          this.guiRecHideShowLoading(type, 'hide');
+          return false;
+        }
+        const content = response.headers['content-type'];
+        let blob = new Blob([response.data], {type: content}), url = window.URL.createObjectURL(blob);
+        let fileName = null;
+        if (type === 'guide') {
+          fileName = this.arquivoGuia.name;
+        }
+        if (type === 'receipt') {
+          fileName = this.arquivoRecibo.name;
+        }
+        forceDownloadFile(blob, fileName);
+        this.guiRecHideShowLoading(type, 'hide');
+      });
+    },
     checkIfChangeMyCompany() {
       if (this.myCompanyLocal !== null) {
         if (this.myCompany.id !== this.myCompanyLocal) {
