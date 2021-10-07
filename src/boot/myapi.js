@@ -6,7 +6,7 @@ export const fetch = function(id, options = {}) {
   if (typeof options.headers === 'undefined')
     Object.assign(options, { headers: new Headers() });
 
-  if (myStore.getters['auth/user'] !== null)
+  if (myStore.getters['auth/user'] !== null && myStore.getters['auth/user'].token)
     options.headers.set(
       'API-TOKEN', myStore.getters['auth/user'].token
     );
