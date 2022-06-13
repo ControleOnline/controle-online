@@ -12,7 +12,7 @@ jobs:
           node-version: 12.18.1
       - name: Check out Git repository
         uses: actions/checkout@v1
-            - name: Building the project                                
+      - name: Building the project                                
         run: |
               cd /home/runner/work/controleonline/controleonline
               echo "export const ENTRYPOINT_LOCAL = 'https://api.controleonline.com'" > ./src/config/entrypoint.local.js
