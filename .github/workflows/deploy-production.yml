@@ -12,38 +12,39 @@ jobs:
           node-version: 12.18.1
       - name: Check out Git repository
         uses: actions/checkout@v1
-      - name: Building the project
+            - name: Building the project                                
         run: |
-              cd /home/runner/work/accounting/accounting
+              cd /home/runner/work/controleonline/controleonline
               echo "export const ENTRYPOINT_LOCAL = 'https://api.controleonline.com'" > ./src/config/entrypoint.local.js
+              echo "export const DOMAIN_LOCAL = location.host" > ./src/config/domain.local.js
               yarn
               npm install
               npm update
-              npx quasar build
-      - name: Copy to Controle Online
+              npx quasar build      
+      - name: Copy to controleonline
         uses: horochx/deploy-via-scp@master
         with:
-          local: /home/runner/work/accounting/accounting/dist/spa
-          remote: /home/control2/sistemas/controleonline/accounting/dist
-          host: ssh.controleonline.com
-          port: 22212
-          user: control2
+          local: /home/runner/work/controleonline/controleonline/dist/spa 
+          remote: ~/sistemas/controleonline/app/dist
+          host: controleonline.com.br
+          port: 22
+          user: controleonline2
           key: ${{ secrets.CONTROLEONLINE }}
-      - name: Building the project
+      - name: Building the project                                
         run: |
-              cd /home/runner/work/accounting/accounting
-              echo "export const ENTRYPOINT_LOCAL = 'https://api.contabion.com.br'" > ./src/config/entrypoint.local.js
+              cd /home/runner/work/controleonline/controleonline
+              echo "export const ENTRYPOINT_LOCAL = 'https://api.controleonline.com'" > ./src/config/entrypoint.local.js
+              echo "export const DOMAIN_LOCAL = location.host" > ./src/config/domain.local.js
               yarn
               npm install
               npm update
-              npx quasar build
-      - name: Copy to Contabion
+              npx quasar build      
+      - name: Copy to trailntravel
         uses: horochx/deploy-via-scp@master
         with:
-          local: /home/runner/work/accounting/accounting/dist/spa
-          remote: /home/contabio/sistemas/accounting/dist
-          host: ssh.digital17.cloudserver8.com
-          port: 22217
-          user: contabio
-          key: ${{ secrets.CONTABION }}
-    
+          local: /home/runner/work/controleonline/controleonline/dist/spa 
+          remote: ~/sistemas/controleonline/dist
+          host: trailntravel.com.br
+          port: 22
+          user: trailntravel2
+          key: ${{ secrets.TRAIL }}
