@@ -8,31 +8,31 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { fetch }                  from "../boot/myapi";
-import Analytics                from "@controleonline/quasar-common-ui/src/utils/analytics";
+import { fetch } from "../boot/myapi";
+import Analytics from "@controleonline/quasar-common-ui/src/utils/analytics";
 
 export default {
-  name      : "MainLayout",
+  name: "MainLayout",
   components: {},
 
-  methods   : {
+  methods: {
     ...mapActions({
-      config              : "config/appConfig",
+      config: "config/appConfig",
       peopleDefaultCompany: "people/defaultCompany",
     }),
 
     style() {
-      if (this.defaultCompany && this.defaultCompany.background){
-        return "background-image: url('"+this.defaultCompany.background+"')";
+      if (this.defaultCompany && this.defaultCompany.background) {
+        return "background-image: url('" + this.defaultCompany.background + "')";
       }
     },
 
     discoveryDefaultCompany() {
       this.peopleDefaultCompany().then((response) => {
         let data = [];
-        if (response.success === true && response.data.length) {
+        if (response.success === true && response.data) {
           for (let index in response.data) {
-            let item = response.data[index];
+            let item = response.data;
             let logo = null;
             let background = null;
 
@@ -43,9 +43,9 @@ export default {
               background = "https://" + item.background.domain + item.background.url;
             }
             data.push({
-              id        : item.id,
-              name      : item.alias,
-              logo      : logo || null,
+              id: item.id,
+              name: item.alias,
+              logo: logo || null,
               background: background || null
             });
           }
