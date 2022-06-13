@@ -26,7 +26,7 @@ jobs:
         with:
           local: /home/runner/work/controleonline/controleonline/dist/spa 
           remote: ~/sistemas/controleonline/app/dist
-          host: controleonline.com.br
+          host: controleonline.com
           port: 22
           user: controleonline2
           key: ${{ secrets.CONTROLEONLINE }}
