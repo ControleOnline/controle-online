@@ -14,6 +14,7 @@ import * as Coupon from '@freteclick/quasar-coupon-ui/src/router/routes';
 import * as Accounting from '@controleonline/quasar-accounting-ui/src/router/routes';
 import * as Import from '@controleonline/quasar-import-ui/src/router/routes';
 import * as Guides from '@controleonline/quasar-guides-ui/src/router/routes';
+import * as Crm from '@controleonline/quasar-crm-ui/src/router/routes';
 
 const routes = [
   ...Login.routes,
@@ -32,6 +33,7 @@ const routes = [
   ...Accounting.routes,
   ...Import.routes,
   ...Guides.routes,
+  ...Crm.routes,
   {
     path: '/calc',
     component: () => import('layouts/MainLayout.vue'),
