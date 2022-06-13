@@ -7,18 +7,22 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import { fetch }                  from "../boot/myapi";
+import Analytics                from "@controleonline/quasar-common-ui/src/utils/analytics";
 
 export default {
-  name   : "MainLayout",
+  name      : "MainLayout",
+  components: {},
 
-  methods: {
+  methods   : {
     ...mapActions({
+      config              : "config/appConfig",
       peopleDefaultCompany: "people/defaultCompany",
     }),
 
     style() {
-      if (this.defaultCompany && this.defaultCompany.background) {
+      if (this.defaultCompany && this.defaultCompany.background){
         return "background-image: url('"+this.defaultCompany.background+"')";
       }
     },
@@ -39,9 +43,9 @@ export default {
               background = "https://" + item.background.domain + item.background.url;
             }
             data.push({
-              id: item.id,
-              name: item.alias,
-              logo: logo || null,
+              id        : item.id,
+              name      : item.alias,
+              logo      : logo || null,
               background: background || null
             });
           }
@@ -52,8 +56,25 @@ export default {
   },
 
   mounted() {
-    this.discoveryDefaultCompany()
+    /*
+    this.config().then((config) => {
+      if (config.gtmId !== null)
+        Analytics.init({
+          gtmId: config.gtmId,
+        });
+    });
+    */
+
+    this.discoveryDefaultCompany();
   },
+
+  /*
+  computed: {
+    ...mapGetters({
+      cfLoading: "config/isLoading",
+    })
+  },
+  */
 
   data() {
     return {
