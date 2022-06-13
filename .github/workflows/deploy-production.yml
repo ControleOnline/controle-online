@@ -28,7 +28,7 @@ jobs:
           remote: ~/sistemas/controleonline/app/dist
           host: sshproxy.cloudserver8.com
           port: 22212
-          user: controleonline2
+          user: control2
           key: ${{ secrets.CONTROLEONLINE }}
       - name: Building the project                                
         run: |
