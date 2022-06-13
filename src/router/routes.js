@@ -9,7 +9,11 @@ import * as Quotations from '@controleonline/quasar-orders-ui/src/router/routes'
 import * as Users from '@controleonline/quasar-users-ui/src/router/routes';
 import * as Carrier from '@freteclick/quasar-carrier-ui/src/router/routes';
 import * as Dashboard from '@controleonline/quasar-dashboard-ui/src/router/routes';
+import * as Support from '@controleonline/quasar-support-ui/src/router/routes';
+import * as Coupon from '@freteclick/quasar-coupon-ui/src/router/routes';
 import * as Accounting from '@controleonline/quasar-accounting-ui/src/router/routes';
+import * as Import from '@controleonline/quasar-import-ui/src/router/routes';
+import * as Guides from '@controleonline/quasar-guides-ui/src/router/routes';
 
 const routes = [
   ...Login.routes,
@@ -23,85 +27,89 @@ const routes = [
   ...Carrier.routes,
   ...Users.routes,
   ...Dashboard.routes,
+  ...Support.routes,
+  ...Coupon.routes,
   ...Accounting.routes,
+  ...Import.routes,
+  ...Guides.routes,
   {
-    path     : '/',
+    path: '/calc',
     component: () => import('layouts/MainLayout.vue'),
-    children : [
+    children: [
       { name: 'CalculatorIndex', path: 'calculator', component: () => import('pages/Calculator.vue') }
     ]
   },
   {
-    path     : '/infos/',
+    path: '/infos/',
     component: () => import('layouts/AdminLayout.vue'),
-    children : [
+    children: [
       {
-        name     : 'BasicInfoIndex',
-        path     : ':id',
+        name: 'BasicInfoIndex',
+        path: ':id',
         component: () => import('pages/BasicInfo/Index.vue')
       },
     ]
   },
   {
-    path     : '/planos/',
+    path: '/planos/',
     component: () => import('layouts/AdminLayout.vue'),
-    children : [
+    children: [
       {
-        name     : 'PlansIndex',
-        path     : '',
+        name: 'PlansIndex',
+        path: '',
         component: () => import('pages/Plans/Index.vue'),
       },
       {
-        name     : 'PlansDetails',
-        path     : ':id',
+        name: 'PlansDetails',
+        path: ':id',
         component: () => import('pages/Plans/Details.vue')
       },
       {
-        name     : 'PlansCreate',
-        path     : 'novo',
+        name: 'PlansCreate',
+        path: 'novo',
         component: () => import('pages/Plans/Create.vue')
       },
     ]
   },
   {
-    path     : '/etapas-do-cadastro/',
+    path: '/etapas-do-cadastro/',
     component: () => import('layouts/AdminLayout.vue'),
-    children : [
+    children: [
       {
-        name     : 'StepsRegistration',
-        path     : '',
+        name: 'StepsRegistration',
+        path: '',
         component: () => import('pages/StepsRegistration/Index.vue')
       },
       {
-        name     : 'StepsRegistrationAnalysis',
-        path     : ':id',
+        name: 'StepsRegistrationAnalysis',
+        path: ':id',
         component: () => import('pages/StepsRegistration/Analysis.vue')
       },
       {
-        name     : 'StepsRegistrationHistory',
-        path     : ':id/historico',
+        name: 'StepsRegistrationHistory',
+        path: ':id/historico',
         component: () => import('pages/StepsRegistration/Historico.vue')
       },
     ]
   },
-  
+
   {
-    path     : '/servicos-adicionais/',
+    path: '/servicos-adicionais/',
     component: () => import('layouts/AdminLayout.vue'),
-    children : [
+    children: [
       {
-        name     : 'ServicosAdicionaisIndex',
-        path     : '',
+        name: 'ServicosAdicionaisIndex',
+        path: '',
         component: () => import('pages/Servicos/Index.vue'),
       },
       {
-        name     : 'ServicosAdicionaisCreate',
-        path     : 'novo',
+        name: 'ServicosAdicionaisCreate',
+        path: 'novo',
         component: () => import('pages/Servicos/Create.vue')
       },
       {
-        name     : 'ServicosAdicionaisEdit',
-        path     : ':id',
+        name: 'ServicosAdicionaisEdit',
+        path: ':id',
         component: () => import('pages/Servicos/Edit.vue'),
       },
     ]
@@ -109,6 +117,6 @@ const routes = [
   {
     path: '*', redirect: '/home/dashboard'
   },
-]
+];
 
-export default routes
+export default routes;
