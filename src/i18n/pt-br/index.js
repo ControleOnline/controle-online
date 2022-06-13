@@ -12,6 +12,9 @@ import * as Professionals from '@controleonline/quasar-professionals-ui/src/i18n
 import * as Carriers from '@freteclick/quasar-carrier-ui/src/i18n/pt-br/index';
 import * as Quote from '@freteclick/quasar-quote-ui/src/i18n/pt-br/index';
 import * as Accounting from '@controleonline/quasar-accounting-ui/src/i18n/pt-br/index';
+import * as Coupon from '@freteclick/quasar-coupon-ui/src/i18n/pt-br/index';
+import * as Import from '@controleonline/quasar-import-ui/src/i18n/pt-br/index';
+import * as Guides from '@controleonline/quasar-guides-ui/src/i18n/pt-br/index';
 
 export default {
   app: {
@@ -28,4 +31,10 @@ export default {
   ...Carriers.translate,
   ...Quote.translate,
   ...Accounting.translate,
+  ...Coupon.translate,
+  ...Import.translate,
+  ...Guides.translate,
+  app: {
+    name: 'Controle Online'
+  },
 }
