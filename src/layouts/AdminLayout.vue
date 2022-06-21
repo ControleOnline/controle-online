@@ -211,7 +211,7 @@
                 </q-item-section>
               </q-item>
 
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'ClientsIndex' }">
+              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'CustomersIndex' }">
                 <q-item-section avatar>
                   <q-icon class="item-icon" name="person" color="white" />
                 </q-item-section>
@@ -436,7 +436,7 @@ export default {
         { icon: 'dashboard', text: this.$t('Dashboard'), to: { name: 'DashboardIndex' } },
         { icon: 'table_view', text: this.$t('Planos'), to: { name: 'PlansIndex' } },
         { icon: 'list', text: this.$t('Checklists'), to: { name: 'StepsRegistration' } },
-        { icon: 'person', text: this.$t('Clientes'), to: { name: 'ClientsIndex' } },
+        { icon: 'person', text: this.$t('Clientes'), to: { name: 'CustomersIndex' } },
         { icon: 'library_books', text: this.$t('Contratos'), to: { name: 'ContractIndex' } },
       ],
       links2: [
