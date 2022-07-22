@@ -104,17 +104,6 @@
 
             <q-expansion-item v-if="isSimple() == false" expand-icon-toggle :content-inset-level="0.3" color="white"
               icon="shopping_cart" class="GNL__drawer-item" :label="$t('Comercial')">
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'ShippingQuoteIndex' }">
-                <q-item-section avatar>
-                  <q-icon name="local_shipping" color="white" />
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label class="menu-list-text">{{
-                      $t("menu.quotes")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-
               <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'CustomersIndex' }">
                 <q-item-section avatar>
                   <q-icon class="item-icon" name="person" color="white" />
@@ -135,17 +124,6 @@
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
-
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'SalesOrderIndex' }">
-                <q-item-section avatar>
-                  <q-icon class="item-icon" name="shopping_cart" color="white" />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label class="menu-list-text">{{
-                      $t("menu.salesorders")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
               <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'CouponIndex' }">
                 <q-item-section avatar>
                   <q-icon class="item-icon" name="shopping_cart" color="white" />
@@ -159,16 +137,6 @@
             </q-expansion-item>
             <q-expansion-item v-if="isSimple() == false" expand-icon-toggle :content-inset-level="0.3" color="white"
               icon="local_shipping" class="GNL__drawer-item" :label="$t('Operacional')">
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'CarriersIndex' }">
-                <q-item-section avatar>
-                  <q-icon class="item-icon" name="local_shipping" color="white" />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label class="menu-list-text">{{
-                      $t("menu.carriers")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
 
               <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'ProfessionalsIndex' }">
                 <q-item-section avatar>
@@ -210,17 +178,6 @@
                 <q-item-section>
                   <q-item-label class="menu-list-text">{{
                       $t("menu.tasks")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'PurchasingOrderIndex' }">
-                <q-item-section avatar>
-                  <q-icon class="item-icon" name="shopping_cart" color="white" />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label class="menu-list-text">{{
-                      $t("menu.purchasingorders")
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
