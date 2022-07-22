@@ -87,102 +87,6 @@
           <MyCompanies :selected="companySelected" @selected="onCompanySelected" @setMyCompanies="setMyCompanies" />
         </q-toolbar>
         <div class="q-pt-xl q-px-sm column">
-
-          <q-list padding v-if="1 == 2">
-
-            <q-item v-ripple clickable class="GNL__drawer-item" v-for="link in links1" :key="link.text" :to="link.to">
-              <q-item-section avatar>
-                <q-icon :name="link.icon" />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>{{ link.text }}</q-item-label>
-              </q-item-section>
-            </q-item>
-
-            <q-separator inset class="q-my-sm" />
-
-            <q-expansion-item expand-icon-toggle :content-inset-level="0.3" icon="done_all" class="GNL__drawer-item"
-              :label="$t('Auditoria')">
-              <q-item v-ripple clickable class="GNL__drawer-item" v-for="link in links2" :key="link.text" :to="link.to">
-                <q-item-section avatar>
-                  <q-icon :name="link.icon" />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label>{{ link.text }}</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-expansion-item>
-
-            <q-expansion-item expand-icon-toggle :content-inset-level="0.3" icon="fact_check" class="GNL__drawer-item"
-              :label="$t('Fiscal')">
-              <q-item v-ripple clickable class="GNL__drawer-item" v-for="link in links3" :key="link.text" :to="link.to">
-                <q-item-section avatar>
-                  <q-icon :name="link.icon" />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label>{{ link.text }}</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-expansion-item>
-
-            <q-expansion-item expand-icon-toggle :content-inset-level="0.3" icon="calculate" class="GNL__drawer-item"
-              :label="$t('Contábil')">
-              <q-item v-ripple clickable class="GNL__drawer-item" v-for="link in links4" :key="link.text" :to="link.to">
-                <q-item-section avatar>
-                  <q-icon :name="link.icon" />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label>{{ link.text }}</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-expansion-item>
-
-            <q-expansion-item expand-icon-toggle :content-inset-level="0.3" icon="contacts" class="GNL__drawer-item"
-              :label="$t('Departamento Pessoal')">
-              <q-item v-ripple clickable class="GNL__drawer-item" v-for="link in links5" :key="link.text" :to="link.to">
-                <q-item-section avatar>
-                  <q-icon :name="link.icon" />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label>{{ link.text }}</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-expansion-item>
-
-            <q-item v-ripple clickable class="GNL__drawer-item" v-for="link in links6" :key="link.text" :to="link.to">
-              <q-item-section avatar>
-                <q-icon :name="link.icon" />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>{{ link.text }}</q-item-label>
-              </q-item-section>
-            </q-item>
-
-            <q-expansion-item expand-icon-toggle :content-inset-level="0.3" icon="attach_money" class="GNL__drawer-item"
-              :label="$t('Financeiro')">
-              <q-item v-ripple clickable class="GNL__drawer-item" v-for="link in links7" :key="link.text" :to="link.to">
-                <q-item-section avatar>
-                  <q-icon :name="link.icon" />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label>{{ link.text }}</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-expansion-item>
-
-            <q-separator inset class="q-my-sm" />
-
-            <q-item v-ripple clickable class="GNL__drawer-item" v-for="link in links8" :key="link.text" :to="link.to">
-              <q-item-section avatar>
-                <q-icon :name="link.icon" />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>{{ link.text }}</q-item-label>
-              </q-item-section>
-            </q-item>
-
-          </q-list>
-
           <q-list class="menu-list" padding>
             <q-item v-if="isSimple() == false" v-ripple clickable class="GNL__drawer-item"
               :to="{ name: 'DashboardIndex' }">
@@ -212,16 +116,6 @@
               </q-item>
 
               <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'CustomersIndex' }">
-                <q-item-section avatar>
-                  <q-icon class="item-icon" name="person" color="white" />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label class="menu-list-text">{{
-                      $t("menu.clients")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'customerServices' }">
                 <q-item-section avatar>
                   <q-icon class="item-icon" name="person" color="white" />
                 </q-item-section>
@@ -276,7 +170,7 @@
                 </q-item-section>
               </q-item>
 
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'Professionals.Index' }">
+              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'ProfessionalsIndex' }">
                 <q-item-section avatar>
                   <q-icon class="item-icon" name="local_shipping" color="white" />
                 </q-item-section>
@@ -309,7 +203,7 @@
                 </q-item-section>
               </q-item>
 
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'TasksIndex' }">
+              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'SupportIndex' }">
                 <q-item-section avatar>
                   <q-icon name="task" color="white" />
                 </q-item-section>
@@ -432,118 +326,6 @@ export default {
       defaultCompany: [],
       leftDrawerOpen: this.$q.screen.gt.sm,
       companySelected: -1,
-      links1: [
-        { icon: 'dashboard', text: this.$t('Dashboard'), to: { name: 'DashboardIndex' } },
-        { icon: 'table_view', text: this.$t('Planos'), to: { name: 'PlansIndex' } },
-        { icon: 'list', text: this.$t('Checklists'), to: { name: 'StepsRegistration' } },
-        { icon: 'person', text: this.$t('Clientes'), to: { name: 'CustomersIndex' } },
-        { icon: 'library_books', text: this.$t('Contratos'), to: { name: 'ContractIndex' } },
-      ],
-      links2: [
-        { icon: 'chevron_right', text: this.$t('Fiscal'), to: { name: 'AuditFiscalIndex' } },
-        { icon: 'chevron_right', text: this.$t('Contábil'), to: { name: 'AuditContabilIndex' } },
-        { icon: 'chevron_right', text: this.$t('Depto. Pessoal'), to: { name: 'AuditDeptoPessoalIndex' } },
-        { icon: 'chevron_right', text: this.$t('Societário'), to: { name: 'AuditSocietarioIndex' } },
-      ],
-      links3: [
-        { icon: 'chevron_right', text: this.$t('Impostos'), to: { name: 'FiscalImpostoIndex' } },
-        { icon: 'chevron_right', text: this.$t('Declarações'), to: { name: 'FiscalDeclaracaoIndex' } },
-        {
-          icon: 'chevron_right',
-          text: this.$t('Serviços Adicionais'),
-          to: {
-            name: 'FiscalServicosAdicionaisIndex'
-          }
-        },
-      ],
-      links4: [
-        {
-          icon: 'chevron_right',
-          text: this.$t('Extratos e Movimentações'),
-          to: {
-            name: 'ContabilExtratosIndex'
-          }
-        },
-        {
-          icon: 'chevron_right',
-          text: this.$t('Declarações'),
-          to: {
-            name: 'ContabilDeclaracaoIndex'
-          }
-        },
-        {
-          icon: 'chevron_right',
-          text: this.$t('Serviços Adicionais'),
-          to: {
-            name: 'ContabilServicosAdicionaisIndex'
-          }
-        },
-        {
-          icon: 'chevron_right',
-          text: this.$t('Administrativo'),
-          to: {
-            name: 'ContabilAdministrativoIndex'
-          }
-        },
-      ],
-      links5: [
-        { icon: 'chevron_right', text: this.$t('Impostos'), to: { name: 'DeptoImpostoIndex' } },
-        { icon: 'chevron_right', text: this.$t('Declarações'), to: { name: 'DeptoDeclaracaoIndex' } },
-        { icon: 'chevron_right', text: this.$t('Folhas de Pagamento'), to: { name: 'DeptoFolhaPagamentoIndex' } },
-        { icon: 'chevron_right', text: this.$t('Pro-Labore'), to: { name: 'DeptoProLaboreIndex' } },
-        { icon: 'chevron_right', text: this.$t('Funcionários'), to: { name: 'DeptoFuncionariosIndex' } },
-        { icon: 'chevron_right', text: this.$t('Sócios'), to: { name: 'DeptoSociosIndex' } },
-        { icon: 'chevron_right', text: this.$t('Administrativo'), to: { name: 'DeptoAdministrativoIndex' } },
-        {
-          icon: 'chevron_right',
-          text: this.$t('Serviços Adicionais'),
-          to: {
-            name: 'DeptoServicosAdicionaisIndex'
-          }
-        },
-      ],
-      links6: [
-        {
-          icon: 'domain',
-          text: this.$t('Societário'),
-          to: {
-            name: 'SocietarioIndex'
-          }
-        },
-      ],
-      links7: [
-        {
-          icon: 'person',
-          text: this.$t('Fornecedores'),
-          to: {
-            name: 'ProvidersIndex'
-          }
-        },
-        {
-          icon: 'attach_money',
-          text: this.$t('Contas a Pagar'),
-          to: {
-            name: 'FinanceiroIndex'
-          }
-        },
-        {
-          icon: 'attach_money',
-          text: this.$t('Contas a Receber'),
-          to: {
-            name: 'FinanceiroReceberIndex'
-          }
-        },
-      ],
-      links8: [
-        {
-          icon: 'note_add',
-          text: this.$t('Serviços Adicionais'),
-          to: {
-            name: 'ServicosAdicionaisIndex'
-          }
-        },
-      ],
-
     };
   },
 
