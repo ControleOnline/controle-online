@@ -21,6 +21,7 @@ import * as Import from '@controleonline/quasar-import-ui/src/i18n/pt-br/index';
 import * as CRM from '@controleonline/quasar-crm-ui/src/i18n/pt-br/index';
 import * as People from '@controleonline/quasar-people-ui/src/i18n/pt-br/index';
 import * as Guides from '@controleonline/quasar-guides-ui/src/i18n/pt-br/index';
+import * as Docs from '@controleonline/quasar-docs-ui/src/i18n/pt-br/index';
 
 export default {
   app: {
@@ -42,4 +43,5 @@ export default {
   ...Import.translate,
   ...CRM.translate,
   ...Guides.translate,
+  ...Docs.translate,
 }
