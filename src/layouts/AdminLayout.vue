@@ -114,6 +114,16 @@
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
+              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'DocsIndex' }">
+                <q-item-section avatar>
+                  <q-icon class="item-icon" name="library_books" color="white" />
+                </q-item-section>
+                <q-item-section no-wrap>
+                  <q-item-label class="menu-list-text">{{
+                      $t("menu.docs")
+                  }}</q-item-label>
+                </q-item-section>
+              </q-item>
               <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'ContractIndex' }">
                 <q-item-section avatar>
                   <q-icon name="library_books" color="white" />
