@@ -22,8 +22,7 @@ table td:first-child {
   position: sticky;
   -webkit-position: sticky; /* add this line */
   left: 0;
-  z-index: 1;
-  background-color: #fff;
+  z-index: 1;  
   opacity: 1;
 }
 tr:nth-child(even) {
