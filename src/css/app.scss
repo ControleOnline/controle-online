@@ -9,3 +9,10 @@
     transition: background opacity 3s ease-in-out;
     background-color: #fafafa;
   }
+
+.q-table__middle.scroll {
+  overflow: visible !important;
+}
+main > .q-card {
+  box-shadow: none !important;
+}
