@@ -16,3 +16,13 @@
 main > .q-card {
   box-shadow: none !important;
 }
+
+table thead tr:first-child th:first-child,
+table td:first-child {
+  position: sticky;
+  -webkit-position: sticky; /* add this line */
+  left: 0;
+  z-index: 1;
+  background-color: #fff;
+  opacity: 1;
+}
