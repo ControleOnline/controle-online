@@ -26,3 +26,9 @@ table td:first-child {
   background-color: #fff;
   opacity: 1;
 }
+tr:nth-child(even) {
+  background-color: #c7c7c7;
+}
+tr:nth-child(odd) {
+  background-color: #fff;
+}
