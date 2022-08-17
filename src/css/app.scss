@@ -31,3 +31,10 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
   background-color: #fff;
 }
+thead {
+  position: sticky;
+  -webkit-position: sticky;
+  top: 60px;
+  z-index: 2;
+  opacity: 1;
+}
