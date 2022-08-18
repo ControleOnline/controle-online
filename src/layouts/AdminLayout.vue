@@ -120,6 +120,7 @@
               v-ripple
               clickable
               class="GNL__drawer-item"
+              @click="leftDrawerOpen != leftDrawerOpen"
               :to="{ name: 'DashboardIndex' }"
             >
               <q-item-section avatar>
@@ -147,6 +148,7 @@
                 v-ripple
                 clickable
                 class="GNL__drawer-item"
+                @click="leftDrawerOpen != leftDrawerOpen"
                 :to="{ name: 'CustomersIndex' }"
               >
                 <q-item-section avatar>
@@ -162,6 +164,7 @@
                 v-ripple
                 clickable
                 class="GNL__drawer-item"
+                @click="leftDrawerOpen != leftDrawerOpen"
                 :to="{ name: 'DocsIndex' }"
               >
                 <q-item-section avatar>
@@ -181,6 +184,7 @@
                 v-ripple
                 clickable
                 class="GNL__drawer-item"
+                @click="leftDrawerOpen != leftDrawerOpen"
                 :to="{ name: 'ContractIndex' }"
               >
                 <q-item-section avatar>
@@ -196,6 +200,7 @@
                 v-ripple
                 clickable
                 class="GNL__drawer-item"
+                @click="leftDrawerOpen != leftDrawerOpen"
                 :to="{ name: 'CouponIndex' }"
               >
                 <q-item-section avatar>
@@ -225,6 +230,7 @@
                 v-ripple
                 clickable
                 class="GNL__drawer-item"
+                @click="leftDrawerOpen != leftDrawerOpen"
                 :to="{ name: 'ProfessionalsIndex' }"
               >
                 <q-item-section avatar>
@@ -245,6 +251,7 @@
                 v-ripple
                 clickable
                 class="GNL__drawer-item"
+                @click="leftDrawerOpen != leftDrawerOpen"
                 :to="{ name: 'ProvidersIndex' }"
               >
                 <q-item-section avatar>
@@ -261,6 +268,7 @@
                 v-ripple
                 clickable
                 class="GNL__drawer-item"
+                @click="leftDrawerOpen != leftDrawerOpen"
                 :to="{ name: 'ImportIndex' }"
               >
                 <q-item-section avatar>
@@ -277,6 +285,7 @@
                 v-ripple
                 clickable
                 class="GNL__drawer-item"
+                @click="leftDrawerOpen != leftDrawerOpen"
                 :to="{ name: 'SupportIndex' }"
               >
                 <q-item-section avatar>
@@ -302,6 +311,7 @@
                 v-ripple
                 clickable
                 class="GNL__drawer-item"
+                @click="leftDrawerOpen != leftDrawerOpen"
                 :to="{ name: 'FinancePayIndex' }"
               >
                 <q-item-section avatar>
@@ -318,6 +328,7 @@
                 v-ripple
                 clickable
                 class="GNL__drawer-item"
+                @click="leftDrawerOpen != leftDrawerOpen"
                 :to="{ name: 'FinanceReceiveIndex' }"
               >
                 <q-item-section avatar>
@@ -342,6 +353,7 @@
                 v-ripple
                 clickable
                 class="GNL__drawer-item"
+                @click="leftDrawerOpen != leftDrawerOpen"
                 :to="{ name: 'News' }"
               >
                 <q-item-section avatar>
@@ -359,6 +371,7 @@
               v-ripple
               clickable
               class="GNL__drawer-item"
+              @click="leftDrawerOpen != leftDrawerOpen"
               :to="{ name: 'ShippingQuoteIndex' }"
             >
               <q-item-section avatar>
@@ -376,6 +389,7 @@
               v-ripple
               clickable
               class="GNL__drawer-item"
+              @click="leftDrawerOpen != leftDrawerOpen"
               :to="{ name: 'CarriersIndex' }"
             >
               <q-item-section avatar>
@@ -431,7 +445,7 @@ export default {
       companies: [],
       pageLoading: true,
       defaultCompany: [],
-      leftDrawerOpen: this.$q.screen.gt.sm,
+      leftDrawerOpen: 0, //this.$q.screen.gt.sm,
       companySelected: -1,
     };
   },
