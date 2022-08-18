@@ -4,14 +4,25 @@
       <q-spinner color="primary" class="q-uploader__spinner" />
     </div>
   </div>
-  <q-layout v-else-if="isAdmin && !disabled" view="lHh Lpr fff" class="bg-image">
+  <q-layout
+    v-else-if="isAdmin && !disabled"
+    view="lHh Lpr fff"
+    class="bg-image"
+  >
     <q-header elevated class="bg-white text-grey-8" height-hint="64">
       <q-toolbar class="GPL__toolbar" style="height: 64px">
-        <q-btn flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu" icon="menu"
-          class="q-mx-md" />
+        <q-btn
+          flat
+          dense
+          round
+          @click="leftDrawerOpen = !leftDrawerOpen"
+          aria-label="Menu"
+          icon="menu"
+          class="q-mx-md"
+        />
         <div class="q-gutter-sm items-center row logo-container">
           <router-link v-bind:to="'/'" tag="a" class="primary">
-            <img :src="defaultCompany.logo || ''" class="main-logo" />
+            <img :src="currentCompany.logo || ''" class="current-logo" />
           </router-link>
         </div>
         <q-space />
@@ -64,7 +75,13 @@
                     {{ user.realname || "John Doe" }}
                   </div>
 
-                  <q-btn v-close-popup color="primary" label="Sair" size="sm" @click="onLogout" />
+                  <q-btn
+                    v-close-popup
+                    color="primary"
+                    label="Sair"
+                    size="sm"
+                    @click="onLogout"
+                  />
                 </div>
               </div>
             </q-menu>
@@ -78,177 +95,286 @@
         <q-toolbar class="GPL__toolbar">
           <div class="q-gutter-sm items-center row current-logo-container">
             <router-link v-bind:to="'/'" tag="a" class="primary">
-              <img :src="currentCompany.logo || ''" class="current-logo" />
+              <img
+                v-if="defaultCompanyLogo"
+                :src="defaultCompanyLogo"
+                class="main-logo"
+              />
             </router-link>
           </div>
         </q-toolbar>
 
-        <q-toolbar class="q-pt-md justify-center">
-          <MyCompanies :selected="companySelected" @selected="onCompanySelected" @setMyCompanies="setMyCompanies" />
-        </q-toolbar>
         <div class="q-pt-xl q-px-sm column">
           <q-list class="menu-list" padding>
-            <q-item v-if="isSimple() == false" v-ripple clickable class="GNL__drawer-item"
-              :to="{ name: 'DashboardIndex' }">
+            <q-item
+              v-if="isSimple() == false"
+              v-ripple
+              clickable
+              class="GNL__drawer-item"
+              :to="{ name: 'DashboardIndex' }"
+            >
               <q-item-section avatar>
                 <q-icon name="home" color="white" />
               </q-item-section>
               <q-item-section>
                 <q-item-label class="menu-list-text">{{
-                    $t("menu.home")
+                  $t("menu.home")
                 }}</q-item-label>
               </q-item-section>
             </q-item>
 
             <q-separator inset class="q-my-sm" />
 
-            <q-expansion-item v-if="isSimple() == false" expand-icon-toggle :content-inset-level="0.3" color="white"
-              icon="shopping_cart" class="GNL__drawer-item" :label="$t('Comercial')">
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'CustomersIndex' }">
+            <q-expansion-item
+              v-if="isSimple() == false"
+              expand-icon-toggle
+              :content-inset-level="0.3"
+              color="white"
+              icon="shopping_cart"
+              class="GNL__drawer-item"
+              :label="$t('Comercial')"
+            >
+              <q-item
+                v-ripple
+                clickable
+                class="GNL__drawer-item"
+                :to="{ name: 'CustomersIndex' }"
+              >
                 <q-item-section avatar>
                   <q-icon class="item-icon" name="person" color="white" />
                 </q-item-section>
                 <q-item-section no-wrap>
                   <q-item-label class="menu-list-text">{{
-                      $t("menu.crm")
+                    $t("menu.crm")
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'DocsIndex' }">
+              <q-item
+                v-ripple
+                clickable
+                class="GNL__drawer-item"
+                :to="{ name: 'DocsIndex' }"
+              >
                 <q-item-section avatar>
-                  <q-icon class="item-icon" name="library_books" color="white" />
+                  <q-icon
+                    class="item-icon"
+                    name="library_books"
+                    color="white"
+                  />
                 </q-item-section>
                 <q-item-section no-wrap>
                   <q-item-label class="menu-list-text">{{
-                      $t("menu.docs")
+                    $t("menu.docs")
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'ContractIndex' }">
+              <q-item
+                v-ripple
+                clickable
+                class="GNL__drawer-item"
+                :to="{ name: 'ContractIndex' }"
+              >
                 <q-item-section avatar>
                   <q-icon name="library_books" color="white" />
                 </q-item-section>
                 <q-item-section>
                   <q-item-label class="menu-list-text">{{
-                      $t("menu.contracts")
+                    $t("menu.contracts")
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'CouponIndex' }">
+              <q-item
+                v-ripple
+                clickable
+                class="GNL__drawer-item"
+                :to="{ name: 'CouponIndex' }"
+              >
                 <q-item-section avatar>
-                  <q-icon class="item-icon" name="shopping_cart" color="white" />
+                  <q-icon
+                    class="item-icon"
+                    name="shopping_cart"
+                    color="white"
+                  />
                 </q-item-section>
                 <q-item-section no-wrap>
                   <q-item-label class="menu-list-text">{{
-                      $t("menu.coupon")
+                    $t("menu.coupon")
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-expansion-item>
-            <q-expansion-item v-if="isSimple() == false" expand-icon-toggle :content-inset-level="0.3" color="white"
-              icon="local_shipping" class="GNL__drawer-item" :label="$t('Operacional')">
-
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'ProfessionalsIndex' }">
+            <q-expansion-item
+              v-if="isSimple() == false"
+              expand-icon-toggle
+              :content-inset-level="0.3"
+              color="white"
+              icon="local_shipping"
+              class="GNL__drawer-item"
+              :label="$t('Operacional')"
+            >
+              <q-item
+                v-ripple
+                clickable
+                class="GNL__drawer-item"
+                :to="{ name: 'ProfessionalsIndex' }"
+              >
                 <q-item-section avatar>
-                  <q-icon class="item-icon" name="local_shipping" color="white" />
+                  <q-icon
+                    class="item-icon"
+                    name="local_shipping"
+                    color="white"
+                  />
                 </q-item-section>
                 <q-item-section no-wrap>
                   <q-item-label class="menu-list-text">{{
-                      $t("menu.profissionals")
+                    $t("menu.profissionals")
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
 
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'ProvidersIndex' }">
+              <q-item
+                v-ripple
+                clickable
+                class="GNL__drawer-item"
+                :to="{ name: 'ProvidersIndex' }"
+              >
                 <q-item-section avatar>
                   <q-icon class="item-icon" name="person" color="white" />
                 </q-item-section>
                 <q-item-section no-wrap>
                   <q-item-label class="menu-list-text">{{
-                      $t("menu.providers")
+                    $t("menu.providers")
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
 
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'ImportIndex' }">
+              <q-item
+                v-ripple
+                clickable
+                class="GNL__drawer-item"
+                :to="{ name: 'ImportIndex' }"
+              >
                 <q-item-section avatar>
                   <q-icon name="publish" color="white" />
                 </q-item-section>
                 <q-item-section>
                   <q-item-label class="menu-list-text">{{
-                      $t("menu.import")
+                    $t("menu.import")
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
 
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'SupportIndex' }">
+              <q-item
+                v-ripple
+                clickable
+                class="GNL__drawer-item"
+                :to="{ name: 'SupportIndex' }"
+              >
                 <q-item-section avatar>
                   <q-icon name="task" color="white" />
                 </q-item-section>
                 <q-item-section>
                   <q-item-label class="menu-list-text">{{
-                      $t("menu.tasks")
+                    $t("menu.tasks")
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-expansion-item>
-            <q-expansion-item v-if="isSimple() == false" expand-icon-toggle :content-inset-level="0.3" color="white"
-              icon="attach_money" class="GNL__drawer-item" :label="$t('Financeiro')">
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'FinancePayIndex' }">
+            <q-expansion-item
+              v-if="isSimple() == false"
+              expand-icon-toggle
+              :content-inset-level="0.3"
+              color="white"
+              icon="attach_money"
+              class="GNL__drawer-item"
+              :label="$t('Financeiro')"
+            >
+              <q-item
+                v-ripple
+                clickable
+                class="GNL__drawer-item"
+                :to="{ name: 'FinancePayIndex' }"
+              >
                 <q-item-section avatar>
                   <q-icon class="item-icon" name="attach_money" color="white" />
                 </q-item-section>
                 <q-item-section no-wrap>
                   <q-item-label class="menu-list-text">{{
-                      $t("menu.financepay")
+                    $t("menu.financepay")
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
 
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'FinanceReceiveIndex' }">
+              <q-item
+                v-ripple
+                clickable
+                class="GNL__drawer-item"
+                :to="{ name: 'FinanceReceiveIndex' }"
+              >
                 <q-item-section avatar>
                   <q-icon class="item-icon" name="attach_money" color="white" />
                 </q-item-section>
                 <q-item-section no-wrap>
                   <q-item-label class="menu-list-text">{{
-                      $t("menu.financereceive")
+                    $t("menu.financereceive")
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-expansion-item>
-            <q-expansion-item expand-icon-toggle :content-inset-level="0.3" color="white" icon="featured_play_list"
-              class="GNL__drawer-item" :label="$t('Support')">
-              <q-item v-ripple clickable class="GNL__drawer-item" :to="{ name: 'News' }">
+            <q-expansion-item
+              expand-icon-toggle
+              :content-inset-level="0.3"
+              color="white"
+              icon="featured_play_list"
+              class="GNL__drawer-item"
+              :label="$t('Support')"
+            >
+              <q-item
+                v-ripple
+                clickable
+                class="GNL__drawer-item"
+                :to="{ name: 'News' }"
+              >
                 <q-item-section avatar>
                   <q-icon name="featured_play_list" color="white" />
                 </q-item-section>
                 <q-item-section>
                   <q-item-label class="menu-list-text">{{
-                      $t("menu.news")
+                    $t("menu.news")
                   }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-expansion-item>
-            <q-item v-if="isSimple() == true" v-ripple clickable class="GNL__drawer-item"
-              :to="{ name: 'ShippingQuoteIndex' }">
+            <q-item
+              v-if="isSimple() == true"
+              v-ripple
+              clickable
+              class="GNL__drawer-item"
+              :to="{ name: 'ShippingQuoteIndex' }"
+            >
               <q-item-section avatar>
                 <q-icon name="local_shipping" color="white" />
               </q-item-section>
               <q-item-section>
                 <q-item-label class="menu-list-text">{{
-                    $t("menu.simulator")
+                  $t("menu.simulator")
                 }}</q-item-label>
               </q-item-section>
             </q-item>
 
-            <q-item v-if="isSimple() == true" v-ripple clickable class="GNL__drawer-item"
-              :to="{ name: 'CarriersIndex' }">
+            <q-item
+              v-if="isSimple() == true"
+              v-ripple
+              clickable
+              class="GNL__drawer-item"
+              :to="{ name: 'CarriersIndex' }"
+            >
               <q-item-section avatar>
                 <q-icon class="item-icon" name="local_shipping" color="white" />
               </q-item-section>
               <q-item-section no-wrap>
                 <q-item-label class="menu-list-text">{{
-                    $t("menu.tables")
+                  $t("menu.tables")
                 }}</q-item-label>
               </q-item-section>
             </q-item>
@@ -258,12 +384,25 @@
     </q-drawer>
 
     <q-page-container class="GPL__page-container">
+      <div class=" items-center row current-logo-container">
+        <q-toolbar class="">
+          <MyCompanies
+            :selected="companySelected"
+            @selected="onCompanySelected"
+            @setMyCompanies="setMyCompanies"
+          />
+        </q-toolbar>
+      </div>
       <router-view />
     </q-page-container>
   </q-layout>
   <div v-else class="row">
     <div class="col-12 pageloader">
-      <MyCompanies :selected="companySelected" @selected="onCompanySelected" @setMyCompanies="setMyCompanies" />
+      <MyCompanies
+        :selected="companySelected"
+        @selected="onCompanySelected"
+        @setMyCompanies="setMyCompanies"
+      />
       <span>Você não tem permissão para acessar este aplicativo</span><br />
       <q-btn color="primary" label="Sair" size="sm" @click="onLogout" />
     </div>
@@ -285,6 +424,7 @@ export default {
 
   data() {
     return {
+      defaultCompanyLogo: null,
       disabled: false,
       isAdmin: false,
       permissions: [],
@@ -343,6 +483,8 @@ export default {
     },
     getPeopleDefaultCompany(data) {
       if (data) {
+        this.defaultCompany = data;
+        this.defaultCompanyLogo = "//" + data.logo.domain + data.logo.url;
         data.permissions.forEach((item) => {
           if (this.permissions.indexOf(item) === -1) {
             this.permissions.push(item);
@@ -442,8 +584,21 @@ export default {
   margin-top: 300px
 .logo-container
   width: 100%
-.main-logo,.logo-container a,.current-logo,.current-logo-container
+.current-logo-container
+  display: block
   margin: auto
+.current-logo
+  display: block
+  margin: auto
+  margin-top: 3px
+  min-height: 50px
+  height: 50px
+  max-width: 100%
+  max-height: 100%
+.logo-container a
+  margin: auto
+.main-logo
+  display: block
   margin-top: 3px
   min-height: 50px
   height: 50px
@@ -452,7 +607,7 @@ export default {
 .bg-image
   background-position: center !important
   background-repeat: no-repeat !important
-  background-size: cover !important    
+  background-size: cover !important
 
 .GPL
   &__toolbar
