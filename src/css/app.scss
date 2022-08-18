@@ -38,3 +38,7 @@ thead {
   z-index: 2;
   opacity: 1;
 }
+.q-table thead tr {
+  background-color: $headers-bg;
+  color: $headers-cl;
+}
