@@ -132,275 +132,12 @@
                 }}</q-item-label>
               </q-item-section>
             </q-item>
-
             <q-separator inset class="q-my-sm" />
-
-            <q-expansion-item
-              v-if="isSimple() == false"
-              expand-icon-toggle
-              :content-inset-level="0.3"
-              color="white"
-              icon="shopping_cart"
-              class="GNL__drawer-item"
-              :label="$t('Comercial')"
-            >
-              <q-item
-                v-ripple
-                clickable
-                class="GNL__drawer-item"
-                @click="leftDrawerOpen != leftDrawerOpen"
-                :to="{ name: 'CustomersIndex' }"
-              >
-                <q-item-section avatar>
-                  <q-icon class="item-icon" name="person" color="white" />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label class="menu-list-text">{{
-                    $t("menu.crm")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item
-                v-ripple
-                clickable
-                class="GNL__drawer-item"
-                @click="leftDrawerOpen != leftDrawerOpen"
-                :to="{ name: 'DocsIndex' }"
-              >
-                <q-item-section avatar>
-                  <q-icon
-                    class="item-icon"
-                    name="library_books"
-                    color="white"
-                  />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label class="menu-list-text">{{
-                    $t("menu.docs")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item
-                v-ripple
-                clickable
-                class="GNL__drawer-item"
-                @click="leftDrawerOpen != leftDrawerOpen"
-                :to="{ name: 'ContractIndex' }"
-              >
-                <q-item-section avatar>
-                  <q-icon name="library_books" color="white" />
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label class="menu-list-text">{{
-                    $t("menu.contracts")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item
-                v-ripple
-                clickable
-                class="GNL__drawer-item"
-                @click="leftDrawerOpen != leftDrawerOpen"
-                :to="{ name: 'CouponIndex' }"
-              >
-                <q-item-section avatar>
-                  <q-icon
-                    class="item-icon"
-                    name="shopping_cart"
-                    color="white"
-                  />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label class="menu-list-text">{{
-                    $t("menu.coupon")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-expansion-item>
-            <q-expansion-item
-              v-if="isSimple() == false"
-              expand-icon-toggle
-              :content-inset-level="0.3"
-              color="white"
-              icon="local_shipping"
-              class="GNL__drawer-item"
-              :label="$t('Operacional')"
-            >
-              <q-item
-                v-ripple
-                clickable
-                class="GNL__drawer-item"
-                @click="leftDrawerOpen != leftDrawerOpen"
-                :to="{ name: 'ProfessionalsIndex' }"
-              >
-                <q-item-section avatar>
-                  <q-icon
-                    class="item-icon"
-                    name="local_shipping"
-                    color="white"
-                  />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label class="menu-list-text">{{
-                    $t("menu.profissionals")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-
-              <q-item
-                v-ripple
-                clickable
-                class="GNL__drawer-item"
-                @click="leftDrawerOpen != leftDrawerOpen"
-                :to="{ name: 'ProvidersIndex' }"
-              >
-                <q-item-section avatar>
-                  <q-icon class="item-icon" name="person" color="white" />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label class="menu-list-text">{{
-                    $t("menu.providers")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-
-              <q-item
-                v-ripple
-                clickable
-                class="GNL__drawer-item"
-                @click="leftDrawerOpen != leftDrawerOpen"
-                :to="{ name: 'ImportIndex' }"
-              >
-                <q-item-section avatar>
-                  <q-icon name="publish" color="white" />
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label class="menu-list-text">{{
-                    $t("menu.import")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-
-              <q-item
-                v-ripple
-                clickable
-                class="GNL__drawer-item"
-                @click="leftDrawerOpen != leftDrawerOpen"
-                :to="{ name: 'SupportIndex' }"
-              >
-                <q-item-section avatar>
-                  <q-icon name="task" color="white" />
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label class="menu-list-text">{{
-                    $t("menu.tasks")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-expansion-item>
-            <q-expansion-item
-              v-if="isSimple() == false"
-              expand-icon-toggle
-              :content-inset-level="0.3"
-              color="white"
-              icon="attach_money"
-              class="GNL__drawer-item"
-              :label="$t('Financeiro')"
-            >
-              <q-item
-                v-ripple
-                clickable
-                class="GNL__drawer-item"
-                @click="leftDrawerOpen != leftDrawerOpen"
-                :to="{ name: 'FinancePayIndex' }"
-              >
-                <q-item-section avatar>
-                  <q-icon class="item-icon" name="attach_money" color="white" />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label class="menu-list-text">{{
-                    $t("menu.financepay")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-
-              <q-item
-                v-ripple
-                clickable
-                class="GNL__drawer-item"
-                @click="leftDrawerOpen != leftDrawerOpen"
-                :to="{ name: 'FinanceReceiveIndex' }"
-              >
-                <q-item-section avatar>
-                  <q-icon class="item-icon" name="attach_money" color="white" />
-                </q-item-section>
-                <q-item-section no-wrap>
-                  <q-item-label class="menu-list-text">{{
-                    $t("menu.financereceive")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-expansion-item>
-            <q-expansion-item
-              expand-icon-toggle
-              :content-inset-level="0.3"
-              color="white"
-              icon="featured_play_list"
-              class="GNL__drawer-item"
-              :label="$t('Support')"
-            >
-              <q-item
-                v-ripple
-                clickable
-                class="GNL__drawer-item"
-                @click="leftDrawerOpen != leftDrawerOpen"
-                :to="{ name: 'News' }"
-              >
-                <q-item-section avatar>
-                  <q-icon name="featured_play_list" color="white" />
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label class="menu-list-text">{{
-                    $t("menu.news")
-                  }}</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-expansion-item>
-            <q-item
-              v-if="isSimple() == true"
-              v-ripple
-              clickable
-              class="GNL__drawer-item"
-              @click="leftDrawerOpen != leftDrawerOpen"
-              :to="{ name: 'ShippingQuoteIndex' }"
-            >
-              <q-item-section avatar>
-                <q-icon name="local_shipping" color="white" />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label class="menu-list-text">{{
-                  $t("menu.simulator")
-                }}</q-item-label>
-              </q-item-section>
-            </q-item>
-
-            <q-item
-              v-if="isSimple() == true"
-              v-ripple
-              clickable
-              class="GNL__drawer-item"
-              @click="leftDrawerOpen != leftDrawerOpen"
-              :to="{ name: 'CarriersIndex' }"
-            >
-              <q-item-section avatar>
-                <q-icon class="item-icon" name="local_shipping" color="white" />
-              </q-item-section>
-              <q-item-section no-wrap>
-                <q-item-label class="menu-list-text">{{
-                  $t("menu.tables")
-                }}</q-item-label>
-              </q-item-section>
-            </q-item>
+            <Menu
+              v-if="isSimple() != true"
+              :context="'super_admin'"
+              :people="this.user.people"
+            />
           </q-list>
         </div>
       </q-scroll-area>
@@ -425,6 +162,8 @@
 
 <script>
 import MyCompanies from "@controleonline/quasar-common-ui/src/components/common/MyCompanies";
+import Menu from "@controleonline/quasar-common-ui/src/components/common/Menu";
+
 import md5 from "md5";
 import { mapActions, mapGetters } from "vuex";
 import { LocalStorage } from "quasar";
@@ -433,6 +172,7 @@ export default {
   name: "AdminLayout",
 
   components: {
+    Menu,
     MyCompanies,
   },
 
