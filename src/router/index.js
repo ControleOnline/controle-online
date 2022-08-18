@@ -101,7 +101,7 @@ export default function ({ store }) {
     }
 
     if (isLoginPage && isLogged) {
-      return next({ name: 'DashboardIndex' });
+      return next({ name: 'HomeIndex' });
     }
 
     if (isPrivatePage === true && isLogged === false) {

@@ -18,7 +18,7 @@ export default {
   
   created() {
     /* global configs */
-    this.setIndexRoute('DashboardIndex');
+    this.setIndexRoute('HomeIndex');
   }
 }
 </script>
