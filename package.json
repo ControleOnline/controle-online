@@ -9,7 +9,8 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {                            
-  "@controleonline/quasar-docs-ui": "^1.0.11",
+    "@controleonline/quasar-guides-ui": "*",
+    "@controleonline/quasar-docs-ui": "^1.0.11",
     "@controleonline/quasar-accounting-ui": "^1.0.5",
     "@controleonline/quasar-common-ui": "^1.0.81",
     "@controleonline/quasar-contracts-ui": "^1.6.49",
@@ -25,7 +26,7 @@
     "@controleonline/quasar-people-ui": "^1.0.42",
     "@controleonline/quasar-support-ui": "^1.0.6",
     "@controleonline/quasar-tasks-ui": "^1.1.37",
-    "@controleonline/quasar-users-ui": "^1.0.23",
+    "@controleonline/quasar-users-ui": "^1.0.23",    
     "@freteclick/quasar-common-ui": "*",
     "@freteclick/quasar-carrier-ui": "*",
     "@freteclick/quasar-quote-ui": "*",
