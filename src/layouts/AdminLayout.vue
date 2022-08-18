@@ -25,6 +25,15 @@
             <img :src="currentCompany.logo || ''" class="current-logo" />
           </router-link>
         </div>
+        <div class="items-center row current-logo-container">
+          <q-toolbar class="">
+            <MyCompanies
+              :selected="companySelected"
+              @selected="onCompanySelected"
+              @setMyCompanies="setMyCompanies"
+            />
+          </q-toolbar>
+        </div>
         <q-space />
         <div class="q-gutter-sm row items-center no-wrap">
           <!--
@@ -384,15 +393,6 @@
     </q-drawer>
 
     <q-page-container class="GPL__page-container">
-      <div class=" items-center row current-logo-container">
-        <q-toolbar class="">
-          <MyCompanies
-            :selected="companySelected"
-            @selected="onCompanySelected"
-            @setMyCompanies="setMyCompanies"
-          />
-        </q-toolbar>
-      </div>
       <router-view />
     </q-page-container>
   </q-layout>
