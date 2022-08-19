@@ -137,6 +137,7 @@
               v-if="isSimple() != true"
               :context="'super_admin'"
               :people="this.user.people"
+              @clickmenu="onClickmenu"
             />
           </q-list>
         </div>
@@ -254,6 +255,11 @@ export default {
       config: "config/appConfig",
       peopleDefaultCompany: "people/defaultCompany",
     }),
+
+    onClickmenu(route) {      
+      this.leftDrawerOpen = !this.leftDrawerOpen;
+      this.$router.push({ name: route });
+    },
 
     isSimple() {
       return this.getPeopleDefaultCompany.domainType === "simple";
