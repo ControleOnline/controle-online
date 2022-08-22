@@ -16,7 +16,7 @@
     "@controleonline/quasar-customers-ui": "^1.0.72",
     "@controleonline/quasar-dashboard-ui": "^1.2.35",
     "@controleonline/quasar-docs-ui": "^1.0.11",
-    "@controleonline/quasar-financial-ui": "^1.0.85",
+    "@controleonline/quasar-financial-ui": "^1.0.86",
     "@controleonline/quasar-guides-ui": "*",
     "@controleonline/quasar-import-ui": "^1.0.12",
     "@controleonline/quasar-login-ui": "^1.0.39",
