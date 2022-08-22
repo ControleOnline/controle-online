@@ -9,14 +9,15 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "@controleonline/quasar-config-ui": "^1.0.1",
     "@controleonline/quasar-accounting-ui": "^1.0.5",
-    "@controleonline/quasar-common-ui": "^1.0.85",
+    "@controleonline/quasar-common-ui": "^1.0.88",
     "@controleonline/quasar-contracts-ui": "^1.6.49",
     "@controleonline/quasar-crm-ui": "^1.0.17",
     "@controleonline/quasar-customers-ui": "^1.0.72",
     "@controleonline/quasar-dashboard-ui": "^1.2.35",
     "@controleonline/quasar-docs-ui": "^1.0.11",
-    "@controleonline/quasar-financial-ui": "^1.0.86",
+    "@controleonline/quasar-financial-ui": "^1.0.87",
     "@controleonline/quasar-guides-ui": "*",
     "@controleonline/quasar-import-ui": "^1.0.12",
     "@controleonline/quasar-login-ui": "^1.0.39",
