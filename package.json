@@ -9,9 +9,9 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@controleonline/quasar-config-ui": "^1.0.1",
+    "@controleonline/quasar-config-ui": "^1.0.2",
     "@controleonline/quasar-accounting-ui": "^1.0.5",
-    "@controleonline/quasar-common-ui": "^1.0.88",
+    "@controleonline/quasar-common-ui": "^1.0.89",
     "@controleonline/quasar-contracts-ui": "^1.6.49",
     "@controleonline/quasar-crm-ui": "^1.0.17",
     "@controleonline/quasar-customers-ui": "^1.0.72",
