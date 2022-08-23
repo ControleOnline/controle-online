@@ -1,14 +1,14 @@
-  // app global css in SCSS form
-  .bg-image {
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
-    -webkit-transition: background opacity 3s ease-in-out;
-    -moz-transition: background opacity 3s ease-in-out;
-    -o-transition: background opacity 3s ease-in-out;
-    transition: background opacity 3s ease-in-out;
-    background-color: #fafafa;
-  }
+// app global css in SCSS form
+.bg-image {
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  -webkit-transition: background opacity 3s ease-in-out;
+  -moz-transition: background opacity 3s ease-in-out;
+  -o-transition: background opacity 3s ease-in-out;
+  transition: background opacity 3s ease-in-out;
+  background-color: #fafafa;
+}
 
 .q-table__middle.scroll {
   overflow: visible !important;
@@ -16,13 +16,17 @@
 main > .q-card {
   box-shadow: none !important;
 }
+.q-table thead tr {
+  background-color: $headers-bg !important;
+  color: $headers-cl !important;
+}
 
-.q-table table thead tr:first-child th:first-child,
-.q-table table td:first-child {
+.q-table thead tr:first-child th:first-child,
+.q-table td:first-child {
   position: sticky;
   -webkit-position: sticky; /* add this line */
   left: 0;
-  z-index: 1;  
+  z-index: 1;
   opacity: 1;
 }
 .q-table tr:nth-child(even) {
@@ -37,8 +41,4 @@ main > .q-card {
   top: 60px;
   z-index: 2;
   opacity: 1;
-}
-.q-table thead tr {
-  background-color: $headers-bg;
-  color: $headers-cl;
 }
