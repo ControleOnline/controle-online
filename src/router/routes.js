@@ -1,5 +1,5 @@
 import * as Login from "@controleonline/quasar-login-ui/src/router/routes";
-import * as Quote from "@freteclick/quasar-quote-ui/src/router/routes";
+import * as Quote from "@controleonline/quasar-quote-ui/src/router/routes";
 import * as Financial from "@controleonline/quasar-financial-ui/src/router/routes";
 import * as Providers from "@controleonline/quasar-providers-ui/src/router/routes";
 import * as Customers from "@controleonline/quasar-customers-ui/src/router/routes";
@@ -7,10 +7,10 @@ import * as Contracts from "@controleonline/quasar-contracts-ui/src/router/route
 import * as Tasks from "@controleonline/quasar-tasks-ui/src/router/routes";
 import * as Quotations from "@controleonline/quasar-orders-ui/src/router/routes";
 import * as Users from "@controleonline/quasar-users-ui/src/router/routes";
-import * as Carrier from "@freteclick/quasar-carrier-ui/src/router/routes";
+import * as Carrier from "@controleonline/quasar-carrier-ui/src/router/routes";
 import * as Dashboard from "@controleonline/quasar-dashboard-ui/src/router/routes";
 import * as Support from "@controleonline/quasar-support-ui/src/router/routes";
-import * as Coupon from "@freteclick/quasar-coupon-ui/src/router/routes";
+import * as Coupon from "@controleonline/quasar-coupon-ui/src/router/routes";
 import * as Accounting from "@controleonline/quasar-accounting-ui/src/router/routes";
 import * as Import from "@controleonline/quasar-import-ui/src/router/routes";
 import * as Guides from "@controleonline/quasar-guides-ui/src/router/routes";
