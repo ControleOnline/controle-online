@@ -50,7 +50,6 @@
   top: 130px;
   z-index: 2;
   opacity: 1;
-  
 }
 
 /* Paginação da Tabela  */
@@ -61,6 +60,7 @@
   bottom: 0;
   left: 0;
   background-color: #fff;
+  padding-right: 10vw;
 }
 
 .q-table__middle.scroll {
@@ -69,4 +69,8 @@
 
 main > .q-card {
   box-shadow: none !important;
+}
+.module-tittle {  
+  font-size: 20px;
+  font-weight: 700;
 }
