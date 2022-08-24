@@ -159,7 +159,11 @@
         </q-item-section>
         <q-item-section no-wrap>
           <q-item-label class="module-tittle">{{
-            $t(this.$route.name)
+            $t(
+              "route." +
+                this.$route.name +
+                (this.$route.path ? "." + this.$route.path : "")
+            )
           }}</q-item-label>
         </q-item-section>
       </q-item>
