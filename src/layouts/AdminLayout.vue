@@ -21,7 +21,6 @@
           class="q-mx-md"
         />
         <div class="q-gutter-sm items-center row logo-container">
-          <!--
           <router-link
             v-if="this.$q.screen.gt.xs"
             v-bind:to="'/'"
@@ -30,8 +29,7 @@
           >
             <img :src="currentCompany.logo || ''" class="current-logo" />
           </router-link>
-          -->
-          <img :src="currentCompany.logo || ''" class="current-logo" />
+          <img v-else :src="currentCompany.logo || ''" class="current-logo" />
         </div>
         <div class="items-center row current-logo-container">
           <q-toolbar class="">
