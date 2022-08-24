@@ -51,6 +51,9 @@
   z-index: 2;
   opacity: 1;
 }
+.q-panel .q-table thead {
+  top: 0px;
+}
 
 /* Paginação da Tabela  */
 .q-table__bottom {
@@ -70,7 +73,7 @@
 main > .q-card {
   box-shadow: none !important;
 }
-.module-tittle {  
+.module-tittle {
   font-size: 20px;
   font-weight: 700;
 }
