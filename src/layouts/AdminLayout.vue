@@ -149,9 +149,11 @@
         </div>
       </q-scroll-area>
     </q-drawer>
-
     <q-page-container class="GPL__page-container">
-      <q-item v-ripple :color="$route.meta.color || '$secondary'">
+      <q-item
+        v-ripple
+        :style="'color:' + ($route.meta.color || 'var(--q-color-secondary)')"
+      >
         <q-item-section avatar>
           <q-icon class="item-icon" :name="$route.meta.icon" />
         </q-item-section>
