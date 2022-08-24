@@ -21,9 +21,17 @@
           class="q-mx-md"
         />
         <div class="q-gutter-sm items-center row logo-container">
-          <router-link v-bind:to="'/'" tag="a" class="primary">
+          <!--
+          <router-link
+            v-if="this.$q.screen.gt.xs"
+            v-bind:to="'/'"
+            tag="a"
+            class="primary"
+          >
             <img :src="currentCompany.logo || ''" class="current-logo" />
           </router-link>
+          -->
+          <img :src="currentCompany.logo || ''" class="current-logo" />
         </div>
         <div class="items-center row current-logo-container">
           <q-toolbar class="">
@@ -256,7 +264,7 @@ export default {
       peopleDefaultCompany: "people/defaultCompany",
     }),
 
-    onClickmenu(route) {      
+    onClickmenu(route) {
       this.leftDrawerOpen = !this.leftDrawerOpen;
       this.$router.push({ name: route });
     },
