@@ -167,6 +167,7 @@
           }}</q-item-label>
         </q-item-section>
       </q-item>
+      <q-scroll-observer horizontal @scroll="onScroll"></q-scroll-observer>
       <router-view />
     </q-page-container>
   </q-layout>
@@ -282,7 +283,9 @@ export default {
       this.leftDrawerOpen = !this.leftDrawerOpen;
       this.$router.push({ name: route });
     },
-
+    onScroll(info) {
+      if (info.position > 0) this.leftDrawerOpen = 0;
+    },
     isSimple() {
       return this.getPeopleDefaultCompany.domainType === "simple";
     },
