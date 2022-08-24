@@ -151,6 +151,16 @@
     </q-drawer>
 
     <q-page-container class="GPL__page-container">
+      <q-item v-ripple :color="$route.meta.color || '$secondary'">
+        <q-item-section avatar>
+          <q-icon class="item-icon" :name="$route.meta.icon" />
+        </q-item-section>
+        <q-item-section no-wrap>
+          <q-item-label class="module-tittle">{{
+            $t(this.$route.name)
+          }}</q-item-label>
+        </q-item-section>
+      </q-item>
       <router-view />
     </q-page-container>
   </q-layout>
