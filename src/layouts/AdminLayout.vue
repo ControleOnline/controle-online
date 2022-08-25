@@ -400,8 +400,7 @@ export default {
   margin: auto
   margin-top: 3px
   min-height: 50px
-  height: 50px
-  max-width: 100%
+  height: 50px  
   max-height: 100%
 .logo-container a
   margin: auto
