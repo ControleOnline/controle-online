@@ -20,7 +20,7 @@
           icon="menu"
           class="q-mx-md"
         />
-        <div v-if="this.$q.screen.gt.xs" class="q-gutter-sm items-center row">
+        <div v-if="this.$q.screen.gt.sm" class="q-gutter-sm items-center row">
           <q-item
             v-ripple
             :style="
@@ -39,7 +39,7 @@
         </div>
         <div class="q-gutter-sm items-center row logo-container">
           <router-link
-            v-if="this.$q.screen.gt.xs"
+            v-if="this.$q.screen.gt.sm"
             v-bind:to="'/'"
             tag="a"
             class="primary"
@@ -168,7 +168,7 @@
     </q-drawer>
     <q-page-container class="GPL__page-container">
       <q-scroll-observer horizontal @scroll="onScroll"></q-scroll-observer>
-      <div v-if="!this.$q.screen.gt.xs" class="relative">
+      <div v-if="!this.$q.screen.gt.sm" class="relative">
         <q-item
           v-ripple
           :style="'color:' + ($route.meta.color || 'var(--q-color-secondary)')"
