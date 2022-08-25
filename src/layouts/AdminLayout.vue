@@ -48,7 +48,9 @@
           </router-link>
           <img v-else :src="currentCompany.logo || ''" class="current-logo" />
         </div>
-        <div class="q-gutter-sm row items-center no-wrap current-logo-container">
+        <div
+          class="q-gutter-sm row items-center no-wrap current-logo-container"
+        >
           <q-toolbar class="">
             <MyCompanies
               :selected="companySelected"
@@ -57,16 +59,21 @@
             />
           </q-toolbar>
         </div>
-        
-        <div class="q-gutter-sm row items-center no-wrap current-user-container">
-          <!--
+
+        <div
+          class="q-gutter-sm row items-center no-wrap current-user-container"
+        >
           <q-btn round dense flat color="grey-8" icon="notifications">
-            <q-badge color="red" text-color="white" floating>
-              2
+            <q-badge
+              v-if="notifications.count > 0"
+              color="red"
+              text-color="white"
+              floating
+            >
+              {{ notifications.count }}
             </q-badge>
             <q-tooltip>Notificações</q-tooltip>
           </q-btn>
-          -->
 
           <q-btn icon="account_circle" flat round>
             <q-tooltip>{{ $t("menu.myacount") }}</q-tooltip>
@@ -217,6 +224,9 @@ export default {
 
   data() {
     return {
+      notifications: {
+        count: 0,
+      },
       defaultCompanyLogo: null,
       disabled: false,
       isAdmin: false,
