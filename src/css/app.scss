@@ -118,6 +118,13 @@ main > .q-card {
   position: absolute;
   right: 10px;
 }
-.menu-button{
+.menu-button {
   z-index: 1000000;
+}
+.module-tittle-container {
+  position: sticky !important;
+  left: 0;
+  -webkit-position: sticky;
+  z-index: 1;
+  width: fit-content;
 }

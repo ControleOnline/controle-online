@@ -175,20 +175,24 @@
     </q-drawer>
     <q-page-container class="GPL__page-container">
       <q-scroll-observer horizontal @scroll="onScroll"></q-scroll-observer>
-      <div v-if="!this.$q.screen.gt.sm" class="relative">
-        <q-item
-          v-ripple
-          :style="'color:' + ($route.meta.color || 'var(--q-color-secondary)')"
-        >
-          <q-item-section avatar v-if="$route.meta.icon">
-            <q-icon class="item-icon" :name="$route.meta.icon" />
-          </q-item-section>
-          <q-item-section no-wrap>
-            <q-item-label class="module-tittle">{{
-              $t("route." + this.$route.name)
-            }}</q-item-label>
-          </q-item-section>
-        </q-item>
+      <div>
+        <div v-if="!this.$q.screen.gt.sm" class="module-tittle-container">
+          <q-item
+            v-ripple
+            :style="
+              'color:' + ($route.meta.color || 'var(--q-color-secondary)')
+            "
+          >
+            <q-item-section avatar v-if="$route.meta.icon">
+              <q-icon class="item-icon" :name="$route.meta.icon" />
+            </q-item-section>
+            <q-item-section no-wrap>
+              <q-item-label class="module-tittle">{{
+                $t("route." + this.$route.name)
+              }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </div>
       </div>
       <router-view />
     </q-page-container>
@@ -400,7 +404,7 @@ export default {
   margin: auto
   margin-top: 3px
   min-height: 50px
-  height: 50px  
+  height: 50px
   max-height: 100%
 .logo-container a
   margin: auto
