@@ -58,7 +58,7 @@
           </q-toolbar>
         </div>
         
-        <div class="q-gutter-sm row items-center no-wrap">
+        <div class="q-gutter-sm row items-center no-wrap current-user-container">
           <!--
           <q-btn round dense flat color="grey-8" icon="notifications">
             <q-badge color="red" text-color="white" floating>
