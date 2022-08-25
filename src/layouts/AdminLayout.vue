@@ -48,7 +48,7 @@
           </router-link>
           <img v-else :src="currentCompany.logo || ''" class="current-logo" />
         </div>
-        <div class="items-center row current-logo-container">
+        <div class="q-gutter-sm row items-center no-wrap current-logo-container">
           <q-toolbar class="">
             <MyCompanies
               :selected="companySelected"
@@ -57,7 +57,7 @@
             />
           </q-toolbar>
         </div>
-        <q-space />
+        
         <div class="q-gutter-sm row items-center no-wrap">
           <!--
           <q-btn round dense flat color="grey-8" icon="notifications">
