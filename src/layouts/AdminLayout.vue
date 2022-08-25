@@ -20,7 +20,7 @@
           icon="menu"
           class="q-mx-md"
         />
-        <div class="q-gutter-sm items-center row">
+        <div v-if="this.$q.screen.gt.xs" class="q-gutter-sm items-center row">
           <q-item
             v-ripple
             :style="
@@ -168,6 +168,21 @@
     </q-drawer>
     <q-page-container class="GPL__page-container">
       <q-scroll-observer horizontal @scroll="onScroll"></q-scroll-observer>
+      <div v-if="!this.$q.screen.gt.xs" class="relative">
+        <q-item
+          v-ripple
+          :style="'color:' + ($route.meta.color || 'var(--q-color-secondary)')"
+        >
+          <q-item-section avatar v-if="$route.meta.icon">
+            <q-icon class="item-icon" :name="$route.meta.icon" />
+          </q-item-section>
+          <q-item-section no-wrap>
+            <q-item-label class="module-tittle">{{
+              $t("route." + this.$route.name)
+            }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </div>
       <router-view />
     </q-page-container>
   </q-layout>
