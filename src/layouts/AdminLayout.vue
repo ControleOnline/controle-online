@@ -150,20 +150,22 @@
       </q-scroll-area>
     </q-drawer>
     <q-page-container class="GPL__page-container">
-      <q-item
-        class="module-tittle-container"
-        v-ripple
-        :style="'color:' + ($route.meta.color || 'var(--q-color-secondary)')"
-      >
-        <q-item-section avatar>
-          <q-icon class="item-icon" :name="$route.meta.icon" />
-        </q-item-section>
-        <q-item-section no-wrap>
-          <q-item-label class="module-tittle">{{
-            $t("route." + this.$route.name)
-          }}</q-item-label>
-        </q-item-section>
-      </q-item>
+      <div style="position: relative">
+        <q-item
+          class="module-tittle-container"
+          v-ripple
+          :style="'color:' + ($route.meta.color || 'var(--q-color-secondary)')"
+        >
+          <q-item-section avatar>
+            <q-icon class="item-icon" :name="$route.meta.icon" />
+          </q-item-section>
+          <q-item-section no-wrap>
+            <q-item-label class="module-tittle">{{
+              $t("route." + this.$route.name)
+            }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </div>
       <q-scroll-observer horizontal @scroll="onScroll"></q-scroll-observer>
       <router-view />
     </q-page-container>

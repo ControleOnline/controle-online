@@ -107,8 +107,8 @@ main > .q-card {
 }
 .module-tittle-container {
   position: sticky !important;
+  -webkit-position: sticky !important;
   top: 0;
   left: 0;
-  width: 100vw;
-  display: inherit;
+  width: 100vw;  
 }
