@@ -99,7 +99,16 @@
 main > .q-card {
   box-shadow: none !important;
 }
+
+/* Title of pages */
 .module-tittle {
   font-size: 20px;
   font-weight: 700;
+}
+.module-tittle-container {
+  position: sticky !important;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  display: inherit;
 }

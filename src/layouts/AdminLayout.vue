@@ -151,6 +151,7 @@
     </q-drawer>
     <q-page-container class="GPL__page-container">
       <q-item
+        class="module-tittle-container"
         v-ripple
         :style="'color:' + ($route.meta.color || 'var(--q-color-secondary)')"
       >
