@@ -79,8 +79,10 @@
     top: 64px;
   }
   .row-filters {
-    position: relative !important;
-    -webkit-position: relative !important;
+    position: sticky !important;
+    -webkit-position: sticky !important;
+    left: 0;
+    z-index: 10;
   }
   /* Paginação da Tabela  */
   .q-table__bottom {
