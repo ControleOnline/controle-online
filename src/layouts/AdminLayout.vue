@@ -20,6 +20,23 @@
           icon="menu"
           class="q-mx-md"
         />
+        <div class="q-gutter-sm items-center row">
+          <q-item
+            v-ripple
+            :style="
+              'color:' + ($route.meta.color || 'var(--q-color-secondary)')
+            "
+          >
+            <q-item-section avatar v-if="$route.meta.icon">
+              <q-icon class="item-icon" :name="$route.meta.icon" />
+            </q-item-section>
+            <q-item-section no-wrap>
+              <q-item-label class="module-tittle">{{
+                $t("route." + this.$route.name)
+              }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </div>
         <div class="q-gutter-sm items-center row logo-container">
           <router-link
             v-if="this.$q.screen.gt.xs"
@@ -150,22 +167,6 @@
       </q-scroll-area>
     </q-drawer>
     <q-page-container class="GPL__page-container">
-      <div style="position: relative">
-        <q-item
-          class="module-tittle-container"
-          v-ripple
-          :style="'color:' + ($route.meta.color || 'var(--q-color-secondary)')"
-        >
-          <q-item-section avatar>
-            <q-icon class="item-icon" :name="$route.meta.icon" />
-          </q-item-section>
-          <q-item-section no-wrap>
-            <q-item-label class="module-tittle">{{
-              $t("route." + this.$route.name)
-            }}</q-item-label>
-          </q-item-section>
-        </q-item>
-      </div>
       <q-scroll-observer horizontal @scroll="onScroll"></q-scroll-observer>
       <router-view />
     </q-page-container>
