@@ -125,7 +125,7 @@
     <q-drawer v-model="leftDrawerOpen" :width="270" content-class="bg-primary">
       <q-scroll-area class="fit">
         <q-toolbar class="GPL__toolbar">
-          <div class="q-gutter-sm items-center row current-logo-container">
+          <div class="q-gutter-sm items-center row">
             <router-link v-bind:to="'/'" tag="a" class="primary">
               <img
                 v-if="defaultCompanyLogo"
@@ -384,9 +384,7 @@ export default {
   margin-top: 300px
 .logo-container
   width: 100%
-.current-logo-container
-  display: block
-  margin: auto
+
 .current-logo
   display: block
   margin: auto
