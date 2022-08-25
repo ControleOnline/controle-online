@@ -18,7 +18,7 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
           aria-label="Menu"
           icon="menu"
-          class="q-mx-md"
+          class="q-mx-md menu-button"
         />
         <div v-if="this.$q.screen.gt.sm" class="q-gutter-sm items-center row">
           <q-item
