@@ -278,6 +278,9 @@ export default {
   },
 
   watch: {
+    "$route.name"() {
+      console.log(this.$route);
+    },
     permissions() {
       if (
         this.permissions.indexOf("franchisee") !== -1 ||
