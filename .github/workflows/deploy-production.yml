@@ -1,7 +1,7 @@
 name: Deploy Project
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,37 +12,37 @@ jobs:
           node-version: 12.18.1
       - name: Check out Git repository
         uses: actions/checkout@v1
-      - name: Building the project                                
+      - name: Building the project
         run: |
-              cd /home/runner/work/controleonline/controleonline
-              echo "export const ENTRYPOINT_LOCAL = 'https://api.controleonline.com'" > ./src/config/entrypoint.local.js
-              echo "export const DOMAIN_LOCAL = location.host" > ./src/config/domain.local.js
-              yarn
-              npm install
-              npm update
-              npx quasar build      
+          cd /home/runner/work/controleonline/controleonline
+          echo "export const ENTRYPOINT_LOCAL = 'https://api.controleonline.com'" > ./src/config/entrypoint.local.js
+          echo "export const DOMAIN_LOCAL = 'app.controleonline.com'" > ./src/config/domain.local.js
+          yarn
+          npm install
+          npm update
+          npx quasar build
       - name: Copy to controleonline
         uses: horochx/deploy-via-scp@master
         with:
-          local: /home/runner/work/controleonline/controleonline/dist/spa 
+          local: /home/runner/work/controleonline/controleonline/dist/spa
           remote: ~/sistemas/controleonline/app/dist
           host: sshproxy.cloudserver8.com
           port: 22212
           user: control2
           key: ${{ secrets.CONTROLEONLINE }}
-      - name: Building the project                                
+      - name: Building the project
         run: |
-              cd /home/runner/work/controleonline/controleonline
-              echo "export const ENTRYPOINT_LOCAL = 'https://api.controleonline.com'" > ./src/config/entrypoint.local.js
-              echo "export const DOMAIN_LOCAL = location.host" > ./src/config/domain.local.js
-              yarn
-              npm install
-              npm update
-              npx quasar build      
+          cd /home/runner/work/controleonline/controleonline
+          echo "export const ENTRYPOINT_LOCAL = 'https://api.controleonline.com'" > ./src/config/entrypoint.local.js
+          echo "export const DOMAIN_LOCAL = app.trailntravel.com" > ./src/config/domain.local.js
+          yarn
+          npm install
+          npm update
+          npx quasar build
       - name: Copy to trailntravel
         uses: horochx/deploy-via-scp@master
         with:
-          local: /home/runner/work/controleonline/controleonline/dist/spa 
+          local: /home/runner/work/controleonline/controleonline/dist/spa
           remote: ~/sistemas/controleonline/dist
           host: trailntravel.com.br
           port: 22
