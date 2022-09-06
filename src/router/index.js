@@ -28,10 +28,10 @@ export default function ({ store }) {
   });
 
   const autoLogin = () => {
-    if (store.getters['auth/user'] !== null) {
+    
+    if (store.getters['auth/user'] !== null && store.getters['auth/user'].token !== null&& store.getters['auth/user'].token !== undefined) {
       return true;
     }
-
     // clean storage from not allowed keys
 
     let keys = LocalStorage.getAllKeys();
@@ -91,8 +91,10 @@ export default function ({ store }) {
   };
 
   Router.beforeEach((to, from, next) => {
-    const isLoginPage   = to.path == '/';
-    const publicPages   = ['/', '/quote'];
+    
+    const isLoginPage   = to.path == '/login';
+    const isHomePage   = to.path == '/';
+    const publicPages   = ['/login', '/quote'];
     const isPrivatePage = !publicPages.includes(to.path);
     const isLogged      = autoLogin();
 
@@ -100,12 +102,12 @@ export default function ({ store }) {
       return next();
     }
 
-    if (isLoginPage && isLogged) {
+    if ((isLoginPage || isHomePage) && isLogged) {
       return next({ name: 'HomeIndex' });
     }
 
     if (isPrivatePage === true && isLogged === false) {
-      return next('/');
+      return next('/login');
     }
 
     next();
