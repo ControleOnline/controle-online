@@ -40,12 +40,12 @@ const routes = [
   ...Config.routes,
 
   {
-    path: "/home",
+    path: "/",
     component: () => import("layouts/AdminLayout.vue"),
     children: [
       {
         name: "HomeIndex",
-        path: "/",
+        path: "home",
         component: () =>
           import("@controleonline/quasar-dashboard-ui/src/pages/Dashboard.vue"),
       },
@@ -140,7 +140,7 @@ const routes = [
   },
   {
     path: "*",
-    redirect: "/home/dashboard",
+    redirect: "/",
   },
 ];
 

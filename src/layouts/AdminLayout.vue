@@ -388,7 +388,7 @@ export default {
 
     onLogout() {
       this.$store.dispatch("auth/logOut");
-      this.$router.push("/");
+      this.$router.push("/login");
     },
   },
 };
