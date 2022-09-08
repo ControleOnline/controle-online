@@ -238,7 +238,7 @@ export default {
       companies: [],
       pageLoading: true,
       defaultCompany: [],
-      leftDrawerOpen: 0, //this.$q.screen.gt.sm,
+      leftDrawerOpen: false, //this.$q.screen.gt.sm,
       companySelected: -1,
     };
   },
