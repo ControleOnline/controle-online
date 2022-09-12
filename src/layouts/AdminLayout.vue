@@ -258,7 +258,7 @@ export default {
 
     user() {
       let user = this.$store.getters["auth/user"] || {};
-      if (user.id === undefined) this.$router.push("/login");
+      if (user.user === undefined) this.$router.push("/login");
       return user;
     },
 
