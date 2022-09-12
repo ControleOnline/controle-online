@@ -316,7 +316,7 @@ export default {
       this.$router.push({ name: route });
     },
     onScroll(info) {
-      if (info.position > 0) this.leftDrawerOpen = 0;
+      if (info.position > 0) this.leftDrawerOpen = false;
     },
     isSimple() {
       return this.getPeopleDefaultCompany.domainType === "simple";
