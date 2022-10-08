@@ -22,7 +22,7 @@ import * as People from "@controleonline/quasar-people-ui/src/i18n/pt-br/index";
 import * as Guides from "@controleonline/quasar-guides-ui/src/i18n/pt-br/index";
 import * as Docs from "@controleonline/quasar-docs-ui/src/i18n/pt-br/index";
 import * as Config from "@controleonline/quasar-config-ui/src/i18n/pt-br/index";
-import * as Prodcts from "@controleonline/quasar-prodcts-ui/src/i18n/pt-br/index";
+import * as Products from "@controleonline/quasar-products-ui/src/i18n/pt-br/index";
 
 export default {
   app: {
@@ -46,5 +46,5 @@ export default {
   ...Guides.translate,
   ...Docs.translate,
   ...Config.translate,
-  ...Prodcts.translate
+  ...Products.translate
 };
