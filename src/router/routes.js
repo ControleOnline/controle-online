@@ -17,6 +17,7 @@ import * as Guides from "@controleonline/quasar-guides-ui/src/router/routes";
 import * as Crm from "@controleonline/quasar-crm-ui/src/router/routes";
 import * as Docs from "@controleonline/quasar-docs-ui/src/router/routes";
 import * as Config from "@controleonline/quasar-config-ui/src/router/routes";
+import * as Products from "@controleonline/quasar-products-ui/src/router/routes";
 
 const routes = [
   ...Login.routes,
@@ -38,6 +39,7 @@ const routes = [
   ...Crm.routes,
   ...Docs.routes,
   ...Config.routes,
+  ...Products.routes,
 
   {
     path: "/",
