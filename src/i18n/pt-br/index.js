@@ -32,8 +32,7 @@ export default {
   ...Accounting.translate,
   ...Coupon.translate,
   ...Common.translate,
-  ...Dashboard.translate,
-  ...Login.translate,
+  ...Dashboard.translate,  
   ...Orders.translate,
   ...Financial.translate,
   ...Contracts.translate,
@@ -46,5 +45,6 @@ export default {
   ...Guides.translate,
   ...Docs.translate,
   ...Config.translate,
-  ...Products.translate
+  ...Products.translate,
+  ...Login.translate,
 };

@@ -37,20 +37,20 @@
     "axios": "^0.26.1",
     "core-js": "^3.21.1",
     "echarts": "^5.0.0",
-    "md5": "^2.3.0",
-    "quasar": "^1.18.8",
+    "md5": "^2.3.0",    
     "vue-echarts-v3": "^2.0.1",
     "vue-i18n": "^8.27.1",
     "vue2-google-maps": "^0.10.7",
-    "vuedraggable": "^2.24.3"
+    "vuedraggable": "^2.24.3",
+    "quasar": "1.20.1"
   },
-  "devDependencies": {
+  "devDependencies": {    
     "@quasar/app": "2.0.6",
     "devtron": "^1.4.0",
-    "electron": "^9.4.4",
-    "electron-debug": "^3.2.0",
-    "electron-devtools-installer": "^3.2.0",
-    "electron-packager": "^15.1.1"
+    "electron": "^9.0.0",
+    "electron-debug": "^3.0.1",
+    "electron-devtools-installer": "^3.0.0",
+    "electron-packager": "^14.1.1"
   },
   "engines": {
     "node": ">= 10.18.1",
