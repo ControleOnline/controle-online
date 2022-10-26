@@ -68,6 +68,10 @@
   .q-table__bottom {
     position: fixed !important;
   }
+  .current-logo-container {
+    position: absolute;
+    right: 80px;
+  }
 }
 .row-filters {
   padding: 5px;
@@ -115,8 +119,6 @@ main > .q-card {
   position: absolute;
 }
 .current-logo-container {
-  /*position: absolute;*/
-  left: 80px;
   margin-top: -10px !important;
 }
 .current-user-container {
