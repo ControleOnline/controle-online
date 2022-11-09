@@ -178,9 +178,6 @@
         <div v-if="!this.$q.screen.gt.sm" class="module-tittle-container">
           <q-item
             v-ripple
-            :style="
-              'color:' + ($route.meta.color || 'var(--q-color-secondary)')
-            "
           >
             <q-item-section avatar v-if="$route.meta.icon">
               <q-icon class="item-icon" :name="$route.meta.icon" />
