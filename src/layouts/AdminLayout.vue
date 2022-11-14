@@ -209,6 +209,7 @@
 <script>
 import MyCompanies from "@controleonline/quasar-common-ui/src/components/common/MyCompanies";
 import Menu from "@controleonline/quasar-common-ui/src/components/common/Menu";
+import Filters from "@controleonline/conline-quasar-ui/common/ui/src/utils/filters";
 
 import md5 from "md5";
 import { mapActions, mapGetters } from "vuex";
