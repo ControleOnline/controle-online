@@ -176,9 +176,7 @@
       <q-scroll-observer horizontal @scroll="onScroll"></q-scroll-observer>
       <div>
         <div v-if="!this.$q.screen.gt.sm" class="module-tittle-container">
-          <q-item
-            v-ripple
-          >
+          <q-item v-ripple>
             <q-item-section avatar v-if="$route.meta.icon">
               <q-icon class="item-icon" :name="$route.meta.icon" />
             </q-item-section>
@@ -241,6 +239,10 @@ export default {
   },
 
   created() {
+    let storedUser = LocalStorage.getItem("session");
+    storedUser.route = this.$route.name;
+    LocalStorage.set("session", storedUser);
+
     this.discoveryDefaultCompany();
     this.selectMyCompanyInSession();
     if (this.getPeopleDefaultCompany) {
