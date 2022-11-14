@@ -239,10 +239,7 @@ export default {
   },
 
   created() {
-    let storedUser = LocalStorage.getItem("session");
-    storedUser.route = this.$route.name;
-    LocalStorage.set("session", storedUser);
-
+    this.setRoute();
     this.discoveryDefaultCompany();
     this.selectMyCompanyInSession();
     if (this.getPeopleDefaultCompany) {
@@ -280,7 +277,7 @@ export default {
 
   watch: {
     "$route.name"() {
-      console.log(this.$route);
+      this.setRoute();
     },
     permissions() {
       if (
@@ -311,7 +308,11 @@ export default {
       config: "config/appConfig",
       peopleDefaultCompany: "people/defaultCompany",
     }),
-
+    setRoute() {
+      let storedUser = LocalStorage.getItem("session");
+      storedUser.route = this.$route.name;
+      LocalStorage.set("session", storedUser);
+    },
     onClickmenu(route) {
       this.leftDrawerOpen = !this.leftDrawerOpen;
       this.$router.push({ name: route });
