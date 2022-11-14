@@ -11,7 +11,7 @@
   "dependencies": {
     "@controleonline/quasar-accounting-ui": "^1.0.5",
     "@controleonline/quasar-carrier-ui": "^1.0.2",
-    "@controleonline/quasar-common-ui": "^1.0.97",
+    "@controleonline/quasar-common-ui": "^1.0.98",
     "@controleonline/quasar-config-ui": "^1.0.11",
     "@controleonline/quasar-contracts-ui": "^1.6.50",
     "@controleonline/quasar-coupon-ui": "^1.0.1",
