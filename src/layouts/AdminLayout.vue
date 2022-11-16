@@ -20,23 +20,6 @@
           icon="menu"
           class="q-mx-md menu-button"
         />
-        <div v-if="this.$q.screen.gt.sm" class="q-gutter-sm items-center row">
-          <q-item
-            v-ripple
-            :style="
-              'color:' + ($route.meta.color || 'var(--q-color-secondary)')
-            "
-          >
-            <q-item-section avatar v-if="$route.meta.icon">
-              <q-icon class="item-icon" :name="$route.meta.icon" />
-            </q-item-section>
-            <q-item-section no-wrap>
-              <q-item-label class="module-tittle">{{
-                $t("route." + this.$route.name)
-              }}</q-item-label>
-            </q-item-section>
-          </q-item>
-        </div>
         <div class="q-gutter-sm items-center row logo-container">
           <router-link
             v-if="this.$q.screen.gt.sm"
@@ -59,7 +42,23 @@
             />
           </q-toolbar>
         </div>
-
+        <div v-if="this.$q.screen.gt.sm" class="q-gutter-sm items-center row">
+          <q-item
+            v-ripple
+            :style="
+              'color:' + ($route.meta.color || 'var(--q-color-secondary)')
+            "
+          >
+            <q-item-section avatar v-if="$route.meta.icon">
+              <q-icon class="item-icon" :name="$route.meta.icon" />
+            </q-item-section>
+            <q-item-section no-wrap>
+              <q-item-label class="module-tittle">{{
+                $t("route." + this.$route.name)
+              }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </div>
         <div
           class="q-gutter-sm row items-center no-wrap current-user-container"
         >
@@ -177,12 +176,7 @@
       <q-scroll-observer horizontal @scroll="onScroll"></q-scroll-observer>
       <div>
         <div v-if="!this.$q.screen.gt.sm" class="module-tittle-container">
-          <q-item
-            v-ripple
-            :style="
-              'color:' + ($route.meta.color || 'var(--q-color-secondary)')
-            "
-          >
+          <q-item v-ripple>
             <q-item-section avatar v-if="$route.meta.icon">
               <q-icon class="item-icon" :name="$route.meta.icon" />
             </q-item-section>
@@ -213,6 +207,7 @@
 <script>
 import MyCompanies from "@controleonline/quasar-common-ui/src/components/common/MyCompanies";
 import Menu from "@controleonline/quasar-common-ui/src/components/common/Menu";
+import Filters from "@controleonline/quasar-common-ui/src/utils/filters";
 
 import md5 from "md5";
 import { mapActions, mapGetters } from "vuex";
@@ -244,6 +239,7 @@ export default {
   },
 
   created() {
+    this.setRoute();
     this.discoveryDefaultCompany();
     this.selectMyCompanyInSession();
     if (this.getPeopleDefaultCompany) {
@@ -281,7 +277,7 @@ export default {
 
   watch: {
     "$route.name"() {
-      console.log(this.$route);
+      this.setRoute();
     },
     permissions() {
       if (
@@ -312,7 +308,11 @@ export default {
       config: "config/appConfig",
       peopleDefaultCompany: "people/defaultCompany",
     }),
-
+    setRoute() {
+      let storedUser = LocalStorage.getItem("session");
+      storedUser.route = this.$route.name;
+      LocalStorage.set("session", storedUser);
+    },
     onClickmenu(route) {
       this.leftDrawerOpen = !this.leftDrawerOpen;
       this.$router.push({ name: route });
