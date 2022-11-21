@@ -208,6 +208,7 @@
 import MyCompanies from "@controleonline/quasar-common-ui/src/components/common/MyCompanies";
 import Menu from "@controleonline/quasar-common-ui/src/components/common/Menu";
 import Filters from "@controleonline/quasar-common-ui/src/utils/filters";
+import acl from "@controleonline/quasar-common-ui/src/utils/acl";
 
 import md5 from "md5";
 import { mapActions, mapGetters } from "vuex";
@@ -226,6 +227,7 @@ export default {
       notifications: {
         count: 0,
       },
+      ACL: new acl(),
       defaultCompanyLogo: null,
       disabled: false,
       isAdmin: false,
@@ -238,10 +240,10 @@ export default {
     };
   },
 
-  created() {
-    this.setRoute();
+  created() {    
     this.discoveryDefaultCompany();
     this.selectMyCompanyInSession();
+    this.setRoute();
     if (this.getPeopleDefaultCompany) {
       this.pageLoading = false;
     }
@@ -298,6 +300,7 @@ export default {
             this.permissions.push(item);
           }
         });
+        this.setRoute();
         this.pageLoading = false;
       }
     },
@@ -307,11 +310,13 @@ export default {
     ...mapActions({
       config: "config/appConfig",
       peopleDefaultCompany: "people/defaultCompany",
-    }),
+    }),    
+
     setRoute() {
       let storedUser = LocalStorage.getItem("session");
       storedUser.route = this.$route.name;
-      LocalStorage.set("session", storedUser);
+      LocalStorage.set("session", storedUser);      
+      this.ACL.setPermission();
     },
     onClickmenu(route) {
       this.leftDrawerOpen = !this.leftDrawerOpen;
