@@ -92,7 +92,7 @@ export default function ({ store }) {
     const isLogged = autoLogin();
 
     // ------ /task/checklist/id/{integer}
-    if (to.name === "ChecklistDetails") {
+    if (to.name === "ChecklistDetails" || to.name === "ContractAccept") {
       // Para não redirecionar para página de login ao abrir vistoria sem estar logado
       return next();
     }
