@@ -73,7 +73,8 @@
             </q-badge>
             <q-tooltip>Notificações</q-tooltip>
           </q-btn>
-
+          <!-- DarkMode -->
+          <darkModeToggle/>
           <q-btn icon="account_circle" flat round>
             <q-tooltip>{{ $t("menu.myacount") }}</q-tooltip>
             <q-menu>
@@ -209,6 +210,7 @@ import MyCompanies from "@controleonline/quasar-common-ui/src/components/Common/
 import Menu from "@controleonline/quasar-common-ui/src/components/Common/Menu";
 import Filters from "@controleonline/quasar-common-ui/src/utils/filters";
 import acl from "@controleonline/quasar-common-ui/src/utils/acl";
+import DarkMode from "@controleonline/quasar-common-ui/src/components/DarkMode/darkModeToggle.vue";
 
 import md5 from "md5";
 import { mapActions, mapGetters } from "vuex";
@@ -220,6 +222,7 @@ export default {
   components: {
     Menu,
     MyCompanies,
+    DarkMode,
   },
 
   data() {
