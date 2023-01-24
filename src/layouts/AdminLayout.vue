@@ -205,7 +205,7 @@
 </template>
 
 <script>
-import MyCompanies from "@controleonline/quasar-common-ui/src/components/common/MyCompanies";
+import MyCompanies from "@controleonline/quasar-common-ui/src/components/Common/MyCompanies";
 import Menu from "@controleonline/quasar-common-ui/src/components/common/Menu";
 import Filters from "@controleonline/quasar-common-ui/src/utils/filters";
 import acl from "@controleonline/quasar-common-ui/src/utils/acl";
