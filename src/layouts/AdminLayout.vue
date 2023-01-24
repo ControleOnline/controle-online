@@ -74,7 +74,7 @@
             <q-tooltip>Notificações</q-tooltip>
           </q-btn>
           <!-- DarkMode -->
-          <darkModeToggle/>
+          <DarkMode/>
           <q-btn icon="account_circle" flat round>
             <q-tooltip>{{ $t("menu.myacount") }}</q-tooltip>
             <q-menu>
