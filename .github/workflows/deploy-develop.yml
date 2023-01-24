@@ -21,10 +21,11 @@ jobs:
               npm install
               npm update
               npx quasar build
+              npx quasar build -m pwa              
       - name: Copy to Nossocep
         uses: horochx/deploy-via-scp@master
         with:
-          local: /home/runner/work/accounting/accounting/dist/spa
+          local: /home/runner/work/accounting/accounting/dist/*
           remote: /var/www/vhosts/nossocep.com.br/sistemas/accounting/dist
           host: 69.162.120.82
           port: 22

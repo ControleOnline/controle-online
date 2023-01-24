@@ -176,9 +176,7 @@
       <q-scroll-observer horizontal @scroll="onScroll"></q-scroll-observer>
       <div>
         <div v-if="!this.$q.screen.gt.sm" class="module-tittle-container">
-          <q-item
-            v-ripple
-          >
+          <q-item v-ripple>
             <q-item-section avatar v-if="$route.meta.icon">
               <q-icon class="item-icon" :name="$route.meta.icon" />
             </q-item-section>
@@ -209,6 +207,8 @@
 <script>
 import MyCompanies from "@controleonline/quasar-common-ui/src/components/common/MyCompanies";
 import Menu from "@controleonline/quasar-common-ui/src/components/common/Menu";
+import Filters from "@controleonline/quasar-common-ui/src/utils/filters";
+import acl from "@controleonline/quasar-common-ui/src/utils/acl";
 
 import md5 from "md5";
 import { mapActions, mapGetters } from "vuex";
@@ -227,6 +227,7 @@ export default {
       notifications: {
         count: 0,
       },
+      ACL: new acl(),
       defaultCompanyLogo: null,
       disabled: false,
       isAdmin: false,
@@ -239,9 +240,10 @@ export default {
     };
   },
 
-  created() {
+  created() {    
     this.discoveryDefaultCompany();
     this.selectMyCompanyInSession();
+    this.setRoute();
     if (this.getPeopleDefaultCompany) {
       this.pageLoading = false;
     }
@@ -277,7 +279,7 @@ export default {
 
   watch: {
     "$route.name"() {
-      console.log(this.$route);
+      this.setRoute();
     },
     permissions() {
       if (
@@ -298,6 +300,7 @@ export default {
             this.permissions.push(item);
           }
         });
+        this.setRoute();
         this.pageLoading = false;
       }
     },
@@ -307,8 +310,14 @@ export default {
     ...mapActions({
       config: "config/appConfig",
       peopleDefaultCompany: "people/defaultCompany",
-    }),
+    }),    
 
+    setRoute() {
+      let storedUser = LocalStorage.getItem("session");
+      storedUser.route = this.$route.name;
+      LocalStorage.set("session", storedUser);      
+      this.ACL.setPermission();
+    },
     onClickmenu(route) {
       this.leftDrawerOpen = !this.leftDrawerOpen;
       this.$router.push({ name: route });
