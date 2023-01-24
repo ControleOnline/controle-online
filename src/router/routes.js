@@ -13,7 +13,6 @@ import * as Support from "@controleonline/quasar-support-ui/src/router/routes";
 import * as Coupon from "@controleonline/quasar-coupon-ui/src/router/routes";
 import * as Accounting from "@controleonline/quasar-accounting-ui/src/router/routes";
 import * as Import from "@controleonline/quasar-import-ui/src/router/routes";
-import * as Guides from "@controleonline/quasar-guides-ui/src/router/routes";
 import * as Crm from "@controleonline/quasar-crm-ui/src/router/routes";
 import * as Docs from "@controleonline/quasar-docs-ui/src/router/routes";
 import * as Config from "@controleonline/quasar-config-ui/src/router/routes";
@@ -35,7 +34,6 @@ const routes = [
   ...Coupon.routes,
   ...Accounting.routes,
   ...Import.routes,
-  ...Guides.routes,
   ...Crm.routes,
   ...Docs.routes,
   ...Config.routes,
