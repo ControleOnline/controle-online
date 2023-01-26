@@ -421,7 +421,7 @@ export default {
     margin-bottom: 20px
     &__label
       font-size: 14px
-      font-family: 'Exo', Helvetica,Arial,Lucida,sans-serif
+      font-family: 'EB Garamond', 'Exo', Helvetica,Arial,Lucida,sans-serif
       font-weight: 600
       text-transform: uppercase
 .q-item__label.menu-list-text
