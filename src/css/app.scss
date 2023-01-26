@@ -1,4 +1,9 @@
 // app global css in SCSS form
+
+* {
+  font-family: "EB Garamond", serif;
+}
+
 .bg-image {
   background-position: center !important;
   background-repeat: no-repeat !important;
@@ -51,7 +56,7 @@
   opacity: 1;
 }
 
-.row-filters {  
+.row-filters {
   background-image: linear-gradient($primary, $secondary);
   background-size: 100% 140px, 50px 50px;
   background-position: center top, 0 0;
@@ -90,11 +95,11 @@
   }
   */
 }
-.row-filters {  
+.row-filters {
   width: 100vw !important;
   margin-top: -20px;
   margin-left: -15px;
-  
+
   left: 0;
   z-index: 10;
 }
