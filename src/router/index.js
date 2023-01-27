@@ -90,9 +90,9 @@ export default function ({ store }) {
     const publicPages = ["/login", "/quote"];
     const isPrivatePage = !publicPages.includes(to.path);
     const isLogged = autoLogin();
-
+    
     // ------ /task/checklist/id/{integer}
-    if (to.name === "ChecklistDetails" || to.name === "ContractAccept") {
+    if (to.name === "ChecklistDetails" || to.name === "ContractAccept" || to.name === "FreightQuoteIndex") {
       // Para não redirecionar para página de login ao abrir vistoria sem estar logado
       return next();
     }
