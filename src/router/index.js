@@ -87,13 +87,18 @@ export default function ({ store }) {
   Router.beforeEach((to, from, next) => {
     const isLoginPage = to.path == "/login";
     const isHomePage = to.path == "/";
-    const publicPages = ["/login", "/quote"];
+    const publicPages = ["/login", "/quote", "/shop"];
     const isPrivatePage = !publicPages.includes(to.path);
     const isLogged = autoLogin();
-    
+
     // ------ /task/checklist/id/{integer}
-    if (to.name === "ChecklistDetails" || to.name === "ContractAccept" || to.name === "FreightQuoteIndex") {
+    if (to.name === "ChecklistDetails" || to.name === "ContractAccept") {
       // Para não redirecionar para página de login ao abrir vistoria sem estar logado
+      return next();
+    }
+
+    //sub router for /shop
+    if (to.name === "ProductsIndex" || to.name === "CategoriesIndex") {
       return next();
     }
 
