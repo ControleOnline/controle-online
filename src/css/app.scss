@@ -90,9 +90,9 @@
     position: fixed !important;
   }
   /*
-  .current-logo-container {    
+  .current-logo-container {
     position: absolute;
-    right: 80px;    
+    right: 80px;
   }
   */
 }
@@ -105,7 +105,7 @@
   z-index: 10;
 }
 /*
-.row-filters + div {  
+.row-filters + div {
   background: linear-gradient(to bottom, $secondary,transparent);
     background-size: 100% 300px, 50px 50px;
     background-position: center top, 0 0;
@@ -169,4 +169,8 @@ main > .q-card {
   -webkit-position: sticky;
   z-index: 1;
   width: fit-content;
+}
+// Remover
+.chat-tasks{
+  display: none;
 }
