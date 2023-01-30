@@ -1,9 +1,10 @@
 <template>
-    <q-layout view="lHh lpr lFf" class="bg-image" :style="style()">
+    <q-layout view="lHh lpr lFf" class="bg-image" :style="">
       <q-header elevated class="shadow-2 q-pa-sm">
         <q-toolbar>
           <q-btn flat round dense icon="menu" class="q-mr-sm" />
           <q-toolbar-title>
+            <!-- Aqui vai a logomarca do cliente -->
             Controle Online
           </q-toolbar-title>
 
@@ -18,9 +19,31 @@
 
           <q-space />
 
-          <q-btn to="/login" flat label="Login" icon="person" />
-          <q-btn to="/shop/categories" flat label="Favoritos" icon="favorite" />
-          <q-btn to="/shop/cart" flat icon="shopping_cart" />
+          <q-btn size="14px" label="Minha conta" icon="person" no-caps flat stack>
+            <q-menu>
+              <q-list style="min-width: 100px">
+                <q-item clickable v-close-popup to="/shop/login" >
+                  <q-item-section>Iniciar sessão</q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup>
+                  <q-item-section>Criar uma conta</q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
+          </q-btn>
+          <!--
+            Para este button precisa criar o contador de itens adicionados no carrinho
+            e na sessão itens do carrinho precisa listar os itens adicionados ao carrinho
+          -->
+          <q-btn size="14px" label="Meu carrinho" icon="pershopping_cartson" no-caps flat stack>
+            <q-menu>
+              <q-list style="min-width: 100px">
+                <q-item clickable v-close-popup to="/shop/login" >
+                  <q-item-section>Itens do carrinho</q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
+          </q-btn>
 
         </q-toolbar>
 
@@ -38,9 +61,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import { fetch } from "../boot/myapi";
-import Analytics from "@controleonline/quasar-common-ui/src/utils/analytics";
+import { mapActions } from "vuex";
 
 export default {
   name: "ShopLayout",
@@ -87,25 +108,8 @@ export default {
   },
 
   mounted() {
-    /*
-    this.config().then((config) => {
-      if (config.gtmId !== null)
-        Analytics.init({
-          gtmId: config.gtmId,
-        });
-    });
-    */
-
     this.discoveryDefaultCompany();
   },
-
-  /*
-  computed: {
-    ...mapGetters({
-      cfLoading: "config/isLoading",
-    })
-  },
-  */
 
   data() {
     return {
