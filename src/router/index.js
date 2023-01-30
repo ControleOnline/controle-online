@@ -98,7 +98,7 @@ export default function ({ store }) {
     }
 
     //sub router for /shop
-    if (to.name === "ProductsIndex" || to.name === "CategoriesIndex") {
+    if (to.name === "ProductsInCategory" || to.name === "CategoriesIndex" || to.name === "ProductDetails") {
       return next();
     }
 
