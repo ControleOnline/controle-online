@@ -53,17 +53,6 @@
         </div>
         <div class="q-gutter-sm row items-center no-wrap current-user-container">
           <Notifications :peopleId="$store.getters['auth/user'].people" />
-          <q-btn round dense flat color="grey-8" icon="notifications">
-            <q-badge
-              v-if="notifications.count > 0"
-              color="red"
-              text-color="white"
-              floating
-            >
-              {{ notifications.count }}
-            </q-badge>
-            <q-tooltip>Notificações</q-tooltip>
-          </q-btn>
           <!-- DarkMode -->
           <DarkMode />
           <Language />
