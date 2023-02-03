@@ -52,17 +52,7 @@
           </q-item>
         </div>
         <div class="q-gutter-sm row items-center no-wrap current-user-container">
-          <q-btn round dense flat color="grey-8" icon="notifications">
-            <q-badge
-              v-if="notifications.count > 0"
-              color="red"
-              text-color="white"
-              floating
-            >
-              {{ notifications.count }}
-            </q-badge>
-            <q-tooltip>Notificações</q-tooltip>
-          </q-btn>
+          <Notifications :peopleId="$store.getters['auth/user'].people" />
           <!-- DarkMode -->
           <DarkMode />
           <Language />
@@ -204,6 +194,7 @@ import Language from "@controleonline/quasar-common-ui/src/components/Language/l
 import md5 from "md5";
 import { mapActions, mapGetters } from "vuex";
 import { LocalStorage } from "quasar";
+import Notifications from "@controleonline/quasar-common-ui/src/components/Common/Notifications.vue";
 
 export default {
   name: "AdminLayout",
@@ -213,6 +204,7 @@ export default {
     MyCompanies,
     DarkMode,
     Language,
+    Notifications,
   },
 
   data() {
@@ -236,6 +228,7 @@ export default {
   created() {
     this.discoveryDefaultCompany();
     this.selectMyCompanyInSession();
+
     this.setRoute();
     if (this.getPeopleDefaultCompany) {
       this.pageLoading = false;
