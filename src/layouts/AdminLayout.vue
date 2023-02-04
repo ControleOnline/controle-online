@@ -54,8 +54,6 @@
         <div class="q-gutter-sm row items-center no-wrap current-user-container">
           <Notifications :peopleId="$store.getters['auth/user'].people" />
           <!-- DarkMode -->
-          <DarkMode />
-          <Language />
           <q-btn icon="account_circle" flat round>
             <q-tooltip>{{ $t("menu.myacount") }}</q-tooltip>
             <q-menu>
@@ -149,6 +147,10 @@
               @clickmenu="onClickmenu"
             />
           </q-list>
+        </div>
+        <div class="q-pt-xl q-px-sm column pull-button">
+          <DarkMode />
+          <Language />
         </div>
       </q-scroll-area>
     </q-drawer>
