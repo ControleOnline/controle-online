@@ -22,6 +22,7 @@ import * as People from "@controleonline/quasar-people-ui/src/i18n/pt-br/index";
 import * as Docs from "@controleonline/quasar-docs-ui/src/i18n/pt-br/index";
 import * as Config from "@controleonline/quasar-config-ui/src/i18n/pt-br/index";
 import * as Products from "@controleonline/quasar-products-ui/src/i18n/pt-br/index";
+import * as Queue from "@controleonline/quasar-queue-ui/src/i18n/pt-br/index";
 
 export default {
   app: {
@@ -31,7 +32,7 @@ export default {
   ...Accounting.translate,
   ...Coupon.translate,
   ...Common.translate,
-  ...Dashboard.translate,  
+  ...Dashboard.translate,
   ...Orders.translate,
   ...Financial.translate,
   ...Contracts.translate,
@@ -45,4 +46,5 @@ export default {
   ...Config.translate,
   ...Products.translate,
   ...Login.translate,
+  ...Queue.translate,
 };
