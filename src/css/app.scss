@@ -1,4 +1,10 @@
 // app global css in SCSS form
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
 .bg-image {
   background-position: center !important;
   background-repeat: no-repeat !important;
@@ -51,7 +57,7 @@
   opacity: 1;
 }
 
-.row-filters {  
+.row-filters {
   background-image: linear-gradient($primary, $secondary);
   background-size: 100% 140px, 50px 50px;
   background-position: center top, 0 0;
@@ -84,22 +90,22 @@
     position: fixed !important;
   }
   /*
-  .current-logo-container {    
+  .current-logo-container {
     position: absolute;
-    right: 80px;    
+    right: 80px;
   }
   */
 }
-.row-filters {  
+.row-filters {
   width: 100vw !important;
   margin-top: -20px;
   margin-left: -15px;
-  
+
   left: 0;
   z-index: 10;
 }
 /*
-.row-filters + div {  
+.row-filters + div {
   background: linear-gradient(to bottom, $secondary,transparent);
     background-size: 100% 300px, 50px 50px;
     background-position: center top, 0 0;
