@@ -19,7 +19,6 @@ import * as Accounting from "@controleonline/quasar-accounting-ui/src/i18n/pt-br
 import * as Import from "@controleonline/quasar-import-ui/src/i18n/pt-br/index";
 import * as CRM from "@controleonline/quasar-crm-ui/src/i18n/pt-br/index";
 import * as People from "@controleonline/quasar-people-ui/src/i18n/pt-br/index";
-import * as Guides from "@controleonline/quasar-guides-ui/src/i18n/pt-br/index";
 import * as Docs from "@controleonline/quasar-docs-ui/src/i18n/pt-br/index";
 import * as Config from "@controleonline/quasar-config-ui/src/i18n/pt-br/index";
 import * as Products from "@controleonline/quasar-products-ui/src/i18n/pt-br/index";
@@ -33,7 +32,7 @@ export default {
   ...Accounting.translate,
   ...Coupon.translate,
   ...Common.translate,
-  ...Dashboard.translate,  
+  ...Dashboard.translate,
   ...Orders.translate,
   ...Financial.translate,
   ...Contracts.translate,
@@ -43,7 +42,6 @@ export default {
   ...Quote.translate,
   ...Import.translate,
   ...CRM.translate,
-  ...Guides.translate,
   ...Docs.translate,
   ...Config.translate,
   ...Products.translate,
