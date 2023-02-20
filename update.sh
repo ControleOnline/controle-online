@@ -6,3 +6,20 @@ npm install --save stylus-loader --force
 npm install webpack@4.43.0 --save-dev
 npm install core-js@3.27.1 --save-dev
 npm install
+
+
+npm install yarn -g
+npm i -g @quasar/cli
+
+
+yarn upgrade 
+yarn upgrade quasar
+quasar upgrade --install
+yarn remove quasar-cli
+yarn add quasar @quasar/extras
+yarn add --dev @quasar/app
+yarn
+yarn add vuex
+yarn add vue-i18n
+yarn add stylus-loader
+yarn add process
