@@ -10,6 +10,7 @@ npm install
 
 npm install yarn -g
 npm i -g @quasar/cli
+npm install -g @vue/cli
 
 
 yarn upgrade 
@@ -23,3 +24,10 @@ yarn add vuex
 yarn add vue-i18n
 yarn add stylus-loader
 yarn add process
+yarn global add @vue/cli
+
+vue upgrade
+
+
+
+npm install --save vue
