@@ -1,8 +1,9 @@
 npm install -g npm-check-updates
 ncu -u
-npm install --save vuex          --force
-npm install --save process       --force
-npm install --save stylus-loader --force
+npm install --save vue
+npm install --save vuex
+npm install --save process
+npm install --save stylus-loader
 npm install webpack@4.43.0 --save-dev
 npm install core-js@3.27.1 --save-dev
 npm install
@@ -23,6 +24,8 @@ yarn
 yarn add vuex
 yarn add vue-i18n
 yarn add stylus-loader
+yarn add stylus
+yarn add styles
 yarn add process
 yarn global add @vue/cli
 
@@ -30,4 +33,3 @@ vue upgrade
 
 
 
-npm install --save vue
