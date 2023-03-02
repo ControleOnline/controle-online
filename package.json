@@ -42,11 +42,12 @@
     "echarts": "^5.4.1",
     "md5": "^2.3.0",
     "quasar": "1.20.1",
-    "vue": "^2.6.11",
+    "vue": "2.6.11",
     "vue-echarts-v3": "^2.0.1",
     "vue-i18n": "^8.27.1",
     "vue2-google-maps": "^0.10.7",
-    "vuedraggable": "^2.24.3"
+    "vuedraggable": "^2.24.3",
+    "vue-template-compiler": "2.6.11"
   },
   "devDependencies": {
     "@quasar/app": "2.0.6",
