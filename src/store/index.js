@@ -22,6 +22,8 @@ import people from "@controleonline/quasar-common-ui/src/store/people";
 import config from "@controleonline/quasar-common-ui/src/store/config";
 import profile from "@controleonline/quasar-common-ui/src/store/profile";
 import user from "@controleonline/quasar-common-ui/src/store/user";
+import products from "@controleonline/quasar-products-ui/src/store/products";
+
 
 Vue.use(Vuex);
 
@@ -59,6 +61,7 @@ export default function (/* { ssrContext } */) {
       categories,
       menu,
       users,
+      products,
     },
 
     // enable strict mode (adds overhead!)
