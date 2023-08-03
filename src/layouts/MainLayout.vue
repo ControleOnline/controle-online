@@ -8,7 +8,6 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { fetch } from "../boot/myapi";
 import Analytics from "@controleonline/quasar-common-ui/src/utils/analytics";
 
 export default {
@@ -46,7 +45,7 @@ export default {
               id: item.id,
               name: item.alias,
               logo: logo || null,
-              background: background || null
+              background: background || null,
             });
           }
         }
