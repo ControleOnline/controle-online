@@ -268,23 +268,26 @@ export default {
     "$route.name"() {
       this.setRoute();
     },
-    permissions() {
-      if (
-        this.permissions.indexOf("franchisee") !== -1 ||
-        this.permissions.indexOf("salesman") !== -1 ||
-        this.permissions.indexOf("super") !== -1 ||
-        this.permissions.indexOf("admin") !== -1
-      ) {
-        this.isAdmin = true;
-      }
-    },
+
     getPeopleDefaultCompany(data) {
+
       if (data) {
         this.defaultCompany = data;
         this.defaultCompanyLogo = "//" + data.logo.domain + data.logo.url;
+
         data.permissions.forEach((item) => {
           if (this.permissions.indexOf(item) === -1) {
+
             this.permissions.push(item);
+
+            if (item.indexOf("franchisee") !== -1 ||
+            item.indexOf("salesman") !== -1 ||
+            item.indexOf("super") !== -1 ||
+            item.indexOf("admin") !== -1
+                ) {
+                  this.isAdmin = true;
+                }
+
           }
         });
         this.setRoute();
