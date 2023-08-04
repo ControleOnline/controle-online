@@ -187,16 +187,15 @@
 </template>
 
 <script>
-import MyCompanies from "@controleonline/quasar-common-ui/src/components/Common/MyCompanies";
 import Menu from "@controleonline/quasar-common-ui/src/components/Common/Menu";
-import Filters from "@controleonline/quasar-common-ui/src/utils/filters";
-import acl from "@controleonline/quasar-common-ui/src/utils/acl";
+import MyCompanies from "@controleonline/quasar-common-ui/src/components/Common/MyCompanies";
+import Notifications from "@controleonline/quasar-common-ui/src/components/Common/Notifications.vue";
 import DarkMode from "@controleonline/quasar-common-ui/src/components/DarkMode/darkModeToggle.vue";
 import Language from "@controleonline/quasar-common-ui/src/components/Language/languageToogle.vue";
+import acl from "@controleonline/quasar-common-ui/src/utils/acl";
 import md5 from "md5";
-import { mapActions, mapGetters } from "vuex";
 import { LocalStorage } from "quasar";
-import Notifications from "@controleonline/quasar-common-ui/src/components/Common/Notifications.vue";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "AdminLayout",
