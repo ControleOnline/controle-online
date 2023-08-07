@@ -7,8 +7,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import Analytics from "@controleonline/quasar-common-ui/src/utils/analytics";
+import { mapActions } from "vuex";
 
 export default {
   name: "MainLayout",
@@ -27,7 +26,7 @@ export default {
     },
 
     discoveryDefaultCompany() {
-      this.peopleDefaultCompany().then((response) => {
+      this.peopleDefaultCompany().then((response) => {        
         let data = [];
         if (response.success === true && response.data) {
           for (let index in response.data) {
