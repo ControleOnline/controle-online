@@ -17,7 +17,6 @@ import * as Professionals from "@controleonline/quasar-professionals-ui/src/rout
 import * as Providers from "@controleonline/quasar-providers-ui/src/router/routes";
 import * as Queues from "@controleonline/quasar-queues-ui/src/router/routes";
 import * as Quote from "@controleonline/quasar-quote-ui/src/router/routes";
-import * as Shop from "@controleonline/quasar-shop-ui/src/router/routes";
 import * as Support from "@controleonline/quasar-support-ui/src/router/routes";
 import * as Tasks from "@controleonline/quasar-tasks-ui/src/router/routes";
 import * as Users from "@controleonline/quasar-users-ui/src/router/routes";
@@ -43,7 +42,6 @@ const routes = [
   ...Config.routes,
   ...Products.routes,
   ...Professionals.routes,
-  ...Shop.routes,
   ...Freight.routes,
   ...Queues.routes,
   {

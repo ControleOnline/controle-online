@@ -19,7 +19,6 @@ import purchasingOrder from "@controleonline/quasar-orders-ui/src/store/modules/
 import salesOrder from "@controleonline/quasar-orders-ui/src/store/modules/order/sales";
 import products from "@controleonline/quasar-products-ui/src/store/products";
 import quote from "@controleonline/quasar-quote-ui/src/store/modules/quote";
-import shop from "@controleonline/quasar-shop-ui/src/store/modules/shop";
 import support from "@controleonline/quasar-support-ui/src/store/support";
 import { store } from "quasar/wrappers";
 import { createStore } from "vuex";
@@ -47,7 +46,6 @@ export default store(function (/* { ssrContext } */) {
       user,
       dashboard,
       quote,
-      shop,
       salesOrder,
       purchasingOrder,
       comissionOrder,
