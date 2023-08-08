@@ -13,7 +13,7 @@ jobs:
           node-version: ">=18.0.0"
       - name: Building the project
         run: |
-          cd /home/runner/work/controleonline/controleonline
+          cd /home/runner/work/erp-enterprise/erp-enterprise
           echo "export const ENTRYPOINT_LOCAL = 'https://api.controleonline.com'" > ./src/config/entrypoint.local.js
           echo "export const DOMAIN_LOCAL = location.host" > ./src/config/domain.local.js
           yarn
@@ -24,7 +24,7 @@ jobs:
       - name: Copy to controleonline
         uses: horochx/deploy-via-scp@master
         with:
-          local: /home/runner/work/controleonline/controleonline/dist/*
+          local: /home/runner/work/erp-enterprise/erp-enterprise/dist/*
           remote: ~/sistemas/controleonline/app/dist
           host: sshproxy.cloudserver8.com
           port: 22501
