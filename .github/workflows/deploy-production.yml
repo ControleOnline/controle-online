@@ -5,13 +5,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 16.16.1
-      - name: Check out Git repository
-        uses: actions/checkout@v1
+          node-version: ">=18.0.0"
       - name: Building the project
         run: |
           cd /home/runner/work/controleonline/controleonline
