@@ -20,10 +20,11 @@ import salesOrder from "@controleonline/quasar-orders-ui/src/store/modules/order
 import products from "@controleonline/quasar-products-ui/src/store/products";
 import quote from "@controleonline/quasar-quote-ui/src/store/modules/quote";
 import support from "@controleonline/quasar-support-ui/src/store/support";
-import { store } from "quasar/wrappers";
-import { createStore } from "vuex";
 
-// import example from './module-example'
+import Vue from "vue";
+import Vuex from "vuex";
+
+Vue.use(Vuex);
 
 /*
  * If not building with SSR mode, you can
@@ -34,8 +35,8 @@ import { createStore } from "vuex";
  * with the Store instance.
  */
 
-export default store(function (/* { ssrContext } */) {
-  const Store = createStore({
+export default function (/* { ssrContext } */) {
+  const Store = new Vuex.Store({
     modules: {
       auth,
       coupon,
@@ -62,9 +63,9 @@ export default store(function (/* { ssrContext } */) {
     },
 
     // enable strict mode (adds overhead!)
-    // for dev mode and --debug builds only
+    // for dev mode only
     strict: process.env.DEV,
   });
 
   return Store;
-});
+}
