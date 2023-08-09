@@ -10,12 +10,12 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: ">=18.0.0"
+          node-version: "14.14.0"
       - name: Building the project
         run: |
           cd /home/runner/work/erp-enterprise/erp-enterprise
           echo "export const ENTRYPOINT_LOCAL = 'https://api.controleonline.com'" > ./src/config/entrypoint.local.js
-          echo "export const DOMAIN_LOCAL = 'app.controleonline.com'" > ./src/config/domain.local.js
+          echo "export const DOMAIN_LOCAL = location.host" > ./src/config/domain.local.js
           yarn
           npm install
           npm update
