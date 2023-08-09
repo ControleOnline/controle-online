@@ -34,16 +34,14 @@
         });
       });
     }
-  </script>
-  <meta name="google-signin-client_id"
-    content="576180805339-80brq257lrnlavl5ca7fd347o7vs1amm.apps.googleusercontent.com">
+  </script><meta name="google-signin-client_id" content="576180805339-80brq257lrnlavl5ca7fd347o7vs1amm.apps.googleusercontent.com">
   <script>
     function onSignIn(googleUser) {
       // The ID token can be used to authenticate the user on your backend.
       var id_token = googleUser.getAuthResponse().id_token;
 
       console.log(googleUser.getAuthResponse());
-
+      
       // Send the `id_token` to your backend server for verification and user authentication.
       // Example AJAX request:
       /*
@@ -60,10 +58,12 @@
       });
       */
     }
-  </script>
+    </script>
 </head>
 
 <body>
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <div id="q-app"></div>
   <script>
     function initMap() {
@@ -73,8 +73,7 @@
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNNix1wmffGVNe9Q29sKSebkklhmkjM8s&callback=initMap&libraries=&v=weekly"
     async></script>
-  <div class="g-signin2" data-onsuccess="onSignIn"></div>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
 </body>
 
 </html>
