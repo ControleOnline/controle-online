@@ -19,7 +19,6 @@ jobs:
           echo "const env = {\
           OAUTH_GOOGLE_CLIENT_ID:'${{ secrets.OAUTH_GOOGLE_CLIENT_ID }},'\
           GMAPS_GOOGLE_CLIENT_ID:'${{ secrets.GMAPS_GOOGLE_CLIENT_ID }}',\
-          OAUTH_INSTAGRAM_CLIENT_ID:'${{ secrets.OAUTH_INSTAGRAM_CLIENT_ID }}',\
           };\
           module.exports = { env };\
           " > ./src/config/env.local.js
