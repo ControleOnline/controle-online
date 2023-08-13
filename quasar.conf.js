@@ -1,6 +1,8 @@
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 
+
+
 module.exports = function (ctx) {
   return {
     // app boot file (/src/boot)
@@ -107,9 +109,7 @@ module.exports = function (ctx) {
       // gzip: true,
       // analyze: true,
 
-      env: ctx.dev
-        ? { APP_API_ENTRYPOINT: "https://localhost:8081/" }
-        : { APP_API_ENTRYPOINT: "https://api.controleonline.com/" },
+      env: require('./src/config/env').ENV_APP,
 
       // Options below are automatically set depending on the env, set them if you want to override
       // preloadChunks: false,
