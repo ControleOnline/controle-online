@@ -26,7 +26,7 @@ export default {
     },
 
     discoveryDefaultCompany() {
-      this.peopleDefaultCompany().then((response) => {        
+      this.peopleDefaultCompany().then((response) => {
         let data = [];
         if (response.success === true && response.data) {
           for (let index in response.data) {
@@ -65,15 +65,19 @@ export default {
 
     this.discoveryDefaultCompany();
   },
-
-  /*
   computed: {
     ...mapGetters({
-      cfLoading: "config/isLoading",
+      isLoading: "people/isLoading",
     })
   },
-  */
-
+  watch: {
+    isLoading(isLoading) {
+      if (isLoading)
+        this.$q.loading.show();
+      else
+        this.$q.loading.hide();
+    },
+  },
   data() {
     return {
       defaultCompany: [],
