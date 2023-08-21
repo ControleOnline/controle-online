@@ -7,6 +7,7 @@ export const api = {
   fetch: function (uri, options = {}) {
     if (typeof options.headers === "undefined")
       Object.assign(options, { headers: new Headers() });
+
     if (myStore.getters["auth/user"] && myStore.getters["auth/user"].token)
       options.headers.set("API-TOKEN", myStore.getters["auth/user"].token);
     options.headers.set("Content-Type", MIME_TYPE);
