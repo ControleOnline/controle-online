@@ -239,6 +239,8 @@ export default {
   computed: {
     ...mapGetters({
       getPeopleDefaultCompany: "people/defaultCompany",
+      isLoading: "people/isLoading",
+
     }),
 
     user() {
@@ -268,7 +270,12 @@ export default {
     "$route.name"() {
       this.setRoute();
     },
-
+    isLoading(isLoading) {
+      if (isLoading)
+        this.$q.loading.show();
+      else
+        this.$q.loading.hide();
+    },
     getPeopleDefaultCompany(data) {
 
       if (data) {
