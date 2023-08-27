@@ -11,7 +11,7 @@
   "dependencies": {
     "@controleonline/quasar-accounting-ui": "^1.0.9",
     "@controleonline/quasar-carrier-ui": "^1.0.15",
-    "@controleonline/quasar-common-ui": "^1.1.51",
+    "@controleonline/quasar-common-ui": "^1.1.53",
     "@controleonline/quasar-config-ui": "^1.0.21",
     "@controleonline/quasar-contracts-ui": "^1.6.61",
     "@controleonline/quasar-coupon-ui": "^1.0.9",
@@ -26,7 +26,7 @@
     "@controleonline/quasar-login-ui": "^1.0.91",
     "@controleonline/quasar-orders-ui": "^1.2.98",
     "@controleonline/quasar-people-ui": "^1.0.62",
-    "@controleonline/quasar-products-ui": "^1.0.14",
+    "@controleonline/quasar-products-ui": "^1.0.15",
     "@controleonline/quasar-professionals-ui": "^1.0.26",
     "@controleonline/quasar-providers-ui": "^1.0.22",
     "@controleonline/quasar-queues-ui": "^1.0.25",
