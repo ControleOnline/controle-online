@@ -28,13 +28,20 @@ export default function ({ store }) {
   });
 
   const autoLogin = () => {
+
+console.log('e');
+
     if (
       store.getters["auth/user"] !== null &&
       store.getters["auth/user"].token !== null &&
       store.getters["auth/user"].token !== undefined
     ) {
+      console.log('f');
       return true;
     }
+
+
+    console.log('g');
     // clean storage from not allowed keys
 
     let keys = LocalStorage.getAllKeys();
