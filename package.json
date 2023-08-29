@@ -13,7 +13,7 @@
     "@controleonline/quasar-carrier-ui": "^1.0.15",
     "@controleonline/quasar-common-ui": "^1.1.54",
     "@controleonline/quasar-config-ui": "^1.0.21",
-    "@controleonline/quasar-contracts-ui": "^1.6.62",
+    "@controleonline/quasar-contracts-ui": "^1.6.64",
     "@controleonline/quasar-coupon-ui": "^1.0.9",
     "@controleonline/quasar-crm-ui": "^1.0.23",
     "@controleonline/quasar-customers-ui": "^1.0.76",
