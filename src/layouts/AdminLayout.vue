@@ -52,7 +52,7 @@
           </q-item>
         </div>
         <div class="q-gutter-sm row items-center no-wrap current-user-container">
-          <Notifications :peopleId="$store.getters['auth/user'].people" />
+          <Notifications  />
           <!-- DarkMode -->
           <q-btn icon="account_circle" flat round>
             <q-tooltip>{{ $t("menu.myacount") }}</q-tooltip>
