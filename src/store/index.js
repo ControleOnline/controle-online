@@ -40,6 +40,7 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       auth,
+      queues,
       coupon,
       gmaps,
       people,
@@ -61,7 +62,6 @@ export default function (/* { ssrContext } */) {
       menu,
       users,
       products,
-      queues,
     },
 
     // enable strict mode (adds overhead!)
