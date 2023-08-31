@@ -20,6 +20,7 @@ import salesOrder from "@controleonline/quasar-orders-ui/src/store/modules/order
 import products from "@controleonline/quasar-products-ui/src/store/products";
 import quote from "@controleonline/quasar-quote-ui/src/store/modules/quote";
 import support from "@controleonline/quasar-support-ui/src/store/support";
+import queues from "@controleonline/quasar-queues-ui/src/store/modules/queues";
 
 import Vue from "vue";
 import Vuex from "vuex";
@@ -60,6 +61,7 @@ export default function (/* { ssrContext } */) {
       menu,
       users,
       products,
+      queues,
     },
 
     // enable strict mode (adds overhead!)
