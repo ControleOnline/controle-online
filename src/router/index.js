@@ -70,7 +70,6 @@ export default function ({ store }) {
 
   Router.beforeEach((to, from, next) => {
     const isLoginPage = to.name == "LoginIndex";
-    const isHomePage = to.name == "HomeIndex";
 
     const publicPages = [
       "LoginIndex",
@@ -86,6 +85,10 @@ export default function ({ store }) {
     const isPrivatePage = !publicPages.includes(to.name);
     const isLogged = autoLogin();
 
+    if ((isLoginPage && isLogged) || to.name == undefined) {
+      return next({ name: "HomeIndex" });
+    }
+
     if (
       isPrivatePage === true &&
       isLogged === false &&
@@ -93,12 +96,6 @@ export default function ({ store }) {
     ) {
       return next({ name: "LoginIndex" });
     }
-
-    if ((isLoginPage || isHomePage) && isLogged && to.name != "HomeIndex") {
-      return next({ name: "HomeIndex" });
-    }
-
-    console.log(to);
 
     return next();
   });
