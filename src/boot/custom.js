@@ -1,6 +1,8 @@
-import Vue       from 'vue';
-import Contracts from '@controleonline/quasar-contracts-ui';
-import Dashboard from '@controleonline/quasar-dashboard-ui'
+import Contracts from "@controleonline/quasar-contracts-ui";
+import Dashboard from "@controleonline/quasar-dashboard-ui";
+import { boot } from "quasar/wrappers";
 
-Vue.use(Contracts);
-Vue.use(Dashboard);
+export default boot(({ app }) => {
+  app.use(Contracts);
+  app.use(Dashboard);
+});
