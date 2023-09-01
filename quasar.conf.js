@@ -1,8 +1,6 @@
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 
-
-
 module.exports = function (ctx) {
   return {
     // app boot file (/src/boot)
@@ -31,7 +29,7 @@ module.exports = function (ctx) {
     framework: {
       cssAddon: true,
       iconSet: "material-icons", // Quasar icon set
-      lang: "pt-br", // Quasar language pack
+      lang: "pt-BR", // Quasar language pack
 
       // Possible values for "all":
       // * 'auto' - Auto-import needed Quasar components & directives
@@ -102,23 +100,28 @@ module.exports = function (ctx) {
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
-      sourceFiles: {
-        // Caminho relativo ao diretório raiz do projeto
-        indexHTML: 'caminho/para/o/seu/index.html',
-      },
       vueRouterMode: "history", // available values: 'hash', 'history'
 
       // rtl: false, // https://quasar.dev/options/rtl-support
       // showProgress: false,
       // gzip: true,
       // analyze: true,
-
-      env: require('./src/config/env').ENV_APP,
+      env: require("./src/config/env").ENV_APP,
 
       // Options below are automatically set depending on the env, set them if you want to override
       // preloadChunks: false,
       // extractCSS: false,
-
+      // chainWebpack(chain) {
+      //   chain.module
+      //     .rule('css')
+      //     .oneOf('normal')
+      //     .use('css-loader')
+      //     .tap(options => {
+      //       // Ajuste as opções do css-loader aqui
+      //       options.url = false; // ou true, dependendo do que você precisa
+      //       return options;
+      //     });
+      // },
       // https://quasar.dev/quasar-cli/cli-documentation/handling-webpack
       extendWebpack(cfg) {},
     },
@@ -142,7 +145,9 @@ module.exports = function (ctx) {
     // https://quasar.dev/quasar-cli/developing-pwa/configuring-pwa
     pwa: {
       workboxPluginMode: "GenerateSW", // 'GenerateSW' or 'InjectManifest'
-      workboxOptions: {}, // only for GenerateSW
+      workboxOptions: {
+        exclude: [/\.htaccess$/], // Excluir o arquivo icon.png do pré-carregamento
+      }, // only for GenerateSW
       manifest: {
         name: "Controle Online",
         short_name: "Controle Online",
@@ -210,7 +215,7 @@ module.exports = function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: "contabion_crm",
+        appId: "controleonline",
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
