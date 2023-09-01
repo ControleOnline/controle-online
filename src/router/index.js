@@ -46,80 +46,61 @@ export default function ({ store }) {
     if (LocalStorage.has("session")) {
       let session = LocalStorage.getItem("session");
 
-      // in case app version changes clear LocalStorage
+      if (session.user != undefined) {
+        store.dispatch("auth/logIn", {
+          username: session.user,
+          api_key: session.token,
+          people: session.people,
+          company: session.company,
+          version: version,
+          email: session.email,
+          phone: session.phone,
+          avatar: session.avatar,
+          realname: session.realname,
+          active: session.active,
+          type: session.type,
+        });
 
-      if (session.version == undefined || session.version != version) {
-        // do logout
-
-        store.dispatch("auth/logOut");
-
-        // set updated version
-
-        LocalStorage.set("session", { version });
+        return true;
       }
-
-      // do login and restore LocalStorage data
-      else {
-        if (session.user != undefined) {
-          store.dispatch("auth/logIn", {
-            username: session.user,
-            api_key: session.token,
-            people: session.people,
-            company: session.company,
-            version: version,
-            email: session.email,
-            phone: session.phone,
-            avatar: session.avatar,
-            realname: session.realname,
-            active: session.active,
-            type: session.type,
-          });
-
-          return true;
-        }
-      }
-    } else {
-      LocalStorage.set("session", { version });
     }
 
     return false;
   };
 
   Router.beforeEach((to, from, next) => {
-    const isLoginPage = to.path == "/login";
-    const isHomePage = to.path == "/";
-    const publicPages = ["/login", "/quote", "/shop"];
-    const isPrivatePage = !publicPages.includes(to.path);
+    const isLoginPage = to.name == "LoginIndex";
+    const isHomePage = to.name == "HomeIndex";
+
+    const publicPages = [
+      "LoginIndex",
+      "ChecklistDetails",
+      "ContractAccept",
+      "ProductsInCategory",
+      "CategoriesIndex",
+      "ProductDetails",
+      "QuoteIndex",
+      "ShopIndex",
+      "ForgotPassword",
+    ];
+    const isPrivatePage = !publicPages.includes(to.name);
     const isLogged = autoLogin();
 
-    // ------ /task/checklist/id/{integer}
-    if (to.name === "ChecklistDetails" || to.name === "ContractAccept") {
-      // Para não redirecionar para página de login ao abrir vistoria sem estar logado
-      return next();
-    }
-
-    //sub router for /shop
     if (
-      to.name === "ProductsInCategory" ||
-      to.name === "CategoriesIndex" ||
-      to.name === "ProductDetails"
+      isPrivatePage === true &&
+      isLogged === false &&
+      to.name != "LoginIndex"
     ) {
-      return next();
+      return next({ name: "LoginIndex" });
     }
 
-    if (to.path.match(/^\/forgot-password\/[\w\W]+\/[\w\W]+$/g)) {
-      return next();
-    }
-
-    if ((isLoginPage || isHomePage) && isLogged) {
+    if ((isLoginPage || isHomePage) && isLogged && to.name != "HomeIndex") {
       return next({ name: "HomeIndex" });
     }
 
-    if (isPrivatePage === true && isLogged === false) {
-      return next("/login");
-    }
+    console.log(to);
 
-    next();
+    return next();
   });
 
   return Router;
