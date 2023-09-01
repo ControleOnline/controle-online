@@ -46,7 +46,7 @@ const routes = [
   ...Queues.routes,
   {
     path: "/",
-    component: () => import("layouts/AdminLayout.vue"),
+    component: () => import("@controleonline/quasar-layout-ui/src/layouts/AdminLayout.vue"),
     children: [
       {
         name: "HomeIndex",
@@ -59,7 +59,7 @@ const routes = [
 
   {
     path: "/calc",
-    component: () => import("layouts/MainLayout.vue"),
+    component: () => import("@controleonline/quasar-layout-ui/src/layouts/MainLayout.vue"),
     children: [
       {
         name: "CalculatorIndex",
@@ -70,7 +70,7 @@ const routes = [
   },
   {
     path: "/infos/",
-    component: () => import("layouts/AdminLayout.vue"),
+    component: () => import("@controleonline/quasar-layout-ui/src/layouts/AdminLayout.vue"),
     children: [
       {
         name: "BasicInfoIndex",
@@ -81,7 +81,7 @@ const routes = [
   },
   {
     path: "/planos/",
-    component: () => import("layouts/AdminLayout.vue"),
+    component: () => import("@controleonline/quasar-layout-ui/src/layouts/AdminLayout.vue"),
     children: [
       {
         name: "PlansIndex",
@@ -102,7 +102,7 @@ const routes = [
   },
   {
     path: "/etapas-do-cadastro/",
-    component: () => import("layouts/AdminLayout.vue"),
+    component: () => import("@controleonline/quasar-layout-ui/src/layouts/AdminLayout.vue"),
     children: [
       {
         name: "StepsRegistration",
@@ -124,7 +124,7 @@ const routes = [
 
   {
     path: "/servicos-adicionais/",
-    component: () => import("layouts/AdminLayout.vue"),
+    component: () => import("@controleonline/quasar-layout-ui/src/layouts/AdminLayout.vue"),
     children: [
       {
         name: "ServicosAdicionaisIndex",

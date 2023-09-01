@@ -102,6 +102,10 @@ module.exports = function (ctx) {
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
+      sourceFiles: {
+        // Caminho relativo ao diretório raiz do projeto
+        indexHTML: 'caminho/para/o/seu/index.html',
+      },
       vueRouterMode: "history", // available values: 'hash', 'history'
 
       // rtl: false, // https://quasar.dev/options/rtl-support
