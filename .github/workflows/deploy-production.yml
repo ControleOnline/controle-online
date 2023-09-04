@@ -31,18 +31,17 @@ jobs:
           module.exports = { env };\
           " > ./src/config/env.local.js
           yarn
-
           npx quasar build
           npx quasar build -m pwa
-      - name: Copy to controleonline
-        uses: horochx/deploy-via-scp@master
+      - name: Deploy
+        uses: locaweb/ftp-deploy@1.0.0
         with:
-          local: /home/runner/work/controle-online/controle-online/dist/*
-          remote: ~/sistemas/controleonline/app/dist
-          host: sshproxy.cloudserver8.com
-          port: 22501
-          user: control2
-          key: ${{ secrets.CONTROLEONLINE }} 
+          host: ${{ secrets.HOST }} 
+          user: ${{ secrets.USER }}
+          password: ${{ secrets.PASS }}
+          localDir: "/home/runner/work/controle-online/controle-online/dist/spa"         
+          remoteDir: "~/public_html"
+          forceSsl: true                                
       - name: Update Controle Online      
         uses: appleboy/ssh-action@master
         with:
