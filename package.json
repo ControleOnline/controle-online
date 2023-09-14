@@ -51,7 +51,7 @@
     "startbootstrap-sb-admin": "^7.0.7",
     "vue": "3",
     "vue-echarts-v3": "^2.0.1",
-    "vue-i18n": "^9.4.0",
+    "vue-i18n": "^9.4.1",
     "vue-router": "^4.2.4",
     "vue2-google-maps": "^0.10.7",
     "vuedraggable": "^2.24.3",
@@ -59,7 +59,7 @@
     "yarn": "^1.22.19"
   },
   "devDependencies": {
-    "@quasar/app-webpack": "^3.11.0",
+    "@quasar/app-webpack": "^3.11.1",
     "@vue/runtime-dom": "^3.3.4",
     "css-loader": "^6.8.1",
     "stylus": "^0.59.0",
