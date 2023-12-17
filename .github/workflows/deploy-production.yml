@@ -30,6 +30,7 @@ jobs:
           };\
           module.exports = { env };\
           " > ./src/config/env.local.js
+          npm update
           yarn
           npx quasar build -m spa          
       - name: Deploy
