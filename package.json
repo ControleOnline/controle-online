@@ -26,7 +26,7 @@
     "@controleonline/quasar-import-ui": "^1.0.24",
     "@controleonline/quasar-layout-ui": "^1.0.4",
     "@controleonline/quasar-login-ui": "^1.0.93",
-    "@controleonline/quasar-orders-ui": "^1.3.20",
+    "@controleonline/quasar-orders-ui": "^1.3.21",
     "@controleonline/quasar-people-ui": "^1.0.72",
     "@controleonline/quasar-products-ui": "^1.0.21",
     "@controleonline/quasar-professionals-ui": "^1.0.27",
