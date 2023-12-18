@@ -32,6 +32,7 @@ jobs:
           " > ./src/config/env.local.js
           npm install --global yarn
           npm update
+          rm -y yarn.lock
           yarn
           npx quasar build
           npx quasar build -m pwa
