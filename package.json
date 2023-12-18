@@ -12,7 +12,7 @@
     "@controleonline/quasar-accounting-ui": "^1.0.12",
     "@controleonline/quasar-carrier-ui": "^1.0.18",
     "@controleonline/quasar-common-ui": "^1.1.94",
-    "@controleonline/quasar-default-ui": "^1.1.0",
+    "@controleonline/quasar-default-ui": "^1.0.0",
     "@controleonline/quasar-config-ui": "^1.0.23",
     "@controleonline/quasar-contracts-ui": "^1.6.66",
     "@controleonline/quasar-coupon-ui": "^1.0.11",
@@ -39,7 +39,6 @@
     "@controleonline/quasar-users-ui": "^1.0.38",
     "@fontsource/metropolis": "^4.5.3",
     "@newrelic/browser-agent": "^1.240.0",
-    "@quasar/app": "^3.3.3",
     "@quasar/extras": "^1.16.6",
     "axios": "^0.26.1",
     "cordova-common": "^4.1.0",
@@ -60,7 +59,7 @@
     "yarn": "^1.22.19"
   },
   "devDependencies": {
-    "@quasar/app-webpack": "^3.11.1",
+    "@quasar/app-webpack": "^3",
     "@vue/runtime-dom": "^3.3.4",
     "css-loader": "^6.8.1",
     "stylus": "^0.59.0",
@@ -68,7 +67,7 @@
     "workbox-webpack-plugin": "^6.6.0"
   },
   "engines": {
-    "node": ">= 18.0.0",
+    "node": ">= 16.0.0",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
   },
