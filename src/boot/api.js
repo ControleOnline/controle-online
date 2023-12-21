@@ -15,8 +15,6 @@ export const api = {
     options.headers.set("Accept", MIME_TYPE);
     options.headers.set("app-domain", DOMAIN);
 
-    console.log(options);
-
     if (options.body && typeof options.body != "string") {
       options.body = JSON.stringify(options.body);
     }
@@ -45,10 +43,7 @@ export const api = {
   },
 
   execute: function (params) {
-    params.params = {
-      ...params.params,
-      Host: DOMAIN,
-    };
+
     return axios(params);
   },
 };
