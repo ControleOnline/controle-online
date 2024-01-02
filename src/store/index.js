@@ -8,13 +8,9 @@ import user from "@controleonline/quasar-common-ui/src/store/user";
 import users from "@controleonline/quasar-common-ui/src/store/users";
 import coupon from "@controleonline/quasar-coupon-ui/src/store/coupon";
 import dashboard from "@controleonline/quasar-dashboard-ui/src/mixins/dashboard";
-import comissionInvoice from "@controleonline/quasar-financial-ui/src/store/modules/invoice/comission";
-import expense from "@controleonline/quasar-financial-ui/src/store/modules/invoice/expense";
-import payInvoice from "@controleonline/quasar-financial-ui/src/store/modules/invoice/pay";
-import receiveInvoice from "@controleonline/quasar-financial-ui/src/store/modules/invoice/receive";
+import invoice from "@controleonline/quasar-financial-ui/src/store/invoice";
 import guides from "@controleonline/quasar-guides-ui/src/store/guides";
 import auth from "@controleonline/quasar-login-ui/src/store/modules/auth";
-import comissionOrder from "@controleonline/quasar-orders-ui/src/store/modules/order/comission";
 import purchasingOrder from "@controleonline/quasar-orders-ui/src/store/modules/order/purchasing";
 import salesOrder from "@controleonline/quasar-orders-ui/src/store/modules/order/sales";
 import products from "@controleonline/quasar-products-ui/src/store/products";
@@ -40,11 +36,7 @@ export default store(function (/* { ssrContext } */) {
       quote,
       salesOrder,
       purchasingOrder,
-      comissionOrder,
-      receiveInvoice,
-      comissionInvoice,
-      payInvoice,
-      expense,
+      invoice,
       support,
       guides,
       categories,
