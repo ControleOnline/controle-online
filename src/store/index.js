@@ -12,6 +12,7 @@ import comissionInvoice from "@controleonline/quasar-financial-ui/src/store/modu
 import expense from "@controleonline/quasar-financial-ui/src/store/modules/invoice/expense";
 import payInvoice from "@controleonline/quasar-financial-ui/src/store/modules/invoice/pay";
 import receiveInvoice from "@controleonline/quasar-financial-ui/src/store/modules/invoice/receive";
+import logistics from "@controleonline/quasar-orders-ui/src/store/modules/logistics";
 import guides from "@controleonline/quasar-guides-ui/src/store/guides";
 import auth from "@controleonline/quasar-login-ui/src/store/modules/auth";
 import comissionOrder from "@controleonline/quasar-orders-ui/src/store/modules/order/comission";
@@ -51,6 +52,7 @@ export default store(function (/* { ssrContext } */) {
       menu,
       users,
       products,
+      logistics,
     },
 
     // enable strict mode (adds overhead!)
