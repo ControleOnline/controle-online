@@ -1,5 +1,6 @@
 import myFetch from "@controleonline/quasar-common-ui/src/utils/fetch";
 import axios from "axios";
+import { DOMAIN } from "../config/domain";
 
 let myStore = null;
 const MIME_TYPE = "application/ld+json";
@@ -12,6 +13,7 @@ export const api = {
       options.headers.set("API-TOKEN", myStore.getters["auth/user"].token);
     options.headers.set("Content-Type", MIME_TYPE);
     options.headers.set("Accept", MIME_TYPE);
+    options.headers.set("app-domain", DOMAIN);
 
     if (options.body && typeof options.body != "string") {
       options.body = JSON.stringify(options.body);
@@ -41,6 +43,7 @@ export const api = {
   },
 
   execute: function (params) {
+
     return axios(params);
   },
 };
