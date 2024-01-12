@@ -29,30 +29,25 @@ export const api = {
     });
   },
 
-   serialize(obj, prefix) {
+  serialize(obj, prefix) {
     const pairs = [];
-  
     for (const key in obj) {
-      if (!obj.hasOwnProperty(key)) continue;
-  
       const value = obj[key];
       let fullKey = prefix ? `${prefix}[${key}]` : key;
-  
-      // Se o valor for um objeto, fazemos uma chamada recursiva
       if (typeof value === "object" && value !== null) {
-        pairs.push(...serialize(value, fullKey));
+        value.forEach((val, k) => {
+          pairs.push(`${key}[${k}]=${val}`);
+        });
       } else if (Array.isArray(value)) {
-        // Tratamento específico para arrays
         fullKey = `${fullKey}[]`;
         value.forEach(val => {
-          pairs.push(`${encodeURIComponent(fullKey)}=${encodeURIComponent(val)}`);
+          pairs.push(`${fullKey}=${val}`);
         });
       } else {
-        // Para valores primitivos
-        pairs.push(`${encodeURIComponent(fullKey)}=${encodeURIComponent(value)}`);
+        console.log(fullKey, value, obj);
+        pairs.push(`${fullKey}=${value}`);
       }
     }
-  
     return pairs;
   },
   
