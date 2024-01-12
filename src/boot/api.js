@@ -1,6 +1,5 @@
 import myFetch from "@controleonline/quasar-common-ui/src/utils/fetch";
 import axios from "axios";
-import { DOMAIN } from "../config/domain";
 
 let myStore = null;
 const MIME_TYPE = "application/ld+json";
@@ -8,29 +7,17 @@ export const api = {
   fetch: function (uri, options = {}) {
     if (typeof options.headers === "undefined")
       Object.assign(options, { headers: new Headers() });
-
     if (myStore.getters["auth/user"] && myStore.getters["auth/user"].token)
       options.headers.set("API-TOKEN", myStore.getters["auth/user"].token);
     options.headers.set("Content-Type", MIME_TYPE);
     options.headers.set("Accept", MIME_TYPE);
-    options.headers.set("app-domain", DOMAIN);
 
     if (options.body && typeof options.body != "string") {
       options.body = JSON.stringify(options.body);
     }
+    
     if (options.params) {
-      let params = [];
-
-      Object.keys(options.params).map((key) => {
-        if (Array.isArray(options.params[key])) {
-          params.push(
-            options.params[key].map((value) => `${key}[]=${value}`).join("&")
-          );
-        } else {
-          params.push(key + "=" + options.params[key]);
-        }
-      });
-      uri = `${uri}?${params.join("&")}`;
+      uri = this.buildQueryString(uri,options);            
     }
 
     return myFetch(uri, options).catch((e) => {
@@ -42,8 +29,36 @@ export const api = {
     });
   },
 
+  serialize(obj, prefix) {
+    const pairs = [];
+    for (const key in obj) {
+      const value = obj[key];
+      let fullKey = prefix ? `${prefix}[${key}]` : key;
+      if (typeof value === "object" && value !== null) {
+        value.forEach((val, k) => {
+          pairs.push(`${key}[${k}]=${val}`);
+        });
+      } else if (Array.isArray(value)) {
+        fullKey = `${fullKey}[]`;
+        value.forEach(val => {
+          pairs.push(`${fullKey}=${val}`);
+        });
+      } else {
+        console.log(fullKey, value, obj);
+        pairs.push(`${fullKey}=${value}`);
+      }
+    }
+    return pairs;
+  },
+  
+   buildQueryString(uri,options) {    
+    if (options.params) {
+      const params = this.serialize(options.params);
+      uri = `${uri}?${params.join("&")}`;
+    }
+    return uri;
+  },
   execute: function (params) {
-
     return axios(params);
   },
 };
