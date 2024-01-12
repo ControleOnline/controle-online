@@ -43,8 +43,7 @@ export const api = {
         value.forEach(val => {
           pairs.push(`${fullKey}=${val}`);
         });
-      } else {
-        console.log(fullKey, value, obj);
+      } else {        
         pairs.push(`${fullKey}=${value}`);
       }
     }
