@@ -1,4 +1,5 @@
 import categories from "@controleonline/quasar-common-ui/src/store/categories";
+import status from "@controleonline/quasar-common-ui/src/store/status";
 import config from "@controleonline/quasar-common-ui/src/store/config";
 import gmaps from "@controleonline/quasar-common-ui/src/store/gmaps";
 import menu from "@controleonline/quasar-common-ui/src/store/menu";
@@ -25,6 +26,7 @@ import { createStore } from "vuex";
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
+      status,
       auth,
       queues,
       coupon,
