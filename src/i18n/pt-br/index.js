@@ -23,6 +23,7 @@ import * as Docs from "@controleonline/quasar-docs-ui/src/i18n/pt-br/index";
 import * as Config from "@controleonline/quasar-config-ui/src/i18n/pt-br/index";
 import * as Products from "@controleonline/quasar-products-ui/src/i18n/pt-br/index";
 import * as Queues from "@controleonline/quasar-queues-ui/src/i18n/pt-br/index";
+import * as Default from "@controleonline/quasar-default-ui/src/i18n/pt-br/index";
 
 export default {
   app: {
@@ -47,4 +48,5 @@ export default {
   ...Products.translate,
   ...Login.translate,
   ...Queues.translate,
+  ...Default.translate
 };
