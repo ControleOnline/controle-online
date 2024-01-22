@@ -1,4 +1,5 @@
 import categories from "@controleonline/quasar-common-ui/src/store/categories";
+import status from "@controleonline/quasar-common-ui/src/store/status";
 import config from "@controleonline/quasar-common-ui/src/store/config";
 import gmaps from "@controleonline/quasar-common-ui/src/store/gmaps";
 import menu from "@controleonline/quasar-common-ui/src/store/menu";
@@ -8,8 +9,8 @@ import user from "@controleonline/quasar-common-ui/src/store/user";
 import users from "@controleonline/quasar-common-ui/src/store/users";
 import coupon from "@controleonline/quasar-coupon-ui/src/store/coupon";
 import dashboard from "@controleonline/quasar-dashboard-ui/src/mixins/dashboard";
-import logistics from "@controleonline/quasar-orders-ui/src/store/modules/logistics";
-import invoice from "@controleonline/quasar-financial-ui/src/store/invoice";
+import receive from "@controleonline/quasar-financial-ui/src/store/receive";
+import expense from "@controleonline/quasar-financial-ui/src/store/expense";
 import guides from "@controleonline/quasar-guides-ui/src/store/guides";
 import auth from "@controleonline/quasar-login-ui/src/store/modules/auth";
 import purchasingOrder from "@controleonline/quasar-orders-ui/src/store/modules/order/purchasing";
@@ -25,6 +26,7 @@ import { createStore } from "vuex";
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
+      status,
       auth,
       queues,
       coupon,
@@ -37,7 +39,8 @@ export default store(function (/* { ssrContext } */) {
       quote,
       salesOrder,
       purchasingOrder,
-      invoice,
+      expense,
+      receive,
       support,
       guides,
       categories,
