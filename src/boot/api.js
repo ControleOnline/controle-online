@@ -35,8 +35,8 @@ export const api = {
       const value = obj[key];
       let fullKey = prefix ? `${prefix}[${key}]` : key;
       if (typeof value === "object" && value !== null) {
-        value.forEach((val, k) => {
-          pairs.push(`${key}[${k}]=${val}`);
+        Object.keys(value).forEach((k) => {
+          pairs.push(`${key}[${k}]=${value[k]}`);
         });
       } else if (Array.isArray(value)) {
         fullKey = `${fullKey}[]`;
