@@ -45,7 +45,7 @@ export default store(function (/* { ssrContext } */) {
       menu,
       users,
       products,
-      logistics,
+
     },
 
     // enable strict mode (adds overhead!)
