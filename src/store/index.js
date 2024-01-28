@@ -9,8 +9,7 @@ import user from "@controleonline/quasar-common-ui/src/store/user";
 import users from "@controleonline/quasar-common-ui/src/store/users";
 import coupon from "@controleonline/quasar-coupon-ui/src/store/coupon";
 import dashboard from "@controleonline/quasar-dashboard-ui/src/mixins/dashboard";
-import receive from "@controleonline/quasar-financial-ui/src/store/receive";
-import expense from "@controleonline/quasar-financial-ui/src/store/expense";
+import invoice from "@controleonline/quasar-financial-ui/src/store/invoice";
 import guides from "@controleonline/quasar-guides-ui/src/store/guides";
 import auth from "@controleonline/quasar-login-ui/src/store/modules/auth";
 import purchasingOrder from "@controleonline/quasar-orders-ui/src/store/modules/order/purchasing";
@@ -39,8 +38,7 @@ export default store(function (/* { ssrContext } */) {
       quote,
       salesOrder,
       purchasingOrder,
-      expense,
-      receive,
+      invoice,
       support,
       guides,
       categories,
