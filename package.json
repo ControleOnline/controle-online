@@ -32,7 +32,7 @@
     "@controleonline/quasar-professionals-ui": "^1.0.27",
     "@controleonline/quasar-providers-ui": "^1.0.23",
     "@controleonline/quasar-queues-ui": "^1.0.50",
-    "@controleonline/quasar-quote-ui": "^1.0.24",
+    "@controleonline/quasar-logistic-ui": "^1.0.24",
     "@controleonline/quasar-shop-ui": "^1.0.11",
     "@controleonline/quasar-support-ui": "^1.0.19",
     "@controleonline/quasar-tasks-ui": "^1.1.60",

@@ -17,7 +17,7 @@ import salesOrder from "@controleonline/quasar-orders-ui/src/store/modules/order
 import logistics from "@controleonline/quasar-orders-ui/src/store/modules/logistics";
 
 import products from "@controleonline/quasar-products-ui/src/store/products";
-import quote from "@controleonline/quasar-quote-ui/src/store/modules/quote";
+import quote from "@controleonline/quasar-logistic-ui/src/store/modules/quote";
 import support from "@controleonline/quasar-support-ui/src/store/support";
 import queues from "@controleonline/quasar-queues-ui/src/store/modules/queues";
 
