@@ -14,6 +14,8 @@ import guides from "@controleonline/quasar-guides-ui/src/store/guides";
 import auth from "@controleonline/quasar-login-ui/src/store/modules/auth";
 import purchasingOrder from "@controleonline/quasar-orders-ui/src/store/modules/order/purchasing";
 import salesOrder from "@controleonline/quasar-orders-ui/src/store/modules/order/sales";
+import logistics from "@controleonline/quasar-orders-ui/src/store/modules/logistics";
+
 import products from "@controleonline/quasar-products-ui/src/store/products";
 import quote from "@controleonline/quasar-quote-ui/src/store/modules/quote";
 import support from "@controleonline/quasar-support-ui/src/store/support";
@@ -45,7 +47,7 @@ export default store(function (/* { ssrContext } */) {
       menu,
       users,
       products,
-
+      logistics,
     },
 
     // enable strict mode (adds overhead!)
