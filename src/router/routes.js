@@ -16,7 +16,7 @@ import * as Products from "@controleonline/quasar-products-ui/src/router/routes"
 import * as Professionals from "@controleonline/quasar-professionals-ui/src/router/routes";
 import * as Providers from "@controleonline/quasar-providers-ui/src/router/routes";
 import * as Queues from "@controleonline/quasar-queues-ui/src/router/routes";
-import * as Quote from "@controleonline/quasar-quote-ui/src/router/routes";
+import * as Quote from "@controleonline/quasar-logistic-ui/src/router/routes";
 import * as Support from "@controleonline/quasar-support-ui/src/router/routes";
 import * as Tasks from "@controleonline/quasar-tasks-ui/src/router/routes";
 import * as Users from "@controleonline/quasar-users-ui/src/router/routes";

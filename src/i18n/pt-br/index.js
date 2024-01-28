@@ -13,7 +13,7 @@ import * as Contracts from "@controleonline/quasar-contracts-ui/src/i18n/pt-br/i
 import * as Tasks from "@controleonline/quasar-tasks-ui/src/i18n/pt-br/index";
 import * as Professionals from "@controleonline/quasar-professionals-ui/src/i18n/pt-br/index";
 import * as Carriers from "@controleonline/quasar-carrier-ui/src/i18n/pt-br/index";
-import * as Quote from "@controleonline/quasar-quote-ui/src/i18n/pt-br/index";
+import * as Quote from "@controleonline/quasar-logistic-ui/src/i18n/pt-br/index";
 import * as Coupon from "@controleonline/quasar-coupon-ui/src/i18n/pt-br/index";
 import * as Accounting from "@controleonline/quasar-accounting-ui/src/i18n/pt-br/index";
 import * as Import from "@controleonline/quasar-import-ui/src/i18n/pt-br/index";
