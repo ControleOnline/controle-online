@@ -1,5 +1,7 @@
 import myFetch from "@controleonline/quasar-common-ui/src/utils/fetch";
 import axios from "axios";
+import { DOMAIN } from '../config/domain';
+
 
 let myStore = null;
 const MIME_TYPE = "application/ld+json";
@@ -11,13 +13,14 @@ export const api = {
       options.headers.set("API-TOKEN", myStore.getters["auth/user"].token);
     options.headers.set("Content-Type", MIME_TYPE);
     options.headers.set("Accept", MIME_TYPE);
+    options.headers.set("App-Domain", DOMAIN);
 
     if (options.body && typeof options.body != "string") {
       options.body = JSON.stringify(options.body);
     }
-    
+
     if (options.params) {
-      uri = this.buildQueryString(uri,options);            
+      uri = this.buildQueryString(uri, options);
     }
 
     return myFetch(uri, options).catch((e) => {
@@ -43,14 +46,14 @@ export const api = {
         value.forEach(val => {
           pairs.push(`${fullKey}=${val}`);
         });
-      } else {        
+      } else {
         pairs.push(`${fullKey}=${value}`);
       }
     }
     return pairs;
   },
-  
-   buildQueryString(uri,options) {    
+
+  buildQueryString(uri, options) {
     if (options.params) {
       const params = this.serialize(options.params);
       uri = `${uri}?${params.join("&")}`;
