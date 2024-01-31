@@ -8,7 +8,6 @@ import * as Customers from "@controleonline/quasar-customers-ui/src/router/route
 import * as Dashboard from "@controleonline/quasar-dashboard-ui/src/router/routes";
 import * as Docs from "@controleonline/quasar-docs-ui/src/router/routes";
 import * as Financial from "@controleonline/quasar-financial-ui/src/router/routes";
-import * as Freight from "@controleonline/quasar-freight-ui/src/router/routes";
 import * as Import from "@controleonline/quasar-import-ui/src/router/routes";
 import * as Login from "@controleonline/quasar-login-ui/src/router/routes";
 import * as Quotations from "@controleonline/quasar-orders-ui/src/router/routes";
@@ -16,14 +15,14 @@ import * as Products from "@controleonline/quasar-products-ui/src/router/routes"
 import * as Professionals from "@controleonline/quasar-professionals-ui/src/router/routes";
 import * as Providers from "@controleonline/quasar-providers-ui/src/router/routes";
 import * as Queues from "@controleonline/quasar-queues-ui/src/router/routes";
-import * as Quote from "@controleonline/quasar-logistic-ui/src/router/routes";
+import * as Logistic from "@controleonline/quasar-logistic-ui/src/router/routes";
 import * as Support from "@controleonline/quasar-support-ui/src/router/routes";
 import * as Tasks from "@controleonline/quasar-tasks-ui/src/router/routes";
 import * as Users from "@controleonline/quasar-users-ui/src/router/routes";
 
 const routes = [
   ...Login.routes,
-  ...Quote.routes,
+  ...Logistic.routes,
   ...Quotations.routes,
   ...Financial.routes,
   ...Providers.routes,
@@ -42,7 +41,6 @@ const routes = [
   ...Config.routes,
   ...Products.routes,
   ...Professionals.routes,
-  ...Freight.routes,
   ...Queues.routes,
   {
     path: "/",
