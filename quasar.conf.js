@@ -6,7 +6,7 @@ module.exports = function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
-    boot: ["i18n", "api", "custom"],
+    boot: ["i18n", "api", "custom", "methods"],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: ["app.scss"],
@@ -123,9 +123,9 @@ module.exports = function (ctx) {
       //     });
       // },
       // https://quasar.dev/quasar-cli/cli-documentation/handling-webpack
-      extendWebpack(cfg) {},
+      extendWebpack(cfg) { },
       chainWebpack(chain) {
-        
+
       },
     },
 
