@@ -19,6 +19,7 @@ import * as Logistic from "@controleonline/quasar-logistic-ui/src/router/routes"
 import * as Support from "@controleonline/quasar-support-ui/src/router/routes";
 import * as Tasks from "@controleonline/quasar-tasks-ui/src/router/routes";
 import * as Users from "@controleonline/quasar-users-ui/src/router/routes";
+import * as Logistic_old from "@controleonline/old/quasar-logistic-ui/src/router/routes";
 
 const routes = [
   ...Login.routes,
@@ -42,6 +43,8 @@ const routes = [
   ...Products.routes,
   ...Professionals.routes,
   ...Queues.routes,
+
+  ...Logistic_old.routes,
   {
     path: "/",
     component: () => import("@controleonline/quasar-layout-ui/src/layouts/AdminLayout.vue"),

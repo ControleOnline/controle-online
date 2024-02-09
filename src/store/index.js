@@ -3,7 +3,7 @@ import status from "@controleonline/quasar-common-ui/src/store/status";
 import config from "@controleonline/quasar-common-ui/src/store/config";
 import gmaps from "@controleonline/quasar-common-ui/src/store/gmaps";
 import menu from "@controleonline/quasar-common-ui/src/store/menu";
-import people from "@controleonline/quasar-common-ui/src/store/people";
+import people from "@controleonline/quasar-people-ui/src/store/people";
 import profile from "@controleonline/quasar-common-ui/src/store/profile";
 import user from "@controleonline/quasar-common-ui/src/store/user";
 import users from "@controleonline/quasar-common-ui/src/store/users";
@@ -17,7 +17,7 @@ import salesOrder from "@controleonline/quasar-orders-ui/src/store/modules/order
 import logistic from "@controleonline/quasar-logistic-ui/src/store/modules/logistic";
 
 import products from "@controleonline/quasar-products-ui/src/store/products";
-import quote from "@controleonline/quasar-logistic-ui/src/store/modules/quote";
+import quote from "@controleonline/old/quasar-logistic-ui/src/store/modules/quote";
 import support from "@controleonline/quasar-support-ui/src/store/support";
 import queues from "@controleonline/quasar-queues-ui/src/store/modules/queues";
 
