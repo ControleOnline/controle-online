@@ -13,17 +13,18 @@ import * as Contracts from "@controleonline/quasar-contracts-ui/src/i18n/pt-br/i
 import * as Tasks from "@controleonline/quasar-tasks-ui/src/i18n/pt-br/index";
 import * as Professionals from "@controleonline/quasar-professionals-ui/src/i18n/pt-br/index";
 import * as Carriers from "@controleonline/quasar-carrier-ui/src/i18n/pt-br/index";
-import * as Quote from "@controleonline/quasar-logistic-ui/src/i18n/pt-br/index";
+import * as Logistic from "@controleonline/quasar-logistic-ui/src/i18n/pt-br/index";
 import * as Coupon from "@controleonline/quasar-coupon-ui/src/i18n/pt-br/index";
 import * as Accounting from "@controleonline/quasar-accounting-ui/src/i18n/pt-br/index";
 import * as Import from "@controleonline/quasar-import-ui/src/i18n/pt-br/index";
 import * as CRM from "@controleonline/quasar-crm-ui/src/i18n/pt-br/index";
-import * as People from "@controleonline/quasar-people-ui/src/i18n/pt-br/index";
+import * as People from "@controleonline/old/quasar-people-ui/src/i18n/pt-br/index";
 import * as Docs from "@controleonline/quasar-docs-ui/src/i18n/pt-br/index";
 import * as Config from "@controleonline/quasar-config-ui/src/i18n/pt-br/index";
 import * as Products from "@controleonline/quasar-products-ui/src/i18n/pt-br/index";
 import * as Queues from "@controleonline/quasar-queues-ui/src/i18n/pt-br/index";
 import * as Default from "@controleonline/quasar-default-ui/src/i18n/pt-br/index";
+import * as Logistic_old from "@controleonline/old/quasar-logistic-ui/src/i18n/pt-br/index";
 
 export default {
   app: {
@@ -40,7 +41,7 @@ export default {
   ...Tasks.translate,
   ...Professionals.translate,
   ...Carriers.translate,
-  ...Quote.translate,
+  ...Logistic.translate,
   ...Import.translate,
   ...CRM.translate,
   ...Docs.translate,
@@ -48,5 +49,6 @@ export default {
   ...Products.translate,
   ...Login.translate,
   ...Queues.translate,
-  ...Default.translate
+  ...Default.translate,
+  ...Logistic_old.translate
 };
