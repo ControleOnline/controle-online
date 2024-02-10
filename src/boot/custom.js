@@ -1,5 +1,5 @@
-import Contracts from "@controleonline/quasar-contracts-ui";
-import Dashboard from "@controleonline/quasar-dashboard-ui";
+import Contracts from "@controleonline/quasar-legacy-ui/quasar-contracts-ui";
+import Dashboard from "@controleonline/quasar-legacy-ui/quasar-dashboard-ui";
 import { boot } from "quasar/wrappers";
 import {
   translate,
