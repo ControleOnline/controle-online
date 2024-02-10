@@ -1,5 +1,5 @@
-import categories from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/categories";
-import status from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/status";
+import categories from "@controleonline/quasar-common-ui/src/store/categories";
+import status from "@controleonline/quasar-common-ui/src/store/status";
 import config from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/config";
 import gmaps from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/gmaps";
 import menu from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/menu";
@@ -14,12 +14,13 @@ import guides from "@controleonline/quasar-legacy-ui/quasar-guides-ui/src/store/
 import auth from "@controleonline/quasar-legacy-ui/quasar-login-ui/src/store/modules/auth";
 import purchasingOrder from "@controleonline/quasar-legacy-ui/quasar-orders-ui/src/store/modules/order/purchasing";
 import salesOrder from "@controleonline/quasar-legacy-ui/quasar-orders-ui/src/store/modules/order/sales";
-import logistic from "@controleonline/quasar-logistic-ui/src/store/modules/logistic";
+import logistic from "@controleonline/quasar-logistic-ui/src/store/logistic";
 
 import products from "@controleonline/quasar-products-ui/src/store/products";
 import quote from "@controleonline/quasar-legacy-ui/quasar-logistic-ui/src/store/modules/quote";
 import support from "@controleonline/quasar-legacy-ui/quasar-support-ui/src/store/support";
 import queues from "@controleonline/quasar-queues-ui/src/store/modules/queues";
+import city from "@controleonline/quasar-common-ui/src/store/address/city";
 
 import { store } from "quasar/wrappers";
 import { createStore } from "vuex";
@@ -48,6 +49,7 @@ export default store(function (/* { ssrContext } */) {
       users,
       products,
       logistic,
+      city
     },
 
     // enable strict mode (adds overhead!)
