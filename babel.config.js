@@ -5,9 +5,8 @@ module.exports = (api) => {
 
   const aliasPaths = {
     // Alias de caminho padrão
-    "@controleonline": isProduction
-      ? "./node_modules/@controleonline"
-      : "./modules/controleonline",
+    //"@controleonline": isProduction      ? "./node_modules/@controleonline"      : "./modules/controleonline",
+    "@controleonline": "./modules/controleonline",
   };
 
   return {
