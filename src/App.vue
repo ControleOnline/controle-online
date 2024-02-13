@@ -25,6 +25,8 @@ export default {
   created() {
     this.setIndexRoute();
     this.peopleDefaultCompany();
+    const zoom = process.env.zoom || 0.65;
+    document.documentElement.style.setProperty('--zoom-level', zoom);
   },
   computed: {
     ...mapGetters({
@@ -34,3 +36,9 @@ export default {
 
 };
 </script>
+<style>
+body>*:not(.fullscreen),
+.fullscreen>* {
+  zoom: var(--zoom-level);
+}
+</style>
