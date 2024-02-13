@@ -25,7 +25,7 @@ export default {
   created() {
     this.setIndexRoute();
     this.peopleDefaultCompany();
-    const zoom = process.env.zoom || 0.80;
+    const zoom = process.env.zoom || 0.75;
     document.documentElement.style.setProperty('--zoom-level', zoom);
   },
   computed: {
@@ -37,8 +37,9 @@ export default {
 };
 </script>
 <style>
-body>*:not(.fullscreen),
-.fullscreen>* {
+body>*:not(.fullscreen, [id^="q-portal--menu--"]),
+.fullscreen>*,
+[id^="q-portal--menu--"] .q-list {
   zoom: var(--zoom-level);
 }
 </style>

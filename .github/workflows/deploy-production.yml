@@ -27,7 +27,7 @@ jobs:
             BEACON: '${{ secrets.NEW_RELIC_BEACON }}',\
             ERROR_BEACON: '${{ secrets.NEW_RELIC_ERROR_BEACON }}'\
           },\
-          zoom: 0.65\
+          zoom: 0.70\
           };\
           module.exports = { env };\
           " > ./src/config/env.local.js
