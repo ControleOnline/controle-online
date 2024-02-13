@@ -26,7 +26,8 @@ jobs:
             TRUST_KEY: '${{ secrets.NEW_RELIC_TRUST_KEY }}',\
             BEACON: '${{ secrets.NEW_RELIC_BEACON }}',\
             ERROR_BEACON: '${{ secrets.NEW_RELIC_ERROR_BEACON }}'\
-          }\
+          },\
+          zoom: 0.65\
           };\
           module.exports = { env };\
           " > ./src/config/env.local.js
