@@ -25,7 +25,7 @@ export default {
   created() {
     this.setIndexRoute();
     this.peopleDefaultCompany();
-    const zoom = process.env.zoom || 0.65;
+    const zoom = process.env.zoom || 0.80;
     document.documentElement.style.setProperty('--zoom-level', zoom);
   },
   computed: {
