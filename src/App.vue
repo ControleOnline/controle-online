@@ -25,8 +25,17 @@ export default {
   created() {
     this.setIndexRoute();
     this.peopleDefaultCompany();
-    const zoom = process.env.zoom || 0.75;
-    document.documentElement.style.setProperty('--zoom-level', zoom);
+    this.setZoom();
+  },
+  methods: {
+    setZoom() {
+      const zoom = process.env.zoom || 0.70;
+      var adjustedWidth = window.innerWidth * 100 / (zoom * 100);
+      var adjustedHeight = window.innerHeight * 100 / (zoom * 100);
+      document.documentElement.style.setProperty('--zoom-level', zoom);
+      document.documentElement.style.setProperty('--zoom-width', adjustedWidth + 'px');
+      document.documentElement.style.setProperty('--zoom-height', adjustedHeight + 'px');
+    }
   },
   computed: {
     ...mapGetters({
