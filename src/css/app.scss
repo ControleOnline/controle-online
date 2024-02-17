@@ -14,21 +14,6 @@
   -o-transition: background opacity 3s ease-in-out;
   transition: background opacity 3s ease-in-out;
 }
-.bg-image {
-  background-color: var(--bg-page);
-}
-header {
-  background-color: var(--bg-headers) !important;
-  color: var(--text-headers) !important;
-}
-.q-drawer-container > aside {
-  background-color: var(--bg-menu) !important;
-  color: var(--text-menu) !important;
-}
-.q-drawer-container .q-item__section--side {
-  color: var(--text-menu) !important;
-}
-
 main > .q-card {
   box-shadow: none !important;
 }

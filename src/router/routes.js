@@ -20,6 +20,8 @@ import * as Support from "@controleonline/quasar-legacy-ui/quasar-support-ui/src
 import * as Tasks from "@controleonline/quasar-legacy-ui/quasar-tasks-ui/src/router/routes";
 import * as Users from "@controleonline/quasar-legacy-ui/quasar-users-ui/src/router/routes";
 import * as Logistic_old from "@controleonline/quasar-legacy-ui/quasar-logistic-ui/src/router/routes";
+import * as Orders from "@controleonline/quasar-orders-ui/src/router/routes";
+ 
 
 const routes = [
   ...Login.routes,
@@ -43,7 +45,7 @@ const routes = [
   ...Products.routes,
   ...Professionals.routes,
   ...Queues.routes,
-
+  ...Orders.routes,
   ...Logistic_old.routes,
   {
     path: "/",

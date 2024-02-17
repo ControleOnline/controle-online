@@ -7,7 +7,7 @@
 import * as Common from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/i18n/pt-br/index";
 import * as Dashboard from "@controleonline/quasar-legacy-ui/quasar-dashboard-ui/src/i18n/pt-br/index";
 import * as Login from "@controleonline/quasar-legacy-ui/quasar-login-ui/src/i18n/pt-br/index";
-import * as Orders from "@controleonline/quasar-legacy-ui/quasar-orders-ui/src/i18n/pt-br/index";
+import * as Orders_old from "@controleonline/quasar-legacy-ui/quasar-orders-ui/src/i18n/pt-br/index";
 import * as Financial from "@controleonline/quasar-financial-ui/src/i18n/pt-br/index";
 import * as Contracts from "@controleonline/quasar-legacy-ui/quasar-contracts-ui/src/i18n/pt-br/index";
 import * as Tasks from "@controleonline/quasar-legacy-ui/quasar-tasks-ui/src/i18n/pt-br/index";
@@ -25,6 +25,7 @@ import * as Products from "@controleonline/quasar-products-ui/src/i18n/pt-br/ind
 import * as Queues from "@controleonline/quasar-queues-ui/src/i18n/pt-br/index";
 import * as Default from "@controleonline/quasar-default-ui/src/i18n/pt-br/index";
 import * as Logistic_old from "@controleonline/quasar-legacy-ui/quasar-logistic-ui/src/i18n/pt-br/index";
+import * as Orders from "@controleonline/quasar-orders-ui/src/i18n/pt-br/index";
 
 export default {
   app: {
@@ -35,7 +36,7 @@ export default {
   ...Coupon.translate,
   ...Common.translate,
   ...Dashboard.translate,
-  ...Orders.translate,
+  ...Orders_old.translate,
   ...Financial.translate,
   ...Contracts.translate,
   ...Tasks.translate,
@@ -50,5 +51,6 @@ export default {
   ...Login.translate,
   ...Queues.translate,
   ...Default.translate,
-  ...Logistic_old.translate
+  ...Logistic_old.translate,
+  ...Orders.translate
 };
