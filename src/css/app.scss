@@ -13,32 +13,21 @@
   -moz-transition: background opacity 3s ease-in-out;
   -o-transition: background opacity 3s ease-in-out;
   transition: background opacity 3s ease-in-out;
-  background-color: #fafafa;
 }
-
-
-@media only screen and (min-width: 1024px) {
-  .module-tittle-container {
-    color: $primary;
-  }
-
-  /*
-  .current-logo-container {
-    position: absolute;
-    right: 80px;
-  }
-  */
+.bg-image {
+  background-color: var(--bg-page);
 }
-
-@media only screen and (max-width: 1024px) {
-  .module-tittle-container {
-    background: $primary;
-    color: white;
-    width: 100% !important;
-  }
+header {
+  background-color: var(--bg-headers) !important;
+  color: var(--text-headers) !important;
 }
-
-
+.q-drawer-container > aside {
+  background-color: var(--bg-menu) !important;
+  color: var(--text-menu) !important;
+}
+.q-drawer-container .q-item__section--side {
+  color: var(--text-menu) !important;
+}
 
 main > .q-card {
   box-shadow: none !important;
@@ -62,11 +51,4 @@ main > .q-card {
 }
 .menu-button {
   z-index: 1000000;
-}
-.module-tittle-container {
-  position: sticky !important;
-  left: 0;
-  -webkit-position: sticky;
-  z-index: 1;
-  width: fit-content;
 }

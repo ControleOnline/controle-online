@@ -10,7 +10,7 @@
           <q-tabs
             align  ="justify"
             v-model="currentTab"
-            class  ="bg-white text-primary"
+            class  ="text-primary"
           >
             <q-tab
               name  ="dados_principais"

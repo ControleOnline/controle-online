@@ -21,13 +21,6 @@ export default {
       peopleDefaultCompany: "people/defaultCompany",
 
     }),
-  },
-  created() {
-    this.setIndexRoute();
-    this.peopleDefaultCompany();
-    this.setZoom();
-  },
-  methods: {
     setZoom() {
       const zoom = process.env.zoom || 0.70;
       var adjustedWidth = window.innerWidth * 100 / (zoom * 100);
@@ -36,6 +29,11 @@ export default {
       document.documentElement.style.setProperty('--zoom-width', adjustedWidth + 'px');
       document.documentElement.style.setProperty('--zoom-height', adjustedHeight + 'px');
     }
+  },
+  created() {
+    this.setIndexRoute();
+    this.peopleDefaultCompany();
+    //this.setZoom();
   },
   computed: {
     ...mapGetters({
