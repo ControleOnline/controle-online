@@ -1,5 +1,4 @@
-import categories from "@controleonline/quasar-common-ui/src/store/categories";
-import status from "@controleonline/quasar-common-ui/src/store/status";
+
 import config from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/config";
 import gmaps from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/gmaps";
 import menu from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/menu";
@@ -9,16 +8,20 @@ import user from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/us
 import users from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/users";
 import coupon from "@controleonline/quasar-legacy-ui/quasar-coupon-ui/src/store/coupon";
 import dashboard from "@controleonline/quasar-legacy-ui/quasar-dashboard-ui/src/mixins/dashboard";
-import invoice from "@controleonline/quasar-financial-ui/src/store/invoice";
 import guides from "@controleonline/quasar-legacy-ui/quasar-guides-ui/src/store/guides";
 import auth from "@controleonline/quasar-legacy-ui/quasar-login-ui/src/store/modules/auth";
 import purchasingOrder from "@controleonline/quasar-legacy-ui/quasar-orders-ui/src/store/modules/order/purchasing";
 import salesOrder from "@controleonline/quasar-legacy-ui/quasar-orders-ui/src/store/modules/order/sales";
-import logistic from "@controleonline/quasar-logistic-ui/src/store/logistic";
-
-import products from "@controleonline/quasar-products-ui/src/store/products";
 import quote from "@controleonline/quasar-legacy-ui/quasar-logistic-ui/src/store/modules/quote";
 import support from "@controleonline/quasar-legacy-ui/quasar-support-ui/src/store/support";
+
+
+import orders from "@controleonline/quasar-orders-ui/src/store/orders";
+import logistic from "@controleonline/quasar-logistic-ui/src/store/logistic";
+import invoice from "@controleonline/quasar-financial-ui/src/store/invoice";
+import categories from "@controleonline/quasar-common-ui/src/store/categories";
+import status from "@controleonline/quasar-common-ui/src/store/status";
+import products from "@controleonline/quasar-products-ui/src/store/products";
 import queues from "@controleonline/quasar-queues-ui/src/store/modules/queues";
 import city from "@controleonline/quasar-common-ui/src/store/address/city";
 
@@ -49,7 +52,8 @@ export default store(function (/* { ssrContext } */) {
       users,
       products,
       logistic,
-      city
+      city,
+      orders
     },
 
     // enable strict mode (adds overhead!)

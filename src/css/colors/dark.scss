@@ -1,0 +1,34 @@
+.body--dark {
+  .default-table .q-table tr:not(:first-child):nth-child(even) {
+    background-color: #dfdfdf;
+  }
+  .default-table .q-table tr:not(:first-child):nth-child(odd) {
+    background-color: #fff;
+  }
+  .bg-image {
+    background-color: var(--bg-dark);
+  }
+  header {
+    background-color: var(--bg-headers-dark) !important;
+    color: var(--text-headers-dark) !important;
+  }
+
+  .q-drawer-container > aside {
+    background-color: var(--bg-menu-dark) !important;
+    color: var(--text-menu-dark) !important;
+  }
+  .q-drawer-container .q-item__section--side {
+    color: var(--text-menu-dark) !important;
+  }
+  aside .menu-avatar {
+    background-color: var(--bg-menu-avatar-dark);
+  }
+  .q-layout__shadow:after {
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.24), 0 0px 10px rgba(0, 0, 0, 0.2) !important;
+  }
+  .q-card--dark {
+    border-color: rgba(255, 255, 255, 0.28);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2), 0 2px 2px rgba(0, 0, 0, 0.14),
+      0 3px 1px -2px rgba(0, 0, 0, 0.12);
+  }
+}

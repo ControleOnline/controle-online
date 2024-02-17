@@ -1,0 +1,23 @@
+.text-disabled {
+  color: #babaca;
+}
+.btn-positive {
+  background: var(--positive);
+  color: var(--text-secondary);
+}
+.btn-danger {
+  background: var(--danger);
+  color: var(--text-secondary);
+}
+.btn-secondary {
+  background: var(--secondary);
+  color:  var(--text-secondary);
+}
+.loading-primary {
+  color: var(--primary);
+}
+
+.default-table .q-table thead {
+  background-color: var(--secondary) !important;
+  color:  var(--text-secondary);
+}
