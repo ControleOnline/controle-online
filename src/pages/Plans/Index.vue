@@ -26,7 +26,7 @@
       <q-tabs
         align  ="justify"
         v-model="currentTab"
-        class  ="bg-white text-primary"
+        class  ="text-primary"
       >
         <q-tab
           name  ="mei_servicos"
