@@ -1,9 +1,9 @@
 .body--dark {
-  .default-table .q-table tr:not(:first-child):nth-child(even) {
-    background-color: #dfdfdf;
+  .default-table .q-table tbody tr:nth-child(even) {
+    background-color: var(--bg-even-dark);
   }
-  .default-table .q-table tr:not(:first-child):nth-child(odd) {
-    background-color: #fff;
+  .default-table .q-table tbody tr:nth-child(odd) {
+    background-color: var(--bg-odd-dark);
   }
   .bg-image {
     background-color: var(--bg-dark);
