@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget android-versionCode="17" id="com.controleonline.controleonline" version="0.6.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Controle Online</name>
+    <description>CRM</description>
+    <author email="luiz.kim@controleonline.com" href="https://app.controleonline.com">
+        Controle Online
+    </author>
+    <content src="index.html" />
+    <allow-intent href="http:///" />
+    <allow-intent href="https:///" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-navigation href="about:*" />
+    <platform name="android">
+        <engine name="android" spec="^12.0.0" />
+        <plugin name="cordova-plugin-whitelist" />
+        <preference name="android-minSdkVersion" value="28" />
+        <preference name="android-compileSdkVersion" value="33" />
+        <preference name="android-targetSdkVersion" value="33" />
+        <preference name="AndroidXEnabled" value="true" />
+        <preference name="GradlePluginGoogleServicesEnabled" value="false" />
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application/activity[@android:name='MainActivity']">
+            <application android:usesCleartextTraffic="true" />
+            <activity android:exported="true" />
+        </edit-config>
+        <allow-intent href="market:*" />
+        <uses-permission android:name="android.permission.INTERNET" />
+    </platform>
+</widget>

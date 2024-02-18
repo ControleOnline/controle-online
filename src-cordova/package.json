@@ -1,0 +1,23 @@
+{
+  "name": "com.controleonline.controleonline",
+  "displayName": "Controle Online",
+  "version": "1.0.0",
+  "description": "CRM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Luiz Kim",
+  "license": "Apache-2.0",
+  "cordova": {
+    "platforms": [
+      "android"
+    ]
+  },
+  "devDependencies": {
+    "cordova-android": "^12.0.1"
+  }
+}
