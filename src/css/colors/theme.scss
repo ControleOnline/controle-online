@@ -2,16 +2,16 @@
   color: #babaca;
 }
 .btn-positive {
-  background: var(--positive);
-  color: var(--text-secondary);
+  background: var(--btn-positive);
+  color: var(--text-positive);
 }
 .btn-danger {
-  background: var(--q-negative);
-  color: var(--text-secondary);
+  background: var(--q-btn-negative);
+  color: var(--text-negative);
 }
-.btn-secondary {
-  background: var(--secondary);
-  color:  var(--text-secondary);
+.btn-primary {
+  background: var(--btn-primary);
+  color:  var(--text-primary);
 }
 .loading-primary {
   color: var(--primary);
