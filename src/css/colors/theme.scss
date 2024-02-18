@@ -6,7 +6,7 @@
   color: var(--text-secondary);
 }
 .btn-danger {
-  background: var(--danger);
+  background: var(--q-negative);
   color: var(--text-secondary);
 }
 .btn-secondary {
@@ -17,7 +17,7 @@
   color: var(--primary);
 }
 
-.default-table .q-table thead {
+.default-table .q-table thead,.default-table .q-table thead th {
   background-color: var(--secondary) !important;
   color:  var(--text-secondary);
 }

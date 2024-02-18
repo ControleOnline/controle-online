@@ -1,4 +1,3 @@
-
 import config from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/config";
 import gmaps from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/gmaps";
 import menu from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/menu";
@@ -15,7 +14,7 @@ import salesOrder from "@controleonline/quasar-legacy-ui/quasar-orders-ui/src/st
 import quote from "@controleonline/quasar-legacy-ui/quasar-logistic-ui/src/store/modules/quote";
 import support from "@controleonline/quasar-legacy-ui/quasar-support-ui/src/store/support";
 
-
+import theme from "@controleonline/quasar-layout-ui/src/store/theme";
 import orders from "@controleonline/quasar-orders-ui/src/store/orders";
 import logistic from "@controleonline/quasar-logistic-ui/src/store/logistic";
 import invoice from "@controleonline/quasar-financial-ui/src/store/invoice";
@@ -53,7 +52,8 @@ export default store(function (/* { ssrContext } */) {
       products,
       logistic,
       city,
-      orders
+      orders,
+      theme,
     },
 
     // enable strict mode (adds overhead!)

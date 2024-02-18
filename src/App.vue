@@ -34,6 +34,7 @@ export default {
     this.setIndexRoute();
     this.peopleDefaultCompany();
     //this.setZoom();
+
   },
   computed: {
     ...mapGetters({
