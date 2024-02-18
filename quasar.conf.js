@@ -9,7 +9,12 @@ module.exports = function (ctx) {
     boot: ["i18n", "api", "custom", "methods"],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
-    css: ["app.scss","colors/theme.scss","colors/light.scss","colors/dark.scss"],
+    css: [
+      "app.scss",
+      "colors/theme.scss",
+      "colors/light.scss",
+      "colors/dark.scss",
+    ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
@@ -38,7 +43,7 @@ module.exports = function (ctx) {
       //            (fastest compile time; minimum bundle size; most tedious)
       // * true   - Import everything from Quasar
       //            (not treeshaking Quasar; biggest bundle size; convenient)
-      all: 'auto',
+      all: "auto",
 
       components: [
         "QLayout",
@@ -123,10 +128,8 @@ module.exports = function (ctx) {
       //     });
       // },
       // https://quasar.dev/quasar-cli/cli-documentation/handling-webpack
-      extendWebpack(cfg) { },
-      chainWebpack(chain) {
-
-      },
+      extendWebpack(cfg) {},
+      chainWebpack(chain) {},
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
