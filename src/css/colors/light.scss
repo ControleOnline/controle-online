@@ -71,18 +71,6 @@
 .default-table .q-table__grid-content .q-card__section:nth-child(1) {
   background: var(--primary);
 }
-
-.default-table .q-table__middle.scroll::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-.default-table .q-table__middle.scroll::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-.default-table .q-table__middle.scroll::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
 .default-table.full-height .q-table__bottom {
   background-color: #fff;
 }
