@@ -22,7 +22,7 @@ export default {
 
     }),
     setZoom() {
-      const zoom = 0.85;
+      const zoom = 0.80;
       var adjustedWidth = window.innerWidth * 100 / (zoom * 100);
       var adjustedHeight = window.innerHeight * 100 / (zoom * 100);
       document.documentElement.style.setProperty('--zoom-level', zoom);
@@ -33,7 +33,7 @@ export default {
   created() {
     this.setIndexRoute();
     this.peopleDefaultCompany();
-    //this.setZoom();
+    this.setZoom();
 
   },
   computed: {
