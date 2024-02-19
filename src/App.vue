@@ -22,7 +22,7 @@ export default {
 
     }),
     setZoom() {
-      const zoom = process.env.zoom || 0.70;
+      const zoom = 0.85;
       var adjustedWidth = window.innerWidth * 100 / (zoom * 100);
       var adjustedHeight = window.innerHeight * 100 / (zoom * 100);
       document.documentElement.style.setProperty('--zoom-level', zoom);
@@ -45,9 +45,7 @@ export default {
 };
 </script>
 <style>
-body>*:not(.fullscreen, [id^="q-portal--menu--"]),
-.fullscreen>*,
-[id^="q-portal--menu--"] .q-list {
+body {
   zoom: var(--zoom-level);
 }
 </style>
