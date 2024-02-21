@@ -195,7 +195,8 @@ module.exports = function (ctx) {
     // Full list of options: https://quasar.dev/quasar-cli/developing-cordova-apps/configuring-cordova
     cordova: {
       // noIosLegacyBuildFlag: true, // uncomment only if you know what you are doing
-      id: "org.cordova.quasar.app",
+      id: "com.controleonline.controleonline",
+      hideSplashscreen: true, // Esconder a tela de splash automaticamente
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/developing-capacitor-apps/configuring-capacitor
