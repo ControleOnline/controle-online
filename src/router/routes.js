@@ -3,7 +3,7 @@ import * as Carrier from "@controleonline/quasar-legacy-ui/quasar-carrier-ui/src
 import * as Config from "@controleonline/quasar-legacy-ui/quasar-config-ui/src/router/routes";
 import * as Contracts from "@controleonline/quasar-legacy-ui/quasar-contracts-ui/src/router/routes";
 import * as Coupon from "@controleonline/quasar-legacy-ui/quasar-coupon-ui/src/router/routes";
-import * as Crm from "@controleonline/quasar-legacy-ui/quasar-crm-ui/src/router/routes";
+import * as Crm from "@controleonline/quasar-crm-ui/src/router/routes";
 import * as Customers from "@controleonline/quasar-legacy-ui/quasar-customers-ui/src/router/routes";
 import * as Dashboard from "@controleonline/quasar-legacy-ui/quasar-dashboard-ui/src/router/routes";
 import * as Docs from "@controleonline/quasar-legacy-ui/quasar-docs-ui/src/router/routes";
@@ -17,7 +17,7 @@ import * as Providers from "@controleonline/quasar-legacy-ui/quasar-providers-ui
 import * as Queues from "@controleonline/quasar-queues-ui/src/router/routes";
 import * as Logistic from "@controleonline/quasar-logistic-ui/src/router/routes";
 import * as Support from "@controleonline/quasar-legacy-ui/quasar-support-ui/src/router/routes";
-import * as Tasks from "@controleonline/quasar-legacy-ui/quasar-tasks-ui/src/router/routes";
+import * as Tasks from "@controleonline/quasar-tasks-ui/src/router/routes";
 import * as Users from "@controleonline/quasar-legacy-ui/quasar-users-ui/src/router/routes";
 import * as Logistic_old from "@controleonline/quasar-legacy-ui/quasar-logistic-ui/src/router/routes";
 import * as Orders from "@controleonline/quasar-orders-ui/src/router/routes";
