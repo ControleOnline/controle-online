@@ -22,12 +22,11 @@ export default {
 
     }),
     setZoom() {
-      const zoom = 0.80;
-      var adjustedWidth = window.innerWidth * 100 / (zoom * 100);
-      var adjustedHeight = window.innerHeight * 100 / (zoom * 100);
+      let zoom = 0.80;
+      var size = zoom < 1 ? (parseFloat(100 / zoom)) : 100;
+      document.documentElement.style.setProperty('--zoom-width', size + 'vw');
+      document.documentElement.style.setProperty('--zoom-height', size + 'vh');
       document.documentElement.style.setProperty('--zoom-level', zoom);
-      document.documentElement.style.setProperty('--zoom-width', adjustedWidth + 'px');
-      document.documentElement.style.setProperty('--zoom-height', adjustedHeight + 'px');
     }
   },
   created() {
