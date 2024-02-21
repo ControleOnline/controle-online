@@ -4,31 +4,30 @@
 
 ```
 
-//cordova platform rm android && cordova platform add android <- rode na pasta do cordova para remover e adicionar novamente o android.
-// keystore está localizada no /home/inovia/Documents/projects/controleonline/controle-online/src-pwa/
+//cordova platform rm android && cordova platform add android <- rode na pasta do cordova para atualizar as configurações do android
+// inicie como sudo
 sudo su
+
+//export os seguintes locais:
 export ANDROID_HOME=/home/inovia/Android/Sdk/
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools/
-
 export PATH=${PATH}:/opt/gradle/gradle-7.2/bin/gradle
 alias gradle=/opt/gradle/gradle-7.2/bin/gradle
 export GRADLE_PATH=/opt/gradle/gradle-7.2/bin/gradle
-[root@inovia src-cordova]# export CORDOVA_ANDROID_GRADLE_DISTRIBUTION_URL="https\://services.gradle.org/distributions/gradle-7.2-all.zip"
+export CORDOVA_ANDROID_GRADLE_DISTRIBUTION_URL="https\://services.gradle.org/distributions/gradle-7.2-all.zip"
 
-yay -Sy jre11-openjdk
-sudo archlinux-java set java-11-openjdk
+pacman -Sy jre8-openjdk
+sudo archlinux-java set java-8-openjdk
 
 source ~/.bashrc
-//javac -version <-- em caso de erros cheque se o javac está instalado
+//javac -version <-- em caso de erros cheque se o javac 1.8.0 está instalado
 
-//sudo npx quasar build -m android
-//or
-sudo npx quasar build -m android -- -- --packageType=apk
-//para gerar apk: npx quasar build -m android -- -- --packageType=apk
 
-export PWD=/home/inovia/Documents/projects/controleonline/controle-online/pwd
+npx quasar build --mode cordova --target android --buildConfig -- --  --packageType=apk
 
-jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore "$PWD/keystore/controleonline.keystore" "$PWD/app-release-unsigned.apk" "controleonline-alias" -storepass "controleonline" -keypass "controleonline"
+- Abrir a ide:
+npx quasar dev -m android --ide
+
 
 
 ```
