@@ -23,6 +23,7 @@ import status from "@controleonline/quasar-common-ui/src/store/status";
 import products from "@controleonline/quasar-products-ui/src/store/products";
 import queues from "@controleonline/quasar-queues-ui/src/store/modules/queues";
 import city from "@controleonline/quasar-common-ui/src/store/address/city";
+import tasks from "@controleonline/quasar-tasks-ui/src/store/tasks";
 
 import { store } from "quasar/wrappers";
 import { createStore } from "vuex";
@@ -54,6 +55,7 @@ export default store(function (/* { ssrContext } */) {
       city,
       orders,
       theme,
+      tasks,
     },
 
     // enable strict mode (adds overhead!)
