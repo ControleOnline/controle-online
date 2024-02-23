@@ -1,13 +1,15 @@
 .body--light {
-  .default-table .q-table tbody tr:nth-child(even) {
-    background-color: #dfdfdf;
+  .default-table .q-table tbody tr:nth-child(even),
+  .default-table .q-table tbody tr:nth-child(even) td:first-child,
+  .default-table .q-table tbody tr:nth-child(even) td:last-child {
+    background-color: var(--bg-even-light);
   }
-  .default-table .q-table tbody tr:nth-child(odd) {
-    background-color: #fff;
+  .default-table .q-table tbody tr:nth-child(odd),
+  .default-table .q-table tbody tr:nth-child(odd) td:first-child,
+  .default-table .q-table tbody tr:nth-child(odd) td:last-child {
+    background-color: var(--bg-odd-light);
   }
-  .bg-image {
-    background-color: var(--bg-light);
-  }
+
   header {
     background-color: var(--bg-headers-light) !important;
     color: var(--text-headers-light) !important;
