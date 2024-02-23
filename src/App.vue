@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import Analytics from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/components/Common/Analytics";
+import Analytics from "@controleonline/quasar-common-ui/src/components/Common/Analytics";
 import ThemeConfig from "@controleonline/quasar-layout-ui/src/layouts/ThemeConfig";
 import { mapActions, mapGetters } from "vuex";
 export default {
