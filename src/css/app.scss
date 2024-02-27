@@ -14,7 +14,8 @@
   -o-transition: background opacity 3s ease-in-out;
   transition: background opacity 3s ease-in-out;
 }
-main > .q-card {
+
+main>.q-card {
   box-shadow: none !important;
 }
 
@@ -23,17 +24,26 @@ main > .q-card {
   font-size: 20px;
   font-weight: 700;
 }
+
 .logo-container {
   width: 100vw;
   position: absolute;
 }
+
 .current-logo-container {
   margin-top: -10px !important;
 }
+
 .current-user-container {
   position: absolute;
   right: 10px;
 }
+
 .menu-button {
   z-index: 1000000;
+}
+
+.fullscreen {
+  max-width: unset;
+  max-height: unset;
 }
