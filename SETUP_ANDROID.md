@@ -11,13 +11,14 @@ sudo su
 //export os seguintes locais:
 export ANDROID_HOME=/home/inovia/Android/Sdk/
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools/
-export PATH=${PATH}:/opt/gradle/gradle-7.2/bin/gradle
-alias gradle=/opt/gradle/gradle-7.2/bin/gradle
-export GRADLE_PATH=/opt/gradle/gradle-7.2/bin/gradle
-export CORDOVA_ANDROID_GRADLE_DISTRIBUTION_URL="https\://services.gradle.org/distributions/gradle-7.2-all.zip"
-
-pacman -Sy jre8-openjdk
-sudo archlinux-java set java-8-openjdk
+export PATH=${PATH}:/opt/gradle/gradle-7.6/bin/gradle
+export ANDROID_SDK_ROOT=/home/inovia/Android/Sdk/
+alias gradle=/opt/gradle/gradle-7.6/bin/gradle
+export GRADLE_PATH=/opt/gradle/gradle-7.6/bin/gradle
+export CORDOVA_ANDROID_GRADLE_DISTRIBUTION_URL="https\://services.gradle.org/distributions/gradle-7.6-all.zip"
+export CORDOVA_JAVA_HOME=/usr/lib/jvm/java-11-openjdk
+pacman -Sy jre11-openjdk
+sudo archlinux-java set java-11-openjdk
 
 source ~/.bashrc
 //javac -version <-- em caso de erros cheque se o javac 1.8.0 está instalado
