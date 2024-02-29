@@ -1,5 +1,5 @@
 {
-  "name": "com.controleonline.controleonline",
+  "name": "com.controleonline.controleonlineapp",
   "displayName": "Controle Online",
   "version": "1.0.0",
   "description": "CRM",
@@ -17,11 +17,15 @@
       "android"
     ],
     "plugins": {
-      "cordova-plugin-ionic-webview": {}
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-inappbrowser": {}
     }
   },
   "devDependencies": {
     "cordova-android": "^12.0.1",
-    "cordova-plugin-ionic-webview": "^5.0.1"
+    "cordova-plugin-inappbrowser": "^6.0.0",
+    "cordova-plugin-ionic-webview": "^5.0.1",
+    "cordova-plugin-splashscreen": "^6.0.1"
   }
 }
