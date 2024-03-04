@@ -55,7 +55,7 @@ const routes = [
         name: "HomeIndex",
         path: "home",
         component: () =>
-          import("@controleonline/quasar-legacy-ui/quasar-dashboard-ui/src/pages/Dashboard.vue"),
+          import("@controleonline/quasar-layout-ui/src/pages/Home"),
       },
     ],
   },
