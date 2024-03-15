@@ -211,7 +211,6 @@
 </template>
 
 <script>
-import { formatMoney } from '@controleonline/quasar-legacy-ui/quasar-common-ui/src/utils/formatter';
 
 const OPTIONS = [
   {
@@ -339,7 +338,7 @@ export default {
       }
 
       if (total > 0) {
-        this.products[index].price = formatMoney(total, 'BRL', 'pt-br');
+        this.products[index].price =  formatMoney(total, 'BRL', 'pt-br');
       }
       else {
         this.products[index].price = 'R$ 0';
