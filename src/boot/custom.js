@@ -11,9 +11,8 @@ export default boot(({ app }) => {
   app.use(Contracts);
   app.use(Dashboard);
 
-  app.config.globalProperties.$formatter = new Formatter();
+  app.config.globalProperties.$formatter = Formatter;
   app.config.globalProperties.$translate = (store, value, type) =>
     translate(store, value, type);
   app.config.globalProperties.$copyObject = (obj) => copyObject(obj);
-
 });
