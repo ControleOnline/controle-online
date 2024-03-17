@@ -1,7 +1,6 @@
 import config from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/config";
 import gmaps from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/gmaps";
 import menu from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/menu";
-import people from "@controleonline/quasar-legacy-ui/quasar-people-ui/src/store/people";
 import profile from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/profile";
 import user from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/user";
 import users from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/store/users";
@@ -14,6 +13,7 @@ import salesOrder from "@controleonline/quasar-legacy-ui/quasar-orders-ui/src/st
 import quote from "@controleonline/quasar-legacy-ui/quasar-logistic-ui/src/store/modules/quote";
 import support from "@controleonline/quasar-legacy-ui/quasar-support-ui/src/store/support";
 
+import people from "@controleonline/quasar-people-ui/src/store/people";
 import theme from "@controleonline/quasar-layout-ui/src/store/theme";
 import orders from "@controleonline/quasar-orders-ui/src/store/orders";
 import logistic from "@controleonline/quasar-logistic-ui/src/store/logistic";
