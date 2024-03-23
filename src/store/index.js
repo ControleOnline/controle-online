@@ -18,9 +18,12 @@ import theme from "@controleonline/quasar-layout-ui/src/store/theme";
 import orders from "@controleonline/quasar-orders-ui/src/store/orders";
 import logistic from "@controleonline/quasar-logistic-ui/src/store/logistic";
 import invoice from "@controleonline/quasar-financial-ui/src/store/invoice";
+import wallet from "@controleonline/quasar-financial-ui/src/store/wallet";
+import paymentType from "@controleonline/quasar-financial-ui/src/store/paymentType";
 import categories from "@controleonline/quasar-common-ui/src/store/categories";
 import status from "@controleonline/quasar-common-ui/src/store/status";
 import products from "@controleonline/quasar-products-ui/src/store/products";
+import displays from "@controleonline/quasar-queues-ui/src/store/modules/displays";
 import queues from "@controleonline/quasar-queues-ui/src/store/modules/queues";
 import city from "@controleonline/quasar-common-ui/src/store/address/city";
 import tasks from "@controleonline/quasar-tasks-ui/src/store/tasks";
@@ -35,6 +38,7 @@ export default store(function (/* { ssrContext } */) {
       status,
       auth,
       queues,
+      displays,
       coupon,
       gmaps,
       people,
@@ -46,6 +50,8 @@ export default store(function (/* { ssrContext } */) {
       salesOrder,
       purchasingOrder,
       invoice,
+      wallet,
+      paymentType,
       support,
       guides,
       categories,
