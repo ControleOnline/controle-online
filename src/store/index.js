@@ -23,7 +23,10 @@ import paymentType from "@controleonline/quasar-financial-ui/src/store/paymentTy
 import categories from "@controleonline/quasar-common-ui/src/store/categories";
 import status from "@controleonline/quasar-common-ui/src/store/status";
 import products from "@controleonline/quasar-products-ui/src/store/products";
-import productUnit from "@controleonline/quasar-products-ui/src/store/products/productUnit";
+import product_unit from "@controleonline/quasar-products-ui/src/store/products/product_unit";
+import product_group from "@controleonline/quasar-products-ui/src/store/products/product_group";
+
+
 import displays from "@controleonline/quasar-queues-ui/src/store/modules/displays";
 import queues from "@controleonline/quasar-queues-ui/src/store/modules/queues";
 import city from "@controleonline/quasar-common-ui/src/store/address/city";
@@ -59,7 +62,8 @@ export default store(function (/* { ssrContext } */) {
       menu,
       users,
       products,
-      productUnit,
+      product_unit,
+      product_group,
       logistic,
       city,
       orders,
