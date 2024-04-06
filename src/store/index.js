@@ -26,6 +26,7 @@ import products from "@controleonline/quasar-products-ui/src/store/products";
 import product_unit from "@controleonline/quasar-products-ui/src/store/products/product_unit";
 import product_group from "@controleonline/quasar-products-ui/src/store/products/product_group";
 import product_group_product from "@controleonline/quasar-products-ui/src/store/products/product_group_product";
+import product_group_feedstock from "@controleonline/quasar-products-ui/src/store/products/product_group_feedstock";
 import displays from "@controleonline/quasar-queues-ui/src/store/modules/displays";
 import queues from "@controleonline/quasar-queues-ui/src/store/modules/queues";
 import city from "@controleonline/quasar-common-ui/src/store/address/city";
@@ -64,12 +65,13 @@ export default store(function (/* { ssrContext } */) {
       product_unit,
       product_group,
       product_group_product,
+      product_group_feedstock,
       logistic,
       city,
       orders,
       theme,
       tasks,
-      crm
+      crm,
     },
 
     // enable strict mode (adds overhead!)
