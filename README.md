@@ -1,6 +1,6 @@
 # ERP
 
-FreteClick Quotation Front End
+Controle Online Front End
 
 ## Install the dependencies
 ```bash
@@ -16,6 +16,12 @@ quasar dev
 ### Build the app for production
 ```bash
 quasar build
+```
+
+### Submodules
+```bash
+git submodule update --init --recursive
+git submodule update --recursive
 ```
 
 ### Customize the configuration
