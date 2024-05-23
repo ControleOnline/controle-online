@@ -12,7 +12,7 @@
     "@controleonline/quasar-common-ui": "^1.2.60",
     "@controleonline/quasar-default-ui": "^1.0.108",
     "@controleonline/quasar-financial-ui": "^1.1.24",
-    "@controleonline/quasar-layout-ui": "^1.0.9",
+    "@controleonline/quasar-layout-ui": "^1.0.11",
     "@controleonline/quasar-legacy-ui": "^1.0.0",
     "@controleonline/quasar-logistic-ui": "^1.0.27",
     "@controleonline/quasar-products-ui": "^1.0.24",
