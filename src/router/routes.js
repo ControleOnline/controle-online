@@ -4,7 +4,7 @@ import * as Config from "@controleonline/quasar-legacy-ui/quasar-config-ui/src/r
 import * as Contracts from "@controleonline/quasar-legacy-ui/quasar-contracts-ui/src/router/routes";
 import * as Coupon from "@controleonline/quasar-legacy-ui/quasar-coupon-ui/src/router/routes";
 import * as Crm from "@controleonline/quasar-crm-ui/src/router/routes";
-import * as Customers from "@controleonline/quasar-legacy-ui/quasar-customers-ui/src/router/routes";
+import * as Customers from "@controleonline/quasar-customers-ui/src/router/routes";
 import * as Dashboard from "@controleonline/quasar-legacy-ui/quasar-dashboard-ui/src/router/routes";
 import * as Docs from "@controleonline/quasar-legacy-ui/quasar-docs-ui/src/router/routes";
 import * as Financial from "@controleonline/quasar-financial-ui/src/router/routes";
