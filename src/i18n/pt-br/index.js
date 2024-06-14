@@ -11,8 +11,8 @@ import * as Orders_old from "@controleonline/quasar-legacy-ui/quasar-orders-ui/s
 import * as Financial from "@controleonline/quasar-financial-ui/src/i18n/pt-br/index";
 import * as Contracts from "@controleonline/quasar-legacy-ui/quasar-contracts-ui/src/i18n/pt-br/index";
 import * as Tasks from "@controleonline/quasar-tasks-ui/src/i18n/pt-br/index";
-import * as Professionals from "@controleonline/quasar-legacy-ui/quasar-professionals-ui/src/i18n/pt-br/index";
-import * as Carriers from "@controleonline/quasar-legacy-ui/quasar-carrier-ui/src/i18n/pt-br/index";
+import * as Professionals from "@controleonline/quasar-professionals-ui/src/i18n/pt-br/index";
+import * as Carriers from "@controleonline/quasar-carrier-ui/src/i18n/pt-br/index";
 import * as Logistic from "@controleonline/quasar-logistic-ui/src/i18n/pt-br/index";
 import * as Coupon from "@controleonline/quasar-legacy-ui/quasar-coupon-ui/src/i18n/pt-br/index";
 import * as Accounting from "@controleonline/quasar-legacy-ui/quasar-accounting-ui/src/i18n/pt-br/index";
