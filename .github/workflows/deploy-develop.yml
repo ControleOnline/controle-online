@@ -14,7 +14,7 @@ jobs:
       - name: Building the project dev
         run: |
           cd /home/runner/work/controle-online/controle-online
-          echo "export const ENTRYPOINT_LOCAL = 'https://api.dev.controleonline.com'" > ./src/config/entrypoint.local.js
+          echo "export const ENTRYPOINT_LOCAL = 'https://api.dev.controleonline.com'" > ./config/entrypoint.local.js
           echo "export const DOMAIN_LOCAL = location.host" > ./src/config/domain.local.js
           echo "const env = {\
           OAUTH_GOOGLE_CLIENT_ID:'${{ secrets.OAUTH_GOOGLE_CLIENT_ID }}',\
