@@ -15,7 +15,7 @@ jobs:
         run: |
           cd /home/runner/work/controle-online/controle-online
           echo "export const ENTRYPOINT_LOCAL = 'https://api.dev.controleonline.com'" > ./config/entrypoint.local.js
-          echo "export const DOMAIN_LOCAL = location.host" > ./src/config/domain.local.js
+          echo "export const DOMAIN_LOCAL = location.host" > ./config/domain.local.js
           echo "const env = {\
           OAUTH_GOOGLE_CLIENT_ID:'${{ secrets.OAUTH_GOOGLE_CLIENT_ID }}',\
           GMAPS_GOOGLE_CLIENT_ID:'${{ secrets.GMAPS_GOOGLE_CLIENT_ID }}',\
@@ -30,7 +30,7 @@ jobs:
           zoom: 0.70\
           };\
           module.exports = { env };\
-          " > ./src/config/env.local.js
+          " > ./config/env.local.js
           npm install --global yarn
           npm update
           yarn
