@@ -1,6 +1,6 @@
 import myFetch from "@controleonline/quasar-legacy-ui/quasar-common-ui/src/utils/fetch";
 import axios from "axios";
-import { DOMAIN } from '../config/domain';
+import { DOMAIN } from '../../config/domain';
 
 
 let myStore = null;
