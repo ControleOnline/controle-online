@@ -40,21 +40,8 @@ jobs:
         uses: horochx/deploy-via-scp@master
         with:
           local: /home/runner/work/controle-online/controle-online/dist/*
-          remote: ~/sistemas/controleonline/app/dist
+          remote: ~/public_html
           host: dev.controleonline.com
           port: 22
-          user: controleonline1
-          key: ${{ secrets.LOCAWEB }} 
-      - name: Update Controle Online      
-        uses: appleboy/ssh-action@master
-        with:
-          host: dev.controleonline.com
-          username: controleonline1
-          key: ${{ secrets.LOCAWEB }}
-          port: 22        
-          script: |
-                  cd ~/sistemas/controleonline/api
-                  git checkout develop
-                  git pull origin develop                
-                  php composer.phar install --no-suggest
-                  php bin/console tenant:migrations:migrate --no-interaction                                   
+          user: devcontroleonlin1
+          key: ${{ secrets.LOCAWEB }}                              
