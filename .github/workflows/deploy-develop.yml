@@ -34,7 +34,6 @@ jobs:
           npm install --global yarn
           npm update
           yarn
-          git submodule update --init --recursive
           npx quasar build
           npx quasar build -m pwa
       - name: Copy to controleonline dev
