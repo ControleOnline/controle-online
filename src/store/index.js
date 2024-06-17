@@ -8,8 +8,6 @@ import coupon from "@controleonline/quasar-legacy-ui/quasar-coupon-ui/src/store/
 import dashboard from "@controleonline/quasar-legacy-ui/quasar-dashboard-ui/src/mixins/dashboard";
 import guides from "@controleonline/quasar-legacy-ui/quasar-guides-ui/src/store/guides";
 import auth from "@controleonline/quasar-legacy-ui/quasar-login-ui/src/store/modules/auth";
-import purchasingOrder from "@controleonline/quasar-legacy-ui/quasar-orders-ui/src/store/modules/order/purchasing";
-import salesOrder from "@controleonline/quasar-legacy-ui/quasar-orders-ui/src/store/modules/order/sales";
 import quote from "@controleonline/quasar-legacy-ui/quasar-logistic-ui/src/store/modules/quote";
 import support from "@controleonline/quasar-legacy-ui/quasar-support-ui/src/store/support";
 
@@ -51,8 +49,6 @@ export default store(function (/* { ssrContext } */) {
       user,
       dashboard,
       quote,
-      salesOrder,
-      purchasingOrder,
       invoice,
       wallet,
       paymentType,
