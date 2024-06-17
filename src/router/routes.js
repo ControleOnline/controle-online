@@ -10,7 +10,6 @@ import * as Docs from "@controleonline/quasar-legacy-ui/quasar-docs-ui/src/route
 import * as Financial from "@controleonline/quasar-financial-ui/src/router/routes";
 import * as Import from "@controleonline/quasar-legacy-ui/quasar-import-ui/src/router/routes";
 import * as Login from "@controleonline/quasar-legacy-ui/quasar-login-ui/src/router/routes";
-import * as Quotations from "@controleonline/quasar-legacy-ui/quasar-orders-ui/src/router/routes";
 import * as Products from "@controleonline/quasar-products-ui/src/router/routes";
 import * as Professionals from "@controleonline/quasar-professionals-ui/src/router/routes";
 import * as Employee from "@controleonline/quasar-employee-ui/src/router/routes";
@@ -29,7 +28,6 @@ import * as Orders from "@controleonline/quasar-orders-ui/src/router/routes";
 const routes = [
   ...Login.routes,
   ...Logistic.routes,
-  ...Quotations.routes,
   ...Financial.routes,
   ...Providers.routes,
   ...Customers.routes,
