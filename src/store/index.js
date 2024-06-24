@@ -31,6 +31,10 @@ import city from "@controleonline/quasar-common-ui/src/store/address/city";
 import tasks from "@controleonline/quasar-tasks-ui/src/store/tasks";
 import crm from "@controleonline/quasar-crm-ui/src/store/crm";
 
+import extra_fields from "@controleonline/quasar-common-ui/src/store/extra/fields";
+
+
+
 import { store } from "quasar/wrappers";
 import { createStore } from "vuex";
 
@@ -68,6 +72,7 @@ export default store(function (/* { ssrContext } */) {
       theme,
       tasks,
       crm,
+      extra_fields,
     },
 
     // enable strict mode (adds overhead!)
