@@ -11,6 +11,13 @@ import auth from "@controleonline/quasar-legacy-ui/quasar-login-ui/src/store/mod
 import quote from "@controleonline/quasar-legacy-ui/quasar-logistic-ui/src/store/modules/quote";
 import support from "@controleonline/quasar-legacy-ui/quasar-support-ui/src/store/support";
 
+
+import companies from "@controleonline/quasar-people-ui/src/store/companies";
+import usersCustomer from "@controleonline/quasar-people-ui/src/store/usersCustomer";
+import addresses from "@controleonline/quasar-people-ui/src/store/addresses";
+import documents from "@controleonline/quasar-people-ui/src/store/documents";
+import phones from "@controleonline/quasar-people-ui/src/store/phones";
+import emails from "@controleonline/quasar-people-ui/src/store/emails";
 import people from "@controleonline/quasar-people-ui/src/store/people";
 import theme from "@controleonline/quasar-layout-ui/src/store/theme";
 import orders from "@controleonline/quasar-orders-ui/src/store/orders";
@@ -46,6 +53,12 @@ export default store(function (/* { ssrContext } */) {
       displays,
       coupon,
       gmaps,
+      emails,
+      addresses,
+      phones,
+      documents,
+      usersCustomer,
+      companies,
       people,
       config,
       profile,
