@@ -12,6 +12,7 @@ import quote from "@controleonline/quasar-legacy-ui/quasar-logistic-ui/src/store
 import support from "@controleonline/quasar-legacy-ui/quasar-support-ui/src/store/support";
 
 
+import contracts from "@controleonline/quasar-people-ui/src/store/contracts";
 import companies from "@controleonline/quasar-people-ui/src/store/companies";
 import usersCustomer from "@controleonline/quasar-people-ui/src/store/usersCustomer";
 import addresses from "@controleonline/quasar-people-ui/src/store/addresses";
@@ -53,6 +54,7 @@ export default store(function (/* { ssrContext } */) {
       displays,
       coupon,
       gmaps,
+      contracts,
       emails,
       addresses,
       phones,
