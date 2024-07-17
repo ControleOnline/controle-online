@@ -18,6 +18,7 @@ import * as Accounting from "@controleonline/quasar-legacy-ui/quasar-accounting-
 import * as Import from "@controleonline/quasar-legacy-ui/quasar-import-ui/src/i18n/pt-br/index";
 import * as CRM from "@controleonline/quasar-crm-ui/src/i18n/pt-br/index";
 import * as People from "@controleonline/quasar-people-ui/src/i18n/pt-br/index";
+// import * as People from "../../../modules/controleonline/quasar-people-ui/src/i18n/pt-br/index";
 import * as Docs from "@controleonline/quasar-legacy-ui/quasar-docs-ui/src/i18n/pt-br/index";
 import * as Config from "@controleonline/quasar-legacy-ui/quasar-config-ui/src/i18n/pt-br/index";
 import * as Products from "@controleonline/quasar-products-ui/src/i18n/pt-br/index";
