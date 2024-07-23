@@ -1,1 +1,1 @@
-export * from "@controleonline/quasar-common-ui/src/api"; 
+export * from "@controleonline/ui-common/src/api"; 
