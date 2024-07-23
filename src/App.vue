@@ -6,8 +6,8 @@
   </div>
 </template>
 <script>
-import Analytics from "@controleonline/quasar-common-ui/src/components/Common/Analytics";
-import ThemeConfig from "@controleonline/quasar-layout-ui/src/layouts/ThemeConfig";
+import Analytics from "@controleonline/ui-common/src/components/Common/Analytics";
+import ThemeConfig from "@controleonline/ui-layout/src/layouts/ThemeConfig";
 import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
