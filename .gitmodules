@@ -55,3 +55,6 @@
 [submodule "modules/controleonline/ui-shop"]
 	path = modules/controleonline/ui-shop
 	url = https://github.com/ControleOnline/ui-shop.git
+[submodule "modules/controleonline/ui-legacy"]
+	path = modules/controleonline/ui-legacy
+	url = https://github.com/ControleOnline/ui-legacy.git

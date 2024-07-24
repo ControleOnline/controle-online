@@ -250,7 +250,7 @@
 </template>
 
 <script>
-import CEPSearchInput from '@controleonline/quasar-legacy-ui/ui-common/src/components/Common/CEPSearchInput.vue';
+import CEPSearchInput from '@controleonline/ui-legacy/ui-common/src/components/Common/CEPSearchInput.vue';
 
 export default {
   props: {

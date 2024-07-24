@@ -1,15 +1,15 @@
-import config from "@controleonline/quasar-legacy-ui/ui-common/src/store/config";
-import gmaps from "@controleonline/quasar-legacy-ui/ui-common/src/store/gmaps";
-import menu from "@controleonline/quasar-legacy-ui/ui-common/src/store/menu";
-import profile from "@controleonline/quasar-legacy-ui/ui-common/src/store/profile";
-import user from "@controleonline/quasar-legacy-ui/ui-common/src/store/user";
-import users from "@controleonline/quasar-legacy-ui/ui-common/src/store/users";
-import coupon from "@controleonline/quasar-legacy-ui/quasar-coupon-ui/src/store/coupon";
-import dashboard from "@controleonline/quasar-legacy-ui/quasar-dashboard-ui/src/mixins/dashboard";
-import guides from "@controleonline/quasar-legacy-ui/quasar-guides-ui/src/store/guides";
-import auth from "@controleonline/quasar-legacy-ui/ui-login/src/store/modules/auth";
-import quote from "@controleonline/quasar-legacy-ui/ui-logistic/src/store/modules/quote";
-import support from "@controleonline/quasar-legacy-ui/quasar-support-ui/src/store/support";
+import config from "@controleonline/ui-legacy/ui-common/src/store/config";
+import gmaps from "@controleonline/ui-legacy/ui-common/src/store/gmaps";
+import menu from "@controleonline/ui-legacy/ui-common/src/store/menu";
+import profile from "@controleonline/ui-legacy/ui-common/src/store/profile";
+import user from "@controleonline/ui-legacy/ui-common/src/store/user";
+import users from "@controleonline/ui-legacy/ui-common/src/store/users";
+import coupon from "@controleonline/ui-legacy/ui-coupon/src/store/coupon";
+import dashboard from "@controleonline/ui-legacy/ui-dashboard/src/mixins/dashboard";
+import guides from "@controleonline/ui-legacy/ui-guides/src/store/guides";
+import auth from "@controleonline/ui-legacy/ui-login/src/store/modules/auth";
+import quote from "@controleonline/ui-legacy/ui-logistic/src/store/modules/quote";
+import support from "@controleonline/ui-legacy/ui-support/src/store/support";
 
 
 import contracts from "@controleonline/ui-people/src/store/contracts";
