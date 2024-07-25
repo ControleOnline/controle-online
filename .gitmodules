@@ -58,3 +58,6 @@
 [submodule "modules/controleonline/ui-legacy"]
 	path = modules/controleonline/ui-legacy
 	url = https://github.com/ControleOnline/ui-legacy.git
+[submodule "modules/controleonline/ui-contracts"]
+	path = modules/controleonline/ui-contracts
+	url = https://github.com/ControleOnline/ui-contracts.git
