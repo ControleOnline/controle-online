@@ -14,7 +14,7 @@ import * as Professionals from "@controleonline/ui-professionals/src/i18n/pt-br/
 import * as Carriers from "@controleonline/ui-carrier/src/i18n/pt-br/index";
 import * as Logistic from "@controleonline/ui-logistic/src/i18n/pt-br/index";
 import * as Coupon from "@controleonline/ui-legacy/ui-coupon/src/i18n/pt-br/index";
-import * as Accounting from "@controleonline/ui-legacy/ui-accounting/src/i18n/pt-br/index";
+import * as Accounting from "@controleonline/ui-accounting/src/i18n/pt-br/index";
 import * as Import from "@controleonline/ui-legacy/ui-import/src/i18n/pt-br/index";
 import * as CRM from "@controleonline/ui-crm/src/i18n/pt-br/index";
 import * as People from "@controleonline/ui-people/src/i18n/pt-br/index";
