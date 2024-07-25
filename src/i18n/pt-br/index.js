@@ -8,7 +8,7 @@ import * as Common from "@controleonline/ui-legacy/ui-common/src/i18n/pt-br/inde
 import * as Dashboard from "@controleonline/ui-legacy/ui-dashboard/src/i18n/pt-br/index";
 import * as Login from "@controleonline/ui-legacy/ui-login/src/i18n/pt-br/index";
 import * as Financial from "@controleonline/ui-financial/src/i18n/pt-br/index";
-import * as Contracts from "@controleonline/ui-legacy/ui-contracts/src/i18n/pt-br/index";
+import * as Contracts from "@controleonline/ui-contracts/src/i18n/pt-br/index";
 import * as Tasks from "@controleonline/ui-tasks/src/i18n/pt-br/index";
 import * as Professionals from "@controleonline/ui-professionals/src/i18n/pt-br/index";
 import * as Carriers from "@controleonline/ui-carrier/src/i18n/pt-br/index";
