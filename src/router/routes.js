@@ -54,20 +54,20 @@ const routes = [
   ...People.routes,
   {
     path: "/",
-    component: () => import("@controleonline/quasar-layout-ui/src/layouts/AdminLayout.vue"),
+    component: () => import("@controleonline/ui-layout/src/layouts/AdminLayout.vue"),
     children: [
       {
         name: "HomeIndex",
         path: "home",
         component: () =>
-          import("@controleonline/quasar-layout-ui/src/pages/Home"),
+          import("@controleonline/ui-layout/src/pages/Home"),
       },
     ],
   },
 
   {
     path: "/calc",
-    component: () => import("@controleonline/quasar-layout-ui/src/layouts/MainLayout.vue"),
+    component: () => import("@controleonline/ui-layout/src/layouts/MainLayout.vue"),
     children: [
       {
         name: "CalculatorIndex",
@@ -78,7 +78,7 @@ const routes = [
   },
   {
     path: "/infos/",
-    component: () => import("@controleonline/quasar-layout-ui/src/layouts/AdminLayout.vue"),
+    component: () => import("@controleonline/ui-layout/src/layouts/AdminLayout.vue"),
     children: [
       {
         name: "BasicInfoIndex",
@@ -89,7 +89,7 @@ const routes = [
   },
   {
     path: "/planos/",
-    component: () => import("@controleonline/quasar-layout-ui/src/layouts/AdminLayout.vue"),
+    component: () => import("@controleonline/ui-layout/src/layouts/AdminLayout.vue"),
     children: [
       {
         name: "PlansIndex",
@@ -110,7 +110,7 @@ const routes = [
   },
   {
     path: "/etapas-do-cadastro/",
-    component: () => import("@controleonline/quasar-layout-ui/src/layouts/AdminLayout.vue"),
+    component: () => import("@controleonline/ui-layout/src/layouts/AdminLayout.vue"),
     children: [
       {
         name: "StepsRegistration",
@@ -132,7 +132,7 @@ const routes = [
 
   {
     path: "/servicos-adicionais/",
-    component: () => import("@controleonline/quasar-layout-ui/src/layouts/AdminLayout.vue"),
+    component: () => import("@controleonline/ui-layout/src/layouts/AdminLayout.vue"),
     children: [
       {
         name: "ServicosAdicionaisIndex",
