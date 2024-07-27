@@ -19,14 +19,16 @@ import * as Logistic from "@controleonline/quasar-logistic-ui/src/router/routes"
 import * as Support from "@controleonline/quasar-legacy-ui/quasar-support-ui/src/router/routes";
 import * as Tasks from "@controleonline/quasar-tasks-ui/src/router/routes";
 import * as People from "@controleonline/quasar-people-ui/src/router/routes";
+import DashboardPage from '../../modules/controleonline/quasar-dashboard-ui/src/pages/DashboardPage.vue';
 
 import * as Users from "@controleonline/quasar-users-ui/src/router/routes";
 import * as Logistic_old from "@controleonline/quasar-legacy-ui/quasar-logistic-ui/src/router/routes";
 import * as Orders from "@controleonline/quasar-orders-ui/src/router/routes";
- 
+
 
 const routes = [
   ...Login.routes,
+  // ...DashboardPage.routes,
   ...Logistic.routes,
   ...Financial.routes,
   ...Providers.routes,
@@ -146,6 +148,19 @@ const routes = [
         name: "ServicosAdicionaisEdit",
         path: ":id",
         component: () => import("pages/Servicos/Edit.vue"),
+      },
+    ],
+  },
+
+  // Rota para DashboardPage (a ser alterada)
+  {
+    path: "/dashboard",
+    component: () => import("@controleonline/quasar-layout-ui/src/layouts/AdminLayout.vue"),
+    children: [
+      {
+        name: "DashboardPage",
+        path: "",
+        component: DashboardPage,
       },
     ],
   },
