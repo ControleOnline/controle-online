@@ -5,7 +5,6 @@ import * as Contracts from "@controleonline/quasar-legacy-ui/quasar-contracts-ui
 import * as Coupon from "@controleonline/quasar-legacy-ui/quasar-coupon-ui/src/router/routes";
 import * as Crm from "@controleonline/quasar-crm-ui/src/router/routes";
 import * as Customers from "@controleonline/quasar-customers-ui/src/router/routes";
-import * as Dashboard from "@controleonline/quasar-legacy-ui/quasar-dashboard-ui/src/router/routes";
 import * as Docs from "@controleonline/quasar-legacy-ui/quasar-docs-ui/src/router/routes";
 import * as Financial from "@controleonline/quasar-financial-ui/src/router/routes";
 import * as Import from "@controleonline/quasar-legacy-ui/quasar-import-ui/src/router/routes";
@@ -19,7 +18,7 @@ import * as Logistic from "@controleonline/quasar-logistic-ui/src/router/routes"
 import * as Support from "@controleonline/quasar-legacy-ui/quasar-support-ui/src/router/routes";
 import * as Tasks from "@controleonline/quasar-tasks-ui/src/router/routes";
 import * as People from "@controleonline/quasar-people-ui/src/router/routes";
-import DashboardPage from '../../modules/controleonline/quasar-dashboard-ui/src/pages/DashboardPage.vue';
+import * as Dashboard from '@controleonline/ui-dashboard/src/pages/DashboardPage.vue';
 
 import * as Users from "@controleonline/quasar-users-ui/src/router/routes";
 import * as Logistic_old from "@controleonline/quasar-legacy-ui/quasar-logistic-ui/src/router/routes";
@@ -28,7 +27,6 @@ import * as Orders from "@controleonline/quasar-orders-ui/src/router/routes";
 
 const routes = [
   ...Login.routes,
-  // ...DashboardPage.routes,
   ...Logistic.routes,
   ...Financial.routes,
   ...Providers.routes,
