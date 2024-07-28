@@ -5,7 +5,6 @@
 // so you can safely delete all default props below
 
 import * as Common from "@controleonline/ui-legacy/ui-common/src/i18n/pt-br/index";
-import * as Dashboard from "@controleonline/ui-legacy/ui-dashboard/src/i18n/pt-br/index";
 import * as Login from "@controleonline/ui-legacy/ui-login/src/i18n/pt-br/index";
 import * as Financial from "@controleonline/ui-financial/src/i18n/pt-br/index";
 import * as Contracts from "@controleonline/ui-contracts/src/i18n/pt-br/index";
@@ -35,7 +34,6 @@ export default {
   ...Accounting.translate,
   ...Coupon.translate,
   ...Common.translate,
-  ...Dashboard.translate,
   ...Financial.translate,
   ...Contracts.translate,
   ...Tasks.translate,

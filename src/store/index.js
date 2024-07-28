@@ -5,7 +5,6 @@ import profile from "@controleonline/ui-legacy/ui-common/src/store/profile";
 import user from "@controleonline/ui-legacy/ui-common/src/store/user";
 import users from "@controleonline/ui-legacy/ui-common/src/store/users";
 import coupon from "@controleonline/ui-legacy/ui-coupon/src/store/coupon";
-import dashboard from "@controleonline/ui-legacy/ui-dashboard/src/mixins/dashboard";
 import guides from "@controleonline/ui-legacy/ui-guides/src/store/guides";
 import auth from "@controleonline/ui-legacy/ui-login/src/store/modules/auth";
 import quote from "@controleonline/ui-legacy/ui-logistic/src/store/modules/quote";
@@ -65,7 +64,6 @@ export default store(function (/* { ssrContext } */) {
       config,
       profile,
       user,
-      dashboard,
       quote,
       invoice,
       wallet,
