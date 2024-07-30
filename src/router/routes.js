@@ -5,7 +5,7 @@ import * as Contracts from "@controleonline/ui-contracts/src/router/routes";
 import * as Coupon from "@controleonline/ui-legacy/ui-coupon/src/router/routes";
 import * as Crm from "@controleonline/ui-crm/src/router/routes";
 import * as Customers from "@controleonline/ui-customers/src/router/routes";
-import * as Dashboard from "@controleonline/ui-dashboard/src/router/routes";
+// import * as Dashboard from "@controleonline/ui-dashboard/src/router/routes";
 import * as Docs from "@controleonline/ui-legacy/ui-docs/src/router/routes";
 import * as Financial from "@controleonline/ui-financial/src/router/routes";
 import * as Import from "@controleonline/ui-legacy/ui-import/src/router/routes";
@@ -23,7 +23,7 @@ import * as People from "@controleonline/ui-people/src/router/routes";
 import * as Users from "@controleonline/ui-users/src/router/routes";
 import * as Logistic_old from "@controleonline/ui-legacy/ui-logistic/src/router/routes";
 import * as Orders from "@controleonline/ui-orders/src/router/routes";
- 
+
 
 const routes = [
   ...Login.routes,
@@ -35,7 +35,7 @@ const routes = [
   ...Tasks.routes,
   ...Carrier.routes,
   ...Users.routes,
-  ...Dashboard.routes,
+  // ...Dashboard.routes,
   ...Support.routes,
   ...Coupon.routes,
   ...Accounting.routes,
