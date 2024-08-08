@@ -37,6 +37,7 @@ import queues from "@controleonline/ui-queues/src/store/modules/queues";
 import city from "@controleonline/ui-common/src/store/address/city";
 import tasks from "@controleonline/ui-tasks/src/store/tasks";
 import crm from "@controleonline/ui-crm/src/store/crm";
+import dashboard from "@controleonline/ui-dashboard/src/store/dashboard";
 
 import extra_fields from "@controleonline/ui-common/src/store/extra/fields";
 import extra_data from "@controleonline/ui-common/src/store/extra/data";
@@ -86,6 +87,8 @@ export default store(function (/* { ssrContext } */) {
       crm,
       extra_fields,
       extra_data,
+      dashboard,
+
     },
 
     // enable strict mode (adds overhead!)
