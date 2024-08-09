@@ -20,6 +20,7 @@ quasar build
 
 ### Submodules
 ```bash
+git submodule update
 git submodule update --init --recursive
 git submodule update --recursive
 ```
