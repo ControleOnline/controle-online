@@ -19,7 +19,7 @@ import * as CRM from "@controleonline/ui-crm/src/i18n/pt-br/index";
 import * as People from "@controleonline/ui-people/src/i18n/pt-br/index";
 // import * as People from "../../../modules/controleonline/ui-people/src/i18n/pt-br/index";
 import * as Docs from "@controleonline/ui-legacy/ui-docs/src/i18n/pt-br/index";
-import * as Config from "@controleonline/ui-legacy/ui-config/src/i18n/pt-br/index";
+import * as Config from "@controleonline/ui-config/src/i18n/pt-br/index";
 import * as Products from "@controleonline/ui-products/src/i18n/pt-br/index";
 import * as Queues from "@controleonline/ui-queues/src/i18n/pt-br/index";
 import * as Default from "@controleonline/ui-default/src/i18n/pt-br/index";
