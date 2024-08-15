@@ -1,6 +1,6 @@
 import * as Accounting from "@controleonline/ui-accounting/src/router/routes";
 import * as Carrier from "@controleonline/ui-carrier/src/router/routes";
-import * as Config from "@controleonline/ui-legacy/ui-config/src/router/routes";
+import * as Config from "@controleonline/ui-config/src/router/routes";
 import * as Contracts from "@controleonline/ui-contracts/src/router/routes";
 import * as Coupon from "@controleonline/ui-legacy/ui-coupon/src/router/routes";
 import * as Crm from "@controleonline/ui-crm/src/router/routes";
