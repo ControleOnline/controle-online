@@ -1,9 +1,9 @@
 import { createApp } from "vue";
-import Formatter from "@controleonline/quasar-common-ui/src/utils/formatter.js";
+import Formatter from "@controleonline/ui-common/src/utils/formatter.js";
 import {
   translate,
   copyObject,
-} from "@controleonline/quasar-default-ui/src/components/Default/Scripts/DefaultMethods.js";
+} from "@controleonline/ui-default/src/components/Default/Scripts/DefaultMethods.js";
 import { DOMAIN } from "../../config/domain";
 import { ENTRYPOINT } from "../../config/entrypoint.js";
 

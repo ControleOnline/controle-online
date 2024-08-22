@@ -1,0 +1,92 @@
+{
+  "id": "c0b98b45-8231-41c3-803f-c3dd7bfd86ee",
+  "version": "2.0",
+  "name": "Controle Online",
+  "url": "https://app.dev.controleonline.com",
+  "tests": [{
+    "id": "6ac9dcf8-c323-4dcc-b919-89971494fb1c",
+    "name": "Login",
+    "commands": [{
+      "id": "1d977e80-acf7-4f6f-806e-c6489dcab3f9",
+      "comment": "",
+      "command": "open",
+      "target": "/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ed380d2e-7262-4b48-82c4-c812baa2e67b",
+      "comment": "",
+      "command": "click",
+      "target": "css=input[aria-label=\"Usuário\"]",
+      "targets": [
+        ["id=f_9050a9cc-ed72-4414-9c16-937df53019eb", "id"],
+        ["css=#f_9050a9cc-ed72-4414-9c16-937df53019eb", "css:finder"],
+        ["xpath=//input[@id='f_9050a9cc-ed72-4414-9c16-937df53019eb']", "xpath:attributes"],
+        ["xpath=//div[@id='q-app']/div/div/main/div/div[2]/div[2]/form/label/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "77163c30-cfca-4e57-b5a7-f997264de18e",
+      "comment": "",
+      "command": "type",
+      "target": "css=input[aria-label=\"Usuário\"]",
+      "targets": [
+        ["id=f_9050a9cc-ed72-4414-9c16-937df53019eb", "id"],
+        ["css=#f_9050a9cc-ed72-4414-9c16-937df53019eb", "css:finder"],
+        ["xpath=//input[@id='f_9050a9cc-ed72-4414-9c16-937df53019eb']", "xpath:attributes"],
+        ["xpath=//div[@id='q-app']/div/div/main/div/div[2]/div[2]/form/label/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "luiz.kim"
+    }, {
+      "id": "2eb6fe96-c157-48f6-93db-f1bb10a46573",
+      "comment": "",
+      "command": "type",
+      "target": "css=input[aria-label=\"Senha\"]",
+      "targets": [
+        ["id=f_3b097544-b34b-47d3-becf-9a2effa970cd", "id"],
+        ["css=#f_3b097544-b34b-47d3-becf-9a2effa970cd", "css:finder"],
+        ["xpath=//input[@id='f_3b097544-b34b-47d3-becf-9a2effa970cd']", "xpath:attributes"],
+        ["xpath=//div[@id='q-app']/div/div/main/div/div[2]/div[2]/form/label[2]/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//label[2]/div/div/div/input", "xpath:position"]
+      ],
+      "value": "Lw7q8a9w5@@qw"
+    }, {
+      "id": "1e0e2258-acff-4aaf-92d9-41b6a7fc0a8a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.q-btn--unelevated > .q-btn__content",
+      "targets": [
+        ["css=.q-btn--unelevated > .q-btn__content", "css:finder"],
+        ["xpath=//div[@id='q-app']/div/div/main/div/div[2]/div[2]/form/div/button/span[2]", "xpath:idRelative"],
+        ["xpath=//span[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f7f02818-344c-4108-a4c9-1ddea9283b67",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=.q-item__section column.q-item__section--main.justify-center.q-item__section--nowrap",
+      "targets": [],
+      "value": "30000"
+    }, {
+      "id": "8f9e4d4a-a872-4e8a-981d-3c71e827d860",
+      "comment": "",
+      "command": "assert",
+      "target": "css=.q-item__section column.q-item__section--main.justify-center.q-item__section--nowrap",
+      "targets": [],
+      "value": "Clientes"
+    }]
+  }],
+  "suites": [{
+    "id": "cba3d3f5-4db4-4093-8d1e-0bb97dc89c6e",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["6ac9dcf8-c323-4dcc-b919-89971494fb1c"]
+  }],
+  "urls": ["https://app.dev.controleonline.com/"],
+  "plugins": []
+}
