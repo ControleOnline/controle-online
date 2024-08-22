@@ -37,7 +37,6 @@ jobs:
         run: |
           npm install --global yarn
           yarn
-          npm install
       - name: Build
         run: |
           npx quasar build -m spa
