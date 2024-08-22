@@ -21,6 +21,8 @@ import emails from "@controleonline/ui-people/src/store/emails";
 import people from "@controleonline/ui-people/src/store/people";
 import theme from "@controleonline/ui-layout/src/store/theme";
 import orders from "@controleonline/ui-orders/src/store/orders";
+import product_orders from "@controleonline/ui-orders/src/store/product_orders";
+
 import logistic from "@controleonline/ui-logistic/src/store/logistic";
 import invoice from "@controleonline/ui-financial/src/store/invoice";
 import wallet from "@controleonline/ui-financial/src/store/wallet";
@@ -60,6 +62,7 @@ export default store(function (/* { ssrContext } */) {
       phones,
       documents,
       usersCustomer,
+      product_orders,
       companies,
       people,
       config,
