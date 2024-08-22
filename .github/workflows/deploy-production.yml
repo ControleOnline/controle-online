@@ -2,17 +2,20 @@ name: Deploy Project
 on:
   push:
     branches: [production]
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         with:
           node-version: "18.17.1"
+
       - name: Creating Config
         run: |
-          cd /home/runner/work/controle-online/controle-online
           echo "export const ENTRYPOINT_LOCAL = 'https://api.controleonline.com'" > ./config/entrypoint.local.js
           echo "export const DOMAIN_LOCAL = location.host" > ./config/domain.local.js
           echo "const env = {\
@@ -30,21 +33,28 @@ jobs:
           };\
           module.exports = { env };\
           " > ./config/env.local.js
-      - name: Submodules
-        run: git submodule update --init --recursive
-             git submodule update --recursive --remote
-      - name: Install Mosules
-        run: npm install --global yarn
+
+      - name: Update Submodules
+        run: |
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+
+      - name: Install Modules
+        run: |
+          npm install --global yarn
           npm update
           yarn
+
       - name: Build
-        run: npx quasar build -m spa
+        run: |
+          npx quasar build -m spa
+
       - name: Deploy
         uses: locaweb/ftp-deploy@1.0.0
         with:
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USER }}
           password: ${{ secrets.PASS }}
-          localDir: "/home/runner/work/controle-online/controle-online/dist/spa"
+          localDir: "./dist/spa"
           remoteDir: "~/public_html"
           forceSsl: true
