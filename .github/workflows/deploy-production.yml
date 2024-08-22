@@ -31,8 +31,8 @@ jobs:
           module.exports = { env };\
           " > ./config/env.local.js
       - name: Submodules
-        run: git submodule update --init --recursive
-             git submodule update --recursive --remote
+        run: /usr/bin/git submodule update --init --recursive
+             /usr/bin/git submodule update --recursive --remote
       - name: Install Mosules
         run: npm install --global yarn
           npm update
