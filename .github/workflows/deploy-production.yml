@@ -9,11 +9,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
+      
       - uses: actions/setup-node@v3
         with:
           node-version: "18.17.1"
-
+      
       - name: Creating Config
         run: |
           echo "export const ENTRYPOINT_LOCAL = 'https://api.controleonline.com'" > ./config/entrypoint.local.js
@@ -33,22 +33,22 @@ jobs:
           };\
           module.exports = { env };\
           " > ./config/env.local.js
-
+      
       - name: Update Submodules
         run: |
           git submodule update --init --recursive
           git submodule update --recursive --remote
-
+      
       - name: Install Modules
         run: |
           npm install --global yarn
           npm update
           yarn
-
+      
       - name: Build
         run: |
           npx quasar build -m spa
-
+      
       - name: Deploy
         uses: locaweb/ftp-deploy@1.0.0
         with:
