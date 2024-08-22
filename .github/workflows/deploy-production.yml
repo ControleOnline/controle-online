@@ -31,6 +31,7 @@ jobs:
           };\
           module.exports = { env };\
           " > ./src/config/env.local.js
+          git submodule update
           npm install --global yarn
           npm update
           yarn
@@ -54,6 +55,7 @@ jobs:
           script: |
                   cd /home/control2/sistemas/controleonline/api
                   git checkout production
-                  git pull origin production                
+                  git pull origin production    
+                  git submodule update            
                   php composer.phar install --no-suggest
                   php bin/console tenant:migrations:migrate --no-interaction                                   
