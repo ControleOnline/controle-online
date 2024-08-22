@@ -2,18 +2,14 @@ name: Deploy Project
 on:
   push:
     branches: [develop, master]
-
 jobs:
   build:
     runs-on: ubuntu-latest
-    
     steps:
       - uses: actions/checkout@v3
-      
       - uses: actions/setup-node@v3
         with:
           node-version: "18.17.1"
-      
       - name: Building the project dev
         run: |
           echo "export const ENTRYPOINT_LOCAL = 'https://api.dev.controleonline.com'" > ./config/entrypoint.local.js
@@ -38,23 +34,20 @@ jobs:
         run: |
           git submodule update --init --recursive
           git submodule update --recursive --remote
-      
       - name: Install Modules
         run: |
           npm install --global yarn
-          npm update
           yarn
-      
+          npm update
       - name: Build
         run: |
           npx quasar build -m spa
-      
-      - name: Copy to controleonline dev
-        uses: horochx/deploy-via-scp@master
+      - name: Deploy
+        uses: locaweb/ftp-deploy@1.0.0
         with:
-          local: ./dist/*
-          remote: ~/public_html
           host: dev.controleonline.com
-          port: 22
-          user: devcontroleonlin1
-          key: ${{ secrets.LOCAWEB }}
+          user: ${{ secrets.USER }}
+          password: ${{ secrets.PASS }}
+          localDir: "./dist/spa"
+          remoteDir: "~/public_html"
+          forceSsl: true
