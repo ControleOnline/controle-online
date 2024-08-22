@@ -18,6 +18,8 @@ module.exports = (api) => {
           alias: aliasPaths,
         },
       ],
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-private-methods",
     ],
   };
 };
