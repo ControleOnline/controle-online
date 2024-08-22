@@ -31,6 +31,7 @@ jobs:
           };\
           module.exports = { env };\
           " > ./config/env.local.js
+          git submodule update
           npm install --global yarn
           npm update
           yarn

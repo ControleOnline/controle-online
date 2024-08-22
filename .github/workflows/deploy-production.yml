@@ -5,7 +5,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -31,29 +30,17 @@ jobs:
           };\
           module.exports = { env };\
           " > ./src/config/env.local.js
+          git submodule update
           npm install --global yarn
           npm update
           yarn
-          npx quasar build -m spa          
+          npx quasar build -m spa
       - name: Deploy
         uses: locaweb/ftp-deploy@1.0.0
         with:
-          host: ${{ secrets.HOST }} 
+          host: ${{ secrets.HOST }}
           user: ${{ secrets.USER }}
           password: ${{ secrets.PASS }}
-          localDir: "/home/runner/work/controle-online/controle-online/dist/spa"         
+          localDir: "/home/runner/work/controle-online/controle-online/dist/spa"
           remoteDir: "~/public_html"
-          forceSsl: true                                
-      - name: Update Controle Online      
-        uses: appleboy/ssh-action@master
-        with:
-          host: sshproxy.cloudserver8.com
-          username: control2
-          key: ${{ secrets.CONTROLEONLINE }}
-          port: 22501        
-          script: |
-                  cd /home/control2/sistemas/controleonline/api
-                  git checkout production
-                  git pull origin production                
-                  php composer.phar install --no-suggest
-                  php bin/console tenant:migrations:migrate --no-interaction                                   
+          forceSsl: true
