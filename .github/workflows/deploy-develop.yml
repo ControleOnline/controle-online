@@ -49,4 +49,4 @@ jobs:
           password: ${{ secrets.DEV_PASS }}
           localDir: "./dist/spa"
           remoteDir: "~/public_html"
-          forceSsl: false
+          forceSsl: true
