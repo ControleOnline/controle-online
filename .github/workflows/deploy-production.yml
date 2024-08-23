@@ -31,7 +31,7 @@ jobs:
           " > ./config/env.local.js
       - name: Update Submodules
         run: |
-          git submodule update --init --recursive
+          git submodule update --recursive --init
           git submodule update --recursive --remote
       - name: Install Modules
         run: |
@@ -48,4 +48,4 @@ jobs:
           password: ${{ secrets.PASS }}
           localDir: "./dist/spa"
           remoteDir: "~/public_html"
-          forceSsl: true
+          forceSsl: false
