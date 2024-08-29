@@ -6,6 +6,7 @@
 
 import * as Common from "@controleonline/ui-legacy/ui-common/src/i18n/pt-br/index";
 import * as Login from "@controleonline/ui-legacy/ui-login/src/i18n/pt-br/index";
+import * as Customers from "@controleonline/ui-customers/src/i18n/pt-br/index"; // Gaffo adicionou
 import * as Financial from "@controleonline/ui-financial/src/i18n/pt-br/index";
 import * as Contracts from "@controleonline/ui-contracts/src/i18n/pt-br/index";
 import * as Tasks from "@controleonline/ui-tasks/src/i18n/pt-br/index";
@@ -31,6 +32,7 @@ export default {
     name: "Controle Online",
   },
   ...People.translate,
+  ...Customers.translate,  
   ...Accounting.translate,
   ...Coupon.translate,
   ...Common.translate,
