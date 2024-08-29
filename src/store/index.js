@@ -43,6 +43,8 @@ import dashboard from "@controleonline/ui-dashboard/src/store/dashboard";
 
 import extra_fields from "@controleonline/ui-common/src/store/extra/fields";
 import extra_data from "@controleonline/ui-common/src/store/extra/data";
+import imports from "@controleonline/ui-common/src/store/imports";
+
 
 import { store } from "quasar/wrappers";
 import { createStore } from "vuex";
@@ -91,7 +93,7 @@ export default store(function (/* { ssrContext } */) {
       extra_fields,
       extra_data,
       dashboard,
-
+      imports,
     },
 
     // enable strict mode (adds overhead!)
