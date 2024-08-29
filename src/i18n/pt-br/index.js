@@ -14,7 +14,6 @@ import * as TranslateGlobal from "@controleonline/ui-common/src/i18n/pt-br/index
 // import * as Logistic from "@controleonline/ui-logistic/src/i18n/pt-br/index"; --> Enviado Para o principal
 import * as Coupon from "@controleonline/ui-legacy/ui-coupon/src/i18n/pt-br/index";
 import * as Accounting from "@controleonline/ui-accounting/src/i18n/pt-br/index";
-import * as Import from "@controleonline/ui-legacy/ui-import/src/i18n/pt-br/index";
 import * as CRM from "@controleonline/ui-crm/src/i18n/pt-br/index";
 import * as People from "@controleonline/ui-people/src/i18n/pt-br/index";
 import * as Docs from "@controleonline/ui-legacy/ui-docs/src/i18n/pt-br/index";
@@ -32,7 +31,6 @@ export default {
   ...People.translate,
   ...Accounting.translate,
   ...Coupon.translate,
-  ...Import.translate,
   ...CRM.translate,
   ...Docs.translate,
   ...Config.translate,

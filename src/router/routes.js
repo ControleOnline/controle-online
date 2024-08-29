@@ -8,7 +8,6 @@ import * as Customers from "@controleonline/ui-customers/src/router/routes";
 import * as Dashboard from "@controleonline/ui-dashboard/src/router/routes";
 import * as Docs from "@controleonline/ui-legacy/ui-docs/src/router/routes";
 import * as Financial from "@controleonline/ui-financial/src/router/routes";
-import * as Import from "@controleonline/ui-legacy/ui-import/src/router/routes";
 import * as Login from "@controleonline/ui-legacy/ui-login/src/router/routes";
 import * as Products from "@controleonline/ui-products/src/router/routes";
 import * as Professionals from "@controleonline/ui-professionals/src/router/routes";
@@ -38,7 +37,6 @@ const routes = [
   ...Support.routes,
   ...Coupon.routes,
   ...Accounting.routes,
-  ...Import.routes,
   ...Crm.routes,
   ...Docs.routes,
   ...Config.routes,
