@@ -12,6 +12,7 @@ import * as TranslateGlobal from "@controleonline/ui-common/src/i18n/pt-br/index
 // import * as Professionals from "@controleonline/ui-professionals/src/i18n/pt-br/index"; --> Enviado Para o principal
 // import * as Carriers from "@controleonline/ui-carrier/src/i18n/pt-br/index"; --> Enviado Para o principal
 // import * as Logistic from "@controleonline/ui-logistic/src/i18n/pt-br/index"; --> Enviado Para o principal
+<<<<<<< HEAD
 // import * as Coupon from "@controleonline/ui-legacy/ui-coupon/src/i18n/pt-br/index"; --> Enviado Para o principal
 // import * as Accounting from "@controleonline/ui-accounting/src/i18n/pt-br/index"; --> Enviado Para o principal
 // import * as Import from "@controleonline/ui-legacy/ui-import/src/i18n/pt-br/index"; --> Enviado Para o principal
@@ -24,10 +25,37 @@ import * as TranslateGlobal from "@controleonline/ui-common/src/i18n/pt-br/index
 // import * as Default from "@controleonline/ui-default/src/i18n/pt-br/index"; --> Enviado Para o principal
 // import * as Logistic_old from "@controleonline/ui-legacy/ui-logistic/src/i18n/pt-br/index"; --> Enviado Para o principal
 // import * as Orders from "@controleonline/ui-orders/src/i18n/pt-br/index"; --> Enviado Para o principal
+=======
+import * as Coupon from "@controleonline/ui-legacy/ui-coupon/src/i18n/pt-br/index";
+import * as Accounting from "@controleonline/ui-accounting/src/i18n/pt-br/index";
+import * as CRM from "@controleonline/ui-crm/src/i18n/pt-br/index";
+import * as People from "@controleonline/ui-people/src/i18n/pt-br/index";
+import * as Docs from "@controleonline/ui-legacy/ui-docs/src/i18n/pt-br/index";
+import * as Config from "@controleonline/ui-config/src/i18n/pt-br/index";
+import * as Products from "@controleonline/ui-products/src/i18n/pt-br/index";
+import * as Queues from "@controleonline/ui-queues/src/i18n/pt-br/index";
+import * as Default from "@controleonline/ui-default/src/i18n/pt-br/index";
+import * as Logistic_old from "@controleonline/ui-legacy/ui-logistic/src/i18n/pt-br/index";
+import * as Orders from "@controleonline/ui-orders/src/i18n/pt-br/index";
+>>>>>>> 3053169e03f8ed78393509d9b60c98192884180a
 
 export default {
   app: {
     name: "Controle Online",
   },
+<<<<<<< HEAD
+=======
+  ...People.translate,
+  ...Accounting.translate,
+  ...Coupon.translate,
+  ...CRM.translate,
+  ...Docs.translate,
+  ...Config.translate,
+  ...Products.translate,
+  ...Queues.translate,
+  ...Default.translate,
+  ...Logistic_old.translate,
+  ...Orders.translate,
+>>>>>>> 3053169e03f8ed78393509d9b60c98192884180a
   ...TranslateGlobal.translate,
 };
