@@ -10,7 +10,6 @@ import auth from "@controleonline/ui-legacy/ui-login/src/store/modules/auth";
 import quote from "@controleonline/ui-legacy/ui-logistic/src/store/modules/quote";
 import support from "@controleonline/ui-legacy/ui-support/src/store/support";
 
-
 import contracts from "@controleonline/ui-people/src/store/contracts";
 import companies from "@controleonline/ui-people/src/store/companies";
 import usersCustomer from "@controleonline/ui-people/src/store/usersCustomer";
@@ -44,7 +43,7 @@ import dashboard from "@controleonline/ui-dashboard/src/store/dashboard";
 import extra_fields from "@controleonline/ui-common/src/store/extra/fields";
 import extra_data from "@controleonline/ui-common/src/store/extra/data";
 import imports from "@controleonline/ui-common/src/store/imports";
-
+import translate from "@controleonline/ui-common/src/store/translate";
 
 import { store } from "quasar/wrappers";
 import { createStore } from "vuex";
@@ -94,6 +93,7 @@ export default store(function (/* { ssrContext } */) {
       extra_data,
       dashboard,
       imports,
+      translate,
     },
 
     // enable strict mode (adds overhead!)
