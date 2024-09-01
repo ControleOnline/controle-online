@@ -14,8 +14,8 @@ export default ({ app }) => {
   app.config.globalProperties.$formatter = Formatter;
   app.config.globalProperties.$domain = DOMAIN;
   app.config.globalProperties.$entrypoint = ENTRYPOINT;
-  app.config.globalProperties.$tt = t;
-  app.config.globalProperties.$translate = (store, value, type) =>
+  app.config.globalProperties.$translate = t;
+  app.config.globalProperties.$tt = (store, value, type) =>
     t.translate(store, value, type);
 
 };
