@@ -1,5 +1,5 @@
 
 export default {
-  "pt-br":[],
-  "en-us":[]
+  "pt-br":{},
+  "en-us":{}
 };
