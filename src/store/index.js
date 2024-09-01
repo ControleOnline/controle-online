@@ -39,10 +39,10 @@ import city from "@controleonline/ui-common/src/store/address/city";
 import tasks from "@controleonline/ui-tasks/src/store/tasks";
 import crm from "@controleonline/ui-crm/src/store/crm";
 import dashboard from "@controleonline/ui-dashboard/src/store/dashboard";
-
 import extra_fields from "@controleonline/ui-common/src/store/extra/fields";
 import extra_data from "@controleonline/ui-common/src/store/extra/data";
 import imports from "@controleonline/ui-common/src/store/imports";
+import language from "@controleonline/ui-common/src/store/language";
 import translate from "@controleonline/ui-common/src/store/translate";
 
 import { store } from "quasar/wrappers";
@@ -94,6 +94,7 @@ export default store(function (/* { ssrContext } */) {
       dashboard,
       imports,
       translate,
+      language,
     },
 
     // enable strict mode (adds overhead!)
