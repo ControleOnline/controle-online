@@ -2,20 +2,22 @@
   <div id="q-app">
     <Analytics />
     <ThemeConfig />
+    <Translate />
     <router-view v-if="defaultCompany" />
   </div>
 </template>
 <script>
 import Analytics from "@controleonline/ui-common/src/components/Common/Analytics";
 import ThemeConfig from "@controleonline/ui-layout/src/layouts/ThemeConfig";
+import Translate from "@controleonline/ui-common/src/components/Common/Translate";
 import { mapActions, mapGetters } from "vuex";
 import { ENTRYPOINT } from "./../config/entrypoint.js";
-
 
 export default {
   components: {
     Analytics,
     ThemeConfig,
+    Translate,
   },
   name: "App",
   data() {
@@ -39,7 +41,7 @@ export default {
       const link = document.createElement("link");
       link.rel = "icon";
       link.type = "image/ico";
-      link.href = ENTRYPOINT+"/files/download/1";
+      link.href = ENTRYPOINT + "/files/download/1";
       document.head.appendChild(link);
     },
   },

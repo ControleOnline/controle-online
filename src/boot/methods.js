@@ -1,18 +1,21 @@
 import { createApp } from "vue";
 import Formatter from "@controleonline/ui-common/src/utils/formatter.js";
-import {
-  translate,
-  copyObject,
-} from "@controleonline/ui-default/src/components/Default/Scripts/DefaultMethods.js";
+import * as methods from "@controleonline/ui-common/src/utils/methods.js";
+import Translate from "@controleonline/ui-common/src/utils/translate.js";
 import { DOMAIN } from "../../config/domain";
 import { ENTRYPOINT } from "../../config/entrypoint.js";
 
 const app = createApp({});
+const t = new Translate();
+
 export default ({ app }) => {
-  app.config.globalProperties.$copyObject = (obj) => copyObject(obj);
+  app.config.globalProperties.$dbTranslate = {'x' : 'p'};
+  app.config.globalProperties.$copyObject = (obj) => methods.copyObject(obj);
   app.config.globalProperties.$formatter = Formatter;
   app.config.globalProperties.$domain = DOMAIN;
   app.config.globalProperties.$entrypoint = ENTRYPOINT;
+  app.config.globalProperties.$tt = t;
   app.config.globalProperties.$translate = (store, value, type) =>
-    translate(store, value, type);
+    t.translate(store, value, type);
+
 };
