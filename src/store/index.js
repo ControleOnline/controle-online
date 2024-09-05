@@ -3,7 +3,6 @@ import gmaps from "@controleonline/ui-legacy/ui-common/src/store/gmaps";
 import menu from "@controleonline/ui-legacy/ui-common/src/store/menu";
 import profile from "@controleonline/ui-legacy/ui-common/src/store/profile";
 import user from "@controleonline/ui-legacy/ui-common/src/store/user";
-import users from "@controleonline/ui-legacy/ui-common/src/store/users";
 import coupon from "@controleonline/ui-legacy/ui-coupon/src/store/coupon";
 import guides from "@controleonline/ui-legacy/ui-guides/src/store/guides";
 import auth from "@controleonline/ui-legacy/ui-login/src/store/modules/auth";
@@ -12,7 +11,7 @@ import support from "@controleonline/ui-legacy/ui-support/src/store/support";
 
 import contracts from "@controleonline/ui-people/src/store/contracts";
 import companies from "@controleonline/ui-people/src/store/companies";
-import usersCustomer from "@controleonline/ui-people/src/store/usersCustomer";
+import users from "@controleonline/ui-users/src/store/users";
 import addresses from "@controleonline/ui-people/src/store/addresses";
 import documents from "@controleonline/ui-people/src/store/documents";
 import phones from "@controleonline/ui-people/src/store/phones";
@@ -62,7 +61,6 @@ export default store(function (/* { ssrContext } */) {
       addresses,
       phones,
       documents,
-      usersCustomer,
       product_orders,
       companies,
       people,
