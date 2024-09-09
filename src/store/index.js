@@ -44,12 +44,16 @@ import imports from "@controleonline/ui-common/src/store/imports";
 import language from "@controleonline/ui-common/src/store/language";
 import translate from "@controleonline/ui-common/src/store/translate";
 
+import menus from "@controleonline/ui-config/src/store/menus";
+
+
 import { store } from "quasar/wrappers";
 import { createStore } from "vuex";
 
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
+      menus,
       status,
       auth,
       queues,
