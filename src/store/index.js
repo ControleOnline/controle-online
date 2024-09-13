@@ -8,7 +8,7 @@ import auth from "@controleonline/ui-login/src/store/modules/auth";
 import quote from "@controleonline/ui-legacy/ui-logistic/src/store/modules/quote";
 import support from "@controleonline/ui-support/src/store/support";
 
-import contracts from "@controleonline/ui-people/src/store/contracts";
+import contracts from "@controleonline/ui-contracts/src/store/contracts";
 import companies from "@controleonline/ui-people/src/store/companies";
 import users from "@controleonline/ui-users/src/store/users";
 import addresses from "@controleonline/ui-people/src/store/addresses";
