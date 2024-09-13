@@ -46,6 +46,7 @@ import translate from "@controleonline/ui-common/src/store/translate";
 import menus from "@controleonline/ui-config/src/store/menus";
 import routes from "@controleonline/ui-config/src/store/routes";
 import modules from "@controleonline/ui-config/src/store/modules";
+import configs from "@controleonline/ui-config/src/store/configs";
 
 import { store } from "quasar/wrappers";
 import { createStore } from "vuex";
@@ -98,6 +99,7 @@ export default store(function (/* { ssrContext } */) {
       imports,
       translate,
       language,
+      configs,
     },
 
     // enable strict mode (adds overhead!)
