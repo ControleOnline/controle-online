@@ -5,4 +5,10 @@ import DefaultForm from "@controleonline/ui-default/src/components/Default/Commo
 export default boot(({ app }) => {
     app.component('DefaultTable', DefaultTable);
     app.component('DefaultForm', DefaultForm);
+
+
+    app.config.globalProperties.$components = {
+        DefaultTable,
+        DefaultForm,
+      };
 });
