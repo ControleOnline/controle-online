@@ -41,7 +41,7 @@ import extra_fields from "@controleonline/ui-common/src/store/extra/fields";
 import extra_data from "@controleonline/ui-common/src/store/extra/data";
 import imports from "@controleonline/ui-common/src/store/imports";
 import language from "@controleonline/ui-common/src/store/language";
-import translate from "@controleonline/ui-common/src/store/translate";
+import translate from "@controleonline/ui-translate/src/store/translate";
 
 import menus from "@controleonline/ui-config/src/store/menus";
 import routes from "@controleonline/ui-config/src/store/routes";
