@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Translate from "@controleonline/ui-translate/src/components/Translate/Details.vue";
+import Translate from "@controleonline/ui-translate/src/components/Details.vue";
 
 export default {
   components: {
