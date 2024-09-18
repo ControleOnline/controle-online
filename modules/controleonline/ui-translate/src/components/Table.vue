@@ -15,7 +15,7 @@ export default {
     configs() {
       return {
         externalFilters: false,
-        store: "translates",
+        store: "translate",
         categories: ["translate"],
         add: true,
         delete: true,
