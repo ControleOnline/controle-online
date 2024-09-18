@@ -40,7 +40,7 @@ import dashboard from "@controleonline/ui-dashboard/src/store/dashboard";
 import extra_fields from "@controleonline/ui-common/src/store/extra/fields";
 import extra_data from "@controleonline/ui-common/src/store/extra/data";
 import imports from "@controleonline/ui-common/src/store/imports";
-import language from "@controleonline/ui-common/src/store/language";
+import language from "@controleonline/ui-translate/src/store/language";
 import translate from "@controleonline/ui-translate/src/store/translate";
 
 import menus from "@controleonline/ui-config/src/store/menus";
