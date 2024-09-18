@@ -17,6 +17,8 @@ export default {
         externalFilters: false,
         store: "translates",
         categories: ["translate"],
+        store: "translate",
+        categories: ["translates"],
         add: true,
         delete: true,
         filters: true,
