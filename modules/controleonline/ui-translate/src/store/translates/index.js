@@ -26,57 +26,35 @@ export default {
         },
       },
       {
-        externalFilter: true,
         sortable: true,
-        name: "field_name",
-        align: "left",
-        label: "field_name",
-        sum: false,
-        format: function (value) {
+        name: "store",
+        editable: false,
+        label: "store",
+        align: "left",     
+        format(value, column, row) {
           return value;
         },
       },
       {
-        externalFilter: true,
         sortable: true,
-        name: "field_type",
-        align: "left",
-        label: "field_type",
-        sum: false,
-        list: [
-          { value: "text", label: "text" },
-          { value: "select", label: "select" },
-          { value: "date-range", label: "date-range" },
-        ],
-        format: function (value) {
+        name: "typo",
+        editable: false,
+        label: "type",
+        align: "left",     
+        format(value, column, row) {
           return value;
         },
-      },
+      },    
       {
-        externalFilter: true,
         sortable: true,
-        name: "required",
-        align: "left",
-        label: "required",
-        sum: false,
-        format: function (value) {
+        name: "translate",
+        editable: false,
+        label: "translate",
+        align: "left",     
+        format(value, column, row) {
           return value;
         },
-        saveFormat: function (value) {
-          return false;
-        },
-      },
-      {
-        externalFilter: true,
-        sortable: true,
-        name: "field_configs",
-        align: "left",
-        label: "field_configs",
-        sum: false,
-        format: function (value) {
-          return value;
-        },
-      },
+      },        
     ],
   },
   actions: actions,

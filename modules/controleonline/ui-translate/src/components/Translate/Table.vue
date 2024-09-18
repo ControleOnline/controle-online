@@ -16,7 +16,7 @@ export default {
       return {
         externalFilters: false,
         store: "translates",
-        categories: ["translates"],
+        categories: ["translate"],
         add: true,
         delete: true,
         filters: true,
@@ -25,7 +25,7 @@ export default {
         columns: {
           category: {
             filters: {
-              context: "translates",
+              context: "translate",
               company: "/people/" + this.defaultCompany.id,
             },
           },
