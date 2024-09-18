@@ -1,5 +1,5 @@
 export const routes = [{
-    path: '/translate/',
+    path: '/translates/',
     component: () =>  import ('@controleonline/ui-layout/src/layouts/AdminLayout.vue'),
     children: [
       {
