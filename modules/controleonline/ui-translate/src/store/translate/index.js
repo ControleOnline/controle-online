@@ -27,17 +27,8 @@ export default {
       },
       {
         sortable: true,
-        name: "store",
-        editable: false,
-        label: "store",
-        align: "left",     
-        format(value, column, row) {
-          return value;
-        },
-      },
-      {
-        sortable: true,
         name: "language",
+        editable: false,        
         align: "left",
         label: "language",
         list: "language/getItems",
@@ -56,6 +47,16 @@ export default {
         saveFormat: function (value) {
           return value ? "/languages/" + (value.value || value) : null;
         },
+      },      
+      {
+        sortable: true,
+        name: "store",
+        editable: false,
+        label: "store",
+        align: "left",     
+        format(value, column, row) {
+          return value;
+        },
       },
       {
         sortable: true,
@@ -67,6 +68,16 @@ export default {
           return value;
         },
       },    
+      {
+        sortable: true,
+        name: "key",
+        editable: false,
+        label: "key",
+        align: "left",     
+        format(value, column, row) {
+          return value;
+        },
+      },         
       {
         sortable: true,
         name: "translate",
