@@ -37,7 +37,29 @@ export default {
       },
       {
         sortable: true,
-        name: "typo",
+        name: "language",
+        align: "left",
+        label: "language",
+        list: "language/getItems",
+        searchParam: "language",
+        externalFilter: true,
+        format: function (value) {
+          return value?.language;
+        },
+        formatList: function (value) {
+          if (value)
+            return {
+              value: value["@id"].split("/").pop(),
+              label: value?.language,
+            };
+        },
+        saveFormat: function (value) {
+          return value ? "/languages/" + (value.value || value) : null;
+        },
+      },
+      {
+        sortable: true,
+        name: "type",
         editable: false,
         label: "type",
         align: "left",     
@@ -48,7 +70,7 @@ export default {
       {
         sortable: true,
         name: "translate",
-        editable: false,
+        editable: true,
         label: "translate",
         align: "left",     
         format(value, column, row) {
