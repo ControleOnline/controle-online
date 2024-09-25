@@ -50,6 +50,7 @@ import menus from "@controleonline/ui-config/src/store/menus";
 import routes from "@controleonline/ui-config/src/store/routes";
 import modules from "@controleonline/ui-config/src/store/modules";
 import configs from "@controleonline/ui-config/src/store/configs";
+import file from "@controleonline/ui-common/src/store/file";
 
 import contents from "@controleonline/ui-ead/src/store/contents";
 
@@ -106,6 +107,7 @@ export default store(function (/* { ssrContext } */) {
       translate,
       language,
       configs,
+      file,
       tt,
       contents,
     },
