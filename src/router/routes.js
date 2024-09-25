@@ -18,6 +18,8 @@ import * as Support from "@controleonline/ui-support/src/router/routes";
 import * as Tasks from "@controleonline/ui-tasks/src/router/routes";
 import * as People from "@controleonline/ui-people/src/router/routes";
 import * as Translate from "@controleonline/ui-translate/src/router/routes";
+import * as Contents from "@controleonline/ui-ead/src/router/routes";
+
 
 import * as Users from "@controleonline/ui-users/src/router/routes";
 import * as Logistic_old from "@controleonline/ui-legacy/ui-logistic/src/router/routes";
@@ -47,6 +49,7 @@ const routes = [
   ...Logistic_old.routes,
   ...People.routes,
   ...Translate.routes,
+  ...Contents.routes,
   {
     path: "/",
     component: () =>

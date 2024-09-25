@@ -51,6 +51,8 @@ import routes from "@controleonline/ui-config/src/store/routes";
 import modules from "@controleonline/ui-config/src/store/modules";
 import configs from "@controleonline/ui-config/src/store/configs";
 
+import contents from "@controleonline/ui-ead/src/store/contents";
+
 import { store } from "quasar/wrappers";
 import { createStore } from "vuex";
 
@@ -105,6 +107,7 @@ export default store(function (/* { ssrContext } */) {
       language,
       configs,
       tt,
+      contents,
     },
 
     // enable strict mode (adds overhead!)
