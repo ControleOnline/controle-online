@@ -10,7 +10,7 @@ export const routes = [{
       {
         name: "contentDetails",
         path: "id/:id",
-        component: () => import("@controleonline/ui-contracts/src/pages/contents/Details.vue"),
+        component: () => import("@controleonline/ui-ead/src/pages/contents/Details.vue"),
       }      
     ]
   }];
