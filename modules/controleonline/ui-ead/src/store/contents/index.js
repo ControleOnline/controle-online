@@ -6,7 +6,7 @@ import Formatter from "@controleonline/ui-common/src/utils/formatter.js";
 export default {
   namespaced: true,
   state: {
-    resourceEndpoint: "contents",
+    resourceEndpoint: "ead/contents",
     isLoading: false,
     error: "",
     violations: null,
