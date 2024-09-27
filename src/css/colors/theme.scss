@@ -11,13 +11,21 @@
 }
 .btn-primary {
   background: var(--btn-primary);
-  color:  var(--text-primary);
+  color: var(--text-primary);
 }
 .loading-primary {
   color: var(--primary);
 }
 
-.default-table .q-table thead,.default-table .q-table thead th {
+.default-table .q-table thead,
+.default-table .q-table thead th {
   background-color: var(--secondary) !important;
-  color:  var(--text-secondary);
+  color: var(--text-secondary);
+}
+
+.bg {
+  background-color: var(--bg-light);
+}
+.q-dark .bg {
+  background-color: var(--bg-dark);
 }
