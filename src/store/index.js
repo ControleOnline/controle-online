@@ -8,9 +8,9 @@ import auth from "@controleonline/ui-login/src/store/modules/auth";
 import quote from "@controleonline/ui-legacy/ui-logistic/src/store/modules/quote";
 import support from "@controleonline/ui-support/src/store/support";
 
-import contract_model from "@controleonline/ui-contracts/src/store/contracts/contract_model";
+import contract_model from "@controleonline/ui-contracts/src/store/contract/contract_model";
 
-import contracts from "@controleonline/ui-contracts/src/store/contracts";
+import contract from "@controleonline/ui-contracts/src/store/contract";
 import companies from "@controleonline/ui-people/src/store/companies";
 import users from "@controleonline/ui-users/src/store/users";
 import addresses from "@controleonline/ui-people/src/store/addresses";
@@ -68,7 +68,7 @@ export default store(function (/* { ssrContext } */) {
       queues,
       displays,
       gmaps,
-      contracts,
+      contract,
       contract_model,
       emails,
       addresses,
