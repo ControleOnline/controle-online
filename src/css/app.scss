@@ -15,7 +15,7 @@
   transition: background opacity 3s ease-in-out;
 }
 
-main>.q-card {
+main > .q-card {
   box-shadow: none !important;
 }
 
@@ -46,4 +46,14 @@ main>.q-card {
 .fullscreen {
   max-width: unset;
   max-height: unset;
+}
+.sticky-bottom {
+  bottom: 0;
+  position: sticky;
+  z-index: 1;
+}
+.sticky-top {
+  top: 0;
+  position: sticky;
+  z-index: 1;
 }
