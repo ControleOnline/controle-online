@@ -28,11 +28,11 @@ export default {
         selection: false,
         search: false,
         columns: {
-          contractModel: {
+          model: {
             component: this.$components.DefaultTable,
             icon: "person",
             externalFilters: false,
-            store: "contract_model",
+            store: "model",
             filters: true,
             add: true,
             delete: true,
