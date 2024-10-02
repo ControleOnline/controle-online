@@ -37,6 +37,9 @@ import displays from "@controleonline/ui-queues/src/store/modules/displays";
 import queues from "@controleonline/ui-queues/src/store/modules/queues";
 import city from "@controleonline/ui-common/src/store/address/city";
 import tasks from "@controleonline/ui-tasks/src/store/tasks";
+import task_interations from "@controleonline/ui-tasks/src/store/task_interations";
+
+
 import crm from "@controleonline/ui-crm/src/store/crm";
 import dashboard from "@controleonline/ui-dashboard/src/store/dashboard";
 import extra_fields from "@controleonline/ui-common/src/store/extra/fields";
@@ -99,6 +102,7 @@ export default store(function (/* { ssrContext } */) {
       orders,
       theme,
       tasks,
+      task_interations,
       crm,
       extra_fields,
       extra_data,
