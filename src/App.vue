@@ -59,7 +59,7 @@ export default {
       const link = document.createElement("link");
       link.rel = "icon";
       link.type = "image/ico";
-      link.href = ENTRYPOINT + "/files/download/1";
+      link.href = ENTRYPOINT + "/files/1/download";
       document.head.appendChild(link);
     },
   },
