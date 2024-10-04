@@ -20,12 +20,23 @@ export default ({ app }) => {
     return (
       ENTRYPOINT +
       "/files/" +
-      file['@id'].replace(/\D/g, "") +
+      file["@id"].replace(/\D/g, "") +
       "/download" +
       "?_=" +
       btoa(file.fileName)
     );
   };
+  app.config.globalProperties.$pdf = function (file) {
+    return (
+      ENTRYPOINT +
+      "/vendor/pdf.js/web/viewer.html?file=" +
+      "/files/" +
+      file["@id"].replace(/\D/g, "") +
+      "/download" +
+      encodeURIComponent("?app-domain=" + DOMAIN)
+    );
+  };
+
   app.config.globalProperties.$translate = t;
   app.config.globalProperties.$tt = (store, value, type) =>
     t.translate(store, value, type);
