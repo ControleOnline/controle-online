@@ -20,7 +20,9 @@ export default ({ app }) => {
     return (
       ENTRYPOINT +
       "/files/" +
-      file["@id"].replace(/\D/g, "") +
+      (typeof file == "object" ? file["@id"] : file)
+        .toString()
+        .replace(/\D/g, "") +
       "/download" +
       "?_=" +
       btoa(file.fileName)
