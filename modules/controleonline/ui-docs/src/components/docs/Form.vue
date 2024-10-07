@@ -606,8 +606,8 @@ export default {
             if (this.editMode) {
               // ----------- Trata o retorno no modo edição
               if (dado.success && msgRet.length > 3) {
-                let fileNameGuide = dado.data.file_name_guide;
-                let fileNameReceipt = dado.data.file_name_receipt;
+                let fileNameGuide = dado.data.fileName_guide;
+                let fileNameReceipt = dado.data.fileName_receipt;
                 if (fileNameGuide !== null) {
                   // Quando o arquivo da Guia foi atualizado, sinaliza que não é necessário novo envio até que o usuário defina um arquivo de Guia diferente
                   this.editModeSetFileOnlyName("arquivoGuia", fileNameGuide); // Marca como arquivo fictício
@@ -625,8 +625,8 @@ export default {
                 // ----- Inclusão bem sucedida
 
                 let lastInsertId = dado.data.id;
-                let fileNameGuide = dado.data.file_name_guide;
-                let fileNameReceipt = dado.data.file_name_receipt;
+                let fileNameGuide = dado.data.fileName_guide;
+                let fileNameReceipt = dado.data.fileName_receipt;
                 let fileGuideCreated = dado.data.file_guide_created; // 'sim','nao'
                 let fileReceiptCreated = dado.data.file_receipt_created; // 'sim','nao'
 
@@ -682,11 +682,11 @@ export default {
                   status: findIn(this.statuses, dado.status),
                 };
 
-                if (dado.file_name_guide !== null) {
-                  this.editModeSetFileOnlyName("arquivoGuia", dado.file_name_guide);
+                if (dado.fileName_guide !== null) {
+                  this.editModeSetFileOnlyName("arquivoGuia", dado.fileName_guide);
                 }
-                if (dado.file_name_receipt !== null) {
-                  this.editModeSetFileOnlyName("arquivoRecibo", dado.file_name_receipt);
+                if (dado.fileName_receipt !== null) {
+                  this.editModeSetFileOnlyName("arquivoRecibo", dado.fileName_receipt);
                 }
 
                 if (companyIdXhr !== this.myCompanyLocal) {
