@@ -1,5 +1,5 @@
 export const routes = [{
-    path: '/contents/',
+    path: '/ead/contents/',
     component: () =>  import ('@controleonline/ui-layout/src/layouts/AdminLayout.vue'),
     children: [
       {
