@@ -41,12 +41,12 @@
             <q-td key="arquivoGuia" :props="props" auto-width>
               <q-btn
                 :ref="'btnguide' + props.row.id"
-                v-if="props.row.file_name_guide !== null"
+                v-if="props.row.fileName_guide !== null"
                 color="secondary"
                 label="Baixar"
                 size="sm"
                 @click="
-                  downloadFilesCallApi(props.row.id, 'guide', props.row.file_name_guide)
+                  downloadFilesCallApi(props.row.id, 'guide', props.row.fileName_guide)
                 "
                 :loading="loadArr['guide_' + props.row.id]"
               />
@@ -54,7 +54,7 @@
             <q-td key="arquivoRecibo" :props="props" auto-width>
               <q-btn
                 :ref="'btnreceipt' + props.row.id"
-                v-if="props.row.file_name_receipt !== null"
+                v-if="props.row.fileName_receipt !== null"
                 color="secondary"
                 label="Baixar"
                 size="sm"
@@ -62,7 +62,7 @@
                   downloadFilesCallApi(
                     props.row.id,
                     'receipt',
-                    props.row.file_name_receipt
+                    props.row.fileName_receipt
                   )
                 "
                 :loading="loadArr['receipt_' + props.row.id]"
@@ -193,13 +193,13 @@ const SETTINGS = {
     },
     {
       name: "arquivoGuia",
-      field: (row) => row.file_name_guide,
+      field: (row) => row.fileName_guide,
       align: "center",
       label: "Guia",
     },
     {
       name: "arquivoRecibo",
-      field: (row) => row.file_name_receipt,
+      field: (row) => row.fileName_receipt,
       align: "center",
       label: "Recibo",
     },

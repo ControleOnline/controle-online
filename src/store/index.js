@@ -11,6 +11,9 @@ import support from "@controleonline/ui-support/src/store/support";
 import model from "@controleonline/ui-crm/src/store/model";
 
 import contract from "@controleonline/ui-contracts/src/store/contract";
+import contract_people from "@controleonline/ui-contracts/src/store/contract/contract_people";
+
+
 import companies from "@controleonline/ui-people/src/store/companies";
 import users from "@controleonline/ui-users/src/store/users";
 import addresses from "@controleonline/ui-people/src/store/addresses";
@@ -69,6 +72,7 @@ export default store(function (/* { ssrContext } */) {
       status,
       auth,
       queues,
+      contract_people,
       displays,
       gmaps,
       contract,
