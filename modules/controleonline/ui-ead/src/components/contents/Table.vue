@@ -21,27 +21,22 @@ export default {
       return {
         externalFilters: false,
         store: this.context,
-        status: [this.context],
+        categories: ["ead-courses","ead-subjects"],
         add: true,
         delete: true,
         filters: true,
         selection: false,
         search: false,
         columns: {
-          model: {
-            component: this.$components.DefaultTable,
-            icon: "person",
-            externalFilters: false,
-            store: "model",
-            filters: true,
-            add: true,
-            delete: true,
-            selection: false,
-            search: false,
-          },
-          status: {
+          courses: {
             filters: {
-              context: this.context,
+              context: "ead-courses",
+              company: "/people/" + this.defaultCompany.id,
+            },
+          },
+          subjects: {
+            filters: {
+              context: "ead-subjects",
               company: "/people/" + this.defaultCompany.id,
             },
           },
