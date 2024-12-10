@@ -27,3 +27,5 @@ git submodule update --recursive
 
 ### Customize the configuration
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+
+[Comunidade](https://chat.whatsapp.com/JGPCQ646F5GF2ag7AXWQw8)
