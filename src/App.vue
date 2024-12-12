@@ -49,7 +49,7 @@ export default {
       );
     },
     setZoom() {
-      let zoom = 1;
+      let zoom = 0.8;
       var size = zoom < 1 ? parseFloat(100 / zoom) : 100;
       document.documentElement.style.setProperty("--zoom-width", size + "vw");
       document.documentElement.style.setProperty("--zoom-height", size + "vh");
