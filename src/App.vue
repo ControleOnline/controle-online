@@ -11,7 +11,6 @@ import Analytics from "@controleonline/ui-common/src/components/Common/Analytics
 import ThemeConfig from "@controleonline/ui-layout/src/layouts/ThemeConfig";
 import Translate from "@controleonline/ui-common/src/components/Common/Translate";
 import { mapActions, mapGetters } from "vuex";
-import { ENTRYPOINT } from "./../config/entrypoint.js";
 import Config from "@controleonline/ui-common/src/utils/config";
 
 export default {
@@ -59,7 +58,7 @@ export default {
       const link = document.createElement("link");
       link.rel = "icon";
       link.type = "image/ico";
-      link.href = ENTRYPOINT + "/files/1/download";
+      link.href = process.env.API_ENTRYPOINT + "/files/1/download";
       document.head.appendChild(link);
     },
   },

@@ -111,7 +111,7 @@ module.exports = function (ctx) {
       // showProgress: false,
       // gzip: true,
       // analyze: true,
-      env: require("./config/env").ENV_APP,
+      env: require("./config/env").APP_ENV,
 
       // Options below are automatically set depending on the env, set them if you want to override
       // preloadChunks: false,
