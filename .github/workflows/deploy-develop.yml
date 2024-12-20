@@ -12,9 +12,8 @@ jobs:
           node-version: "18.17.1"
       - name: Building the project dev
         run: |
-          echo "export const ENTRYPOINT_LOCAL = 'https://api.dev.controleonline.com'" > ./config/entrypoint.local.js
-          echo "export const DOMAIN_LOCAL = location.host" > ./config/domain.local.js
           echo "const env = {\
+          API_ENTRYPOINT: "https://api.lave-go.com",\
           OAUTH_GOOGLE_CLIENT_ID:'${{ secrets.OAUTH_GOOGLE_CLIENT_ID }}',\
           GMAPS_GOOGLE_CLIENT_ID:'${{ secrets.GMAPS_GOOGLE_CLIENT_ID }}',\
           NEW_RELIC:{\
