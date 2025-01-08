@@ -1,5 +1,5 @@
 {
-  "name": "com.controleonline.controleonlineapp",
+  "name": "com.controleonline.app",
   "displayName": "Controle Online",
   "version": "1.0.0",
   "description": "CRM",
@@ -10,7 +10,7 @@
   "keywords": [
     "ecosystem:cordova"
   ],
-  "author": "Luiz Kim",
+  "author": "Controle Online",
   "license": "Apache-2.0",
   "cordova": {
     "platforms": [
