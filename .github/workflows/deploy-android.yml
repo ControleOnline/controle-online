@@ -9,6 +9,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: gradle/actions/setup-gradle@v3      
       - uses: buildtool/setup-buildtools-action@v1
+        with:
+          buildtools-version: 33.0.3
       - uses: actions/setup-node@v3
         with:
           node-version: "20"
