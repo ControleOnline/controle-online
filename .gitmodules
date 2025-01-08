@@ -31,9 +31,7 @@
 [submodule "modules/controleonline/ui-professionals"]
 	path = modules/controleonline/ui-professionals
 	url = https://github.com/ControleOnline/ui-professionals.git
-[submodule "modules/controleonline/ui-orders"]
-	path = modules/controleonline/ui-orders
-	url = https://github.com/ControleOnline/ui-orders.git
+
 [submodule "modules/controleonline/ui-logistic"]
 	path = modules/controleonline/ui-logistic
 	url = https://github.com/ControleOnline/ui-logistic.git
@@ -70,3 +68,24 @@
 [submodule "modules/controleonline/ui-config"]
 	path = modules/controleonline/ui-config
 	url = https://github.com/ControleOnline/ui-config.git
+[submodule "modules/controleonline/ui-delivery"]
+	path = modules/controleonline/ui-delivery
+	url = https://github.com/ControleOnline/ui-delivery.git
+[submodule "modules/controleonline/ui-docs"]
+	path = modules/controleonline/ui-docs
+	url = https://github.com/ControleOnline/ui-docs.git
+[submodule "modules/controleonline/ui-ead"]
+	path = modules/controleonline/ui-ead
+	url = https://github.com/ControleOnline/ui-ead.git
+[submodule "modules/controleonline/ui-guides"]
+	path = modules/controleonline/ui-guides
+	url = https://github.com/ControleOnline/ui-guides.git
+[submodule "modules/controleonline/ui-import"]
+	path = modules/controleonline/ui-import
+	url = https://github.com/ControleOnline/ui-import.git
+[submodule "modules/controleonline/ui-support"]
+	path = modules/controleonline/ui-support
+	url = https://github.com/ControleOnline/ui-support.git
+[submodule "modules/controleonline/ui-translate"]
+	path = modules/controleonline/ui-translate
+	url = https://github.com/ControleOnline/ui-translate.git
