@@ -85,9 +85,6 @@
 [submodule "modules/controleonline/ui-support"]
 	path = modules/controleonline/ui-support
 	url = https://github.com/ControleOnline/ui-support.git
-[submodule "modules/controleonline/ui-translate"]
-	path = modules/controleonline/ui-translate
-	url = https://github.com/ControleOnline/ui-translate.git
 [submodule "modules/controleonline/ui-orders"]
 	path = modules/controleonline/ui-orders
 	url = https://github.com/ControleOnline/ui-orders.git
