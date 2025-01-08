@@ -8,7 +8,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3      
+        uses: gradle/actions/setup-gradle@v3   
+      - name: Configurar o ambiente Android
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"           
       - uses: actions/setup-node@v3
         with:
           node-version: "20"
