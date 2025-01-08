@@ -13,7 +13,7 @@ jobs:
       - name: Building the project dev
         run: |
           echo "const env = {\
-          API_ENTRYPOINT: "https://api.lave-go.com",\
+          API_ENTRYPOINT: "https://api.dev.controleonline.com",\
           OAUTH_GOOGLE_CLIENT_ID:'${{ secrets.OAUTH_GOOGLE_CLIENT_ID }}',\
           GMAPS_GOOGLE_CLIENT_ID:'${{ secrets.GMAPS_GOOGLE_CLIENT_ID }}',\
           NEW_RELIC:{\
