@@ -8,9 +8,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: gradle/actions/setup-gradle@v3      
-      - uses: buildtool/setup-buildtools-action@v1
+      - uses: maxim-lobanov/setup-android-tools@v1
         with:
-          buildtools-version: 33.0.3
+          packages: |
+            platforms;android-30
+            platforms;android-33
+            platforms;android-35
+            system-images;android-30;google_apis;x86
       - uses: actions/setup-node@v3
         with:
           node-version: "20"
