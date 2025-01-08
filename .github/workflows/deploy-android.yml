@@ -8,9 +8,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: gradle/actions/setup-gradle@v3   
-      - uses: android-actions/setup-android@v3
+      - uses: amyu/setup-android@v4
         with:
-          cmdline-tools-version: 8512546   
+          sdk-version: |
+            33
+            34
+          build-tools-version: 33.0.2
       - uses: actions/setup-node@v3
         with:
           node-version: "20"
