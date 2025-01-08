@@ -46,6 +46,6 @@ jobs:
         with:
           service_account_json: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
           package_name: "com.controleonline.app"
-          aab_file_path: "./build/outputs/bundle/release/app-release.aab"
+          aab_file_path: "./dist/cordova/android/bundle/release/cordovaapp-release.aab"
           track: "production"
           release_status: "completed"
