@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "com.controleonline.app",
+=======
+  "name": "com.controleonline.controleonlineapp",
+>>>>>>> 174a1d74f3b2d0e68e0776891b6adf2e7b91f6e7
   "displayName": "Controle Online",
   "version": "1.0.0",
   "description": "CRM",
@@ -10,7 +14,11 @@
   "keywords": [
     "ecosystem:cordova"
   ],
+<<<<<<< HEAD
   "author": "Controle Online",
+=======
+  "author": "Luiz Kim",
+>>>>>>> 174a1d74f3b2d0e68e0776891b6adf2e7b91f6e7
   "license": "Apache-2.0",
   "cordova": {
     "platforms": [
