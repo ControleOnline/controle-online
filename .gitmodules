@@ -31,7 +31,6 @@
 [submodule "modules/controleonline/ui-professionals"]
 	path = modules/controleonline/ui-professionals
 	url = https://github.com/ControleOnline/ui-professionals.git
-
 [submodule "modules/controleonline/ui-logistic"]
 	path = modules/controleonline/ui-logistic
 	url = https://github.com/ControleOnline/ui-logistic.git
@@ -89,3 +88,6 @@
 [submodule "modules/controleonline/ui-translate"]
 	path = modules/controleonline/ui-translate
 	url = https://github.com/ControleOnline/ui-translate.git
+[submodule "modules/controleonline/ui-orders"]
+	path = modules/controleonline/ui-orders
+	url = https://github.com/ControleOnline/ui-orders.git
