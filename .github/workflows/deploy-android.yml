@@ -13,8 +13,8 @@ jobs:
       - name: Creating Config
         run: |
           echo "const env = {\
-          API_ENTRYPOINT: "https://api.controleonline.com",\
-          DOMAIN: "https://app.controleonline.com",\
+          API_ENTRYPOINT: 'https://api.controleonline.com',\
+          DOMAIN: 'https://app.controleonline.com',\
           OAUTH_GOOGLE_CLIENT_ID:'${{ secrets.OAUTH_GOOGLE_CLIENT_ID }}',\
           GMAPS_GOOGLE_CLIENT_ID:'${{ secrets.GMAPS_GOOGLE_CLIENT_ID }}',\
           NEW_RELIC:{\
