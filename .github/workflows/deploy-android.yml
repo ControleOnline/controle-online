@@ -7,9 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3      
+      - uses: gradle/actions/setup-gradle@v3      
       - uses: buildtool/setup-buildtools-action@v1
+        with:
+          buildtools-version: 0.22.3
+      - run: build
       - uses: actions/setup-node@v3
         with:
           node-version: "20"
