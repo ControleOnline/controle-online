@@ -89,6 +89,7 @@ export default route(function ({ store, ssrContext }) {
       "ProductDetails",
       "QuoteIndex",
       "ShopIndex",
+      "CreateUserIndex",
       "ForgotPassword",
     ];
     const isPrivatePage = !publicPages.includes(to.name);
