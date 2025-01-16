@@ -91,6 +91,7 @@ export default route(function ({ store, ssrContext }) {
       "ShopIndex",
       "CreateUserIndex",
       "ForgotPassword",
+      "PaylistIndex",
     ];
     const isPrivatePage = !publicPages.includes(to.name);
     const isLogged = autoLogin();
