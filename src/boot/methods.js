@@ -34,7 +34,7 @@ export default ({ app }) => {
       "/files/" +
       file["@id"].replace(/\D/g, "") +
       "/download" +
-      encodeURIComponent("?app-domain=" + APP_ENV.DOMAIN)
+      encodeURIComponent("?app-domain=" + (APP_ENV.DOMAIN || location.host))
     );
   };
 
