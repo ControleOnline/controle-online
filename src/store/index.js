@@ -15,7 +15,7 @@ import contract_people from "@controleonline/ui-contracts/src/store/contract/con
 
 
 import users from "@controleonline/ui-users/src/store/users";
-import addresses from "@controleonline/ui-people/src/store/addresses";
+import address from "@controleonline/ui-people/src/store/address";
 import documents from "@controleonline/ui-people/src/store/documents";
 import phones from "@controleonline/ui-people/src/store/phones";
 import emails from "@controleonline/ui-people/src/store/emails";
@@ -77,7 +77,7 @@ export default store(function (/* { ssrContext } */) {
       contract,
       model,
       emails,
-      addresses,
+      address,
       phones,
       documents,
       product_orders,
