@@ -19,6 +19,7 @@
     "devextreme": "^23.2.8",
     "devextreme-vue": "^23.2.8",
     "echarts": "^5.5.1",
+    "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "quasar": "^2.16.9",
     "startbootstrap-sb-admin": "^7.0.7",
