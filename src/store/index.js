@@ -13,7 +13,6 @@ import model from "@controleonline/ui-crm/src/store/model";
 import contract from "@controleonline/ui-contracts/src/store/contract";
 import contract_people from "@controleonline/ui-contracts/src/store/contract/contract_people";
 
-
 import users from "@controleonline/ui-users/src/store/users";
 import address from "@controleonline/ui-people/src/store/address";
 import documents from "@controleonline/ui-people/src/store/documents";
@@ -23,6 +22,7 @@ import people from "@controleonline/ui-people/src/store/people";
 import theme from "@controleonline/ui-layout/src/store/theme";
 import orders from "@controleonline/ui-orders/src/store/orders";
 import product_orders from "@controleonline/ui-orders/src/store/product_orders";
+import expanded_product_orders from "@controleonline/ui-orders/src/store/expanded_product_orders";
 
 import logistic from "@controleonline/ui-logistic/src/store/logistic";
 import invoice from "@controleonline/ui-financial/src/store/invoice";
@@ -40,7 +40,6 @@ import queues from "@controleonline/ui-queues/src/store/modules/queues";
 import city from "@controleonline/ui-common/src/store/address/city";
 import tasks from "@controleonline/ui-tasks/src/store/tasks";
 import task_interations from "@controleonline/ui-tasks/src/store/task_interations";
-
 
 import crm from "@controleonline/ui-crm/src/store/crm";
 import dashboard from "@controleonline/ui-dashboard/src/store/dashboard";
@@ -99,6 +98,7 @@ export default store(function (/* { ssrContext } */) {
       product_group,
       product_group_product,
       product_group_feedstock,
+      expanded_product_orders,
       logistic,
       city,
       orders,
