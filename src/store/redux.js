@@ -1,8 +1,22 @@
+import { combineReducers } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import { thunk } from "redux-thunk";
+
+import config from "@controleonline/ui-legacy/ui-common/src/store/config";
+import gmaps from "@controleonline/ui-legacy/ui-common/src/store/gmaps";
+import menu from "@controleonline/ui-legacy/ui-common/src/store/menu";
+import profile from "@controleonline/ui-legacy/ui-common/src/store/profile";
+import user from "@controleonline/ui-legacy/ui-common/src/store/user";
+import guides from "@controleonline/ui-legacy/ui-guides/src/store/guides";
 import auth from "@controleonline/ui-login/src/store/modules/auth";
+import quote from "@controleonline/ui-legacy/ui-logistic/src/store/modules/quote";
 import support from "@controleonline/ui-support/src/store/support";
+
 import model from "@controleonline/ui-crm/src/store/model";
+
 import contract from "@controleonline/ui-contracts/src/store/contract";
 import contract_people from "@controleonline/ui-contracts/src/store/contract/contract_people";
+
 import users from "@controleonline/ui-users/src/store/users";
 import address from "@controleonline/ui-people/src/store/address";
 import documents from "@controleonline/ui-people/src/store/documents";
@@ -48,63 +62,60 @@ import file from "@controleonline/ui-common/src/store/file";
 
 import contents from "@controleonline/ui-ead/src/store/contents";
 
-import { store } from "quasar/wrappers";
-import { createStore } from "vuex";
-
-export default store(function (/* { ssrContext } */) {
-  const Store = createStore({
-    modules: {
-      modules,
-      routes,
-      menus,
-      status,
-      auth,
-      queues,
-      contract_people,
-      displays,
-      contract,
-      model,
-      emails,
-      address,
-      phones,
-      documents,
-      product_orders,
-      people,
-      invoice,
-      wallet,
-      paymentType,
-      support,
-      categories,
-      users,
-      products,
-      product_unit,
-      product_group,
-      product_group_product,
-      product_group_feedstock,
-      expanded_product_orders,
-      logistic,
-      city,
-      orders,
-      theme,
-      tasks,
-      task_interations,
-      crm,
-      extra_fields,
-      extra_data,
-      dashboard,
-      imports,
-      translate,
-      language,
-      configs,
-      file,
-      tt,
-      contents,
-    },
-
-    // enable strict mode (adds overhead!)
-    // for dev mode and --debug builds only
-    strict: process.env.DEBUGGING,
-  });
-
-  return Store;
+const rootReducer = combineReducers({
+  modules,
+  routes,
+  menus,
+  status,
+  auth,
+  queues,
+  contract_people,
+  displays,
+  gmaps,
+  contract,
+  model,
+  emails,
+  address,
+  phones,
+  documents,
+  product_orders,
+  people,
+  config,
+  profile,
+  user,
+  quote,
+  invoice,
+  wallet,
+  paymentType,
+  support,
+  guides,
+  categories,
+  menu,
+  users,
+  products,
+  product_unit,
+  product_group,
+  product_group_product,
+  product_group_feedstock,
+  expanded_product_orders,
+  logistic,
+  city,
+  orders,
+  theme,
+  tasks,
+  task_interations,
+  crm,
+  extra_fields,
+  extra_data,
+  dashboard,
+  imports,
+  translate,
+  language,
+  configs,
+  file,
+  tt,
+  contents,
 });
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+export default store;

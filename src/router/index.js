@@ -39,8 +39,8 @@ export default route(function ({ store, ssrContext }) {
   const autoLogin = () => {
     if (
       store.getters["auth/user"] !== null &&
-      store.getters["auth/user"].token !== null &&
-      store.getters["auth/user"].token !== undefined
+      store.getters["auth/user"].api_key !== null &&
+      store.getters["auth/user"].api_key !== undefined
     ) {
       return true;
     }
@@ -57,18 +57,7 @@ export default route(function ({ store, ssrContext }) {
       // in case app version changes clear LocalStorage
 
       if (session.user != undefined) {
-        store.dispatch("auth/logIn", {
-          username: session.user,
-          api_key: session.token,
-          people: session.people,
-          company: session.company,
-          email: session.email,
-          phone: session.phone,
-          avatar: session.avatar,
-          realname: session.realname,
-          active: session.active,
-          type: session.type,
-        });
+        store.dispatch("auth/logIn", session);
 
         return true;
       }
