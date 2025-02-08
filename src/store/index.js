@@ -25,6 +25,8 @@ import product_unit from "@controleonline/ui-products/src/store/products/product
 import product_group from "@controleonline/ui-products/src/store/products/product_group";
 import product_group_product from "@controleonline/ui-products/src/store/products/product_group_product";
 import product_group_feedstock from "@controleonline/ui-products/src/store/products/product_group_feedstock";
+import product_category from "@controleonline/ui-products/src/store/products/product_category";
+
 import displays from "@controleonline/ui-queues/src/store/modules/displays";
 import queues from "@controleonline/ui-queues/src/store/modules/queues";
 import city from "@controleonline/ui-common/src/store/address/city";
@@ -82,6 +84,7 @@ export default store(function (/* { ssrContext } */) {
       product_group_product,
       product_group_feedstock,
       expanded_product_orders,
+      product_category,
       logistic,
       city,
       orders,
