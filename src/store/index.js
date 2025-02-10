@@ -29,6 +29,8 @@ import product_category from "@controleonline/ui-products/src/store/products/pro
 
 import displays from "@controleonline/ui-pcp/src/store/modules/displays";
 import queues from "@controleonline/ui-pcp/src/store/modules/queues";
+import order_queue from "@controleonline/ui-pcp/src/store/modules/order_queue";
+
 import city from "@controleonline/ui-common/src/store/address/city";
 import tasks from "@controleonline/ui-tasks/src/store/tasks";
 import task_interations from "@controleonline/ui-tasks/src/store/task_interations";
@@ -71,6 +73,7 @@ export default store(function (/* { ssrContext } */) {
       phones,
       documents,
       product_orders,
+      order_queue,
       people,
       invoice,
       wallet,
