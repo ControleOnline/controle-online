@@ -13,9 +13,6 @@
 [submodule "modules/controleonline/ui-tasks"]
 	path = modules/controleonline/ui-tasks
 	url = https://github.com/ControleOnline/ui-tasks.git
-[submodule "modules/controleonline/ui-queues"]
-	path = modules/controleonline/ui-queues
-	url = https://github.com/ControleOnline/ui-queues.git
 [submodule "modules/controleonline/ui-products"]
 	path = modules/controleonline/ui-products
 	url = https://github.com/ControleOnline/ui-products.git
@@ -91,3 +88,6 @@
 [submodule "modules/controleonline/ui-translate"]
 	path = modules/controleonline/ui-translate
 	url = https://github.com/ControleOnline/ui-translate.git
+[submodule "modules/controleonline/ui-pcp"]
+	path = modules/controleonline/ui-pcp
+	url = https://github.com/ControleOnline/ui-pcp.git

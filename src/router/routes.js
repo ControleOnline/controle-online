@@ -12,7 +12,7 @@ import * as Products from "@controleonline/ui-products/src/router/routes";
 import * as Professionals from "@controleonline/ui-professionals/src/router/routes";
 import * as Employee from "@controleonline/ui-employee/src/router/routes";
 import * as Providers from "@controleonline/ui-providers/src/router/routes";
-import * as Queues from "@controleonline/ui-queues/src/router/routes";
+import * as Queues from "@controleonline/ui-pcp/src/router/routes";
 import * as Logistic from "@controleonline/ui-logistic/src/router/routes";
 import * as Support from "@controleonline/ui-support/src/router/routes";
 import * as Tasks from "@controleonline/ui-tasks/src/router/routes";

@@ -39,8 +39,8 @@ import product_unit from "@controleonline/ui-products/src/store/products/product
 import product_group from "@controleonline/ui-products/src/store/products/product_group";
 import product_group_product from "@controleonline/ui-products/src/store/products/product_group_product";
 import product_group_feedstock from "@controleonline/ui-products/src/store/products/product_group_feedstock";
-import displays from "@controleonline/ui-queues/src/store/modules/displays";
-import queues from "@controleonline/ui-queues/src/store/modules/queues";
+import displays from "@controleonline/ui-pcp/src/store/modules/displays";
+import pcp from "@controleonline/ui-pcp/src/store/modules/pcp";
 import city from "@controleonline/ui-common/src/store/address/city";
 import tasks from "@controleonline/ui-tasks/src/store/tasks";
 import task_interations from "@controleonline/ui-tasks/src/store/task_interations";
@@ -68,7 +68,7 @@ const rootReducer = combineReducers({
   menus,
   status,
   auth,
-  queues,
+  pcp,
   contract_people,
   displays,
   gmaps,

@@ -27,8 +27,8 @@ import product_group_product from "@controleonline/ui-products/src/store/product
 import product_group_feedstock from "@controleonline/ui-products/src/store/products/product_group_feedstock";
 import product_category from "@controleonline/ui-products/src/store/products/product_category";
 
-import displays from "@controleonline/ui-queues/src/store/modules/displays";
-import queues from "@controleonline/ui-queues/src/store/modules/queues";
+import displays from "@controleonline/ui-pcp/src/store/modules/displays";
+import queues from "@controleonline/ui-pcp/src/store/modules/queues";
 import city from "@controleonline/ui-common/src/store/address/city";
 import tasks from "@controleonline/ui-tasks/src/store/tasks";
 import task_interations from "@controleonline/ui-tasks/src/store/task_interations";

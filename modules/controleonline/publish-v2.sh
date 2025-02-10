@@ -21,7 +21,7 @@ diretorios=(
     "quasar-products-ui"
     "ui-legacy/quasar-professionals-ui"
     "ui-legacy/quasar-providers-ui"
-    "quasar-queues-ui"
+    "quasar-pcp-ui"
     "quasar-logistic-ui"
     "quasar-shop-ui"
     "ui-legacy/quasar-support-ui"

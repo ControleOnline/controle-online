@@ -128,7 +128,7 @@ npm publish --access=public
 cd ..
 cd ..
 
-cd queues
+cd pcp
 cd ui
 npm publish --access=public
 cd ..
