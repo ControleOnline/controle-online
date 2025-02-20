@@ -48,7 +48,7 @@ export default {
       );
     },
     setZoom() {
-      let zoom = 0.8;
+      let zoom = this.$env.ZOOM || 0.8;
       var size = zoom < 1 ? parseFloat(100 / zoom) : 100;
       document.documentElement.style.setProperty("--zoom-width", size + "vw");
       document.documentElement.style.setProperty("--zoom-height", size + "vh");
@@ -77,7 +77,14 @@ export default {
 };
 </script>
 <style>
-body {
-  zoom: var(--zoom-level);
+#q-app,
+.q-menu.q-position-engine {
+  transform: scale(var(--zoom-level)) !important;
+  transform-origin: top left;
+}
+
+#q-app {
+  width: calc(100% / var(--zoom-level)) !important;
+  height: calc(100% / var(--zoom-level)) !important;
 }
 </style>
