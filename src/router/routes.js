@@ -36,7 +36,6 @@ const routes = [
   ...Support.routes,
   ...Accounting.routes,
   ...Crm.routes,
-  ...Docs.routes,
   ...Config.routes,
   ...Employee.routes,
   ...Products.routes,
