@@ -6,14 +6,19 @@ module.exports = function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
-    boot: ["i18n","methods", "api", "custom" ],
+    boot: [
+      "../../modules/controleonline/ui-common/src/api",
+      "../../modules/controleonline/ui-common/src/boot/i18n",
+      "../../modules/controleonline/ui-common/src/boot/custom",
+      "../../modules/controleonline/ui-common/src/boot/methods",
+    ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: [
-      "app.scss",
-      "colors/theme.scss",
-      "colors/light.scss",
-      "colors/dark.scss",
+      "../../modules/controleonline/ui-layout/css/app.scss",
+      "../../modules/controleonline/ui-layout/css/colors/theme.scss",
+      "../../modules/controleonline/ui-layout/css/colors/light.scss",
+      "../../modules/controleonline/ui-layout/css/colors/dark.scss",
     ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
