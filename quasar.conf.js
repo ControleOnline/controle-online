@@ -91,6 +91,7 @@ module.exports = function (ctx) {
         "QInnerLoading",
         "QFile",
         "QVideo",
+        "QCarousel"
       ],
 
       notify: {

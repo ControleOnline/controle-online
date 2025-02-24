@@ -26,6 +26,8 @@ import product_group from "@controleonline/ui-products/src/store/products/produc
 import product_group_product from "@controleonline/ui-products/src/store/products/product_group_product";
 import product_group_feedstock from "@controleonline/ui-products/src/store/products/product_group_feedstock";
 import product_category from "@controleonline/ui-products/src/store/products/product_category";
+import product_file from "@controleonline/ui-products/src/store/products/product_file";
+
 
 import displays from "@controleonline/ui-pcp/src/store/modules/displays";
 import queues from "@controleonline/ui-pcp/src/store/modules/queues";
@@ -89,6 +91,7 @@ export default store(function (/* { ssrContext } */) {
       product_group_product,
       product_group_feedstock,
       expanded_product_orders,
+      product_file,
       product_category,
       logistic,
       city,
