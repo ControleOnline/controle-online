@@ -15,6 +15,7 @@ jobs:
           echo "const env = {\
           API_ENTRYPOINT: 'https://api.dev.controleonline.com',\
           APP_TYPE: 'ERP',\
+          ZOOM: 0.80,\
           OAUTH_GOOGLE_CLIENT_ID:'${{ secrets.OAUTH_GOOGLE_CLIENT_ID }}',\
           GMAPS_GOOGLE_CLIENT_ID:'${{ secrets.GMAPS_GOOGLE_CLIENT_ID }}',\
           NEW_RELIC:{\
@@ -24,8 +25,7 @@ jobs:
             TRUST_KEY: '${{ secrets.NEW_RELIC_TRUST_KEY }}',\
             BEACON: '${{ secrets.NEW_RELIC_BEACON }}',\
             ERROR_BEACON: '${{ secrets.NEW_RELIC_ERROR_BEACON }}'\
-          },\
-          zoom: 0.70\
+          }\
           };\
           module.exports = { env };\
           " > ./config/env.local.js
