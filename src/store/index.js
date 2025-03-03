@@ -19,6 +19,8 @@ import invoice from "@controleonline/ui-financial/src/store/invoice";
 import wallet from "@controleonline/ui-financial/src/store/wallet";
 import paymentType from "@controleonline/ui-financial/src/store/paymentType";
 import categories from "@controleonline/ui-common/src/store/categories";
+import acl from "@controleonline/ui-common/src/store/acl";
+
 import status from "@controleonline/ui-common/src/store/status";
 import products from "@controleonline/ui-products/src/store/products";
 import product_unit from "@controleonline/ui-products/src/store/products/product_unit";
@@ -27,7 +29,6 @@ import product_group_product from "@controleonline/ui-products/src/store/product
 import product_group_feedstock from "@controleonline/ui-products/src/store/products/product_group_feedstock";
 import product_category from "@controleonline/ui-products/src/store/products/product_category";
 import product_file from "@controleonline/ui-products/src/store/products/product_file";
-
 
 import displays from "@controleonline/ui-pcp/src/store/modules/displays";
 import queues from "@controleonline/ui-pcp/src/store/modules/queues";
@@ -66,6 +67,7 @@ export default store(function (/* { ssrContext } */) {
       menus,
       status,
       auth,
+      acl,
       queues,
       contract_people,
       displays,
