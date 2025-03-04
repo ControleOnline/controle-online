@@ -19,6 +19,8 @@ import invoice from "@controleonline/ui-financial/src/store/invoice";
 import wallet from "@controleonline/ui-financial/src/store/wallet";
 import paymentType from "@controleonline/ui-financial/src/store/paymentType";
 import categories from "@controleonline/ui-common/src/store/categories";
+import category_file from "@controleonline/ui-common/src/store/categories/category_file";
+
 import acl from "@controleonline/ui-common/src/store/acl";
 
 import status from "@controleonline/ui-common/src/store/status";
@@ -80,6 +82,7 @@ export default store(function (/* { ssrContext } */) {
       product_orders,
       order_products_queue,
       display_queues,
+      category_file,
       people,
       invoice,
       wallet,
