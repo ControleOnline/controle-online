@@ -42,6 +42,7 @@ export default route(function ({ store, ssrContext }) {
       store.getters["auth/user"].api_key !== null &&
       store.getters["auth/user"].api_key !== undefined
     ) {
+      store.commit("auth/LOGIN_SET_IS_LOGGED_IN", true);
       return true;
     }
     // clean storage from not allowed keys
@@ -58,7 +59,6 @@ export default route(function ({ store, ssrContext }) {
 
       if (session.user != undefined) {
         store.dispatch("auth/logIn", session);
-
         return true;
       }
     }
