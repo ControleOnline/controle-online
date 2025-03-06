@@ -11,6 +11,7 @@ import emails from "@controleonline/ui-people/src/store/emails";
 import people from "@controleonline/ui-people/src/store/people";
 import theme from "@controleonline/ui-layout/src/store/theme";
 import orders from "@controleonline/ui-orders/src/store/orders";
+import cart from "@controleonline/ui-orders/src/store/cart";
 import product_orders from "@controleonline/ui-orders/src/store/product_orders";
 import expanded_product_orders from "@controleonline/ui-orders/src/store/expanded_product_orders";
 
@@ -65,6 +66,7 @@ export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
       modules,
+      cart,
       routes,
       menus,
       status,
