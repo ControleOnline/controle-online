@@ -25,8 +25,8 @@ import emails from "@controleonline/ui-people/src/store/emails";
 import people from "@controleonline/ui-people/src/store/people";
 import theme from "@controleonline/ui-layout/src/store/theme";
 import orders from "@controleonline/ui-orders/src/store/orders";
-import product_orders from "@controleonline/ui-orders/src/store/product_orders";
-import expanded_product_orders from "@controleonline/ui-orders/src/store/expanded_product_orders";
+import order_products from "@controleonline/ui-orders/src/store/order_products";
+import expanded_order_products from "@controleonline/ui-orders/src/store/expanded_order_products";
 
 import logistic from "@controleonline/ui-logistic/src/store/logistic";
 import invoice from "@controleonline/ui-financial/src/store/invoice";
@@ -78,7 +78,7 @@ const rootReducer = combineReducers({
   address,
   phones,
   documents,
-  product_orders,
+  order_products,
   people,
   config,
   profile,
@@ -97,7 +97,7 @@ const rootReducer = combineReducers({
   product_group,
   product_group_product,
   product_group_feedstock,
-  expanded_product_orders,
+  expanded_order_products,
   logistic,
   city,
   orders,
