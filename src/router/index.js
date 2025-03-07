@@ -86,7 +86,8 @@ export default route(function ({ store, ssrContext }) {
     const isLogged = autoLogin();
 
     if ((isLoginPage && isLogged) || to.name == undefined) {
-      return next({ name: "HomeIndex" });
+      if (to.query.redirect) next(to.query.redirect);
+      else return next({ name: "HomeIndex" });
     }
 
     if (
@@ -94,7 +95,7 @@ export default route(function ({ store, ssrContext }) {
       isLogged === false &&
       to.name != "LoginIndex"
     ) {
-      return next({ name: "LoginIndex" });
+      return next({ name: "LoginIndex", query: { redirect: to.fullPath } });
     }
 
     return next();
