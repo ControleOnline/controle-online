@@ -8,9 +8,9 @@ module.exports = function (ctx) {
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
     boot: [
       "../../modules/controleonline/ui-common/src/api",
-      "../../modules/controleonline/ui-common/src/boot/i18n",
-      "../../modules/controleonline/ui-common/src/boot/custom",
-      "../../modules/controleonline/ui-common/src/boot/methods",
+      "../../modules/controleonline/ui-common/src/vue/boot/i18n",
+      "../../modules/controleonline/ui-common/src/vue/boot/custom",
+      "../../modules/controleonline/ui-common/src/vue/boot/methods",
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
