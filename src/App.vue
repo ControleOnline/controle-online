@@ -2,7 +2,7 @@
   <App />
 </template>
 <script>
-import App from "@controleonline/ui-layout/src/App";
+import App from "@controleonline/ui-layout/src/vue/App";
 
 export default {
   components: {
