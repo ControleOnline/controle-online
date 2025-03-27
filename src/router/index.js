@@ -1,2 +1,2 @@
-import route from "@controleonline/ui-common/src/utils/route.js";
+import route from "@controleonline/ui-common/src/vue/utils/route.js";
 export default route;
