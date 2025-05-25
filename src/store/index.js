@@ -14,6 +14,7 @@ import orders from "@controleonline/ui-orders/src/store/orders";
 import cart from "@controleonline/ui-orders/src/store/cart";
 import order_products from "@controleonline/ui-orders/src/store/order_products";
 import expanded_order_products from "@controleonline/ui-orders/src/store/expanded_order_products";
+import connections from "@controleonline/ui-common/src/store/connections";
 
 import logistic from "@controleonline/ui-logistic/src/store/logistic";
 import invoice from "@controleonline/ui-financial/src/store/invoice";
@@ -74,6 +75,7 @@ export default store(function (/* { ssrContext } */) {
       queues,
       contract_people,
       displays,
+      connections,
       contract,
       model,
       emails,
