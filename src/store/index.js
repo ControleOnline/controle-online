@@ -18,6 +18,8 @@ import connections from "@controleonline/ui-common/src/store/connections";
 
 import logistic from "@controleonline/ui-logistic/src/store/logistic";
 import invoice from "@controleonline/ui-financial/src/store/invoice";
+import asaas from "@controleonline/ui-financial/src/store/asaas";
+import card from "@controleonline/ui-financial/src/store/card";
 import wallet from "@controleonline/ui-financial/src/store/wallet";
 import paymentType from "@controleonline/ui-financial/src/store/paymentType";
 import categories from "@controleonline/ui-common/src/store/categories";
@@ -71,6 +73,8 @@ export default store(function (/* { ssrContext } */) {
       menus,
       status,
       auth,
+      asaas,
+      card,
       acl,
       queues,
       contract_people,
