@@ -1,7 +1,7 @@
 .DS_Store
 .thumbs.db
 node_modules
-/dist
+
 # Quasar core related directories
 .quasar
 
@@ -34,3 +34,5 @@ yarn-error.log*
 
 package-lock.json
 yarn.lock
+
+/dist

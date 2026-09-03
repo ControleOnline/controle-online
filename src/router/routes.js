@@ -1,460 +1,64 @@
-import * as Login from '@controleonline/quasar-login-ui/src/router/routes';
-import * as Customers from '@controleonline/quasar-customers-ui/src/router/routes';
-import * as Providers from '@controleonline/quasar-providers-ui/src/router/routes';
-import * as Tasks from '@controleonline/quasar-providers-ui/src/router/routes';
+import * as Accounting from "@controleonline/ui-accounting/src/vue/router/routes";
+import * as Carrier from "@controleonline/ui-carrier/src/vue/router/routes";
+import * as Config from "@controleonline/ui-config/src/vue/router/routes";
+import * as Contracts from "@controleonline/ui-contracts/src/vue/router/routes";
+import * as Crm from "@controleonline/ui-crm/src/vue/router/routes";
+import * as Customers from "@controleonline/ui-customers/src/vue/router/routes";
+import * as Dashboard from "@controleonline/ui-dashboard/src/vue/router/routes";
+import * as Financial from "@controleonline/ui-financial/src/vue/router/routes";
+import * as Login from "@controleonline/ui-login/src/vue/router/routes";
+import * as Products from "@controleonline/ui-products/src/vue/router/routes";
+import * as Professionals from "@controleonline/ui-professionals/src/vue/router/routes";
+import * as Employee from "@controleonline/ui-employee/src/vue/router/routes";
+import * as Providers from "@controleonline/ui-providers/src/vue/router/routes";
+import * as Queues from "@controleonline/ui-pcp/src/vue/router/routes";
+import * as Logistic from "@controleonline/ui-logistic/src/vue/router/routes";
+import * as Support from "@controleonline/ui-support/src/vue/router/routes";
+import * as Tasks from "@controleonline/ui-tasks/src/vue/router/routes";
+import * as People from "@controleonline/ui-people/src/vue/router/routes";
+import * as Translate from "@controleonline/ui-translate/src/vue/router/routes";
+import * as Contents from "@controleonline/ui-ead/src/vue/router/routes";
+import * as Shop from "@controleonline/ui-shop/src/vue/router/routes";
+
+import * as Users from "@controleonline/ui-users/src/vue/router/routes";
+import * as Orders from "@controleonline/ui-orders/src/vue/router/routes";
 
 const routes = [
   ...Login.routes,
-  ...Customers.routes,
+  ...Logistic.routes,
+  ...Financial.routes,
   ...Providers.routes,
+  ...Customers.routes,
+  ...Contracts.routes,
   ...Tasks.routes,
+  ...Carrier.routes,
+  ...Users.routes,
+  ...Dashboard.routes,
+  ...Support.routes,
+  ...Accounting.routes,
+  ...Crm.routes,
+  ...Config.routes,
+  ...Employee.routes,
+  ...Products.routes,
+  ...Professionals.routes,
+  ...Queues.routes,
+  ...Orders.routes,
+  ...People.routes,
+  ...Translate.routes,
+  ...Contents.routes,
+  ...Shop.routes,
   {
-    path     : '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children : [
-      { name: 'CalculatorIndex', path: 'calculator', component: () => import('pages/Calculator.vue') }
-    ]
-  },
-  {
-    path     : '/forgot-password',
-    component: () => import('layouts/MainLayout.vue'),
-    children : [
-      {
-        path     : ':hash/:lost',
-        component: () => import('pages/User/Recovery/AccessRecovery.vue')
-      },
-    ]
-  },
-  {
-    path     : '/home/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      { name: 'DashboardIndex', path: 'dashboard', component: () => import('pages/Home/Dashboard.vue') },
-    ]
-  },
-  {
-    path: '/contratos/',
-    component: () => import('layouts/AdminLayout.vue'),
+    path: "/",
+    component: () =>
+      import("@controleonline/ui-layout/src/vue/layouts/AdminLayout.vue"),
     children: [
-      { name: 'ContractIndex'  , path: ''      , component: () => import('pages/Contracts/Index.vue'  ) },
-      { name: 'ContractDetails', path: 'id/:id', component: () => import('pages/Contracts/Details.vue') },
-    ]
-  },
-  {
-    path     : '/soporte/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      { name: 'FAQ',  path: 'faq',  component: () => import('pages/Support/FAQ.vue') },
-      { name: 'News', path: 'news', component: () => import('pages/Support/News.vue') },
-      { name: 'NewsDetail', path: 'news/:id', component: () => import('pages/Support/NewsDetail.vue') },
-    ]
-  },
-  {
-    path     : '/minhas-empresas/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
       {
-        path     : '',
-        name     : 'MyCompaniesIndex',
-        component: () => import('pages/Company/Index.vue')
+        name: "HomeIndex",
+        path: "home",
+        component: () => import("@controleonline/ui-layout/src/vue/pages/Home"),
       },
-      {
-        path     : ':id',
-        name     : 'MyCompanyDetails',
-        component: () => import('pages/Company/Details.vue')
-      },
-      {
-        path     : ':id/funcionarios/:employeeId',
-        name     : 'MyCompanyEmployee',
-        component: () => import('pages/Company/Employee.vue')
-      },
-    ]
+    ],
   },
-  {
-    path     : '/meu-perfil/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        path     : '',
-        name     : 'MyProfileIndex',
-        component: () => import('pages/User/Profile.vue')
-      },
-    ]
-  },
+];
 
-  {
-    path     : '/infos/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'BasicInfoIndex',
-        path     : ':id',
-        component: () => import('pages/BasicInfo/Index.vue')
-      },
-    ]
-  },
-  {
-    path     : '/planos/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'PlansIndex',
-        path     : '',
-        component: () => import('pages/Plans/Index.vue'),
-      },
-      {
-        name     : 'PlansDetails',
-        path     : ':id',
-        component: () => import('pages/Plans/Details.vue')
-      },
-      {
-        name     : 'PlansCreate',
-        path     : 'novo',
-        component: () => import('pages/Plans/Create.vue')
-      },
-    ]
-  },
-  {
-    path     : '/etapas-do-cadastro/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'StepsRegistration',
-        path     : '',
-        component: () => import('pages/StepsRegistration/Index.vue')
-      },
-      {
-        name     : 'StepsRegistrationAnalysis',
-        path     : ':id',
-        component: () => import('pages/StepsRegistration/Analysis.vue')
-      },
-      {
-        name     : 'StepsRegistrationHistory',
-        path     : ':id/historico',
-        component: () => import('pages/StepsRegistration/Historico.vue')
-      },
-    ]
-  },
-  {
-    path     : '/auditoria/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'AuditFiscalIndex',
-        path     : 'fiscal',
-        component: () => import('pages/Audit/Fiscal/Index.vue'),
-      },
-      {
-        name     : 'AuditFiscalDetails',
-        path     : 'fiscal/:id',
-        component: () => import('pages/Audit/Fiscal/Details.vue'),
-      },
-      {
-        name     : 'AuditFiscalHistorico',
-        path     : 'fiscal/:id/historico',
-        component: () => import('pages/Audit/Fiscal/Historico.vue'),
-      },
-      {
-        name     : 'AuditContabilIndex',
-        path     : 'contabil',
-        component: () => import('pages/Audit/Contabil/Index.vue'),
-      },
-      {
-        name     : 'AuditContabilDetails',
-        path     : 'contabil/:id',
-        component: () => import('pages/Audit/Contabil/Details.vue'),
-      },
-      {
-        name     : 'AuditContabilHistorico',
-        path     : 'contabil/:id/historico',
-        component: () => import('pages/Audit/Contabil/Historico.vue'),
-      },
-      {
-        name     : 'AuditDeptoPessoalIndex',
-        path     : 'depto-pessoal',
-        component: () => import('pages/Audit/Depto/Index.vue'),
-      },
-      {
-        name     : 'AuditDeptoPessoalDetails',
-        path     : 'depto-pessoal/:id',
-        component: () => import('pages/Audit/Depto/Details.vue'),
-      },
-      {
-        name     : 'AuditDeptoPessoalHistorico',
-        path     : 'depto-pessoal/:id/historico',
-        component: () => import('pages/Audit/Depto/Historico.vue'),
-      },
-      {
-        name     : 'AuditSocietarioIndex',
-        path     : 'societario',
-        component: () => import('pages/Audit/Societario/Index.vue'),
-      },
-      {
-        name     : 'AuditSocietarioDetails',
-        path     : 'societario/:id',
-        component: () => import('pages/Audit/Societario/Details.vue'),
-      },
-      {
-        name     : 'AuditSocietarioHistorico',
-        path     : 'societario/:id/historico',
-        component: () => import('pages/Audit/Societario/Historico.vue'),
-      },
-      {
-        name     : 'AuditSocietarioMessages',
-        path     : 'societario/:id/mensagens',
-        component: () => import('pages/Audit/Societario/Mensagens.vue'),
-      },
-    ]
-  },
-  {
-    path     : '/fiscal/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'FiscalImpostoIndex',
-        path     : 'impostos',
-        component: () => import('pages/Fiscal/Impostos/Index.vue'),
-      },
-      {
-        name     : 'FiscalImpostoCreate',
-        path     : 'impostos/novo',
-        component: () => import('pages/Fiscal/Impostos/Create.vue')
-      },
-      {
-        name     : 'FiscalImpostoEdit',
-        path     : 'impostos/:id/editar',
-        component: () => import('pages/Fiscal/Impostos/Edit.vue')
-      },
-      {
-        name     : 'FiscalDeclaracaoIndex',
-        path     : 'declaracoes',
-        component: () => import('pages/Fiscal/Declaracoes/Index.vue'),
-      },
-      {
-        name     : 'FiscalDeclaracaoCreate',
-        path     : 'declaracoes/novo',
-        component: () => import('pages/Fiscal/Declaracoes/Create.vue')
-      },
-      {
-        name     : 'FiscalDeclaracaoEdit',
-        path     : 'declaracoes/:id/editar',
-        component: () => import('pages/Fiscal/Declaracoes/Edit.vue')
-      },
-      {
-        name     : 'FiscalServicosAdicionaisIndex',
-        path     : 'servicos-adicionais',
-        component: () => import('pages/Fiscal/Servicos/Index.vue'),
-      },
-    ]
-  },
-  {
-    path     : '/contabil/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'ContabilExtratosIndex',
-        path     : 'extratos',
-        component: () => import('pages/Contabil/Extratos/Index.vue'),
-      },
-      {
-        name     : 'ContabilDeclaracaoIndex',
-        path     : 'declaracoes',
-        component: () => import('pages/Contabil/Declaracoes/Index.vue'),
-      },
-      {
-        name     : 'ContabilDeclaracaoCreate',
-        path     : 'declaracoes/novo',
-        component: () => import('pages/Contabil/Declaracoes/Create.vue')
-      },
-      {
-        name     : 'ContabilDeclaracaoEdit',
-        path     : 'declaracoes/:id/editar',
-        component: () => import('pages/Contabil/Declaracoes/Edit.vue')
-      },
-      {
-        name     : 'ContabilServicosAdicionaisIndex',
-        path     : 'servicos-adicionais',
-        component: () => import('pages/Contabil/Servicos/Index.vue'),
-      },
-      {
-        name     : 'ContabilAdministrativoIndex',
-        path     : 'administrativo',
-        component: () => import('pages/Contabil/Administrativo/Index.vue'),
-      },
-      {
-        name     : 'ContabilAdministrativoCreate',
-        path     : 'administrativo/novo',
-        component: () => import('pages/Contabil/Administrativo/Create.vue')
-      },
-    ]
-  },
-  {
-    path     : '/depto-pessoal/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'DeptoImpostoIndex',
-        path     : 'impostos',
-        component: () => import('pages/Depto/Impostos/Index.vue'),
-      },
-      {
-        name     : 'DeptoImpostoCreate',
-        path     : 'impostos/novo',
-        component: () => import('pages/Depto/Impostos/Create.vue')
-      },
-      {
-        name     : 'DeptoImpostoEdit',
-        path     : 'impostos/:id/editar',
-        component: () => import('pages/Depto/Impostos/Edit.vue')
-      },
-      {
-        name     : 'DeptoDeclaracaoIndex',
-        path     : 'declaracoes',
-        component: () => import('pages/Depto/Declaracoes/Index.vue'),
-      },
-      {
-        name     : 'DeptoDeclaracaoCreate',
-        path     : 'declaracoes/novo',
-        component: () => import('pages/Depto/Declaracoes/Create.vue')
-      },
-      {
-        name     : 'DeptoDeclaracaoEdit',
-        path     : 'declaracoes/:id/editar',
-        component: () => import('pages/Depto/Declaracoes/Edit.vue')
-      },
-      {
-        name     : 'DeptoFolhaPagamentoIndex',
-        path     : 'folhas-pagamento',
-        component: () => import('pages/Depto/Folhas/Index.vue'),
-      },
-      {
-        name     : 'DeptoFolhaPagamentoCreate',
-        path     : 'folhas-pagamento/novo',
-        component: () => import('pages/Depto/Folhas/Create.vue')
-      },
-      {
-        name     : 'DeptoFolhaPagamentoEdit',
-        path     : 'folhas-pagamento/:id/editar',
-        component: () => import('pages/Depto/Folhas/Edit.vue')
-      },
-      {
-        name     : 'DeptoProLaboreIndex',
-        path     : 'pro-labore',
-        component: () => import('pages/Depto/Prolabore/Index.vue'),
-      },
-      {
-        name     : 'DeptoProLaboreCreate',
-        path     : 'pro-labore/novo',
-        component: () => import('pages/Depto/Prolabore/Create.vue')
-      },
-      {
-        name     : 'DeptoProLaboreEdit',
-        path     : 'pro-labore/:id/editar',
-        component: () => import('pages/Depto/Prolabore/Edit.vue')
-      },
-      {
-        name     : 'DeptoFuncionariosIndex',
-        path     : 'funcionarios',
-        component: () => import('pages/Depto/Funcionarios/Index.vue'),
-      },
-      {
-        name     : 'DeptoFuncionariosDependentes',
-        path     : 'funcionarios/:id/dependentes',
-        component: () => import('pages/Depto/Funcionarios/Dependentes.vue')
-      },
-      {
-        name     : 'DeptoFuncionariosFolhas',
-        path     : 'funcionarios/:id/folhas',
-        component: () => import('pages/Depto/Funcionarios/Folhas.vue')
-      },
-      {
-        name     : 'DeptoSociosIndex',
-        path     : 'socios',
-        component: () => import('pages/Depto/Socios/Index.vue'),
-      },
-      {
-        name     : 'DeptoSociosDependentes',
-        path     : 'socios/:id/dependentes',
-        component: () => import('pages/Depto/Socios/Dependentes.vue')
-      },
-      {
-        name     : 'DeptoSociosFolhas',
-        path     : 'socios/:id/folhas',
-        component: () => import('pages/Depto/Socios/Folhas.vue')
-      },
-      {
-        name     : 'DeptoAdministrativoIndex',
-        path     : 'administrativo',
-        component: () => import('pages/Depto/Administrativo/Index.vue'),
-      },
-      {
-        name     : 'DeptoAdministrativoCreate',
-        path     : 'administrativo/novo',
-        component: () => import('pages/Depto/Administrativo/Create.vue')
-      },
-      {
-        name     : 'DeptoServicosAdicionaisIndex',
-        path     : 'servicos-adicionais',
-        component: () => import('pages/Depto/Servicos/Index.vue'),
-      },
-    ]
-  },
-  {
-    path     : '/societario/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'SocietarioIndex',
-        path     : '',
-        component: () => import('pages/Societario/Index.vue'),
-      },
-      {
-        name     : 'SocietarioMessages',
-        path     : ':id/mensagens',
-        component: () => import('pages/Societario/Mensagens.vue'),
-      },
-    ]
-  },
-  {
-    path     : '/financeiro/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'FinanceiroIndex',
-        path     : 'pagar',
-        component: () => import('@controleonline/quasar-financial-ui/src/pages/Invoice/Pay/Index.vue'),
-      },
-      {
-        name     : 'FinanceiroReceberIndex',
-        path     : 'receber',
-        component: () => import('@controleonline/quasar-financial-ui/src/pages/Invoice/Receive/Index.vue'),
-      }
-    ]
-  },
-  {
-    path     : '/servicos-adicionais/',
-    component: () => import('layouts/AdminLayout.vue'),
-    children : [
-      {
-        name     : 'ServicosAdicionaisIndex',
-        path     : '',
-        component: () => import('pages/Servicos/Index.vue'),
-      },
-      {
-        name     : 'ServicosAdicionaisCreate',
-        path     : 'novo',
-        component: () => import('pages/Servicos/Create.vue')
-      },
-      {
-        name     : 'ServicosAdicionaisEdit',
-        path     : ':id',
-        component: () => import('pages/Servicos/Edit.vue'),
-      },
-    ]
-  },
-  {
-    path: '*', redirect: '/home/dashboard'
-  },
-]
-
-export default routes
+export default routes;

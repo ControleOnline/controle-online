@@ -1,29 +1,52 @@
 name: Deploy Project
 on:
   push:
-    branches: [ develop ]
+    branches: [develop]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 12.18.1
-      - name: Check out Git repository
-        uses: actions/checkout@v1
-      - name: Building the project
+          node-version: "20"
+      - name: Building the project dev
         run: |
-              cd /home/runner/work/accounting/accounting
-              echo "export const ENTRYPOINT_LOCAL = 'https://api.nossocep.com.br'" > ./src/config/entrypoint.local.js
-              npm install
-              npx quasar build
-      - name: Copy to Nossocep
-        uses: horochx/deploy-via-scp@master
+          echo "const env = {\
+          API_ENTRYPOINT: 'https://api.dev.controleonline.com',\
+          APP_TYPE: 'ERP',\
+          ZOOM: 0.80,\
+          OAUTH_GOOGLE_CLIENT_ID:'${{ secrets.OAUTH_GOOGLE_CLIENT_ID }}',\
+          GMAPS_GOOGLE_CLIENT_ID:'${{ secrets.GMAPS_GOOGLE_CLIENT_ID }}',\
+          NEW_RELIC:{\
+            LICENSE_KEY:'${{ secrets.NEW_RELIC_LICENSE_KEY }}',\
+            APPLICATION_ID:'${{ secrets.NEW_RELIC_APPLICATION_ID }}',\
+            ACCOUNT_ID: '${{ secrets.NEW_RELIC_ACCOUNT_ID }}',\
+            TRUST_KEY: '${{ secrets.NEW_RELIC_TRUST_KEY }}',\
+            BEACON: '${{ secrets.NEW_RELIC_BEACON }}',\
+            ERROR_BEACON: '${{ secrets.NEW_RELIC_ERROR_BEACON }}'\
+          }\
+          };\
+          module.exports = { env };\
+          " > ./config/env.local.js
+      
+      - name: Update Submodules
+        run: |
+          git submodule update --recursive --init
+          git submodule update --recursive --remote
+      - name: Install Modules
+        run: |
+          npm install --global yarn
+          yarn
+      - name: Build
+        run: |
+          npx quasar build -m spa
+      - name: Deploy
+        uses: locaweb/ftp-deploy@1.0.0
         with:
-          local: /home/runner/work/accounting/accounting/dist/spa
-          remote: /var/www/vhosts/nossocep.com.br/sistemas/accounting/dist
-          host: 69.162.120.82
-          port: 22
-          user: nossocep_usu
-          key: ${{ secrets.NOSSOCEP }}          
+          host: ${{ secrets.DEV_HOST }}
+          user: ${{ secrets.DEV_USER }}
+          password: ${{ secrets.DEV_PASS }}
+          localDir: "./dist/spa"
+          remoteDir: "~/public_html"
+          forceSsl: false

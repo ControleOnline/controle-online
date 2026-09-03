@@ -1,24 +1,12 @@
 <template>
-  <div id="q-app">
-    <router-view />
-  </div>
+  <App />
 </template>
-
 <script>
-import { mapActions } from 'vuex';
+import App from "@controleonline/ui-layout/src/vue/App";
 
 export default {
-  name: 'App',
-  
-  methods: {
-    ...mapActions({
-      setIndexRoute: 'auth/setIndexRoute'
-    })
+  components: {
+    App,
   },
-  
-  created() {
-    /* global configs */
-    this.setIndexRoute('DashboardIndex');
-  }
-}
+};
 </script>
