@@ -28,6 +28,8 @@ function describeRejection(reason) {
   return String(reason);
 }
 
+export { describeRejection };
+
 export default () => {
   if (typeof window === 'undefined') {
     return;
