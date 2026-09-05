@@ -7,6 +7,7 @@ module.exports = function (ctx) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
     boot: [
+      "runtime-error-guard",
       "../../modules/controleonline/ui-common/src/api",
       "../../modules/controleonline/ui-common/src/vue/boot/i18n",
       "../../modules/controleonline/ui-common/src/vue/boot/custom",
